@@ -27,9 +27,7 @@
 <script src="{!! asset('resources/views/admin/plugins/fastclick/fastclick.js') !!}"></script>
 <!-- AdminLTE App -->
 <script src="{!! asset('resources/views/admin/dist/js/app.min.js') !!}"></script>
-@if(Request::path() == 'admin/dashboard/last_year' or Request::path() == 'admin/dashboard/last_month' or Request::path() == 'admin/dashboard/this_month')
-    <!--<script src="{!! asset('resources/views/admin/dist/js/pages/dashboard.js') !!}"></script>-->
-@endif
+
 <!-- AdminLTE for demo purposes -->
 <script src="{!! asset('resources/views/admin/js/demo.js') !!}"></script>
 
@@ -54,19 +52,19 @@ $.ajaxSetup({
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     }
 });
-	
+
 	$(function () {
-	
+
 		//Initialize Select2 Elements
 		$(".select2").select2();
-	
+
 		//Datemask dd/mm/yyyy
 		$("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 		//Datemask2 mm/dd/yyyy
 		$("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
 		//Money Euro
 		$("[data-mask]").inputmask();
-	
+
 		//Date range picker
 		$('.reservation').daterangepicker();
 		//Date range picker with time picker
@@ -89,12 +87,12 @@ $.ajaxSetup({
 			  $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 			}
 		);*/
-	
+
 		//Date picker
 		$('#datepicker').datepicker({
 		  autoclose: true
 		});
-	
+
 		//iCheck for checkbox and radio inputs
 		$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
 		  checkboxClass: 'icheckbox_minimal-blue',
@@ -110,12 +108,12 @@ $.ajaxSetup({
 		  checkboxClass: 'icheckbox_flat-green',
 		  radioClass: 'iradio_flat-green'
 		});
-	
+
 		//Colorpicker
 		$(".my-colorpicker1").colorpicker();
 		//color picker with addon
 		$(".my-colorpicker2").colorpicker();
-	
+
 		//Timepicker
 		$(".timepicker").timepicker({
 		  showInputs: false
@@ -133,7 +131,7 @@ $(document).on('click', '.checkboxess', function(e){
 });
 
 $(document).ready(function(e) {
-		
+
 	//brantree_active
 	$(document).on('click', '#brantree_active', function(){
 		//has-error
@@ -143,62 +141,62 @@ $(document).ready(function(e) {
 			$('.brantree_active').parents('div.form-group').removeClass('has-error');
 			$('.brantree_active').removeClass('field-validate');
 		}
-		
+
 	});
-	
+
 	//brantree_active
 	$(document).on('click', '#cash_on_delivery', function(){
-		
+
 		if($(this).is(':checked')){
 			$('.cash_on_delivery').addClass('field-validate');
 		}else{
 			$('.cash_on_delivery').parents('div.form-group').removeClass('has-error');
 			$('.cash_on_delivery').removeClass('field-validate');
 		}
-		
+
 	});
-	
+
 	//paypal_status
 	$(document).on('click', '#paypal_status', function(){
-		
+
 		if($(this).is(':checked')){
 			$('.paypal_status').addClass('field-validate');
 		}else{
 			$('.paypal_status').parents('div.form-group').removeClass('has-error');
 			$('.paypal_status').removeClass('field-validate');
 		}
-		
+
 	});
-	
-	
+
+
 	//brantree_active
 	$(document).on('click', '#stripe_active', function(){
-		
+
 		if($(this).is(':checked')){
 			$('.stripe_active').addClass('field-validate');
 		}else{
 			$('.stripe_active').parents('div.form-group').removeClass('has-error');
 			$('.stripe_active').removeClass('field-validate');
 		}
-		
+
 	});
-	
-	
+
+
 	//brantree_active
 	$(document).on('click', '#instamojo_active', function(){
-		
+
 		if($(this).is(':checked')){
 			$('.instamojo_active').addClass('field-validate');
 		}else{
 			$('.instamojo_active').parents('div.form-group').removeClass('has-error');
 			$('.instamojo_active').removeClass('field-validate');
 		}
-		
+
 	});
-	
+
 });
 
-	
+
 //ajax call for add option value
 $(document).on('click', '.add-value', function(e){
 	$("#loader").show();
@@ -216,7 +214,7 @@ $(document).on('click', '.add-value', function(e){
 				$("#content_"+products_options_id+'_'+language_id).parent('tbody').html(res);
 		},
 	});
-		
+
 });
 
 //ajax call for add option value
@@ -234,11 +232,11 @@ $(document).on('click', '.update-value', function(e){
 		data: formData,
 		success: function (res) {
 				$('.addError').hide();
-				
+
 				$("#content_"+products_options_id+'_'+language_id).parent('tbody').html(res);
 		},
 	});
-		
+
 });
 
 
@@ -255,12 +253,12 @@ $(document).on('click', '#deleteAttribute', function(e){
 		data: formData,
 		success: function (res) {
 				$('.addError').hide();
-				
+
 				$("#content_"+products_options_id+'_'+language_id).parent('tbody').html(res);
 				$('#deleteValueModal').modal('hide');
 		},
 	});
-		
+
 });
 
 //ajax call for submit value
@@ -272,7 +270,7 @@ $(document).on('click', '#addDefaultAttribute', function(e){
 		type: "POST",
 		data: formData,
 		success: function (res) {
-			
+
 			if(res.length != ''){
 				$('.addError').hide();
 				$('#adddefaultattributesmodal').modal('hide');
@@ -280,24 +278,24 @@ $(document).on('click', '#addDefaultAttribute', function(e){
 				var showData = [];
 				for (i = 0; i < res.length; ++i) {
 					var j = i + 1;
-					showData[i] = "<tr><td>"+j+"</td><td>"+res[i].products_options_name+"</td><td>"+res[i].products_options_values_name+"</td><td><a class='badge bg-light-blue editdefaultattributemodal' products_attributes_id = '"+res[i].products_attributes_id+"' products_id = '"+res[i].products_id+"' language_id ='"+res[i].language_id+"' options_id ='"+res[i].options_id+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a> <a class='badge bg-red deletedefaultattributemodal' products_attributes_id = '"+res[i].products_attributes_id+"' products_id = '"+res[i].products_id+"' ><i class='fa fa-trash' aria-hidden='true'></i></a></td></tr>"; 
+					showData[i] = "<tr><td>"+j+"</td><td>"+res[i].products_options_name+"</td><td>"+res[i].products_options_values_name+"</td><td><a class='badge bg-light-blue editdefaultattributemodal' products_attributes_id = '"+res[i].products_attributes_id+"' products_id = '"+res[i].products_id+"' language_id ='"+res[i].language_id+"' options_id ='"+res[i].options_id+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a> <a class='badge bg-red deletedefaultattributemodal' products_attributes_id = '"+res[i].products_attributes_id+"' products_id = '"+res[i].products_id+"' ><i class='fa fa-trash' aria-hidden='true'></i></a></td></tr>";
 
 				}
 				$(".contentDefaultAttribute").html(showData);
 			}else{
 				$('.addDefaultError').show();
 			}
-			
-			
+
+
 		},
 	});
-		
-		
+
+
 });
 
 //onchange get zones agains country
 $(document).on('change', '#entry_country_id', function(e){
-		
+
 	var zone_country_id = $(this).val();
 	$.ajax({
 	  url: "{{ URL::to('admin/getZones')}}",
@@ -309,15 +307,15 @@ $(document).on('change', '#entry_country_id', function(e){
 			var i;
 			var showData = [];
 			for (i = 0; i < data.data.length; ++i) {
-				showData[i] = "<option value='"+data.data[i].zone_id+"'>"+data.data[i].zone_name+"</option>"; 
+				showData[i] = "<option value='"+data.data[i].zone_id+"'>"+data.data[i].zone_name+"</option>";
 			}
 		}else{
-			showData = "<option value=''>Select Zone</option>"; 				
+			showData = "<option value=''>Select Zone</option>";
 		}
 			$(".zoneContent").html(showData);
 	  }
 	});
-	
+
 });
 
 //AddProductAttribute
@@ -330,7 +328,7 @@ $(document).on('click', '.addProductAttributeModal', function(){
 		data: '&product_id='+product_id,
 		success: function (data) {
 			console.log("data : " + data);
-			$('#productAttributeDialog').html(data); 
+			$('#productAttributeDialog').html(data);
 			$('#productAttributeDialog').modal('show');
 		},
 		dataType: 'html'
@@ -349,7 +347,7 @@ $(document).on('click', '.editProductAttributeModal', function(){
 		data: '&product_id='+product_id+'&product_attribute_id='+product_attribute_id,
 		success: function (data) {
 			console.log("data : " + data);
-			$('#productAttributeDialog').html(data); 
+			$('#productAttributeDialog').html(data);
 			$('#productAttributeDialog').modal('show');
 		},
 		dataType: 'html'
@@ -389,7 +387,7 @@ $(document).on('click', '.addProductImageModal', function(){
 		data: '&product_id='+product_id,
 		success: function (data) {
 			console.log("data : " + data);
-			$('#productImageDialog').html(data); 
+			$('#productImageDialog').html(data);
 			$('#productImageDialog').modal('show');
 		},
 		dataType: 'html'
@@ -408,7 +406,7 @@ $(document).on('click', '.editProductImageModal', function(){
 		data: '&product_id='+product_id+'&product_image_id='+product_image_id,
 		success: function (data) {
 			console.log("data : " + data);
-			$('#productImageDialog').html(data); 
+			$('#productImageDialog').html(data);
 			$('#productImageDialog').modal('show');
 		},
 		dataType: 'html'
@@ -447,7 +445,7 @@ $(document).on('click', '.part_edit_product', function(){
 		data: '&order_product='+order_product,
 		success: function (data) {
 			// console.log("data : " + data);
-			$('#dialog_edit_product').html(data); 
+			$('#dialog_edit_product').html(data);
 			$('#dialog_edit_product').modal('show');
 		},
 		error:function (error){
@@ -467,7 +465,7 @@ $(document).on('click', '.addAddressModal', function(){
 		data: '&customer_id='+customer_id,
 		success: function (data) {
 			// console.log(data);
-			$('#addressDialog').html(data); 
+			$('#addressDialog').html(data);
 			$('#addressDialog').modal('show');
 		},
 		dataType: 'html'
@@ -488,29 +486,29 @@ $(document).on('click', '.editAddressModal', function(){
 		success: function (data) {
 			// console.log(JSON.stringify(data));
 			console.log(data);
-			// $('.editContent').html(data); 
+			// $('.editContent').html(data);
 			// $('#editAddressModal').modal('show');
-			$('#addressDialog').html(data); 
+			$('#addressDialog').html(data);
 			$('#addressDialog').modal('show');
 		},
 		dataType: 'html'
 	});
 });
-	
-	
-		
+
+
+
 //editproductattributemodal
 $(document).on('click', '.editproductattributemodal', function(){
 	var products_id = $(this).attr('products_id');
 	var products_attributes_id = $(this).attr('products_attributes_id');
-	var language_id = $(this).attr('language_id');	
+	var language_id = $(this).attr('language_id');
 	var options_id = $(this).attr('options_id');
 	$.ajax({
 		url: '{{ URL::to("admin/editproductattribute")}}',
 		type: "POST",
 		data: '&products_id='+products_id+'&products_attributes_id='+products_attributes_id+'&language_id='+language_id+'&options_id='+options_id,
 		success: function (data) {
-			$('.editContent').html(data); 
+			$('.editContent').html(data);
 			$('#editproductattributemodal').modal('show');
 		},
 		dataType: 'html'
@@ -528,7 +526,7 @@ $(document).on('click', '.editdefaultattributemodal', function(){
 		type: "POST",
 		data: '&products_id='+products_id+'&products_attributes_id='+products_attributes_id+'&language_id='+language_id+'&options_id='+options_id,
 		success: function (data) {
-			$('.editDefaultContent').html(data); 
+			$('.editDefaultContent').html(data);
 			$('#editdefaultattributemodal').modal('show');
 		},
 		dataType: 'html'
@@ -544,20 +542,20 @@ $(document).on('click', '#updateAddress', function(e){
 			type: "POST",
 			data: formData,
 			success: function (res) {
-				
+
 				if(res.length != ''){
 					$('.addError').hide();
 					$('#editAddressModal').modal('hide');
 					var i;
 					var showData = [];
 					for (i = 0; i < res.length; ++i) {
-					
+
 					var j = i + 1;
-					showData[i] = "<tr><td>"+j+"</td><td><strong>Company:</strong> "+res[i].entry_company+"<br><strong>First Name:</strong> "+res[i].entry_firstname+"<br><strong>Last Name:</strong> "+res[i].entry_lastname+"</td><td><strong>Street:</strong> "+res[i].entry_street_address+"<br><strong>Suburb:</strong> "+res[i].entry_suburb+"<br><strong>Postcode:</strong> "+res[i].entry_postcode+"<br><strong>City:</strong> "+res[i].entry_city+"<br><strong>State:</strong> "+res[i].entry_state+"<br><strong>Zone:</strong> "+res[i].zone_name+"<br><strong>Country:</strong> "+res[i].countries_name+"</td><td><a class='badge bg-light-blue editAddressModal' customers_id = '"+res[i].customers_id+"' address_book_id = '"+res[i].address_book_id+"' ><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a customers_id = '"+res[i].customers_id+"' address_book_id = '"+res[i].address_book_id+"' class='badge bg-red deleteAddressModal'><i class='fa fa-trash' aria-hidden='true'></i></a></td></tr>"; 
+					showData[i] = "<tr><td>"+j+"</td><td><strong>Company:</strong> "+res[i].entry_company+"<br><strong>First Name:</strong> "+res[i].entry_firstname+"<br><strong>Last Name:</strong> "+res[i].entry_lastname+"</td><td><strong>Street:</strong> "+res[i].entry_street_address+"<br><strong>Suburb:</strong> "+res[i].entry_suburb+"<br><strong>Postcode:</strong> "+res[i].entry_postcode+"<br><strong>City:</strong> "+res[i].entry_city+"<br><strong>State:</strong> "+res[i].entry_state+"<br><strong>Zone:</strong> "+res[i].zone_name+"<br><strong>Country:</strong> "+res[i].countries_name+"</td><td><a class='badge bg-light-blue editAddressModal' customers_id = '"+res[i].customers_id+"' address_book_id = '"+res[i].address_book_id+"' ><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a customers_id = '"+res[i].customers_id+"' address_book_id = '"+res[i].address_book_id+"' class='badge bg-red deleteAddressModal'><i class='fa fa-trash' aria-hidden='true'></i></a></td></tr>";
 
 					}
 					$(".contentAttribute").html(showData);
-					
+
 				}else{
 					$('.addError').show();
 				}
@@ -565,10 +563,10 @@ $(document).on('click', '#updateAddress', function(e){
 
 			},
 		});
-		
+
 	});
-	
-	
+
+
 	$(document).on('click', '#updateDefaultAttribute', function(e){
 		$("#loader").show();
 		var formData = $('#editDefaultAttributeFrom').serialize();
@@ -577,7 +575,7 @@ $(document).on('click', '#updateAddress', function(e){
 			type: "POST",
 			data: formData,
 			success: function (res) {
-				
+
 				if(res.length != ''){
 					$('.addError').hide();
 					$('#editdefaultattributemodal').modal('hide');
@@ -595,17 +593,17 @@ $(document).on('click', '#updateAddress', function(e){
 
 			},
 		});
-		
+
 	});
-	
-	
+
+
 	//deleteAddressModal
 	$(document).on('click', '#deleteSliderId', function(){
 		var sliders_id = $(this).attr('sliders_id');
 		$('#sliders_id').val(sliders_id);
 		$('#deleteSliderModal').modal('show');
 	});
-	
+
 	//deleteAddressModal
 	$(document).on('click', '.deleteAddressModal', function(){
 		var customer_id = $(this).attr('customer_id');
@@ -617,7 +615,7 @@ $(document).on('click', '#updateAddress', function(e){
 		$('#delete_id').val(id);
 		$('#deleteAddressModal').modal('show');
 	});
-		
+
 
 	//deletedefaultattributemodal
 	$(document).on('click', '.deletedefaultattributemodal', function(){
@@ -628,13 +626,13 @@ $(document).on('click', '#updateAddress', function(e){
 			type: "POST",
 			data: '&products_id='+products_id+'&products_attributes_id='+products_attributes_id,
 			success: function (data) {
-				$('.deleteDefaultEmbed').html(data); 
+				$('.deleteDefaultEmbed').html(data);
 				$('#deletedefaultattributemodal').modal('show');
 			},
 			dataType: 'html'
 		});
 	});
-	
+
 	//deleteOption
 	$(document).on('click', '.deleteOption', function(){
 		$("#loader").show();
@@ -657,7 +655,7 @@ $(document).on('click', '#updateAddress', function(e){
 			},
 		});
 	});
-	
+
 	// delete-value
 	$(document).on('click', '.delete-value', function(){
 		$("#loader").show();
@@ -670,7 +668,7 @@ $(document).on('click', '#updateAddress', function(e){
 			type: "POST",
 			data: '&value_id='+value_id,
 			success: function (res) {
-				//$('.deleteEmbed').html(res); 
+				//$('.deleteEmbed').html(res);
 				//alert(res);
 				if(res.length != ''){
 					$('.addError').hide();
@@ -687,7 +685,7 @@ $(document).on('click', '#updateAddress', function(e){
 			},
 		});
 	});
-	
+
 	//deletedefaultattributemodal
 	$(document).on('click', '#deleteDefaultAttribute', function(){
 		$("#loader").show();
@@ -698,7 +696,7 @@ $(document).on('click', '#updateAddress', function(e){
 			type: "POST",
 			data: formData,
 			success: function (res) {
-				//$('.deleteEmbed').html(res); 
+				//$('.deleteEmbed').html(res);
 				//alert(res);
 				if(res.length != ''){
 					$('.addError').hide();
@@ -707,12 +705,12 @@ $(document).on('click', '#updateAddress', function(e){
 					var showData = [];
 					for (i = 0; i < res.length; ++i) {
 						var j = i + 1;
-						showData[i] = "<tr><td>"+j+"</td><td>"+res[i].products_options_name+"</td><td>"+res[i].products_options_values_name+"</td><td><a class='badge bg-light-blue editdefaultattributemodal' products_attributes_id = '"+res[i].products_attributes_id+"'  products_id = '"+res[i].products_id+"' language_id ='"+res[i].language_id+"' options_id ='"+res[i].options_id+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a> <a class='badge bg-red deletedefaultattributemodal' products_attributes_id = '"+res[i].products_attributes_id+"' products_id = '"+res[i].products_id+"' ><i class='fa fa-trash' aria-hidden='true'></i></a></td></tr>"; 
+						showData[i] = "<tr><td>"+j+"</td><td>"+res[i].products_options_name+"</td><td>"+res[i].products_options_values_name+"</td><td><a class='badge bg-light-blue editdefaultattributemodal' products_attributes_id = '"+res[i].products_attributes_id+"'  products_id = '"+res[i].products_id+"' language_id ='"+res[i].language_id+"' options_id ='"+res[i].options_id+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a> <a class='badge bg-red deletedefaultattributemodal' products_attributes_id = '"+res[i].products_attributes_id+"' products_id = '"+res[i].products_id+"' ><i class='fa fa-trash' aria-hidden='true'></i></a></td></tr>";
 					}
-					
+
 					$(".contentDefaultAttribute").html(showData);
 				}else{
-					
+
 					$('#deletedefaultattributemodal').modal('hide');
 					$('.addDefaultError').show();
 					$(".contentDefaultAttribute").html(res);
@@ -720,7 +718,7 @@ $(document).on('click', '#updateAddress', function(e){
 			},
 		});
 	});
-		
+
 	//ajax call for submit value
 	$(document).on('click', '#addImage', function(e){
 		$("#loader").show();
@@ -737,7 +735,7 @@ $(document).on('click', '#updateAddress', function(e){
 					var showData = [];
 					for (i = 0; i < res.length; ++i) {
 						var j = i + 1;
-						showData[i] = "<tr><td>"+j+"</td><td><img src={{asset('').'/'}}"+res[i].image+" alt='' width=' 100px'></td><td>"+res[i].htmlcontent+"</td> <td><a products_id = '"+res[i].products_id+"' class='badge bg-light-blue editProductImagesModal' id = '"+res[i].id+"' ><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a> <a class='badge bg-red deleteProductImagesModal' id = '"+res[i].id+"' products_id = '"+res[i].products_id+"' ><i class='fa fa-trash' aria-hidden='true'></i></a></td></tr>"; 
+						showData[i] = "<tr><td>"+j+"</td><td><img src={{asset('').'/'}}"+res[i].image+" alt='' width=' 100px'></td><td>"+res[i].htmlcontent+"</td> <td><a products_id = '"+res[i].products_id+"' class='badge bg-light-blue editProductImagesModal' id = '"+res[i].id+"' ><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a> <a class='badge bg-red deleteProductImagesModal' id = '"+res[i].id+"' products_id = '"+res[i].products_id+"' ><i class='fa fa-trash' aria-hidden='true'></i></a></td></tr>";
 					}
 					$(".contentImages").html(showData);
 				}else{
@@ -750,10 +748,10 @@ $(document).on('click', '#updateAddress', function(e){
 			contentType: false,
 			processData: false
 		});
-		
-		
+
+
 	});
-	
+
 	//website_themes
 	$(document).on('click', '.website_themes', function(){
 		//$('.applied_message').attr('hidden','hidden');
@@ -770,8 +768,8 @@ $(document).on('click', '#updateAddress', function(e){
 			dataType: 'html'
 		});
 	});
-	
-	
+
+
 	//editproductimagesmodal
 	$(document).on('click', '.editProductImagesModal', function(){
 		var id = $(this).attr('id');
@@ -781,14 +779,14 @@ $(document).on('click', '#updateAddress', function(e){
 			type: "POST",
 			data: '&products_id='+products_id+'&id='+id,
 			success: function (data) {
-				$('.editImageContent').html(data); 
+				$('.editImageContent').html(data);
 				$('#editProductImagesModal').modal('show');
 			},
 			dataType: 'html'
 		});
 	});
-	
-		
+
+
 	$(document).on('click', '#updateProductImage', function(e){
 		$("#loader").show();
 		var formData = new FormData($('#editImageFrom')[0]);
@@ -818,14 +816,14 @@ $(document).on('click', '#updateAddress', function(e){
 			contentType: false,
 			processData: false
 		});
-		
-	});	
-		
+
+	});
+
 	$("#sendNotificaionForm").submit(function(){
 		$('.not-sent').addClass('hide');
 		$('.sent-push').addClass('hide');
 		var formData = new FormData($(this)[0]);
-		
+
 		$.ajax({
 			url: "{{ URL::to('admin/notifyUser')}}",
 			type: "POST",
@@ -843,17 +841,17 @@ $(document).on('click', '#updateAddress', function(e){
 				}
 			},
 		});
-		
+
 		return false;
-			
+
 	});
-	
+
 	//send-notificaion
 	$(document).on('click', '#single-notificaion', function(){
 		$('.not-sent').addClass('hide');
 		$('.sent-push').addClass('hide');
 		var formData = new FormData($('#sendNotificaionForm')[0]);
-		
+
 		$.ajax({
 			url: "{{ URL::to('admin/notifyUser')}}",
 			type: "POST",
@@ -871,22 +869,22 @@ $(document).on('click', '#updateAddress', function(e){
 				}
 			},
 		});
-		
+
 		return false;
-			
+
 	});
-	
-		
+
+
 	//send push Notification
 	$(document).on('click', '#sendd-notificaion', function(){
 		$('.not-sent').addClass('hide');
 		$('.sent-push').addClass('hide');
 		var title = $('#title').val();
 		var message = $('#message').val();
-		
+
 		var form = $('#sendNotificaionForm')[0]; // You need to use standard javascript object here
 		var formData = new FormData($(this)[0]);
-		
+
 		$.ajax({
 			url: "{{ URL::to('admin/notifyUser')}}",
 			type: "POST",
@@ -904,7 +902,7 @@ $(document).on('click', '#updateAddress', function(e){
 				}
 			},
 		});
-				
+
 	});
 
 	//deleteProductImageModal
@@ -917,7 +915,7 @@ $(document).on('click', '#updateAddress', function(e){
 		$('#delete_product_image_id').val(product_image_id);
 		$("#deleteProductImageModal").modal('show');
 	});
-	
+
 	//ajax call for notification pop
 	$(document).on('click', '#notification-popup', function(){
 		var customers_id = $(this).attr('customers_id');
@@ -926,13 +924,13 @@ $(document).on('click', '#updateAddress', function(e){
 			type: "POST",
 			data: '&customers_id='+customers_id,
 			success: function (data) {
-				$('.notificationContent').html(data); 
+				$('.notificationContent').html(data);
 				$('#notificationModal').modal('show');
 			},
 			dataType: 'html'
 		});
 	});
-	
+
 	//get products for coupon
 	$(document).on('focus', '.couponProdcuts input', function(){
 		var products = $(this).attr('products_id');
@@ -945,21 +943,21 @@ $(document).on('click', '#updateAddress', function(e){
 			dataType: 'html'
 		});
 	});
-	
+
 	//call function on window load
 	@if(Request::path() == 'admin/editproduct/*')
 		getSubCategory();
 	@endif
 	//special product
 	showSpecial();
-			
+
 	//deleteproductmodal
 	$(document).on('click', '#deleteProductId', function(){
 		var product_id = $(this).attr('product_id');
 		$('#product_id').val(product_id);
 		$("#deleteProductModal").modal('show');
 	});
-		
+
 	//deleteCustomerModal
 	$(document).on('click', '#deleteCustomerFrom', function(){
 		var customer_id = $(this).attr('customer_id');
@@ -980,14 +978,14 @@ $(document).on('click', '#updateAddress', function(e){
 		$('#delete_company_id').val(company_id);
 		$("#deleteCompanyModal").modal('show');
 	});
-	
+
 	//manufacturerModal
 	$(document).on('click', '#manufacturerFrom', function(){
 		var manufacturers_id = $(this).attr('manufacturers_id');
 		$('#manufacturers_id').val(manufacturers_id);
 		$("#manufacturerModal").modal('show');
 	});
-	
+
 	//deleteManufacturerModal
 	$(document).on('click', '#deleteManufacturerId', function(){
 		var manufacturer_id = $(this).attr('manufacturer_id');
@@ -1023,7 +1021,7 @@ $(document).on('click', '#updateAddress', function(e){
 		$('#product_option_id').val(product_option_id);
 		$("#deleteProductOptionModal").modal('show');
 	});
-	
+
 	//deleteCountrytModal
 	$(document).on('click', '#deleteCategoryId', function(){
 		var category_id = $(this).attr('category_id');
@@ -1070,100 +1068,100 @@ $(document).on('click', '#updateAddress', function(e){
 		$('#zone_id').val(zone_id);
 		$("#deleteZoneModal").modal('show');
 	});
-	
+
 	//deleteTaxClassModal
 	$(document).on('click', '#deleteTaxClassId', function(){
 		var tax_class_id = $(this).attr('tax_class_id');
 		$('#tax_class_id').val(tax_class_id);
 		$("#deleteTaxClassModal").modal('show');
 	});
-	
+
 	//deleteTaxRateModal
 	$(document).on('click', '#deleteTaxRateId', function(){
 		var tax_rates_id = $(this).attr('tax_rates_id');
 		$('#tax_rates_id').val(tax_rates_id);
 		$("#deleteTaxRateModal").modal('show');
 	});
-	
+
 	//deleteOrderStatusModal
 	$(document).on('click', '#deleteOrderStatusId', function(){
 		var orders_status_id = $(this).attr('orders_status_id');
 		$('#orders_status_id').val(orders_status_id);
 		$("#deleteOrderStatusModal").modal('show');
 	});
-	
-	
+
+
 	//deletelanguageModal
 	$(document).on('click', '#deleteLanguageId', function(){
 		var languages_id = $(this).attr('languages_id');
 		$('#languages_id').val(languages_id);
 		$("#deleteLanguagesModal").modal('show');
 	});
-	
+
 	//deleteTaxRateModal
 	$(document).on('click', '#deleteCoupans_id', function(){
 		var coupans_id = $(this).attr('coupans_id');
 		$('#coupans_id').val(coupans_id);
 		$("#deleteCoupanModal").modal('show');
 	});
-	
+
 	//deleteTaxClassModal
 	$(document).on('click', '#deleteBannerId', function(){
 		var banners_id = $(this).attr('banners_id');
 		$('#banners_id').val(banners_id);
 		$("#deleteBannerModal").modal('show');
 	});
-	
+
 	//deleteNewsCategoryModal
 	$(document).on('click', '#deleteNewsCategroyId', function(){
 		var id = $(this).attr('category_id');
 		$('#id').val(id);
 		$("#deleteNewsCategoryModal").modal('show');
 	});
-	
+
 	//deleteNewsModal
 	$(document).on('click', '#deleteNewsId', function(){
 		var id = $(this).attr('news_id');
 		$('#id').val(id);
 		$("#deleteNewsModal").modal('show');
 	});
-	
+
 	//deletePageModal
 	$(document).on('click', '#deletePageId', function(){
 		var id = $(this).attr('page_id');
 		$('#id').val(id);
 		$("#deletePageModal").modal('show');
 	});
-	
+
 	//deleteOrderModal
 	$(document).on('click', '#deleteOrderId', function(){
 		var order_id = $(this).attr('order_id');
 		$('#order_id').val(order_id);
 		$("#deleteOrderModal").modal('show');
 	});
-	
-	
+
+
 	//edit option value
 	$(document).on('click', '.edit-value', function(){
 		var value = $(this).attr('value');
 		$(".form-p-"+value).hide();
 		$(".form-content-"+value).show();
 	});
-	
+
 	//cancel option value
 	$(document).on('click', '.cancel-value', function(){
 		var value = $(this).attr('value');
 		$(".form-content-"+value).hide();
 		$(".form-p-"+value).show();
 	});
-	
+
 	//deleteUnitModal
 	$(document).on('click', '#deleteUnitsId', function(){
 		var unit_id = $(this).attr('unit_id');
 		$('#unit_id').val(unit_id);
 		$("#deleteUnitModal").modal('show');
 	});
-	 
+
 	//getRange
 	$(document).on('click', '.getRange', function(){
 		var dateRange = $('.dateRange').val();
@@ -1177,7 +1175,7 @@ $(document).on('click', '#updateAddress', function(e){
 			$('.dateRange').parent('.input-group').addClass('has-error');
 		}
 	});
-	
+
 	//default_method
 	$(document).on('click', '.default_method', function(){
 		var shipping_id = $(this).attr('shipping_id');
@@ -1190,56 +1188,56 @@ $(document).on('click', '#updateAddress', function(e){
 			},
 		});
 	});
-	
+
 	//product options language
 	$(document).on('change', '.language_id', function(){
 		var language_id = $(this).val();
 		getOptions(language_id);
 	});
-	
+
 	//product options option with language id
 	$(document).on('change', '.default-option-id', function(){
 		var option_id = $(this).val();
 		getOptionsValue(option_id);
 	});
-	
+
 	//product options language
 	$(document).on('change', '.edit_language_id', function(){
 		var language_id = $(this).val();
 		getEditOptions(language_id);
 	});
-	
+
 	//product options option with language id
 	$(document).on('change', '.edit-default-option-id', function(){
 		var option_id = $(this).val();
 		getEditOptionsValue(option_id);
 	});
-	
+
 	//product options language
 	$(document).on('change', '.additional_language_id', function(){
 		var language_id = $(this).val();
 		getAdditionalOptions(language_id);
 	});
-	
+
 	//product options option with language id
 	$(document).on('change', '.additional-option-id', function(){
 		var option_id = $(this).val();
 		getAdditionalOptionsValue(option_id);
 	});
-	
+
 	//product options language
 	$(document).on('change', '.edit_additional_language_id', function(){
 		var language_id = $(this).val();
 		getEditAdditionalOptions(language_id);
 	});
-	
+
 	//product options option with language id
 	$(document).on('change', '.edit-additional-option-id', function(){
 		var option_id = $(this).val();
 		getEditAdditionalOptionsValue(option_id);
 	});
-	
-	
+
+
 	//default_language
 	$(document).on('click', '.default_language', function(){
 		var languages_id = $(this).val();
@@ -1248,14 +1246,14 @@ $(document).on('click', '#updateAddress', function(e){
 			type: "POST",
 			data: '&languages_id='+languages_id,
 			success: function (data) {
-				location.reload(); 
+				location.reload();
 			},
 		});
 	});
-	
-	
+
+
 });
-	
+
 function getOptions(languages_id) {
 	$.ajax({
 		url: '{{ URL::to("admin/getOptions")}}',
@@ -1267,7 +1265,7 @@ function getOptions(languages_id) {
 	});
 }
 
-	
+
 function getOptionsValue(option_id) {
 	var language_id = $('.language_id').val();
 	$.ajax({
@@ -1291,9 +1289,9 @@ function getEditOptions(languages_id) {
 	});
 }
 
-	
+
 function getEditOptionsValue(option_id) {
-	
+
 	var language_id = $('.edit_language_id').val();
 	$.ajax({
 		url: '{{ URL::to("admin/getOptionsValue")}}',
@@ -1316,9 +1314,9 @@ function getAdditionalOptions(languages_id) {
 	});
 }
 
-	
+
 function getAdditionalOptionsValue(option_id) {
-	
+
 	var language_id = $('.additional_language_id').val();
 	$.ajax({
 		url: '{{ URL::to("admin/getOptionsValue")}}',
@@ -1341,9 +1339,9 @@ function getEditAdditionalOptions(languages_id) {
 	});
 }
 
-	
+
 function getEditAdditionalOptionsValue(option_id) {
-	
+
 	var language_id = $('.edit_additional_language_id').val();
 	$.ajax({
 		url: '{{ URL::to("admin/getOptionsValue")}}',
@@ -1364,11 +1362,11 @@ function getSubCategory() {
 	/*
 	@if(Request::path() == 'admin/addProduct')
 	 	var getCategories =	'{{ URL::to("admin/getajaxcategories")}}';
-	 
+
 	@else*/
 		var getCategories = '{{ URL::to("admin/getajaxcategories")}}';
 	/*@endif*/
-	
+
 	var category_id = $('#category_id').val();
 	if(category_id != ''){
 		$.ajax({
@@ -1397,7 +1395,7 @@ function showSpecial() {
 		$(".special-container").show();
 		$(".special-container input#expiry_date").addClass("field-validate");
 		$(".special-container input#special_price").addClass("number-validate");
-		
+
 	}else{
 		$(".special-container").hide();
 		$(".special-container input#expiry_date").removeClass("field-validate");
@@ -1405,7 +1403,7 @@ function showSpecial() {
 	}
 }
 
-	
+
 $(function () {
 	$('.datepicker').datepicker({
 	  autoclose: true,
@@ -1425,25 +1423,25 @@ function banner_type(){
 		$('.productContent').show();
 	}else{
 		$('.categoryContent').hide();
-		$('.productContent').hide();	
+		$('.productContent').hide();
 	}
 }
 $(document).on('change','.choseOption',function(){
-	
+
 	var content = $(this).attr('content');
 	var choseOption = $(this).val();
 	console.log(choseOption);
-	
+
 	if(choseOption == 'new'){
 		$('.field-validate_'+content).addClass('field-validate');
 		$('.newAttribute_'+content).show();
 		$('.oldAttribute_'+content).hide();
-	}else if(choseOption == 'old'){	
+	}else if(choseOption == 'old'){
 		$('.field-validate_'+content).removeClass('field-validate');
 		$('.newAttribute_'+content).hide();
 		$('.oldAttribute_'+content).show();
 	}
-	
+
 });
 
 
@@ -1457,14 +1455,14 @@ $(document).on('change', '#bannerType', function(e){
 		$('.productContent').show();
 	}else{
 		$('.categoryContent').hide();
-		$('.productContent').hide();	
+		$('.productContent').hide();
 	}
-	
+
 });
 
 
 $(document).on('click', '.notifyTo', function(e){
-	
+
 	if($(this).is(':checked')){
 		$('.device_id > input').attr('disabled', true);
 	}else{
@@ -1476,10 +1474,10 @@ $(document).on('click', '.notifyTo', function(e){
 //validate form
 $(document).on('submit', '.form-validate', function(e){
 	var error = "";
-	
+
 	//to validate text field
 	$(".field-validate").each(function() {
-		
+
 		if(this.value == '') {
 			$(this).closest(".form-group").addClass('has-error');
 			//$(this).next(".error-content").removeClass('hidden');
@@ -1489,7 +1487,7 @@ $(document).on('submit', '.form-validate', function(e){
 			//$(this).next(".error-content").addClass('hidden');
 		}
 	});
-	
+
 	$(".number-validate").each(function() {
 		if(this.value == '' || isNaN(this.value)) {
 			$(this).closest(".form-group").addClass('has-error');
@@ -1500,30 +1498,30 @@ $(document).on('submit', '.form-validate', function(e){
 			//$(this).next(".error-content").addClass('hidden');
 		}
 	});
-	
+
 	//
 	$(".email-validate").each(function() {
 		var validEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
 		if(this.value != '' && validEmail.test(this.value)) {
 			$(this).closest(".form-group").removeClass('has-error');
 			//$(this).next(".error-content").addClass('hidden');
-			
+
 		}else{
 			$(this).closest(".form-group").addClass('has-error');
 			//$(this).next(".error-content").removeClass('hidden');
 			error = "has error";
 		}
 	});
-	
+
 	if(error=="has error"){
     	return false;
 	}
-	
+
 });
 
 //focus form field
 $(document).on('keyup change', '.field-validate', function(e){
-	
+
 	if(this.value == '') {
 		$(this).closest(".form-group").addClass('has-error');
 		//$(this).next(".error-content").removeClass('hidden');
@@ -1531,12 +1529,12 @@ $(document).on('keyup change', '.field-validate', function(e){
 		$(this).closest(".form-group").removeClass('has-error');
 		//$(this).next(".error-content").addClass('hidden');
 	}
-	
+
 });
 
 //focus form field
 $(document).on('keyup', '.number-validate', function(e){
-	
+
 	if(this.value == '' || isNaN(this.value)) {
 		$(this).closest(".form-group").addClass('has-error');
 		//$(this).next(".error-content").removeClass('hidden');
@@ -1544,7 +1542,7 @@ $(document).on('keyup', '.number-validate', function(e){
 		$(this).closest(".form-group").removeClass('has-error');
 		//$(this).next(".error-content").addClass('hidden');
 	}
-	
+
 });
 
 $(document).on('keyup focusout', '.email-validate', function(e){
@@ -1552,7 +1550,7 @@ $(document).on('keyup focusout', '.email-validate', function(e){
 	if(this.value != '' && validEmail.test(this.value)) {
 		$(this).closest(".form-group").removeClass('has-error');
 		//$(this).next(".error-content").addClass('hidden');
-		
+
 	}else{
 		$(this).closest(".form-group").addClass('has-error');
 		//$(this).next(".error-content").removeClass('hidden');
@@ -1560,7 +1558,7 @@ $(document).on('keyup focusout', '.email-validate', function(e){
 	}
 });
 
-//change default notifcation 
+//change default notifcation
 $(document).on('change', '#default_notification', function(e){
 	var value = $(this).val();
 	if(value=='fcm'){
@@ -1569,7 +1567,7 @@ $(document).on('change', '#default_notification', function(e){
 	}else if(value=='onesignal'){
 		$('.fcm_content').hide();
 		$('.onesignal_content').show();
-		
+
 	}
 });
 
@@ -1585,7 +1583,7 @@ $(document).on('click', '#generate-key', function(e){
 		success: function (res) {
 			$("#loader").hide();
 			$('#generateSuccessfully').removeAttr('hidden');
-			$('#consumer_key').val(res.consumerKey);				
+			$('#consumer_key').val(res.consumerKey);
 			$("#consumer_secret").val(res.consumerSecret);
 		},
 	});
@@ -1605,7 +1603,7 @@ $(document).on('click', '#generate-key', function(e){
 		}else{
 			 $('#password').closest('.col-sm-10').removeClass('has-error');
 			 $('#password').next('.error-content').hide();
-			 
+
 			  if (re_password == null || re_password == '' ) {
 					 err  = "Please re enter password! \n";
 					 document.getElementById("re_password").focus();
@@ -1621,7 +1619,7 @@ $(document).on('click', '#generate-key', function(e){
 					return false;
 				 }else{
 					return true;
-				
+
 				}
 			 }
 		}
@@ -1637,5 +1635,5 @@ $(document).on('click','#change-passowrd', function(){
 });
 
 
-	
+
 </script>

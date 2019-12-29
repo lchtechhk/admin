@@ -16,61 +16,51 @@
             {{-- {{ trans('labels.welcome_message_to') }} --}}
         </div>
     </div>
-    <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">{{ trans('labels.login_text') }}</p>
         @if( count($errors) > 0)
-        @foreach($errors->all() as $error)
-        <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">{{ trans('labels.Error') }}:</span>
-            {{ $error }}
-        </div>
-        @endforeach
+            @foreach($errors->all() as $error)
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">{{ trans('labels.Error') }}:</span>
+                    {{ $error }}
+                </div>
+            @endforeach
         @endif
 
         @if(Session::has('loginError'))
-        <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">{{ trans('labels.Error') }}:</span>
-            {!! session('loginError') !!}
-        </div>
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">{{ trans('labels.Error') }}:</span>
+                {!! session('loginError') !!}
+            </div>
         @endif
 
         {!! Form::open(array('url' =>'admin/checkLogin', 'method'=>'post', 'class'=>'form-validate')) !!}
-
-        <div class="form-group has-feedback">
-            {!! Form::email('email', '', array('class'=>'form-control email-validate', 'id'=>'email')) !!}
-            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                {{ trans('labels.AdminEmailText') }}</span>
-            <span class="help-block hidden"> {{ trans('labels.AdminEmailText') }}</span>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-            <input type="password" name='password' class='form-control field-validate' value="">
-            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                {{ trans('labels.AdminPasswordText') }}</span>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
-
-        </div>
-        <img src="http://ionicecommerce.com/testcontroller1.php">
-        <div class="row">
-
-            <!-- /.col -->
-            <div class="col-xs-6">
-                {!! Form::submit(trans('labels.login'), array('id'=>'login', 'class'=>'btn btn-primary btn-block
-                btn-flat' )) !!}
+            <div class="form-group has-feedback">
+                {!! Form::email('email', '', array('class'=>'form-control email-validate', 'id'=>'email')) !!}
+                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                    {{ trans('labels.AdminEmailText') }}</span>
+                <span class="help-block hidden"> {{ trans('labels.AdminEmailText') }}</span>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
-            <div class="col-xs-6">
-                <a href="{{ URL::to('admin/view_registerUser') }}"
-                    class='btn btn-primary btn-block btn-flat'>{{trans('labels.register')}}</a>
+            <div class="form-group has-feedback">
+                <input type="password" name='password' class='form-control field-validate' value="">
+                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                    {{ trans('labels.AdminPasswordText') }}</span>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
             </div>
-            <!-- /.col -->
-        </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    {!! Form::submit(trans('labels.login'), array('id'=>'login', 'class'=>'btn btn-primary btn-block
+                    btn-flat' )) !!}
+                </div>
+                <div class="col-xs-6">
+                    <a href="{{ URL::to('admin/view_registerUser') }}"
+                        class='btn btn-primary btn-block btn-flat'>{{trans('labels.register')}}</a>
+                </div>
+            </div>
         {!! Form::close() !!}
-
     </div>
-
-    <!-- /.login-box-body -->
 </div>
