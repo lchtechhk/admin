@@ -8,8 +8,12 @@ Route::get('/', function() { return Redirect::to("admin/login"); });
 
 Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
     Route::get('/login', 'Controller\AdminController@login');
+    Route::post('/checkLogin', 'Controller\AdminController@checkLogin');
     // Route::get('/login', function () {
     //     return view('welcome');
     // });
 
+    Route::group(['middleware' => 'admin', 'middleware' => 'company'], function () {
+
+    });
 });

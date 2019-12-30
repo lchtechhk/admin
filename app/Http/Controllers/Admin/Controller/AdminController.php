@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Controller;
 use App\Http\Controllers\Controller;
-// use Validator;
+use Validator;
 // use App;
 use Lang;
 use Log;
@@ -104,6 +104,8 @@ class AdminController extends Controller{
     }
 
 	public function login(){
+		Log::info('[login] --  : ');
+
 		if (Auth::check()) {
 		  return redirect('/admin/dashboard/this_month');
 		}else{
@@ -112,4 +114,40 @@ class AdminController extends Controller{
 		}
 	}
 
+	//login function
+	public function checkLogin(Request $request){
+		Log::info('[checkLogin] --  : ');
+
+		$validator = Validator::make(
+			array(
+					'email'    => $request->email,
+					'password' => $request->password
+				), 
+			array(
+					'email'    => 'required | email',
+					'password' => 'required',
+				)
+		);
+		//check validation
+		if($validator->fails()){
+			return redirect('admin/login')->withErrors($validator)->withInput();
+		}else{
+			//check authentication of email and password
+			$adminInfo = array("email" => $request->email, "password" => $request->password);
+			Log::info('adminInfo : ' . json_encode($adminInfo));
+			if(auth()->guard('admin')->attempt($adminInfo)) {
+				$user_auth = auth()->guard('admin')->user();
+				Log::info('user_auth : ' . json_encode($user_auth));
+				$language_id = $user_auth->default_language;
+				$user = $this->UserService->findByColumn_Value("user_id",$user_auth->user_id);
+				session(['language_id' => $language_id]);
+				Log::info('user : ' . json_encode($user));
+				return redirect()->intended('admin/dashboard/this_month')->with('administrators', $user);
+			}else{
+				return redirect('admin/login')->with('loginError',Lang::get("labels.EmailPasswordIncorrectText"));
+			}
+
+		}
+		
+	}
 }

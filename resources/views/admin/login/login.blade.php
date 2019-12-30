@@ -1,4 +1,4 @@
-@extends('admin.login.layoutlogin')
+@extends('admin.login.layout_login')
 @section('content')
 <style>
     .wrapper {
