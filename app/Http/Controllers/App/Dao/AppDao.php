@@ -3,9 +3,9 @@
     use DB;
     use Log;
     use JWTAuth;
-    use App\Http\Controllers\Repository\BaseRepository;
+    use App\Http\Controllers\Repository\MainRepository;
 
-    abstract class AppDao extends BaseRepository{
+    abstract class AppDao extends MainRepository{
         protected $table;
         protected $companyAuth = false;
 
