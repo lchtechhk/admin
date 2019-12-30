@@ -32,75 +32,75 @@ class AdminController extends Controller{
 
     public function dashboard(Request $request){
 		Log::info('dashboard');
-		$title 			  = 	array('pageTitle' => Lang::get("labels.title_dashboard"));
-		$language_id      = 	'1';
-		$result 		  =		array();
+		// $title 			  = 	array('pageTitle' => Lang::get("labels.title_dashboard"));
+		// $language_id      = 	'1';
+		// $result 		  =		array();
 
-		$reportBase		  = 	$request->reportBase;
+		// $reportBase		  = 	$request->reportBase;
 
-		//recently order placed
-        $orders = $this->View_OrderService->findByColumn_Value('company_id',Session::get('default_company_id'));
-
-
-
-		$index = 0;
-		$total_price = array();
-
-		$compeleted_orders = 0;
-		$pending_orders = 0;
+		// //recently order placed
+        // $orders = $this->View_OrderService->findByColumn_Value('company_id',Session::get('default_company_id'));
 
 
-		$result['orders'] = $orders->chunk(10);
-		$result['pending_orders'] = $pending_orders;
-		$result['compeleted_orders'] = $compeleted_orders;
-		$result['total_orders'] = count($orders);
 
-		$result['inprocess'] = count($orders)-$pending_orders-$compeleted_orders;
-		//add to cart orders
+		// $index = 0;
+		// $total_price = array();
 
-		$result['cart'] = 0;
+		// $compeleted_orders = 0;
+		// $pending_orders = 0;
 
-		//Rencently added products
-		$recentProducts = DB::table('product')
-			->leftJoin('product_description','product_description.product_id','=','product.product_id')
-			->where('product_description.language_id','=', $language_id)
-			->orderBy('product.product_id', 'DESC')
-			->paginate(8);
 
-		$result['recentProducts'] = $recentProducts;
+		// $result['orders'] = $orders->chunk(10);
+		// $result['pending_orders'] = $pending_orders;
+		// $result['compeleted_orders'] = $compeleted_orders;
+		// $result['total_orders'] = count($orders);
 
-		//products
-		$products = DB::table('product')
-			->leftJoin('product_description','product_description.product_id','=','product.product_id')
-			->where('product_description.language_id','=', $language_id)
-			->orderBy('product.product_id', 'DESC')
-			->get();
+		// $result['inprocess'] = count($orders)-$pending_orders-$compeleted_orders;
+		// //add to cart orders
 
-		//low products & out of stock
-		$lowLimit = 0;
-		$outOfStock = 0;
-		foreach($products as $products_data){
-			if($products_data->low_limit >= 1 && $products_data->quantity >= $products_data->low_limit){
-				$lowLimit++;
-			}elseif($products_data->quantity == 0){
-				$outOfStock++;
-			}
-		}
+		// $result['cart'] = 0;
 
-		$result['lowLimit'] = $lowLimit;
-		$result['outOfStock'] = $outOfStock;
-		$result['totalProducts'] = count($products);
+		// //Rencently added products
+		// $recentProducts = DB::table('product')
+		// 	->leftJoin('product_description','product_description.product_id','=','product.product_id')
+		// 	->where('product_description.language_id','=', $language_id)
+		// 	->orderBy('product.product_id', 'DESC')
+		// 	->paginate(8);
 
-		$result['recentCustomers'] = array();
-		$result['totalCustomers'] = 0;
-		$result['reportBase'] = $reportBase;
+		// $result['recentProducts'] = $recentProducts;
 
-		//get function from other controller
-		$myVar = new AdminSiteSettingController();
-		$currency = $myVar->getSetting();
-		$result['currency'] = $currency;
+		// //products
+		// $products = DB::table('product')
+		// 	->leftJoin('product_description','product_description.product_id','=','product.product_id')
+		// 	->where('product_description.language_id','=', $language_id)
+		// 	->orderBy('product.product_id', 'DESC')
+		// 	->get();
 
-		return view("admin.dashboard",$title)->with('result', $result);
+		// //low products & out of stock
+		// $lowLimit = 0;
+		// $outOfStock = 0;
+		// foreach($products as $products_data){
+		// 	if($products_data->low_limit >= 1 && $products_data->quantity >= $products_data->low_limit){
+		// 		$lowLimit++;
+		// 	}elseif($products_data->quantity == 0){
+		// 		$outOfStock++;
+		// 	}
+		// }
+
+		// $result['lowLimit'] = $lowLimit;
+		// $result['outOfStock'] = $outOfStock;
+		// $result['totalProducts'] = count($products);
+
+		// $result['recentCustomers'] = array();
+		// $result['totalCustomers'] = 0;
+		// $result['reportBase'] = $reportBase;
+
+		// //get function from other controller
+		// $myVar = new AdminSiteSettingController();
+		// $currency = $myVar->getSetting();
+		// $result['currency'] = $currency;
+
+		// return view("admin.dashboard",$title)->with('result', $result);
     }
 
 	public function login(){
