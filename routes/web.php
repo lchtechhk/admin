@@ -30,4 +30,7 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::get('/dashboard/{reportBase}', 'Controller\AdminController@dashboard');
 
     });
+
+    Route::get('/test', 'Controller\TestController@pdf');
+
 });
