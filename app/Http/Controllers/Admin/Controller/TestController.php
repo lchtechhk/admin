@@ -21,7 +21,7 @@ class TestController extends Controller{
     function pdf(){
         $data = [
             'title' => 'First PDF for Medium',
-            'heading' => 'Hello from 99Points.info',
+            'image' => 'http://localhost/admin/storage/company/logo/logo.png',
             'content' => 'Hello from 99Points.info'
         ];
         $pdf = App::make('dompdf.wrapper');

@@ -4,7 +4,10 @@ header('Access-Control-Allow-Origin:  *');
 header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 
-Route::get('/', function() { return Redirect::to("admin/login"); });
+// Route::get('/', function() { return Redirect::to("admin/login"); });
+
+Route::get('/', function() { return view('pdf'); });
+
 
 Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
     //log in
