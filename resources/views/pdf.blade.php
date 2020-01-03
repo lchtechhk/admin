@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+  @font-face {
+    font-family: SimHei;
+    src: url('{{base_path().'/public/report_assets/'}}fonts/simhei.ttf') format('truetype');
+  }
+
+  * {
+    font-family: SimHei;
+  }
+</style>
 
 <head>
   <meta charset="utf-8">
