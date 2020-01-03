@@ -80,4 +80,7 @@
   'stc' => array(
     'normal' => $fontDir . '\529242dd0ba6e9262f0c0cb6f179ab1e',
   ),
+  'simsun' => array(
+    'normal' => $fontDir . '\93d5d7929726deaf3638f3bc912a73e9',
+  ),
 ) ?>

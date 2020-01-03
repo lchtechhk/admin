@@ -19,19 +19,16 @@ class TestController extends Controller{
     }
 
     function pdf(){
-        $data = [
-            'title' => 'First PDF for Medium',
-            'image' => 'http://localhost/admin/storage/company/logo/logo.png',
-            'content' => '昨'
-        ];
-        $pdf = App::make('dompdf.wrapper');
-        $pdf = PDF::loadView('pdf', $data);
-        $file_name = "test";
-        Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());
-        return $pdf->stream();
-        // return response()->download('storage/pdf/'.$file_name.'.pdf');
-        
-
+      $data = [
+          'title' => 'First PDF for Medium',
+          'image' => 'http://localhost/admin/storage/company/logo/logo.png',
+          'content' => '昨'
+      ];
+      $pdf = PDF::loadView('pdf', $data);
+      $file_name = "test";
+      Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());
+      return $pdf->stream();
+      // return response()->download('storage/pdf/'.$file_name.'.pdf');
     }
 
     function characet($data){

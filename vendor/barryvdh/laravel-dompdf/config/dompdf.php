@@ -76,7 +76,7 @@ return array(
         /**
          * Whether to enable font subsetting or not.
          */
-        "enable_font_subsetting" => true,
+        "enable_font_subsetting" => false,
 
         /**
          * The PDF rendering backend to use
@@ -149,7 +149,7 @@ return array(
          * Used if no suitable fonts can be found. This must exist in the font folder.
          * @var string
          */
-        "default_font" => "sans-serif",
+        "default_font" => "serif",
 
         /**
          * Image DPI setting
@@ -198,7 +198,7 @@ return array(
          *
          * @var bool
          */
-        "enable_php" => true,
+        "enable_php" => false,
 
         /**
          * Enable inline Javascript
@@ -237,7 +237,7 @@ return array(
         /**
          * Use the more-than-experimental HTML5 Lib parser
          */
-        "enable_html5_parser" => true,
+        "enable_html5_parser" => false,
     ),
 
 
