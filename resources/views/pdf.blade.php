@@ -2,17 +2,17 @@
 <html>
 <style type="text/css">
   @font-face {
-    font-family: wt011;
-    src: url("{{storage_path('fonts\wt011.ttf')}}") format('truetype');
+    font-family: "pming";
+    src: url("{{storage_path('fonts\pming.ttf')}}") format('truetype');
   }
   * {
-    font-family: wt011;
+    font-family: "pming";
   }
 </style>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Laravel 5.6 PDF Generate Tutorial With Example</title>
+  <title>顧客 Laravel 5.6 PDF Generate Tutorial With Example</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -40,9 +40,10 @@
   <hr style="margin:5px; border: 1px solid black;">
   <div class="row">
     <div class="col-xs-12 col-md-12">
+      1.不支持汉字 dompdf_font_family_cache.dist.php，修改完之后问题顺利解决，汉字能正常显示。
       <table style="width:100%;">
         <tr>
-          <th><?= '顧客' ?> : </th>
+          {{-- <th>顧客 : </th>
           <td style="padding:5px;">
             1
           </td>
@@ -53,7 +54,7 @@
           <th>已操作時數 :</th>
           <td style="padding:5px;">
             3
-          </td>
+          </td> --}}
         </tr>
       </table>
     </div>

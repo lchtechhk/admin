@@ -80,4 +80,7 @@
   'wt011' => array(
     'normal' => $fontDir . '\dd9840aa45f8d88632aba45e37e9b7f5',
   ),
+  'pming' => array(
+    'normal' => $fontDir . '\edf10048e9ea18d9241a9e0485c34f00',
+  ),
 ) ?>

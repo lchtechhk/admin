@@ -83,4 +83,10 @@
     'italic' => $fontDir . '/wt011',
     'bold_italic' => $fontDir . '/wt011',
   ),
+  'pming' => array(
+    'normal' => $fontDir . '/pming',
+    'bold' => $fontDir . '/pming',
+    'italic' => $fontDir . '/pming',
+    'bold_italic' => $fontDir . '/pming',
+  ),
 ) ?>
