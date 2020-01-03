@@ -26,9 +26,11 @@ class TestController extends Controller{
         ];
         $pdf = App::make('dompdf.wrapper');
         $pdf = PDF::loadView('pdf', $data);
-        Storage::disk('pdf')->put('1.pdf', $pdf->output());
-        // return $pdf->download('invoice.pdf');
+        $file_name = "test";
+        Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());
         return $pdf->stream();
+        // return response()->download('storage/pdf/'.$file_name.'.pdf');
+        
 
     }
 

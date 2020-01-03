@@ -77,16 +77,10 @@
     'italic' => $fontDir . '\DejaVuSerif-Italic',
     'normal' => $fontDir . '\DejaVuSerif',
   ),
-  'wt011' => array(
-    'normal' => $fontDir . '/wt011',
-    'bold' => $fontDir . '/wt011',
-    'italic' => $fontDir . '/wt011',
-    'bold_italic' => $fontDir . '/wt011',
-  ),
-  'pming' => array(
-    'normal' => $fontDir . '/pming',
-    'bold' => $fontDir . '/pming',
-    'italic' => $fontDir . '/pming',
-    'bold_italic' => $fontDir . '/pming',
+  'stc' => array(
+    'normal' => $fontDir . '/stc',
+    'bold' => $fontDir . '/stc',
+    'italic' => $fontDir . '/stc',
+    'bold_italic' => $fontDir . '/stc',
   ),
 ) ?>

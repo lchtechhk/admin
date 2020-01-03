@@ -77,10 +77,7 @@
     'italic' => $rootDir . '\lib\fonts\DejaVuSerif-Italic',
     'normal' => $rootDir . '\lib\fonts\DejaVuSerif',
   ),
-  'wt011' => array(
-    'normal' => $fontDir . '\dd9840aa45f8d88632aba45e37e9b7f5',
-  ),
-  'pming' => array(
-    'normal' => $fontDir . '\edf10048e9ea18d9241a9e0485c34f00',
+  'stc' => array(
+    'normal' => $fontDir . '\529242dd0ba6e9262f0c0cb6f179ab1e',
   ),
 ) ?>

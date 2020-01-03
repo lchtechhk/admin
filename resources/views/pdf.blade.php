@@ -2,16 +2,17 @@
 <html>
 <style type="text/css">
   @font-face {
-    font-family: "pming";
-    src: url("{{storage_path('fonts\pming.ttf')}}") format('truetype');
+    font-family: "stc";
+    src: url("{{storage_path('fonts\stc.ttf')}}") format('truetype');
   }
   * {
-    font-family: "pming";
+    color:#000;
+    font-family: "stc";
   }
 </style>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>顧客 Laravel 5.6 PDF Generate Tutorial With Example</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -40,7 +41,7 @@
   <hr style="margin:5px; border: 1px solid black;">
   <div class="row">
     <div class="col-xs-12 col-md-12">
-      1.不支持汉字 dompdf_font_family_cache.dist.php，修改完之后问题顺利解决，汉字能正常显示。
+      不支持汉字 dompdf_font_family
       <table style="width:100%;">
         <tr>
           {{-- <th>顧客 : </th>
