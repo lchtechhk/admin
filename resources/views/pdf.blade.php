@@ -2,19 +2,17 @@
 <html>
 <style type="text/css">
   @font-face {
-    font-family: SimHei;
-    src: url('{{base_path().'/public/report_assets/'}}fonts/simhei.ttf') format('truetype');
+    font-family: wt011;
+    src: url("{{storage_path('fonts\wt011.ttf')}}") format('truetype');
   }
-
   * {
-    font-family: SimHei;
+    font-family: wt011;
   }
 </style>
 
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Laravel 5.6 PDF Generate Tutorial With Example</title>
-  <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -44,7 +42,7 @@
     <div class="col-xs-12 col-md-12">
       <table style="width:100%;">
         <tr>
-          <th>顧客 : </th>
+          <th><?= '顧客' ?> : </th>
           <td style="padding:5px;">
             1
           </td>

@@ -22,7 +22,7 @@ class TestController extends Controller{
         $data = [
             'title' => 'First PDF for Medium',
             'image' => 'http://localhost/admin/storage/company/logo/logo.png',
-            'content' => 'Hello from 99Points.info'
+            'content' => '昨'
         ];
         $pdf = App::make('dompdf.wrapper');
         $pdf = PDF::loadView('pdf', $data);
