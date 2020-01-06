@@ -24,11 +24,18 @@ class TestController extends Controller{
           'image' => 'http://localhost/admin/storage/company/logo/logo.png',
           'content' => '昨'
       ];
-      $pdf = PDF::loadView('pdf', $data);
-      $file_name = "test";
-      Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());
-      return $pdf->stream();
+      // $pdf = PDF::loadView('pdf', $data);
+      // $file_name = "test";
+      // Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());
+      // return $pdf->stream();
       // return response()->download('storage/pdf/'.$file_name.'.pdf');
+
+      // snappy
+      //To file
+      $html = '<h1>Bill</h1><p>You owe me money, dude.</p>';
+      $pdf = PDF::loadView('test', $data);
+      return $pdf->stream("hello.pdf");
+      // return $pdf->download();
     }
 
     function characet($data){

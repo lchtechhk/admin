@@ -4,28 +4,19 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <title>测试pdf</title>
   <style type="text/css" media="all">
     @font-face {
       font-family: "stc";
       src: url("{{storage_path('fonts\stc.ttf')}}") format('truetype');
     }
-
     * {
+      word-break: break-all;
       color: #000;
       font-family: "stc";
     }
-    .information_table{
-      border: 1px solid black;
-    }
-    .information_tr{
-      border: 1px solid black;
-      padding:5px;
-    }
-    .information_td{
-      padding:5px;
+    table {
+      border-collapse: collapse;
     }
     .page-break {
         page-break-after: always;
@@ -34,6 +25,7 @@
 </head>
 
 <body style="font-size: 12px;">
+  
   <div class="row">
     <div class="col-xs-6 col-md-6">
       <p class="bold">
@@ -47,28 +39,30 @@
     </div>
     <div class="col-xs-6 col-md-6">
       <div class="text-center">
-        {{-- <img style="width:200px;height:100px;" src="{{$image}}"> --}}
         <img style="width:200px;height:100px;" src="http://localhost/admin/storage/company/logo/logo.png">
       </div>
     </div>
   </div>
+  
   <hr style="margin:5px; border: 1px solid black;">
   <div class="row">
     <div class="col-xs-12 col-md-12">
       <table class="information" style="width:100%;">
-        <tr class="information_tr">
-          <td class="information_td">顧客</td>
-          <td class="information_td">
-            1
-          </td>
-          <td class="information_td">日期 : </td>
-          <td class="information_td">
-            2
-          </td>
-          <td class="information_td">已操作時數 :</td>
-          <td class="information_td">
-            3
-          </td>
+        <tr>
+          <td style="max-width:50px;text-align:center;padding:5px;" class="information_td">顧客 : </td>
+          <td style="min-width:100px;padding:5px;border-bottom: 1px solid black;"></td>
+          <td style="max-width:50px;text-align:center;padding:5px;" class="information_td">日期 : </td>
+          <td style="min-width:100px;padding:5px;border-bottom: 1px solid black;"></td>
+          <td style="max-width:50px;text-align:center;padding:5px;" class="information_td">已操作時數 :</td>
+          <td style="min-width:100px;padding:5px;border-bottom: 1px solid black;"></td>
+        </tr>
+        <tr>
+          <td style="text-align:center;padding:5px;" class="information_td">型號 : </td>
+          <td style="padding:5px;border-bottom: 1px solid black;"><span></span></td>
+          <td style="text-align:center;padding:5px;" class="information_td">車身號 : </td>
+          <td style="padding:5px;border-bottom: 1px solid black;"></td>
+          <td style="text-align:center;padding:5px;" class="information_td">門架類型 :</td>
+          <td style="padding:5px;border-bottom: 1px solid black;"></td>
         </tr>
       </table>
     </div>
