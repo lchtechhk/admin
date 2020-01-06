@@ -26,14 +26,7 @@ class TestController extends Controller{
 
       ];
       $file_name = "hello";
-      // $pdf = PDF::loadView('pdf', $data);
-      // $file_name = "test";
-      // Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());
-      // return $pdf->stream();
-      // return response()->download('storage/pdf/'.$file_name.'.pdf');
-
       // snappy
-      //To file
       $pdf = PDF::loadView('pdf.content', $data);
       $pdf->setOption('header-html',view('pdf.header'));
       Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());

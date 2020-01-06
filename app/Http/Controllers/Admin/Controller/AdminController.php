@@ -31,15 +31,18 @@ class AdminController extends Controller{
     }
 
     public function dashboard(Request $request){
-		Log::info('dashboard');
-		// $title 			  = 	array('pageTitle' => Lang::get("labels.title_dashboard"));
-		// $language_id      = 	'1';
-		// $result 		  =		array();
+		$title 			  = 	array('pageTitle' => Lang::get("labels.title_dashboard"));
+		$language_id      = 	'1';
+		$result 		  =		array();
 
-		// $reportBase		  = 	$request->reportBase;
+
+		$reportBase		  = 	$request->reportBase; //this_month
 
 		// //recently order placed
-        // $orders = $this->View_OrderService->findByColumn_Value('company_id',Session::get('default_company_id'));
+		$orders = $this->View_OrderService->findByColumn_Value('company_id',Session::get('default_company_id'));
+		Log::info('default_company_id : ' . Session::get('default_company_id') );
+
+		Log::info('orders : ' . json_encode($orders) );
 
 
 
