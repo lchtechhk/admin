@@ -21,9 +21,11 @@ class TestController extends Controller{
     function pdf(){
       $data = [
           'title' => 'First PDF for Medium',
-          'image' => 'http://localhost/admin/storage/company/logo/logo.png',
-          'content' => '昨'
+          'company_logo' => 'http://localhost/admin/storage/company/logo/logo.png',
+          'header' => "Rainbow Equipment Ltd.<br>Unit 706, Asia Trade Centre<br>76 Lei Muk Road, Kwai Chung, NT, HK, <br>Tel : (+852) 3524-7324 / 9101-4561<br>Fax : (+852) 3168-9717<br>Email : REL@Rainbow-Equipment.com<br>"
+
       ];
+      $file_name = "hello";
       // $pdf = PDF::loadView('pdf', $data);
       // $file_name = "test";
       // Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());
@@ -32,9 +34,10 @@ class TestController extends Controller{
 
       // snappy
       //To file
-      $html = '<h1>Bill</h1><p>You owe me money, dude.</p>';
-      $pdf = PDF::loadView('test', $data);
-      return $pdf->stream("hello.pdf");
+      $pdf = PDF::loadView('pdf.content', $data);
+      $pdf->setOption('header-html',view('pdf.header'));
+      Storage::disk('pdf')->put($file_name.'.pdf', $pdf->output());
+      return $pdf->stream($file_name.".pdf");
       // return $pdf->download();
     }
 
