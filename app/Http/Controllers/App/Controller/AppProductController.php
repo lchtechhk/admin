@@ -12,7 +12,7 @@ use Auth;
 
 //for requesting a value 
 use Illuminate\Http\Request;
-use function GuzzleHttp\json_encode;
+
 
 use App\Http\Controllers\App\Service\AppProductService;
 

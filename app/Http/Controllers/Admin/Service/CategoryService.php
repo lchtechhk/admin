@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\Service\View_CategoryService;
 use App\Http\Controllers\Admin\Service\LanguageService;
 use App\Http\Controllers\Admin\Service\UploadService;
 use App\Http\Controllers\Admin\Service\CategoryDescriptionService;
-use function GuzzleHttp\json_encode;
+
 
 class CategoryService extends BaseApiService{
     private $View_CategoryService;

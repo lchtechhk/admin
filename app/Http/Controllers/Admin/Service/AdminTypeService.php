@@ -7,7 +7,7 @@ use Exception;
 
 use App\Http\Controllers\Admin\Service\UploadService;
 
-use function GuzzleHttp\json_encode;
+
 
 class AdminTypeService extends BaseApiService{
     private $UploadService;

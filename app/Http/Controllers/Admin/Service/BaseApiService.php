@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\Dao\AdminDao;
 use Log;
 use DB;
 use Session;
-use App\Http\Controllers\Admin\AdminSiteSettingController;
+use App\Http\Controllers\Admin\Controller\AdminSiteSettingController;
 use League\Flysystem\Exception;
 
 abstract class BaseApiService extends AdminDao{ 

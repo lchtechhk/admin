@@ -30,7 +30,16 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
     
     Route::group(['middleware' => 'admin', 'middleware' => 'company'], function () {
         // DashBoard
-		Route::get('/dashboard/{reportBase}', 'Controller\AdminController@dashboard');
+        Route::get('/dashboard/{reportBase}', 'Controller\AdminController@dashboard');
+        
+        //Jamie Manufacturer
+		Route::get('/listingManufacturer', 'Controller\AdminManufacturerController@listingManufacturer');
+		Route::get('/view_addManufacturer', 'Controller\AdminManufacturerController@view_addManufacturer');
+		Route::get('/view_editManufacturer/{manufacturer_id}', 'Controller\AdminManufacturerController@view_editManufacturer');
+		Route::post('/addManufacturer', 'Controller\AdminManufacturerController@addManufacturer');
+		Route::post('/updateManufacturer', 'Controller\AdminManufacturerController@updateManufacturer');
+        Route::post('/deleteManufacturer', 'Controller\AdminManufacturerController@deleteManufacturer');
+        
 
     });
 

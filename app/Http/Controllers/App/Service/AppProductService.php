@@ -8,7 +8,7 @@ use Exception;
 use App\Http\Controllers\App\Service\AppUploadService;
 use App\Http\Controllers\App\Service\AppLanguageService;
 
-use function GuzzleHttp\json_encode;
+
 
 class AppProductService extends AppBaseApiService{
     private $AppLanguageService;

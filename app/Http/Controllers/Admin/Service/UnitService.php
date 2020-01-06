@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\Service\View_ManufacturerService;
 use App\Http\Controllers\Admin\Service\LanguageService;
 use App\Http\Controllers\Admin\Service\UploadService;
 use App\Http\Controllers\Admin\Service\ManufacturerDescriptionService;
-use function GuzzleHttp\json_encode;
+
 
 class UnitService extends BaseApiService{
     function __construct(){

@@ -4,7 +4,7 @@ use Log;
 use DB;
 use Lang;
 use Exception;
-use App\Http\Controllers\Admin\AdminSiteSettingController;
+use App\Http\Controllers\Admin\Controller\AdminSiteSettingController;
 
 class UploadService{
     function __construct(){

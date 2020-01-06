@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\Service\LanguageService;
 use App\Http\Controllers\Admin\Service\UploadService;
 use App\Http\Controllers\Admin\Service\ProductDescriptionService;
 
-use function GuzzleHttp\json_encode;
+
 
 class ProductService extends BaseApiService{
     private $View_ProductService;

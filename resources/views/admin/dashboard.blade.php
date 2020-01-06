@@ -1,7 +1,6 @@
-@extends('admin.login.layout_login')
+@extends('admin.common.layout')
 @section('content')
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
       {{ trans('labels.title_dashboard') }}
@@ -11,8 +10,6 @@
       <li class="active"><i class="fa fa-dashboard"></i> {{ trans('labels.breadcrumb_dashboard') }}</li>
     </ol>
   </section>
-
-  <!-- Main content -->
   <section class="content">
     <div class="row">
       <div class="col-lg-3 col-xs-6">
