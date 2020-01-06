@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Autho
 
 // Route::get('/', function() { return Redirect::to("admin/login"); });
 
-Route::get('/', function() { return view('pdf'); });
+Route::get('/', function() { return view('pdf.content'); });
 
 
 Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
