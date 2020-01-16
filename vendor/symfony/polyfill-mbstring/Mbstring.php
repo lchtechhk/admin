@@ -672,7 +672,7 @@ final class Mbstring
             'mail_body_encoding' => 'BASE64',
             'illegal_chars' => 0,
             'encoding_translation' => 'Off',
-            'language' => self::$language,
+            // 'language' => self::$language,
             'detect_order' => self::$encodingList,
             'substitute_character' => 'none',
             'strict_detection' => 'Off',

@@ -49,7 +49,6 @@ use App\Http\Controllers\Admin\Service\AreaService;
                 break;
                 case 'add':
                     try{
-                        Log::info('[result] : ' . \json_encode($result));
                         DB::beginTransaction();
                         $add_district_result = $this->add($result);
                         if(empty($add_district_result['status']) || $add_district_result['status'] == 'fail')throw new Exception("Error To Add District");

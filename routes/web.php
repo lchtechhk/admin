@@ -27,12 +27,17 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::get('/view_registerCompany', 'Controller\AdminRegisterController@view_registerCompany');
 		Route::post('/add_registerCompany', 'Controller\AdminRegisterController@add_registerCompany');
     });
-    
-    Route::group(['middleware' => 'admin', 'middleware' => 'company'], function () {
+    Route::group(['middleware' => 'admin', 'middleware' => 'company','middleware' => 'language'], function () {
+    // Route::group(['middleware' => 'admin', 'middleware' => 'company'], function () {
         // DashBoard
         Route::get('/dashboard/{reportBase}', 'Controller\AdminController@dashboard');
         
-        //Jamie Manufacturer
+        //Language
+		// Route::get('/getlanguages', 'AdminSiteSettingController@getlanguages');
+        Route::get('/listingLanguage', 'Controller\AdminLanguageController@listingLanguage');
+        Route::post('/defaultLanguage', 'Controller\AdminLanguageController@defaultLanguage');			
+
+        //Manufacturer
 		Route::get('/listingManufacturer', 'Controller\AdminManufacturerController@listingManufacturer');
 		Route::get('/view_addManufacturer', 'Controller\AdminManufacturerController@view_addManufacturer');
 		Route::get('/view_editManufacturer/{manufacturer_id}', 'Controller\AdminManufacturerController@view_editManufacturer');

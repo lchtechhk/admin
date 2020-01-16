@@ -7,10 +7,7 @@
 </style>
 <div class="login-box">
     <div class="login-logo">
-        {{-- <img src="{{asset('/resources/views/admin/images/admin_logo/logo-android-blue-v1.png')}}"
-        class="ionic-hide">
-        <img src="{{asset('/resources/views/admin/images/admin_logo/logo-ionic-blue-v1.png')}}" class="android-hide">
-        --}}
+        <img style="width:300px; height:200px;" src="{{asset('/storage/company/logo/logo.png')}}" class="android-hide">
         <div style="font-size: 25px;">
             {{-- <b> {{ trans('labels.welcome_message') }}</b> --}}
             {{-- {{ trans('labels.welcome_message_to') }} --}}

@@ -21,8 +21,9 @@
         @include('admin.common.sidebar')
         @yield('content')
         @include('admin.common.controlsidebar')
-    	@include('admin.common.footer')
+        @include('admin.common.footer')
     </div>
-	@include('admin.common.scripts')    
-	</body>
+    @include('admin.common.scripts')
+</body>
+
 </html>

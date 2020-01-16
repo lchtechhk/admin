@@ -1240,11 +1240,12 @@ $(document).on('click', '#updateAddress', function(e){
 
 	//default_language
 	$(document).on('click', '.default_language', function(){
-		var languages_id = $(this).val();
+		var language_id = $(this).val();
+		console.log("language_id : " + language_id);
 		$.ajax({
 			url: '{{ URL::to("admin/defaultLanguage")}}',
 			type: "POST",
-			data: '&languages_id='+languages_id,
+			data: 'language_id='+language_id,
 			success: function (data) {
 				location.reload();
 			},

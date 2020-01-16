@@ -112,6 +112,12 @@ class AdminController extends Controller{
 		}
 	}
 
+	//logout
+	public function logout(){
+		Auth::guard('admin')->logout();
+		return redirect()->intended('admin/login');
+	}
+
 	//login function
 	public function checkLogin(Request $request){
 		Log::info('[checkLogin] --  : ');
