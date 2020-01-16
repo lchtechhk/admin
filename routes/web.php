@@ -36,7 +36,12 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		// Route::get('/getlanguages', 'AdminSiteSettingController@getlanguages');
         Route::get('/listingLanguage', 'Controller\AdminLanguageController@listingLanguage');
         Route::post('/defaultLanguage', 'Controller\AdminLanguageController@defaultLanguage');			
-
+		Route::get('/view_addLanguage', 'Controller\AdminLanguageController@view_addLanguage');
+        Route::get('/view_editLanguage/{language_id}', 'Controller\AdminLanguageController@view_editLanguage');
+        Route::post('/addLanguage', 'Controller\AdminLanguageController@addLanguage');
+		Route::post('/updateLanguage/{language_id}', 'Controller\AdminLanguageController@updateDistrict');
+        Route::post('/deleteLanguage','Controller\AdminLanguageController@deleteDistrict');
+        
         //Manufacturer
 		Route::get('/listingManufacturer', 'Controller\AdminManufacturerController@listingManufacturer');
 		Route::get('/view_addManufacturer', 'Controller\AdminManufacturerController@view_addManufacturer');
