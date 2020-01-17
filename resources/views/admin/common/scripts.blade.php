@@ -1093,9 +1093,10 @@ $(document).on('click', '#updateAddress', function(e){
 
 	//deletelanguageModal
 	$(document).on('click', '#deleteLanguageId', function(){
-		var languages_id = $(this).attr('languages_id');
-		$('#languages_id').val(languages_id);
-		$("#deleteLanguagesModal").modal('show');
+		var language_id = $(this).attr('language_id');
+		console.log("language_id : " + language_id);
+		$('#language_id').val(language_id);
+		$("#deleteLanguageModal").modal('show');
 	});
 
 	//deleteTaxRateModal

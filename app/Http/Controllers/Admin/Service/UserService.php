@@ -77,6 +77,7 @@ class UserService extends BaseApiService{
                     }        
                     $result['image'] = $this->UploadService->upload_image($result['request'],'newImage','resources/assets/images/user_profile/');
                     $add_user_result = $this->add($result);
+                    if(empty($add_user_result['status']) || $add_user_result['status'] == 'fail')throw new Exception("Error To Add User");
                     $user = $this->findByColumn_Value("user_id",$add_user_result['response_id']);
                     $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
                     $result = $this->response($result,"Success To Add User","view_edit");
@@ -105,7 +106,8 @@ class UserService extends BaseApiService{
                     }
     
                     $result['image'] = $this->UploadService->upload_image($result['request'],'newImage','resources/assets/images/user_profile/');
-                    $add_user_result = $this->update("user_id",$result);
+                    $update_user_result = $this->update("user_id",$result);
+                    if(empty($update_user_result['status']) || $update_user_result['status'] == 'fail')throw new Exception("Error To Update User");
                     $result = $this->response($result,"Success To Edit User","view_edit");
                     DB::commit();
                 }catch(Exception $e){

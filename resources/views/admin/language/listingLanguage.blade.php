@@ -42,13 +42,13 @@
                                                                 </label>
                                                             </td>
                                                             <td>{{ $language->name }}</td>
-                                                            <td><img src="{{asset('').'/'.$language->image}}" width="25px"
+                                                            <td><img src="{{asset('').$language->image}}" style="max-width:70px;"
                                                                     alt=""></td>
                                                             <td>{{ $language->code }}</td>
                                                             <td>
                                                                 <a data-toggle="tooltip" data-placement="bottom"
                                                                     title=" {{ $language->name }}"
-                                                                    href="{{ URL::to('admin/editLanguage/'.$language->language_id)}}"
+                                                                    href="{{ URL::to('admin/view_editLanguage/'.$language->language_id)}}"
                                                                     class="badge bg-light-blue"><i class="fa fa-pencil-square-o"
                                                                         aria-hidden="true"></i></a>
 

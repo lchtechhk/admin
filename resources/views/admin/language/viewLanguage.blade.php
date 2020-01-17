@@ -40,6 +40,14 @@
                                             {!! Form::file('image', array('id'=>'image')) !!}
                                             <span class="help-block"
                                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.LanguageFlag') }}</span>
+                                            @if(!empty($result['language']->image))
+                                                <img width="150px" src="{{asset('').$result['language']->image}}"
+                                                    class="img-circle">
+                                            @else
+                                                <img width="150px"
+                                                    src="{{asset('').'storage/image/question.png' }}"
+                                                    class="img-circle">
+                                            @endif
                                         </div>
                                     </div>
 
@@ -47,7 +55,7 @@
                                         <label for="name"
                                             class="col-sm-2 col-md-3 control-label">{{ trans('labels.Name') }}</label>
                                         <div class="col-sm-10 col-md-4">
-                                            {!! Form::text('name', '', array('class'=>'form-control ',
+                                            {!! Form::text('name',  empty($result['language']->name) ? '' : $result['language']->name, array('class'=>'form-control ',
                                             'id'=>'name'))!!}
                                             <span class="help-block"
                                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.exampleLanguageName') }}</span>
@@ -60,7 +68,7 @@
                                         <label for="name"
                                             class="col-sm-2 col-md-3 control-label">{{ trans('labels.Code') }}</label>
                                         <div class="col-sm-10 col-md-4">
-                                            {!! Form::text('code', '', array('class'=>'form-control ',
+                                            {!! Form::text('code', empty($result['language']->code) ? '' : $result['language']->code, array('class'=>'form-control ',
                                             'id'=>'code'))!!}
                                             <span class="help-block"
                                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.exampleLanguageCode') }}</span>
@@ -68,23 +76,6 @@
                                                 class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="name"
-                                            class="col-sm-2 col-md-3 control-label">{{ trans('labels.defaultLanguage') }}</label>
-                                        <div class="col-sm-10 col-md-4">
-                                            <select class="form-control field-validate" id="is_default"
-                                                name="is_default">
-                                                <option value="yes">{{ trans('labels.Yes') }}</option>
-                                                <option value="no" selected>{{ trans('labels.No') }}</option>
-                                            </select>
-                                            <span class="help-block"
-                                                style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.defaultLanguageText') }}</span>
-                                            <span
-                                                class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
-                                        </div>
-                                    </div>
-
                                     @include('layouts/submit_back_button')
                                     {!! Form::close() !!}
                                 </div>

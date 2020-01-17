@@ -29,15 +29,15 @@ class CompanyMiddleware
     {
         $user_auth = auth()->guard('admin')->user();
         $default_company_id = $user_auth->default_company_id;
+        $user_id = $user_auth->user_id;
+
+        $request->session()->put('user_id', $user_id);
         $request->session()->put('default_company_id', $default_company_id);
-        Log::info('default_company_id : ' . $default_company_id);
 
         $own_companies = $this->View_CompanyService->getCompanyBelongOwn();
-        Log::info('own_companies : ' . json_encode($own_companies));
         if(\sizeof($own_companies) > 0){
             $request->session()->put('owner_companies', $own_companies);
         }else {
-            // go to register company
             return redirect('/admin/view_registerCompany');
         }
         return $next($request);
