@@ -24,12 +24,10 @@ class LanguageMiddleware{
 		}else{	   
             $user_auth = auth()->guard('admin')->user();
             $default_company_id = $user_auth->default_company_id;
-            $languages = $this->LanguageService->findByArray(array("company_id"=>$default_company_id,"is_default"=>'yes'));
-            // Log::info('default_company_id : ' . json_encode($default_company_id));
-
+            $request->session()->put('default_company_id', $default_company_id);
+            $languages = $this->LanguageService->findByColumn_Value("is_default",'yes');
             if(!empty($languages) && \sizeof($languages) > 0){
                 $language = $languages[0];
-
                 $request->session()->put('direction', $language->direction);	 	
                 $locale = $language->code;
                 App::setLocale($locale);

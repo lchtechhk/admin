@@ -5,11 +5,13 @@ use DB;
 use Lang;
 use Exception;
 use Session;
+use App\Http\Controllers\Admin\Service\UploadService;
 
      class LanguageService extends BaseApiService{
 
         function __construct(){
             $this->setTable('language');
+            $this->UploadService = new UploadService();
             $this->companyAuth = true;
         }
         function clean_dafault_language(){
@@ -49,17 +51,25 @@ use Session;
                     return view("admin.language.listingLanguage", $title)->with('result', $result);
                 break;
                 case 'view_add':
-                    return view("admin.location.district.addDistrict", $title)->with('result', $result);
+                    return view("admin.language.viewLanguage", $title)->with('result', $result);
                 break;
                 case 'view_edit':
-                    return view("admin.location.district.editDistrict", $title)->with('result', $result);		
+                    $result['language'] = $this->findByColumn_Value("language_id",$result['language_id']);
+                    Log::info('[view_edit] --  : ' . \json_encode($result));
+                    return view("admin.language.viewLanguage", $title)->with('result', $result);		
                 break;
                 case 'add':
-                    try{                        
-                        return view("admin.location.district.editDistrict", $title)->with('result', $result);
+                    try{                    
+                        DB::beginTransaction();
+                        if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/language/'))$result['image'] = $image;
+                        $add_language_image_result = $this->add($result);
+                        if(empty($add_language_image_result['status']) || $add_language_image_result['status'] == 'fail')throw new Exception("Error To Add Language Image");
+
+                        $result['language'] = $this->findByColumn_Value("language_id",1);
                     }catch(Exception $e){
-                        return view("admin.location.district.addDistrict", $title)->with('result', $result);
+                        $result = $this->throwException($result,$e->getMessage(),true);
                     }
+                    return view("admin.language.viewLanguage", $title)->with('result', $result);
                 break;
                 case 'edit':
                     try{

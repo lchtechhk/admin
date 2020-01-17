@@ -27,8 +27,10 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::get('/view_registerCompany', 'Controller\AdminRegisterController@view_registerCompany');
 		Route::post('/add_registerCompany', 'Controller\AdminRegisterController@add_registerCompany');
     });
-    Route::group(['middleware' => 'admin', 'middleware' => 'company','middleware' => 'language'], function () {
-    // Route::group(['middleware' => 'admin', 'middleware' => 'company'], function () {
+
+    Route::group(['middleware' => 'admin','middleware' => 'language' , 'middleware' => 'company'], function () {
+        // Route::group(['middleware' => 'admin', 'middleware' => 'company'], function () {
+
         // DashBoard
         Route::get('/dashboard/{reportBase}', 'Controller\AdminController@dashboard');
         

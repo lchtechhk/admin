@@ -20,8 +20,8 @@
 
       <li class="treeview 
         {{ Request::is('admin/listingLanguage') ? 'active' : '' }} 
-        {{ Request::is('admin/addlanguages') ? 'active' : '' }} 
-        {{ Request::is('admin/editlanguages/*') ? 'active' : '' }} ">
+        {{ Request::is('admin/view_addLanguage') ? 'active' : '' }} 
+        {{ Request::is('admin/view_editLanguage/*') ? 'active' : '' }} ">
         <a href="{{ URL::to('admin/listingLanguage')}}">
           <i class="fa fa-language" aria-hidden="true"></i> <span> {{ trans('labels.listingLanguage') }} </span>
         </a>
