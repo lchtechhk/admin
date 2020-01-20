@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
         }
 
         function getListing(){
-            return $this->findByColumn_Value('sub_category_language_id' , session('language_id'));
+            return $this->findByColumn_Value('sub_category_language_id' , Session::get('language_id'));
         }
         function redirect_view($result,$title){
         }

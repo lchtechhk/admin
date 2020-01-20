@@ -9,6 +9,7 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <div class="form-group has-feedback">
+            @include('layouts/responseMessage')
             <div class="box-body">
                 {!! Form::open(array('url' =>'admin/add_registerCompany', 'method'=>'post', 'class' =>
                     'form-horizontal form-validate', 'enctype'=>'multipart/form-data')) !!}
@@ -21,9 +22,9 @@
                                 <span style="color:red">★</span>
                             </label>
                             <div class="col-sm-10 col-md-4">
-                                {!! Form::text("language_array[".$language->languages_id."]",
-                                empty($result['company']->language_array[$language->languages_id]['name']) ? '' :
-                                print_value($result['operation'],$result['company']->language_array[$language->languages_id]['name']),
+                                {!! Form::text("language_array[".$language->language_id."]",
+                                empty($result['company']->language_array[$language->language_id]['name']) ? '' :
+                                print_value($result['operation'],$result['company']->language_array[$language->language_id]['name']),
                                 array('class'=>'form-control
                                 field-validate', 'id'=>'name')) !!}
                                 <span class="help-block"

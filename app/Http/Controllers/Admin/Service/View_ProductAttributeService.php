@@ -17,13 +17,13 @@ class View_ProductAttributeService extends BaseApiService{
     }
 
     function getAllProduct(){
-        $product_attribute_array = DB::table($this->getTable())->where('language_id',session('language_id'))->get();
+        $product_attribute_array = DB::table($this->getTable())->where('language_id',Session::get('language_id'))->get();
         Log::info('['.$this->getTable().'] -- getAllProduct : ' . json_encode($product_attribute_array));
         return $product_attribute_array;
     }
 
     function getListing($product_id){
-        $product_attribute_array = DB::table($this->getTable())->where('language_id',session('language_id'))->where('product_id',$product_id)->get();
+        $product_attribute_array = DB::table($this->getTable())->where('language_id',Session::get('language_id'))->where('product_id',$product_id)->get();
         Log::info('['.$this->getTable().'] -- getListing : ' . json_encode($product_attribute_array));
         return $product_attribute_array;
     }

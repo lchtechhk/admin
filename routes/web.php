@@ -28,7 +28,7 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/add_registerCompany', 'Controller\AdminRegisterController@add_registerCompany');
     });
 
-    Route::group(['middleware' => 'admin','middleware' => 'language' , 'middleware' => 'company'], function () {
+    Route::group(['middleware' => 'admin', 'middleware' => 'company'], function () {
         // Route::group(['middleware' => 'admin', 'middleware' => 'company'], function () {
 
         // DashBoard

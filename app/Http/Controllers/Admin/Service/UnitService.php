@@ -16,7 +16,7 @@ class UnitService extends BaseApiService{
         $this->setTable('unit');
     }
     function getUnit(){
-        return DB::table($this->getTable())->where('language_id',session('language_id'))->get();
+        return DB::table($this->getTable())->where('language_id',Session::get('language_id'))->get();
     }
     function redirect_view($result,$title){
     }

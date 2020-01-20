@@ -46,8 +46,7 @@ class RegisterService extends BaseApiService{
 
     function redirect_view($result,$title){
         $result['label'] = "RegisterUser";
-        $result['languages'] = $this->LanguageService->findByColumn_Value("is_default",1);
-
+        $result['languages'] = $this->LanguageService->setUp();
         switch($result['operation']){
             case 'view_registerCompany':
                 return view("admin.register.view_registerCompany", $title)->with('result', $result);
@@ -95,31 +94,45 @@ class RegisterService extends BaseApiService{
                     DB::beginTransaction();
 
                     // Handle Company
-                    $company_param['image'] = $this->UploadService->upload_image($result['request'],'company_newImage','storage/company/'.Session::get('default_company_id').'/company/images/');
+                    if($image = $this->UploadService->upload_image($result['request'],'company_image','storage/company/'.Session::get('default_company_id').'/company/images/'))$company_param['image'] = $image;
                     $add_company_result = $this->CompanyService->register_add($company_param);
                     if(empty($add_company_result['status']) || $add_company_result['status'] == 'fail')throw new Exception("Error To Add Company");
                     $result['company_id'] = $add_company_result['response_id'];
                     
+
+                    // Handle Language
+                    $lan_param = array();
+                    $lan_param['company_id'] = $result['company_id'];
+                    $lan_param['name'] = $result['languages'][0]->name;
+                    $lan_param['code'] = $result['languages'][0]->code;
+                    $lan_param['image'] = $result['languages'][0]->image;
+                    $lan_param['directory'] = $result['languages'][0]->directory;
+                    $lan_param['is_default'] = $result['languages'][0]->is_default;
+                    $add_language_result = $this->LanguageService->register_add($lan_param);
+                    if(empty($add_language_result['status']) || $add_language_result['status'] == 'fail')throw new Exception("Error To Add Language");
+                    $language_id = $add_language_result['response_id'];
+
+                    Log::info('[language_id] --  : ' . $language_id);
+
+
                     // Handle User
                     $user_param['permission'] = 'boss';
                     $user_param['default_company_id'] = $result['company_id'];
-                    $user_param['default_language'] = 1;
+                    $user_param['default_language'] = $language_id;
                     $user_param['password'] = Hash::make($user_param['password_str']);
                     $email = $user_param['email'];
                     $own_email_count = $this->UserService->getCountForEmailExisting($email);
                     if($own_email_count > 0 ){
-                        $result['status'] = 'fail';
-                        $result['message'] =  'Update Error, The Email Is Duplicate In DB';
-                        return view("admin.register.view_registerUser", $title)->with('result', $result);
+                        throw new Exception("Update Error, The Email Is Duplicate In DB");
                     }        
-                    $user_param['image'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                    if($image = $this->UploadService->upload_image($result['request'],'user_image','storage/company/'.Session::get('default_company_id').'/customer/images/'))$user_param['image'] = $image;
                     $add_user_result = $this->UserService->register_add($user_param);
                     $result['user_id'] = $add_user_result['response_id'];
                     if(empty($add_user_result['status']) || $add_user_result['status'] == 'fail')throw new Exception("Error To Add User");
 
             
                     // Handle Company Description
-                    foreach ($company_param['language_array'] as $language_id => $name) {
+                    foreach ($company_param['language_array'] as $name) {
                         $param = array();
                         $param['language_id'] = $language_id;
                         $param['name'] = $name;
@@ -166,8 +179,6 @@ class RegisterService extends BaseApiService{
         $company_param['phone'] = $result['company_phone'];
 
         $res = array("user_param"=>$user_param,"company_param"=>$company_param);
-        Log::info('[res] --  : ' . \json_encode($res));
-
         return $res;
     }
 }

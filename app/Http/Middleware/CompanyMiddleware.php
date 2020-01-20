@@ -7,23 +7,20 @@ use DB;
 use Session;
 use Config;
 use Log;
+use App;
 use App\Http\Controllers\Admin\Service\View_CompanyService;
 use App\Http\Controllers\Admin\Service\UserToCompanyService;
+use App\Http\Controllers\Admin\Service\LanguageService;
 
 class CompanyMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     private $View_CompanyService;
     private $UserToCompanyService;
+    private $LanguageService;
     function __construct(){
         $this->View_CompanyService = new View_CompanyService();
         $this->UserToCompanyService = new UserToCompanyService();
+        $this->LanguageService = new LanguageService();
 	}
     public function handle($request, Closure $next)
     {
@@ -34,12 +31,24 @@ class CompanyMiddleware
         $request->session()->put('user_id', $user_id);
         $request->session()->put('default_company_id', $default_company_id);
 
-        $own_companies = $this->View_CompanyService->getCompanyBelongOwn();
-        if(\sizeof($own_companies) > 0){
-            $request->session()->put('owner_companies', $own_companies);
+        $languages = $this->LanguageService->findByColumn_Value("is_default",'yes');
+        if(!empty($languages) && \sizeof($languages) > 0){
+            $language = $languages[0];
+            $request->session()->put('direction', $language->direction);	 
+            $request->session()->put('language_id', $language->language_id);
+            App::setLocale($language->code);
+
+            $own_companies = $this->View_CompanyService->getCompanyBelongOwn();
+            Log::info("own_companies : " . json_encode($own_companies));
+            if(\sizeof($own_companies) > 0){
+                $request->session()->put('owner_companies', $own_companies);
+            }else {
+                return redirect('/admin/view_registerCompany');
+            }
         }else {
-            return redirect('/admin/view_registerCompany');
+            return redirect('/admin/login');
         }
+        
         return $next($request);
     }
 }

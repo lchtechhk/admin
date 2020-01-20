@@ -130,5 +130,12 @@ use App\Http\Controllers\Admin\Service\UploadService;
                 break;
             }
         }
+
+        function setUp(){
+            $this->companyAuth = false;
+            $languages = $this->findByColumn_Value("language_id","1");
+            $this->companyAuth = true;
+            return $languages;
+        }
     }
 ?>
