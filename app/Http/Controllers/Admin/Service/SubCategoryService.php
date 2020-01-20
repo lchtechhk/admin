@@ -4,6 +4,7 @@ use Log;
 use DB;
 use Lang;
 use Exception;
+use Session;
 
 use App\Http\Controllers\Admin\Service\View_CategoryService;
 use App\Http\Controllers\Admin\Service\View_SubCategoryService;
