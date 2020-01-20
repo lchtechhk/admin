@@ -48,7 +48,7 @@ class ProductImageService extends BaseApiService{
                 //  Log::info('[add] --  : '. \json_encode($result));
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/product_images/'))$result['image'] = $image;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/product/images/'))$result['image'] = $image;
                     $add_product_image_result = $this->add($result);
                     if(empty($add_product_image_result['status']) || $add_product_image_result['status'] == 'fail')throw new Exception("Error To Add Product Image");
                     $result['product_image_id'] = $add_product_image_result['response_id'];
@@ -65,7 +65,7 @@ class ProductImageService extends BaseApiService{
                 // Log::info('[edit] --  : ' . \json_encode($result));
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/product_images/'))$result['image'] = $image;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/product/images/'))$result['image'] = $image;
                     $update_product_result = $this->update("product_image_id",$result);
                     if(empty($update_product_result['status']) || $update_product_result['status'] == 'fail')throw new Exception("Error To Update Product Image");
                     $result = $this->response($result,"Successful","listing");

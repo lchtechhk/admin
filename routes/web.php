@@ -84,6 +84,13 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/updateProductImage', 'Controller\AdminProductImageController@updateProductImage');
 		Route::post('/deleteProductImage', 'Controller\AdminProductImageController@deleteProductImage');
 
+        //product Attribute
+		Route::get('/listingProductAttribute/{product_id}/', 'Controller\AdminProductAttributeController@listingProductAttribute');
+		Route::post('/view_addProductAttribute', 'Controller\AdminProductAttributeController@view_addProductAttribute');
+		Route::post('/view_editProductAttribute', 'Controller\AdminProductAttributeController@view_editProductAttribute');
+		Route::post('/addProductAttribute', 'Controller\AdminProductAttributeController@addProductAttribute');
+		Route::post('/updateProductAttribute', 'Controller\AdminProductAttributeController@updateProductAttribute');
+		Route::post('/deleteProductAttribute1', 'Controller\AdminProductAttributeController@deleteProductAttribute');
 
     });
 

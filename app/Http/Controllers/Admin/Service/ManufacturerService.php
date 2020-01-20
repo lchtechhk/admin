@@ -60,8 +60,8 @@ class ManufacturerService extends BaseApiService{
             case 'add':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/manufacturer/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','resources/assets/images/manufacturer/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/manufacturer/images/'))$result['image'] = $image;
+                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/manufacturer/images/'))$result['icon'] = $icon;
                     Log::info('[add result] --  : ' . json_encode($result));
                     $add_manufacturer_result = $this->add($result);
                     if(empty($add_manufacturer_result['status']) || $add_manufacturer_result['status'] == 'fail')throw new Exception("Error To Add Manufacturer");

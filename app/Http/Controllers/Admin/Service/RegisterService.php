@@ -59,8 +59,8 @@ class RegisterService extends BaseApiService{
             case 'add_registerCompany':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/company/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','resources/assets/images/company/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/company/images/'))$result['image'] = $image;
+                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/company/icons/'))$result['icon'] = $icon;
                     Log::info('[add_registerCompany] --  : ' . json_encode($result));
                     $add_company_result = $this->CompanyService->register_add($result);
                     if(empty($add_company_result['status']) || $add_company_result['status'] == 'fail')throw new Exception("Error To Add Company");
@@ -95,7 +95,7 @@ class RegisterService extends BaseApiService{
                     DB::beginTransaction();
 
                     // Handle Company
-                    $company_param['image'] = $this->UploadService->upload_image($result['request'],'company_newImage','resources/assets/images/company_images/');
+                    $company_param['image'] = $this->UploadService->upload_image($result['request'],'company_newImage','storage/company/'.Session::get('default_company_id').'/company/images/');
                     $add_company_result = $this->CompanyService->register_add($company_param);
                     if(empty($add_company_result['status']) || $add_company_result['status'] == 'fail')throw new Exception("Error To Add Company");
                     $result['company_id'] = $add_company_result['response_id'];
@@ -112,7 +112,7 @@ class RegisterService extends BaseApiService{
                         $result['message'] =  'Update Error, The Email Is Duplicate In DB';
                         return view("admin.register.view_registerUser", $title)->with('result', $result);
                     }        
-                    $user_param['image'] = $this->UploadService->upload_image($result['request'],'newImage','resources/assets/images/user_profile/');
+                    $user_param['image'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
                     $add_user_result = $this->UserService->register_add($user_param);
                     $result['user_id'] = $add_user_result['response_id'];
                     if(empty($add_user_result['status']) || $add_user_result['status'] == 'fail')throw new Exception("Error To Add User");

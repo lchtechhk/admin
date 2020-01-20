@@ -52,7 +52,7 @@ class CustomersService extends BaseApiService{
                     $result['message'] =  'Update Error, The Email Is Duplicate In DB';
                     return view("admin.customer.addCustomer", $title)->with('result', $result);
                 }        
-                $result['customers_picture'] = $this->UploadService->upload_image($result['request'],'newImage','resources/assets/images/user_profile/');
+                $result['customers_picture'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
                 $add_customer_result = $this->add($result);
                 $customers = $this->findById($add_customer_result['response_id']);
                 $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
@@ -73,7 +73,7 @@ class CustomersService extends BaseApiService{
                     $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
                     return view("admin.customer.editCustomer", $title)->with('result', $result);
                 }
-                $result['customers_picture'] = $this->UploadService->upload_image($result['request'],'newImage','resources/assets/images/user_profile/');
+                $result['customers_picture'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
                 $update_customer_result = $this->update('id',$result);
                 if(empty($update_customer_result['status']) || $update_customer_result['status'] == 'fail')throw new Exception("Error To Update Customer");
                 $customers = $this->findById($result['request']->id);

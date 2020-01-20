@@ -75,7 +75,7 @@ class UserService extends BaseApiService{
                         $result['message'] =  'Update Error, The Email Is Duplicate In DB';
                         return view("admin.user.viewUser", $title)->with('result', $result);
                     }        
-                    $result['image'] = $this->UploadService->upload_image($result['request'],'newImage','resources/assets/images/user_profile/');
+                    $result['image'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
                     $add_user_result = $this->add($result);
                     if(empty($add_user_result['status']) || $add_user_result['status'] == 'fail')throw new Exception("Error To Add User");
                     $user = $this->findByColumn_Value("user_id",$add_user_result['response_id']);
@@ -105,7 +105,7 @@ class UserService extends BaseApiService{
                         return view("admin.user.viewUser", $title)->with('result', $result);
                     }
     
-                    $result['image'] = $this->UploadService->upload_image($result['request'],'newImage','resources/assets/images/user_profile/');
+                    $result['image'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
                     $update_user_result = $this->update("user_id",$result);
                     if(empty($update_user_result['status']) || $update_user_result['status'] == 'fail')throw new Exception("Error To Update User");
                     $result = $this->response($result,"Success To Edit User","view_edit");

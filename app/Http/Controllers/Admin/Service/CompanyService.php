@@ -84,8 +84,8 @@ class CompanyService extends BaseApiService{
             case 'add':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/company/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','resources/assets/images/company/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/company/images/'))$result['image'] = $image;
+                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/company/icons/'))$result['icon'] = $icon;
                     Log::info('[add result] --  : ' . json_encode($result));
                     $add_company_result = $this->add($result);
                     if(empty($add_company_result['status']) || $add_company_result['status'] == 'fail')throw new Exception("Error To Add Company");
@@ -117,8 +117,8 @@ class CompanyService extends BaseApiService{
             case 'edit':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/company/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','resources/assets/images/company/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/company/images/'))$result['image'] = $image;
+                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/company/icons/'))$result['icon'] = $icon;
                     Log::info('[edit result] --  : ' . json_encode($result));
                     $update_company_result = $this->update("company_id",$result);
                     if(empty($update_company_result['status']) || $update_company_result['status'] == 'fail')throw new Exception("Error To update Company");

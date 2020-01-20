@@ -81,7 +81,7 @@ class ProductService extends BaseApiService{
                 // Log::info('[add] --  : ' . \json_encode($result));
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/product_images/'))$result['image'] = $image;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/product/images/'))$result['image'] = $image;
                     if(empty($result['special_status']) || $result['special_status'] == 'cancel'){
                         $result['special_price'] = 0.00;
                         $result['expiry_date'] = NULL;

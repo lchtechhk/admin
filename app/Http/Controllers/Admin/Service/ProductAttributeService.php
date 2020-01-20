@@ -4,6 +4,7 @@ use Log;
 use DB;
 use Lang;
 use Exception;
+use Session;
 
 use App\Http\Controllers\Admin\Service\UploadService;
 use App\Http\Controllers\Admin\Service\LanguageService;
@@ -39,7 +40,7 @@ class ProductAttributeService extends BaseApiService{
             break;
             case 'view_add':
                 $result['product'] = $this->View_ProductService->getProduct($result['product_id']);
-                // Log::info('[view_add] --  : ' . \json_encode($result));
+                Log::info('[view_add] --  : ' . \json_encode($result));
                 return view("admin.product_attribute.productAttributeDialog", $title)->with('result', $result);
             break;
             case 'view_edit':
@@ -52,7 +53,7 @@ class ProductAttributeService extends BaseApiService{
                  Log::info('[add] --  : '. \json_encode($result));
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/product_attribute/'))$result['image'] = $image;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/product_attribute/images/'))$result['image'] = $image;
                     $add_product_attribute_result = $this->add($result);
                     if(empty($add_product_attribute_result['status']) || $add_product_attribute_result['status'] == 'fail')throw new Exception("Error To Add Product Attribute");
                     $result['product_attribute_id'] = $add_product_attribute_result['response_id'];
@@ -79,7 +80,7 @@ class ProductAttributeService extends BaseApiService{
                 Log::info('[edit] --  : ' . \json_encode($result));
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/product_attribute/'))$result['image'] = $image;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/product_attribute/images/'))$result['image'] = $image;
                     $update_product_attribute_result = $this->update("product_attribute_id",$result);
                     if(empty($update_product_attribute_result['status']) || $update_product_attribute_result['status'] == 'fail')throw new Exception("Error To Update Product Attribute");
                    

@@ -64,8 +64,8 @@ class SubCategoryService extends BaseApiService{
             case 'add':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/sub_category_images/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','resources/assets/images/sub_category_icons/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/sub_category/images/'))$result['image'] = $image;
+                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/sub_category/icons/'))$result['icon'] = $icon;
                     $add_sub_category_result = $this->add($result);
                     if(empty($add_sub_category_result['status']) || $add_sub_category_result['status'] == 'fail')throw new Exception("Error To Add Category");
                     $result['sub_category_id'] = $add_sub_category_result["response_id"];
@@ -90,8 +90,8 @@ class SubCategoryService extends BaseApiService{
             case 'edit':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/sub_category_images/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','resources/assets/images/sub_category_icons/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/sub_category/images/'))$result['image'] = $image;
+                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/sub_category/icons/'))$result['icon'] = $icon;
                     $update_sub_category_result = $this->update("sub_category_id",$result);
                     if(empty($update_sub_category_result['status']) || $update_sub_category_result['status'] == 'fail')throw new Exception("Error To Update SubCategory");
                     foreach ($result['language_array'] as $language_id => $name) {

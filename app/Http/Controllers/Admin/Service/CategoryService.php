@@ -60,8 +60,8 @@ class CategoryService extends BaseApiService{
             case 'add':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/category_images/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','resources/assets/images/category_icons/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/category/images/'))$result['image'] = $image;
+                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/category/icons/'))$result['icon'] = $icon;
                     $add_category_result = $this->add($result);
                     if(empty($add_category_result['status']) || $add_category_result['status'] == 'fail')throw new Exception("Error To Add Category");
                     $result['category_id'] = $add_category_result['response_id'];
@@ -86,8 +86,8 @@ class CategoryService extends BaseApiService{
             case 'edit':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/category_images/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','resources/assets/images/category_icons/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/category/images/'))$result['image'] = $image;
+                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/category/icons/'))$result['icon'] = $icon;
                     Log::info('[result] --  : ' . json_encode($result));
                     $update_category_result = $this->update("category_id",$result);
                     if(empty($update_category_result['status']) || $update_category_result['status'] == 'fail')throw new Exception("Error To update Category");
