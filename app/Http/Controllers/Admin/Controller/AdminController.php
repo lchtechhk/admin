@@ -102,8 +102,6 @@ class AdminController extends Controller{
     }
 
 	public function login(){
-		Log::info('[login] --  : ');
-
 		if (Auth::check()) {
 		  return redirect('/admin/dashboard/this_month');
 		}else{

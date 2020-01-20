@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\Service\UserToCompanyService;
 use App\Http\Controllers\Admin\Service\View_ManufacturerService;
 use App\Http\Controllers\Admin\Service\PermissionService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Controller\AdminController;
 use Hash;
 
 
@@ -49,7 +49,6 @@ class RegisterService extends BaseApiService{
 
         switch($result['operation']){
             case 'view_registerCompany':
-                Log::info('[view_registerCompany] --  : ' . \json_encode($result));
                 return view("admin.register.view_registerCompany", $title)->with('result', $result);
             break;
             case 'view_registerUser':

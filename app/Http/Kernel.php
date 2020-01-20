@@ -61,7 +61,12 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'app_api'   => \App\Http\Middleware\ApiMiddleware::class,
+
+        'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
+        'user' => \App\Http\Middleware\RedirectIfNotUser::class,
+        'customer' => \App\Http\Middleware\RedirectIfNotCustomer::class,
         'company' => \App\Http\Middleware\CompanyMiddleware::class,
+
         'language' => \App\Http\Middleware\LanguageMiddleware::class,
         'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
         'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
