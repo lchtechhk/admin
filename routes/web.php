@@ -52,6 +52,38 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/updateManufacturer', 'Controller\AdminManufacturerController@updateManufacturer');
         Route::post('/deleteManufacturer', 'Controller\AdminManufacturerController@deleteManufacturer');
         
+        //Categories
+        Route::get('/listingCategory', 'Controller\AdminCategoryController@listingCategory');
+		Route::get('/view_addCategory', 'Controller\AdminCategoryController@view_addCategory');
+		Route::get('/view_editCategory/{category_id}', 'Controller\AdminCategoryController@view_editCategory');
+		Route::post('/addCategory', 'Controller\AdminCategoryController@addCategory');
+		Route::post('/updateCategory', 'Controller\AdminCategoryController@updateCategory');
+        Route::post('/deleteCategory', 'Controller\AdminCategoryController@deleteCategory');
+        
+        //Sub Category
+		Route::get('/listingSubCategory', 'Controller\AdminSubCategoryController@listingSubCategory');
+		Route::get('/view_addSubCategory', 'Controller\AdminSubCategoryController@view_addSubCategory');
+		Route::get('/view_editSubCategory/{sub_category_id}', 'Controller\AdminSubCategoryController@view_editSubCategory');
+		Route::post('/addSubCategory', 'Controller\AdminSubCategoryController@addSubCategory');
+		Route::post('/updateSubCategory', 'Controller\AdminSubCategoryController@updateSubCategory');
+        Route::post('/deleteSubCategory', 'Controller\AdminSubCategoryController@deleteSubCategory');
+        
+        //product
+		Route::get('/listingProduct', 'Controller\AdminProductController@listingProduct');
+		Route::get('/view_addProduct', 'Controller\AdminProductController@view_addProduct');
+		Route::get('/view_editProduct/{product_id}', 'Controller\AdminProductController@view_editProduct');
+		Route::post('/addProduct', 'Controller\AdminProductController@addProduct');
+		Route::post('/updateProduct', 'Controller\AdminProductController@updateProduct');
+        Route::post('/deleteProduct', 'Controller\AdminProductController@deleteProduct');
+        
+        //Product Image
+		Route::get('/listingProductImage/{product_id}/', 'Controller\AdminProductImageController@listingProductImage');
+		Route::post('/view_addProductImage', 'Controller\AdminProductImageController@view_addProductImage');
+		Route::post('/view_editProductImage', 'Controller\AdminProductImageController@view_editProductImage');
+		Route::post('/addProductImage', 'Controller\AdminProductImageController@addProductImage');
+		Route::post('/updateProductImage', 'Controller\AdminProductImageController@updateProductImage');
+		Route::post('/deleteProductImage', 'Controller\AdminProductImageController@deleteProductImage');
+
 
     });
 

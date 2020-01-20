@@ -43,6 +43,7 @@ class CategoryService extends BaseApiService{
     function redirect_view($result,$title){
         $result['label'] = "Category";
         $result['languages'] = $this->LanguageService->findAll();
+        Log::info('[languages] : ' .json_encode($result['languages']));
         switch($result['operation']){
             case 'listing':
                 $result['categories'] = $this->View_CategoryService->getListing();

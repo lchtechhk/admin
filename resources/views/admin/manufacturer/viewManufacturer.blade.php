@@ -42,9 +42,9 @@
                                             <span style="color:red">★</span>
                                         </label>
                                         <div class="col-sm-10 col-md-4">
-                                            {!! Form::text("language_array[".$language->languages_id."]",
-                                            empty($result['manufacturer']->language_array[$language->languages_id]['name']) ? '' :
-                                            print_value($result['operation'],$result['manufacturer']->language_array[$language->languages_id]['name']),
+                                            {!! Form::text("language_array[".$language->language_id."]",
+                                            empty($result['manufacturer']->language_array[$language->language_id]['name']) ? '' :
+                                            print_value($result['operation'],$result['manufacturer']->language_array[$language->language_id]['name']),
                                             array('class'=>'form-control
                                             field-validate', 'id'=>'name')) !!}
                                             <span class="help-block"

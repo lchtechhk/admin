@@ -35,7 +35,7 @@ class ProductImageService extends BaseApiService{
                 return view("admin.product_image.listingProductImage", $title)->with('result', $result);
             break;
             case 'view_add':
-                // Log::info('[view_add] --  : ' . \json_encode($result));
+                Log::info('[view_add] --  : ' . \json_encode($result));
                 return view("admin.product_image.productImageDialog", $title)->with('result', $result);
             break;
             case 'view_edit':
@@ -45,7 +45,7 @@ class ProductImageService extends BaseApiService{
                 return view("admin.product_image.productImageDialog", $title)->with('result', $result);
             break;
             case 'add':
-                //  Log::info('[add] --  : '. \json_encode($result["product_images"]));
+                //  Log::info('[add] --  : '. \json_encode($result));
                 try{
                     DB::beginTransaction();
                     if($image = $this->UploadService->upload_image($result['request'],'image','resources/assets/images/product_images/'))$result['image'] = $image;
