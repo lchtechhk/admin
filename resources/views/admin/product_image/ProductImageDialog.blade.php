@@ -19,7 +19,7 @@
         {!! Form::text('product_id', empty($result['product_id']) ? '' : $result['product_id'], array('class'=>'form-control', 'id'=>'product_id')) !!}
         
         @if ($result['operation'] == 'view_edit')
-            {!! Form::text('product_image_id', empty($result['product_image_id']) ? '' : print_value($result['operation'],$result['product_image_id']), array('class'=>'form-control', 'id'=>'product_image_id')) !!}    
+            {!! Form::text('product_image_id', empty($result['product_image_id']) ? '' : $result['product_image_id'], array('class'=>'form-control', 'id'=>'product_image_id')) !!}    
         @endif
         <div class="modal-body">
                 <div class="form-group">
@@ -36,7 +36,7 @@
                     </label>
                     <div class="col-sm-10 col-md-8">
                         {!! Form::textarea('description',
-                        empty($result['product_image']->description) ? '' : print_value($result['operation'],$result['product_image']->description),
+                        !empty($result['product_image']) && !empty($result['product_image']->description) ? $result['product_image']->description : "",
                         array('class'=>'form-control','id'=>'description', 'colspan'=>'3' )) !!}
                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                             {{ trans('labels.ImageDescription') }}
