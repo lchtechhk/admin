@@ -108,7 +108,7 @@
                     @if(!empty($recentCustomers->customers_picture))
                     <img src="{{asset('').'/'.$recentCustomers->customers_picture}}">
                     @else
-                    <img src="{{asset('').'/resources/assets/images/default_images/user.png' }}">
+                    <img src="{{asset('').'storage/default_images/user.png' }}">
                     @endif
                     <a class="users-list-name"
                       href="{{ URL::to('admin/editcustomers') }}/{{ $recentCustomers->id }}">{{ $recentCustomers->customers_firstname }}

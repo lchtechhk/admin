@@ -4,6 +4,10 @@
     @include('layouts/add_header')
     <section class="content">
         <div class="row">
+            {{-- {{json_encode($_POST)}} --}}
+            {{-- @if (!empty($result['product']))
+                {{json_encode($result['product'])}}
+            @endif --}}
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
@@ -37,7 +41,7 @@
                                             <div class="col-sm-10 col-md-4">
                                                 {!! Form::text('sub_category_id',
                                                 empty($result['sub_category']->sub_category_id) ? '' :
-                                                print_value($result['operation'],$result['sub_category']->sub_category_id),
+                                                $result['sub_category']->sub_category_id,
                                                 array('class'=>'form-control', 'id'=>'sub_category_id','readonly')) !!}
                                             </div>
                                         </div>
@@ -51,9 +55,7 @@
                                                 <select name="category_id" class='form-control field-validate'>
                                                     @foreach( $result['categories'] as $category)
                                                     <option value="{{ $category->category_id }}"
-                                                        @if(!empty($result['sub_category']->category_id))
-                                                        {{print_selected_value($result['operation'],$category->category_id,$result['sub_category']->category_id)}}
-                                                        @endif>
+                                                        {{print_selected_value($category->category_id, isset($_POST['category_id']) ? $_POST['category_id'] : !empty($result['sub_category']->category_id) ? $result['sub_category']->category_id : '')}}>
                                                         {{ $category->name }}
                                                     </option>
                                                     @endforeach
@@ -69,9 +71,7 @@
                                             </label>
                                             <div class="col-sm-10 col-md-4">
                                                 {!! Form::text("language_array[".$language->language_id."]",
-                                                empty($result['sub_category']->language_array[$language->language_id]['name'])
-                                                ? '' :
-                                                print_value($result['operation'],$result['sub_category']->language_array[$language->language_id]['name']),
+                                                print_value(isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : !empty($result['sub_category']->language_array[$language->language_id]['name']) ? $result['sub_category']->language_array[$language->language_id]['name'] : '' ),
                                                 array('class'=>'form-control
                                                 field-validate', 'id'=>'name')) !!}
                                                 <span class="help-block"
@@ -95,7 +95,7 @@
                                                     class="img-circle">
                                                 @else
                                                 <img width="150px"
-                                                    src="{{asset('').'/resources/assets/images/default_images/default.png' }}"
+                                                    src="{{asset('').'storage/default_images/default.png' }}"
                                                     class="img-circle">
                                                 @endif
                                             </div>
@@ -113,7 +113,7 @@
                                                     class="img-circle">
                                                 @else
                                                 <img width="150px"
-                                                    src="{{asset('').'resources/assets/images/default_images/default.png' }}"
+                                                    src="{{asset('').'storage/default_images/default.png' }}"
                                                     class="img-circle">
                                                 @endif
                                             </div>
@@ -126,8 +126,7 @@
                                                     style="color:red">★</label>
                                             <div class="col-sm-10 col-md-4">
                                                 {!! Form::text('create_date',
-                                                empty($result['sub_category']->create_date) ? '' :
-                                                print_value($result['operation'],$result['sub_category']->create_date),
+                                                print_value( isset($_POST['create_date']) ? $_POST['create_date'] : !empty($result['sub_category']->create_date) ? $result['sub_category']->create_date : '' ),
                                                 array('class'=>'form-control', 'id'=>'create_date','readonly'=>'true'))
                                                 !!}
                                                 <span class="help-block"
@@ -141,9 +140,8 @@
                                                 class="col-sm-2 col-md-3 control-label">{{ trans('labels.EditDate') }}<span
                                                     style="color:red">★</label>
                                             <div class="col-sm-10 col-md-4">
-                                                {!! Form::text('edit_date', empty($result['sub_category']->edit_date) ?
-                                                '' :
-                                                print_value($result['operation'],$result['sub_category']->edit_date),
+                                                {!! Form::text('edit_date',
+                                                print_value(isset($_POST['edit_date']) ? $_POST['edit_date'] : !empty($result['sub_category']->edit_date) ? $result['sub_category']->edit_date : '' ),
                                                 array('class'=>'form-control',
                                                 'id'=>'edit_date','readonly'=>'true')) !!}
                                                 <span class="help-block"

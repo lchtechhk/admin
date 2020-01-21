@@ -27,8 +27,7 @@
                                         </label>
                                         <div class="col-sm-10 col-md-4">
                                             {!! Form::text('manufacturer_id',
-                                            empty($result['manufacturer']->manufacturer_id) ? '' :
-                                            print_value($result['operation'],$result['manufacturer']->manufacturer_id),
+                                            empty($result['manufacturer']->manufacturer_id) ? '' : $result['manufacturer']->manufacturer_id,
                                             array('class'=>'form-control', 'id'=>'manufacturer_id','readonly')) !!}
                                         </div>
                                     </div>
@@ -43,8 +42,7 @@
                                         </label>
                                         <div class="col-sm-10 col-md-4">
                                             {!! Form::text("language_array[".$language->language_id."]",
-                                            empty($result['manufacturer']->language_array[$language->language_id]['name']) ? '' :
-                                            print_value($result['operation'],$result['manufacturer']->language_array[$language->language_id]['name']),
+                                            print_value(isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : !empty($result['manufacturer']->language_array[$language->language_id]['name']) ? $result['manufacturer']->language_array[$language->language_id]['name'] : '' ),
                                             array('class'=>'form-control
                                             field-validate', 'id'=>'name')) !!}
                                             <span class="help-block"
@@ -59,8 +57,9 @@
                                         <label for="name"
                                             class="col-sm-2 col-md-3 control-label">{{ trans('labels.Url') }}</label>
                                         <div class="col-sm-10 col-md-4">
-                                            {!! Form::text("url", empty($result['manufacturer']->url) ? '' :
-                                            print_value($result['operation'],$result['manufacturer']->url),array('class'=>'form-control', 'id'=>'name')) !!}
+                                            {!! Form::text("url", 
+                                            print_value( isset($_POST['url']) ? $_POST['url'] : !empty($result['manufacturer']->url) ? $result['manufacturer']->url : '' ),
+                                            array('class'=>'form-control', 'id'=>'name')) !!}
                                             <span class="help-block"
                                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.Url') }}</span>
                                             <span
@@ -80,7 +79,7 @@
                                                 class="img-circle">
                                             @else
                                             <img width="150px"
-                                                src="{{asset('').'/resources/assets/images/default_images/manufacturer.png' }}"
+                                                src="{{asset('').'storage/default_images/manufacturer.png' }}"
                                                 class="img-circle">
                                             @endif
                                         </div>

@@ -60,7 +60,7 @@
                             @if(!empty($result['company']->image))
                             <img width="150px" src="{{asset('').'/'.$result['company']->image}}" class="img-circle">
                             @else
-                            <img width="150px" src="{{asset('').'/resources/assets/images/default_images/company.png' }}" class="img-circle">
+                            <img width="150px" src="{{asset('').'storage/default_images/company.png' }}" class="img-circle">
                             @endif
                         </div>
                     </div>

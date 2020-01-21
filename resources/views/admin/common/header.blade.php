@@ -64,7 +64,7 @@
                       <img src="{{asset('').'/'.$unseenOrder->customers_picture}}" class="img-circle"
                         alt="{{ $unseenOrder->customers_name }} Image">
                       @else
-                      <img src="{{asset('').'/resources/assets/images/default_images/user.png' }}" class="img-circle"
+                      <img src="{{asset('').'storage/default_images/user.png' }}" class="img-circle"
                         alt="{{ $unseenOrder->customers_name }} Image">
                       @endif
 
@@ -101,7 +101,7 @@
                       @if(!empty($newCustomer->customers_picture))
                       <img src="{{asset('').'/'.$newCustomer->customers_picture}}" class="img-circle">
                       @else
-                      <img src="{{asset('').'/resources/assets/images/default_images/user.png' }}" class="img-circle"
+                      <img src="{{asset('').'storage/default_images/user.png' }}" class="img-circle"
                         alt="{{ $newCustomer->customers_firstname }} Image">
                       @endif
                     </div>

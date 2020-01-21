@@ -34,8 +34,8 @@
                         <span style="color:red">★</span>
                       </label>
                       <div class="col-sm-10 col-md-4">
-                        {!! Form::text('category_id', empty($result['category']->category_id) ? '' :
-                        print_value($result['operation'],$result['category']->category_id),
+                        {!! Form::text('category_id', 
+                        print_value( isset($_POST['category_id']) ? $_POST['category_id'] : !empty($result['category']->category_id) ? $result['category']->category_id : '' ),
                         array('class'=>'form-control', 'id'=>'category_id','readonly')) !!}
                       </div>
                     </div>
@@ -50,8 +50,7 @@
                       </label>
                       <div class="col-sm-10 col-md-4">
                         {!! Form::text("language_array[".$language->language_id."]",
-                        empty($result['category']->language_array[$language->language_id]['name']) ? '' :
-                        print_value($result['operation'],$result['category']->language_array[$language->language_id]['name']),
+                        print_value(isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : !empty($result['category']->language_array[$language->language_id]['name']) ? $result['category']->language_array[$language->language_id]['name'] : '' ),
                         array('class'=>'form-control
                         field-validate', 'id'=>'name')) !!}
                         <span class="help-block"
@@ -70,7 +69,7 @@
                         @if(!empty($result['category']->image))
                         <img width="150px" src="{{asset('').'/'.$result['category']->image}}" class="img-circle">
                         @else
-                        <img width="150px" src="{{asset('').'/resources/assets/images/default_images/default.png' }}"
+                        <img width="150px" src="{{asset('').'storage/default_images/default.png' }}"
                           class="img-circle">
                         @endif
                       </div>
@@ -85,7 +84,7 @@
                         @if(!empty($result['category']->icon))
                         <img width="150px" src="{{asset('').'/'.$result['category']->icon}}" class="img-circle">
                         @else
-                        <img width="150px" src="{{asset('').'resources/assets/images/default_images/default.png' }}"
+                        <img width="150px" src="{{asset('').'storage/default_images/default.png' }}"
                           class="img-circle">
                         @endif
                       </div>
@@ -95,8 +94,8 @@
                       <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.CreateDate') }}<span
                           style="color:red">★</label>
                       <div class="col-sm-10 col-md-4">
-                        {!! Form::text('create_date', empty($result['category']->create_date) ? '' :
-                        print_value($result['operation'],$result['category']->create_date),
+                        {!! Form::text('create_date', 
+                        print_value(isset($_POST['create_date']) ? $_POST['create_date'] : !empty($result['category']->create_date) ? $result['category']->create_date : '' ),
                         array('class'=>'form-control', 'id'=>'create_date','readonly'=>'true')) !!}
                         <span class="help-block"
                           style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.CreateDate') }}</span>
@@ -107,8 +106,9 @@
                       <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.EditDate') }}<span
                           style="color:red">★</label>
                       <div class="col-sm-10 col-md-4">
-                        {!! Form::text('edit_date', empty($result['category']->edit_date) ? '' :
-                        print_value($result['operation'],$result['category']->edit_date), array('class'=>'form-control',
+                        {!! Form::text('edit_date', 
+                         print_value(isset($_POST['edit_date']) ? $_POST['edit_date'] : !empty($result['category']->edit_date) ? $result['category']->edit_date : '' ),
+                         array('class'=>'form-control',
                         'id'=>'edit_date','readonly'=>'true')) !!}
                         <span class="help-block"
                           style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.EditDate') }}</span>
