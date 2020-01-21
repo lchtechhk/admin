@@ -1,41 +1,32 @@
 <?php 
-    // function print_selected_value($original,$db_value){
-    //     $value = '';
-    //     if(!empty($original) && !empty($db_value) && $original == $db_value){
-    //         $value .= "selected";
-    //     }
-    //     return $value;
-    // }
     function testing(){
         error_log("testing function");
         return "testing";
     }
-    function print_value($operation,$data){
-        $value = '';
-        if($operation == 'edit' || $operation == 'view_edit' || $operation == 'listing' || $operation == 'changeable'){
-            $value .= $data;
-        }
+
+    function print_value($value){
         return $value;
+
     }
-    function print_radio_value($operation,$data,$selected_value){
+
+    function print_radio_value($display_choice,$value){
         $value = '';
-        if( ($operation == 'edit' || $operation == 'view_edit' || $operation == 'listing' || $operation == 'changeable') && !empty($data) && !empty($selected_value) && $data == $selected_value){
-            $value .= "checked";
-        }
+        if($display_choice == $value)$value .= "checked";
         return $value;
     }
 
-    function print_selected_value($operation,$data,$selected_value){
+    function print_selected_value($display_choice,$value){
         $value = '';
-        if( ($operation == 'edit' || $operation == 'view_edit' || $operation == 'listing' || $operation == 'changeable') && !empty($data) && !empty($selected_value) && $data == $selected_value){
-            $value .= "selected";
-        }
+        if($display_choice == $value)$value .= "checked";
         return $value;
     }
-    function print_checkbox($operation,$selected_value){
+
+    function print_checkbox($display_choice,$edit_value,$post_value){
         $value = '';
-        if( ($operation == 'edit' || $operation == 'listing' || $operation == 'changeable') && !empty($selected_value) && $selected_value == 'reject'){
-            $value .= "checked";
+        if(!empty($post_value)){
+            if($post_value == 'reject')$value .= "checked";
+        }else {
+            if($edit_value == 'reject')$value .= "checked";
         }
         return $value;
     }
@@ -55,5 +46,29 @@
         }
         return $value;
     }
+
+    // function print_value($operation,$data){
+    //     $value = '';
+    //     if($operation == 'edit' || $operation == 'view_edit' || $operation == 'listing' || $operation == 'changeable'){
+    //         $value .= $data;
+    //     }
+    //     return $value;
+    // }
+
+    // function print_radio_value($operation,$data,$selected_value){
+    //     $value = '';
+    //     if( ($operation == 'edit' || $operation == 'view_edit' || $operation == 'listing' || $operation == 'changeable') && !empty($data) && !empty($selected_value) && $data == $selected_value){
+    //         $value .= "checked";
+    //     }
+    //     return $value;
+    // }
+
+    // function print_selected_value($operation,$display_value,$add_value,$post_value){
+    //     $value = '';
+    //     if( ($operation == 'edit' || $operation == 'view_edit' || $operation == 'listing' || $operation == 'changeable') && !empty($display_value) && !empty($add_value) && $display_value == $add_value){
+    //         $value .= "selected";
+    //     }
+    //     return $value;
+    // }
 
 ?>

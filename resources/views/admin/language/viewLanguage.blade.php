@@ -45,7 +45,7 @@
                                                     class="img-circle">
                                             @else
                                                 <img width="150px"
-                                                    src="{{asset('').'storage/image/question.png' }}"
+                                                    src="{{asset('').'storage/default_images/question.png' }}"
                                                     class="img-circle">
                                             @endif
                                         </div>

@@ -954,6 +954,7 @@ $(document).on('click', '#updateAddress', function(e){
 	//deleteproductmodal
 	$(document).on('click', '#deleteProductId', function(){
 		var product_id = $(this).attr('product_id');
+		console.log("product_id : " + product_id);
 		$('#product_id').val(product_id);
 		$("#deleteProductModal").modal('show');
 	});

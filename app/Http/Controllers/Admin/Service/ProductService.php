@@ -74,7 +74,7 @@ class ProductService extends BaseApiService{
                 return view("admin.product.viewProduct", $title)->with('result', $result);
             break;
             case 'view_edit':
-                // Log::info('[view_edit] --  : '. \json_encode($result));
+                Log::info('[view_edit] --  : '. \json_encode($result));
                 $result['product'] = $this->getProduct($result['product_id']);
                 return view("admin.product.viewProduct", $title)->with('result', $result);
             break;
@@ -119,6 +119,8 @@ class ProductService extends BaseApiService{
                     if(empty($result['special_status']) || $result['special_status'] == 'cancel'){
                         $result['special_price'] = 0.00;
                         $result['expiry_date'] = NULL;
+                        // unset($result['special_price']);
+                        // unset($result['expiry_date']);
                     }
                     $update_product_result = $this->update("product_id",$result);
                     if(empty($update_product_result['status']) || $update_product_result['status'] == 'fail')throw new Exception("Error To update Product");

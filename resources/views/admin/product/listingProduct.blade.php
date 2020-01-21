@@ -67,7 +67,7 @@
                                                                     <li role="presentation" class="divider"></li>
                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="listingProductAttribute/{{ $product->product_id }}">{{ trans('labels.ProductAttribute') }}</a></li>
                                                                     <li role="presentation" class="divider"></li>
-                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" id="deleteProductId" products_id="{{ $product->product_id }}">{{ trans('labels.Delete') }}</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" id="deleteProductId" product_id="{{ $product->product_id }}">{{ trans('labels.Delete') }}</a></li>
                                                                 </ul>
                                                             </li>
                                                         </ul>

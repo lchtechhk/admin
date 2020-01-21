@@ -4,6 +4,7 @@ use Log;
 use DB;
 use Lang;
 use Exception;
+use Session;
 
 use App\Http\Controllers\Admin\Service\View_ManufacturerService;
 use App\Http\Controllers\Admin\Service\LanguageService;
