@@ -112,15 +112,12 @@ class ProductService extends BaseApiService{
                 }
             break;
             case 'edit':
-                Log::info('[edit] --  : ' . \json_encode($result));
                 try{
                     DB::beginTransaction();
                     
                     if(empty($result['special_status']) || $result['special_status'] == 'cancel'){
-                        $result['special_price'] = 0.00;
+                        $result['special_price'] = NULL;
                         $result['expiry_date'] = NULL;
-                        // unset($result['special_price']);
-                        // unset($result['expiry_date']);
                     }
                     $update_product_result = $this->update("product_id",$result);
                     if(empty($update_product_result['status']) || $update_product_result['status'] == 'fail')throw new Exception("Error To update Product");
@@ -144,7 +141,6 @@ class ProductService extends BaseApiService{
                     }
                     $result = $this->response($result,"Successful","view_edit");
                     $result['product'] = $this->getProduct($result['product_id']);
-                    Log::info('[EDIT] --  : ' . \json_encode($result));
 
                     DB::commit();
                     return view("admin.product.viewProduct", $title)->with('result', $result);

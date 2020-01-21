@@ -41,7 +41,7 @@
 
                     if(array_key_exists($column, $data)){
                         $object = array();
-                        $count = (preg_match('/.*(date|datetime|char|text).*/i', $column_type));
+                        $count = (preg_match('/.*(date|datetime|char|text|mediumtext|varchar).*/i', $column_type));
                         $value = isset($data[$column]) ? html_entity_decode($data[$column]) :NULL;
                         // $value = (empty($data[$column]) && $data[$column] != 0 ) ? null : html_entity_decode($data[$column]);
                         $answer = $this->out_put_value($count,$value);
@@ -70,7 +70,7 @@
 
                 if(array_key_exists($column, $data)){
                     $object = array();
-                    $count = (preg_match('/.*(date|datetime|char|text).*/i', $column_type));
+                    $count = (preg_match('/.*(date|datetime|char|text|mediumtext|varchar).*/i', $column_type));
                     // $value = (empty($data[$column]) && $data[$column] != 0 ) ? null : html_entity_decode($data[$column]);
                     $value = isset($data[$column]) ? html_entity_decode($data[$column]) :NULL;
                     $answer = $this->out_put_value($count,$value);
@@ -78,6 +78,7 @@
                 }
             }
             DB::enableQueryLog();
+            // Log::info('[db_prepareUpdate] -- ' .'target_array --' . \json_encode($target_array));
             $update_result = DB::table($table)->where($key, $id)->update($target_array);
             Log::notice('[MainRepository] -- ' .'[Update SQL] --'.json_encode(DB::getQueryLog()));
             if($update_result > 0 ){
@@ -96,7 +97,7 @@
                 $column_type = $row->Type;
 
                 if(array_key_exists($column, $data)){
-                    $count = (preg_match('/.*(date|datetime|char|text).*/i', $column_type));
+                    $count = (preg_match('/.*(date|datetime|char|text|mediumtext|varchar).*/i', $column_type));
                     $value = isset($data[$column]) ? html_entity_decode($data[$column]) :NULL;
                     $answer = $this->out_put_value($count,$value);
                     $target_array["$column"] = $answer;
@@ -161,17 +162,18 @@
                 return false;
         }
         private function out_put_value($count,$value){
-            $query_part_2 = '';
-            if(empty($value)){
-                $query_part_2 .= NULL;
-            }else{
-                if($count == 1){
-                    $query_part_2 .= $value;
-                }else {
-                    $query_part_2 .= $value;
-                }
-            }
-            return $query_part_2;
+            // $query_part_2 = '';
+            // if(empty($value)){
+            //     $query_part_2 .= NULL;
+            // }else{
+            //     if($count == 1){
+            //         $query_part_2 .= $value;
+            //     }else {
+            //         $query_part_2 .= $value;
+            //     }
+            // }
+            // return $query_part_2;
+            return $value;
         }
         private function output_null($string){
             if(empty($string)){

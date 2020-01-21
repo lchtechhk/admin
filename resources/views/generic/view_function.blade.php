@@ -9,15 +9,15 @@
 
     }
 
-    function print_radio_value($display_choice,$value){
+    function print_radio_value($display_choice,$post_value){
         $value = '';
-        if($display_choice == $value)$value .= "checked";
+        if($display_choice == $post_value)$value .= "checked";
         return $value;
     }
 
-    function print_selected_value($display_choice,$value){
+    function print_selected_value($display_choice,$post_value){
         $value = '';
-        if($display_choice == $value)$value .= "checked";
+        if($display_choice == $post_value)$value .= "selected";
         return $value;
     }
 

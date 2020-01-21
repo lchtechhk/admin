@@ -26,8 +26,7 @@
                                             </label>
                                             <div class="col-sm-10 col-md-4">
                                                 {!! Form::text('language_id',
-                                                empty($result['language']->language_id) ? '' :
-                                                print_value($result['operation'],$result['language']->language_id),
+                                                empty($result['language']->language_id) ? '' : $result['language']->language_id,
                                                 array('class'=>'form-control', 'id'=>'language_id','readonly')) !!}
                                             </div>
                                         </div>
@@ -55,7 +54,9 @@
                                         <label for="name"
                                             class="col-sm-2 col-md-3 control-label">{{ trans('labels.Name') }}</label>
                                         <div class="col-sm-10 col-md-4">
-                                            {!! Form::text('name',  empty($result['language']->name) ? '' : $result['language']->name, array('class'=>'form-control ',
+                                            {!! Form::text('name',  
+                                            print_value(isset($_POST['name']) ? $_POST['name'] : !empty($result['language']->name) ? $result['language']->name : '' ),
+                                            array('class'=>'form-control ',
                                             'id'=>'name'))!!}
                                             <span class="help-block"
                                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.exampleLanguageName') }}</span>
@@ -68,7 +69,9 @@
                                         <label for="name"
                                             class="col-sm-2 col-md-3 control-label">{{ trans('labels.Code') }}</label>
                                         <div class="col-sm-10 col-md-4">
-                                            {!! Form::text('code', empty($result['language']->code) ? '' : $result['language']->code, array('class'=>'form-control ',
+                                            {!! Form::text('code', 
+                                            print_value(isset($_POST['code']) ? $_POST['code'] : !empty($result['language']->code) ? $result['language']->code : '' ),
+                                            array('class'=>'form-control ',
                                             'id'=>'code'))!!}
                                             <span class="help-block"
                                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.exampleLanguageCode') }}</span>

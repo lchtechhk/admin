@@ -5,9 +5,9 @@
     <section class="content">
         <div class="row">
             {{-- {{json_encode($_POST)}} --}}
-            @if (!empty($result['product']))
+            {{-- @if (!empty($result['product']))
                 {{json_encode($result['product'])}}
-            @endif
+            @endif --}}
             <div class="col-md-12">
                 <div class="box-body">
                     <div class="row">
