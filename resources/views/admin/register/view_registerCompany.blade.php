@@ -23,8 +23,7 @@
                             </label>
                             <div class="col-sm-10 col-md-4">
                                 {!! Form::text("language_array[".$language->language_id."]",
-                                empty($result['company']->language_array[$language->language_id]['name']) ? '' :
-                                print_value($result['operation'],$result['company']->language_array[$language->language_id]['name']),
+                                print_value(isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : !empty($result['company']->language_array[$language->language_id]['name']) ? $result['company']->language_array[$language->language_id]['name'] : '' ),
                                 array('class'=>'form-control
                                 field-validate', 'id'=>'name')) !!}
                                 <span class="help-block"
@@ -40,8 +39,8 @@
                         </label>
                         <div class="col-sm-10 col-md-4">
                             {!! Form::email('email', 
-                            empty($result['company']->email) ? '' :  print_value($result['operation'],$result['company']->email)
-                            , array('class'=>'form-control
+                            print_value( isset($_POST['email']) ? $_POST['email'] : !empty($result['company']->email) ? $result['company']->email : '' ),
+                            array('class'=>'form-control
                             email-validate', 'id'=>'email')) !!}
                             <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                 {{ trans('labels.EmailText') }}</span>
@@ -67,7 +66,8 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Telephone') }}</label>
                         <div class="col-sm-10 col-md-4">
-                            {!! Form::text('phone', empty($result['company']->phone) ? '' :  print_value($result['operation'],$result['company']->phone),
+                            {!! Form::text('phone', 
+                            print_value( isset($_POST['phone']) ? $_POST['phone'] : !empty($result['company']->phone) ? $result['company']->phone : '' ),
                             array('class'=>'form-control', 'id'=>'phone')) !!}
                             <span class="help-block"
                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.TelephoneText') }}</span>

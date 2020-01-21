@@ -25,6 +25,9 @@ class CompanyMiddleware
     public function handle($request, Closure $next)
     {
         $user_auth = auth()->guard('admin')->user();
+        if(empty($user_auth)) return redirect('/admin/login');
+        Log::info("user_auth : " . json_encode($user_auth));
+
         $default_company_id = $user_auth->default_company_id;
         $user_id = $user_auth->user_id;
 
@@ -39,7 +42,6 @@ class CompanyMiddleware
             App::setLocale($language->code);
 
             $own_companies = $this->View_CompanyService->getCompanyBelongOwn();
-            Log::info("own_companies : " . json_encode($own_companies));
             if(\sizeof($own_companies) > 0){
                 $request->session()->put('owner_companies', $own_companies);
             }else {

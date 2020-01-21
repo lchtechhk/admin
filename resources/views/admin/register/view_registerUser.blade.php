@@ -6,7 +6,6 @@
         display: none !important;
     }
 </style>
-{{json_encode($result)}}
 <div style="margin: 2% 7% 7% 7%;">
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -72,11 +71,13 @@
                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.UploadProductImageText') }}</span>
                             <br>
                             @if(!empty($result['user_image']))
-                                {!! Form::hidden('user_oldImage', empty($result['user_image']) ? '' : print_value($result['operation'],$result['user_image']) , array('id'=>'user_oldImage',
+                                {!! Form::hidden('user_oldImage',
+                                print_value( isset($_POST['user_image']) ? $_POST['user_image'] : !empty($result['user_image']) ? $result['user_image'] : '' ),
+                                 array('id'=>'user_oldImage',
                                 'class'=>' ')) !!}
                                 <img src="{{asset('').$result['user_image']}}" alt="" width=" 100px">
                             @else
-                                <img src="../resources/assets/images/default_images/product.png"
+                                <img src="storage/default_images/product.png"
                                 style="width: 50px; float: left; margin-right: 10px">
                             @endif
                         </div>
@@ -174,7 +175,9 @@
                             <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.PictureText') }}</span>
                             <br>
                             @if(!empty($result['user_image']))
-                                {!! Form::hidden('company_oldImage', empty($result['company_image']) ? '' : print_value($result['operation'],$result['company_image']) , array('id'=>'company_oldImage',
+                                {!! Form::hidden('company_oldImage', 
+                                print_value( isset($_POST['company_image']) ? $_POST['company_image'] : !empty($result['company_image']) ? $result['company_image'] : '' ),
+                                array('id'=>'company_oldImage',
                                 'class'=>' ')) !!}
                                 <img src="{{asset('').$result['company_image']}}" alt="" width=" 100px">
                             @else

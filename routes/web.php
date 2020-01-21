@@ -92,6 +92,22 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/updateProductAttribute', 'Controller\AdminProductAttributeController@updateProductAttribute');
 		Route::post('/deleteProductAttribute1', 'Controller\AdminProductAttributeController@deleteProductAttribute');
 
+		//Product Option
+		Route::get('/listingProductOption', 'Controller\AdminProductOptionController@listingProductOption');
+		Route::get('/view_addProductOption', 'Controller\AdminProductOptionController@view_addProductOption');
+		Route::get('/view_editProductOption/{product_option_id}/', 'Controller\AdminProductOptionController@view_editProductOption');
+		Route::post('/addProductOption', 'Controller\AdminProductOptionController@addProductOption');
+		Route::post('/updateProductOption', 'Controller\AdminProductOptionController@updateProductOption');
+		Route::post('/deleteProductOption', 'Controller\AdminProductOptionController@deleteProductOption');
+
+		//Product Option Value
+		Route::get('/listingProductOptionValue', 'Controller\AdminProductOptionValueController@listingProductOptionValue');
+		Route::get('/view_addProductOptionValue', 'Controller\AdminProductOptionValueController@view_addProductOptionValue');
+		Route::get('/view_editProductOptionValue/{product_option_value_id}/', 'Controller\AdminProductOptionValueController@view_editProductOptionValue');
+		Route::post('/addProductOptionValue', 'Controller\AdminProductOptionValueController@addProductOptionValue');
+		Route::post('/updateProductOptionValue', 'Controller\AdminProductOptionValueController@updateProductOptionValue');
+		Route::post('/deleteProductOptionValue', 'Controller\AdminProductOptionValueController@deleteProductOptionValue');
+
     });
 
     Route::get('/test', 'Controller\TestController@pdf');
