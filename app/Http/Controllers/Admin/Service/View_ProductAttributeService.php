@@ -4,6 +4,7 @@ use Log;
 use DB;
 use Lang;
 use Exception;
+use Session;
 use App\Http\Controllers\Admin\Service\OrderProductDescriptionService;
 
 class View_ProductAttributeService extends BaseApiService{

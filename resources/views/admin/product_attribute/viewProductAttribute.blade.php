@@ -25,8 +25,7 @@
                                             <span style="color:red">★</span>
                                         </label>
                                         <div class="col-sm-10 col-md-4">
-                                            {!! Form::text('product_id', empty($result['product_id']) ? '' :
-                                            print_value('listing',$result['product_id']),
+                                            {!! Form::text('product_id', empty($result['product_id']) ? '' : $result['product_id'],
                                             array('class'=>'form-control', 'id'=>'product_id','readonly')) !!}
                                         </div>
                                     </div>
