@@ -6,25 +6,25 @@ use Lang;
 use Exception;
 use Session;
 
-use App\Http\Controllers\Admin\Service\View_CustomersService;
+use App\Http\Controllers\Admin\Service\View_CustomerService;
 use App\Http\Controllers\Admin\Service\AddressBookService;
 use App\Http\Controllers\Admin\Service\UploadService;
 
-class CustomersService extends BaseApiService{
-    private $View_CustomersService;
+class CustomerService extends BaseApiService{
+    private $View_CustomerService;
     private $AddressBookService;
 	private $UploadService;
 
     function __construct(){
-        $this->setTable('customers');
+        $this->setTable('customer');
         $this->companyAuth = true;
-        $this->View_CustomersService = new View_CustomersService();
+        $this->View_CustomerService = new View_CustomerService();
         $this->AddressBookService = new AddressBookService();
 		$this->UploadService = new UploadService();
 
     }
     function getListing(){
-        return $this->View_CustomersService->getListingWithOutStatus();
+        return $this->View_CustomerService->getListingWithOutStatus();
     }
 
     function redirect_view($result,$title){
@@ -36,33 +36,32 @@ class CustomersService extends BaseApiService{
                 return view("admin.customer.listingCustomer", $title)->with('result', $result);
             break;
             case 'view_add':
-                return view("admin.customer.addCustomer", $title)->with('result', $result);
+                return view("admin.customer.viewCustomer", $title)->with('result', $result);
             break;
             case 'view_edit':
                 $customers = $this->findById($result['request']->id);
                 $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
-                return view("admin.customer.editCustomer", $title)->with('result', $result);	
+                return view("admin.customer.viewCustomer", $title)->with('result', $result);	
             break;
             case 'add':
                 $email = $result['email'];
-                $own_email_count = $this->View_CustomersService->getCountByEmail($email);
-                // Log::info('own_email_count : ' . $own_email_count);
+                $own_email_count = $this->View_CustomerService->getCountByEmail($email);
                 if($own_email_count > 0 ){
                     $result['status'] = 'fail';
                     $result['message'] =  'Update Error, The Email Is Duplicate In DB';
-                    return view("admin.customer.addCustomer", $title)->with('result', $result);
+                    return view("admin.customer.viewCustomer", $title)->with('result', $result);
                 }        
                 $result['customers_picture'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
                 $add_customer_result = $this->add($result);
                 $customers = $this->findById($add_customer_result['response_id']);
                 $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
                 $result = $this->response($result,"Success To Add Customer","view_edit");
-                return view("admin.customer.editCustomer", $title)->with('result', $result);
+                return view("admin.customer.viewCustomer", $title)->with('result', $result);
             break;
             case 'edit':
                 $email = $result['email'];
                 $id = $result['id'];
-                $own_email_count = $this->View_CustomersService->getCountByEmailAndId($email,$id);
+                $own_email_count = $this->View_CustomerService->getCountByEmailAndId($email,$id);
                 $duplicate_email_count = $this->getCountForEmailExisting($email);
                 if($own_email_count > 1 ){
                     unset($result['email']);
@@ -71,15 +70,18 @@ class CustomersService extends BaseApiService{
                     $result['status'] = 'fail';
                     $result['message'] =  'Update Error, The Email Is Duplicate In DB';
                     $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
-                    return view("admin.customer.editCustomer", $title)->with('result', $result);
+                    return view("admin.customer.viewCustomer", $title)->with('result', $result);
                 }
                 $result['customers_picture'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                if(empty($result['password'])){
+                    unset($result['password']);
+                }
                 $update_customer_result = $this->update('id',$result);
                 if(empty($update_customer_result['status']) || $update_customer_result['status'] == 'fail')throw new Exception("Error To Update Customer");
                 $customers = $this->findById($result['request']->id);
                 $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
                 $result = $this->response($result,"Success To Update Customer","view_edit");
-                return view("admin.customer.editCustomer", $title)->with('result', $result);		
+                return view("admin.customer.viewCustomer", $title)->with('result', $result);		
             break;
             case 'delete':
                 try{

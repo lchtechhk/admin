@@ -5,7 +5,7 @@ use DB;
 use Session;
 
 use App\Http\Controllers\Admin\Service\BaseApiService;
-     class View_CustomersService extends BaseApiService{
+     class View_CustomerService extends BaseApiService{
         function __construct(){
             $this->setTable('view_customer');
             $this->companyAuth = true;
@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
             // ->orderBy('countries_id','ASC')
             // ->orderBY('zones_id','ASC')
             ->paginate(60);
-            Log::info('[View_CustomersService] -- getListing : ] '. json_encode($result, JSON_UNESCAPED_UNICODE));
+            Log::info('[View_CustomerService] -- getListing : ] '. json_encode($result, JSON_UNESCAPED_UNICODE));
             return $result;
         }
 
@@ -28,13 +28,13 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
             // ->orderBy('countries_id','ASC')
             // ->orderBY('zones_id','ASC')
             ->paginate(60);
-            Log::info('[View_CustomersService] -- getListing : ] '. json_encode($result, JSON_UNESCAPED_UNICODE));
+            Log::info('[View_CustomerService] -- getListing : ] '. json_encode($result, JSON_UNESCAPED_UNICODE));
             return $result;
         }
         function findByEmail($email){
             $result = DB::table($this->getTable())
             ->where('email','=',$email);
-            Log::info('[View_CustomersService] -- findByEmail : ] '. json_encode($result, JSON_UNESCAPED_UNICODE));
+            Log::info('[View_CustomerService] -- findByEmail : ] '. json_encode($result, JSON_UNESCAPED_UNICODE));
             return $result;
         }
         function getCountByEmailAndId($email,$id){
@@ -42,14 +42,14 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
             ->where('email','=',$email)
             ->where('id','=',$id)
             ->count();
-            Log::info('[View_CustomersService] -- getCountByEmailAndId : ] '. $result);
+            Log::info('[View_CustomerService] -- getCountByEmailAndId : ] '. $result);
             return $result;
         }
         function getCountByEmail($email){
             $result = DB::table($this->getTable())
             ->where('email','=',$email)
             ->count();
-            Log::info('[View_CustomersService] -- getCountByEmail : ] '. $result);
+            Log::info('[View_CustomerService] -- getCountByEmail : ] '. $result);
             return $result;
         }
         function redirect_view($result,$title){

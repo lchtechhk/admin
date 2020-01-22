@@ -50,7 +50,8 @@
                 }
                 DB::enableQueryLog();
                 $insert_id = DB::table($table)->insertGetId($target_array);
-                Log::notice('[MainRepository] -- ' .'[Insert SQL] --'.json_encode(DB::getQueryLog()));
+                $query = DB::getQueryLog();
+                Log::notice('[MainRepository] -- ' .'[Insert SQL] --'. \json_encode(end($query)));
 
                 if($insert_id > 0 ){
                     Log::info('[MainRepository] -- ' .'Insert Effected Id --' . $insert_id);
@@ -78,9 +79,9 @@
                 }
             }
             DB::enableQueryLog();
-            // Log::info('[db_prepareUpdate] -- ' .'target_array --' . \json_encode($target_array));
             $update_result = DB::table($table)->where($key, $id)->update($target_array);
-            Log::notice('[MainRepository] -- ' .'[Update SQL] --'.json_encode(DB::getQueryLog()));
+            $query = DB::getQueryLog();
+            Log::notice('[MainRepository] -- ' .'[Update SQL] --'. \json_encode(end($query)));
             if($update_result > 0 ){
                 Log::info('[MainRepository] -- ' .'Update Effected Rows --' . $update_result);
                 return $update_result;
@@ -109,7 +110,9 @@
                $where[$key] =$id_array[$index];
             }
             $update_result = DB::table($table)->where($where)->update($target_array);
-            Log::notice('[MainRepository] -- ' .'[Update SQL] --'.json_encode(DB::getQueryLog()));
+
+            $query = DB::getQueryLog();
+            Log::notice('[MainRepository] -- ' .'[Update SQL] --'. \json_encode(end($query)));
             if($update_result > 0 ){
                 Log::info('[MainRepository] -- ' .'Update Effected Rows --' . $update_result);
                 return $update_result;
@@ -124,8 +127,6 @@
                 $where[$key] =$id_array[$index];
              }
             $check_result = DB::table($this->getTable())->where($where)->get();
-            Log::info('[MainRepository] -- ' .'[isExistingByMultipleKey_Value]  : ');
-
             Log::info('[MainRepository] -- ' .'['.$this->getTable().'] -- isExistingByMultipleKey_Value : ' . json_encode($check_result));
             if(!empty($check_result) && sizeof($check_result) > 0 ){
                 return true;

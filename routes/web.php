@@ -108,6 +108,13 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/updateProductOptionValue', 'Controller\AdminProductOptionValueController@updateProductOptionValue');
 		Route::post('/deleteProductOptionValue', 'Controller\AdminProductOptionValueController@deleteProductOptionValue');
 
+		//Customer
+		Route::get('/listingCustomer', 'Controller\AdminCustomerController@listingCustomer');
+		Route::get('/view_addCustomer', 'Controller\AdminCustomerController@view_addCustomer');
+		Route::get('/view_editCustomer/{id}', 'Controller\AdminCustomerController@view_editCustomer');
+		Route::post('/addCustomer', 'Controller\AdminCustomerController@addCustomer');
+		Route::post('/updateCustomer', 'Controller\AdminCustomerController@updateCustomer');
+		Route::post('/deleteCustomer', 'Controller\AdminCustomerController@deleteCustomer');
     });
 
     Route::get('/test', 'Controller\TestController@pdf');
