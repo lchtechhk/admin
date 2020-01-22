@@ -156,6 +156,23 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/updateDistrict/{id}', 'Controller\AdminDistrictController@updateDistrict');
 		Route::post('/deleteDistrict','Controller\AdminDistrictController@deleteDistrict');
 
+		//User
+		Route::get('/listingUser', 'Controller\AdminUserController@listingUser');
+		Route::get('/view_addUser', 'Controller\AdminUserController@view_addUser');
+		Route::get('/view_editUser/{user_id}', 'Controller\AdminUserController@view_editUser');
+		Route::post('/addUser', 'Controller\AdminUserController@addUser');
+		Route::post('/updateUser', 'Controller\AdminUserController@updateUser');
+		Route::post('/deleteUser', 'Controller\AdminUserController@deleteUser');
+		Route::post('/changeDefaultCompany', 'Controller\AdminUserController@changeDefaultCompany');
+
+		//Company
+		Route::get('/listingCompany', 'Controller\AdminCompanyController@listingCompany');
+		Route::get('/view_addCompany', 'Controller\AdminCompanyController@view_addCompany');
+		Route::get('/view_editCompany/{company_id}', 'Controller\AdminCompanyController@view_editCompany');
+		Route::post('/addCompany', 'Controller\AdminCompanyController@addCompany');
+		Route::post('/updateCompany', 'Controller\AdminCompanyController@updateCompany');
+		Route::post('/deleteCompany', 'Controller\AdminCompanyController@deleteCompany');
+
     });
 
     Route::get('/test', 'Controller\TestController@pdf');

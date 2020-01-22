@@ -76,16 +76,18 @@ class UserService extends BaseApiService{
                         $result['message'] =  'Update Error, The Email Is Duplicate In DB';
                         return view("admin.user.viewUser", $title)->with('result', $result);
                     }        
-                    $result['image'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                    $result['image'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                    $result['default_language'] = Session::get('default_company_id');
                     $add_user_result = $this->add($result);
                     if(empty($add_user_result['status']) || $add_user_result['status'] == 'fail')throw new Exception("Error To Add User");
+                    $result = $this->response($result,"Success To Add User","view_edit");
                     $user = $this->findByColumn_Value("user_id",$add_user_result['response_id']);
                     $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
-                    $result = $this->response($result,"Success To Add User","view_edit");
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
+                Log::info('result : ' . json_encode($result));
                 return view("admin.user.viewUser", $title)->with('result', $result);               
             break;
             case 'edit':
@@ -106,7 +108,10 @@ class UserService extends BaseApiService{
                         return view("admin.user.viewUser", $title)->with('result', $result);
                     }
     
-                    $result['image'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                    $result['image'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                    if(empty($result['password'])){
+                        unset($result['password']);
+                    }
                     $update_user_result = $this->update("user_id",$result);
                     if(empty($update_user_result['status']) || $update_user_result['status'] == 'fail')throw new Exception("Error To Update User");
                     $result = $this->response($result,"Success To Edit User","view_edit");
@@ -114,9 +119,9 @@ class UserService extends BaseApiService{
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
-                $user = $this->findByColumn_Value("user_id",$user_id);
-                $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
-                Log::info('result : ' . json_encode($result));
+                // $user = $this->findByColumn_Value("user_id",$user_id);
+                // $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
+                // Log::info('result : ' . json_encode($result));
                 return view("admin.user.viewUser", $title)->with('result', $result);        
             break;
             case 'delete': 

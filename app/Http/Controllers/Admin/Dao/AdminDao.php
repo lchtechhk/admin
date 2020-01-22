@@ -58,6 +58,7 @@
             $result = DB::table($this->getTable())->whereIn($column, $values);
             if($this->companyAuth)$result = $result->where('company_id',Session::get('default_company_id'));
             $result = $result->get();
+            $query = DB::getQueryLog();
             Log::notice('[AdminDao] -- ' .'[SQL] - [findByColumn_Values] -- '. \json_encode(end($query)));
             // Log::info('[AdminDao] -- ' .'['.$this->getTable().'] -- findByColumn_Values : ' . json_encode($result));
             return $result;
