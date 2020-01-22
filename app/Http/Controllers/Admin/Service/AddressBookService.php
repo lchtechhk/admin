@@ -25,12 +25,8 @@ class AddressBookService extends BaseApiService{
 
     }
     function getListing($result){
-        $customer_id = $result['customer_id'];
-        $customer_address = $this->View_AddressBookService->findByColumn_Value('customer_id',$customer_id);
-        $result['customer_address'] = $customer_address;
-        $result['customer_id'] = $customer_id;
-        // Log::info('[Addressbooking] -- getListing : ' .json_encode($result));
-        return $result;
+        $customer_address = $this->View_AddressBookService->findByColumn_Value('customer_id',$result['customer_id']);
+        return $customer_address;
     }
     function combine_full_address($district_id){
         $full_address_obj = $this->View_CCADistrictService->getCCADistrictNameById($district_id);
@@ -45,7 +41,7 @@ class AddressBookService extends BaseApiService{
         $result['districts'] = $district;
         switch($result['operation']){
             case 'listing':
-                $result = $this->getListing($result);
+                $result['customer_addresses'] = $this->getListing($result);
                 return view("admin.addressbook.listingAddress",$title)->with('result', $result);
             break;
             case 'view_add':
@@ -61,13 +57,15 @@ class AddressBookService extends BaseApiService{
             break;
             case 'add':
                 try{
+                    $result['is_default'] = 'no';
                     $add_addressbook_result = $this->add($result);
                     if(empty($add_addressbook_result['status']) || $add_addressbook_result['status'] == 'fail')throw new Exception("Error To Delete Category");
-                    $result = $this->getListing($result);
                     $result = $this->response($result,"Success To Add Address Book","listing");
+                    $result['customer_addresses'] = $this->getListing($result);
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }	
+                Log::info('result : '. json_encode($result));
                 return view("admin.addressbook.listingAddress",$title)->with('result', $result);
             break;
             case 'edit':
@@ -78,13 +76,12 @@ class AddressBookService extends BaseApiService{
                     DB::beginTransaction();
                     $update_addressbook_result = $this->update("id",$result);
                     if(empty($update_addressbook_result['status']) || $update_addressbook_result['status'] == 'fail')throw new Exception("Error To Delete Category");
-                    $result = $this->getListing($result);
                     $result = $this->response($result,"Success To Update Address Book","listing");
+                    $result['customer_addresses'] = $this->getListing($result);
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }	
-                           
                 return view("admin.addressbook.listingAddress",$title)->with('result', $result);
             break;
             case 'delete':
@@ -93,8 +90,8 @@ class AddressBookService extends BaseApiService{
                     $id = $result['id'];
                     $delete_address_book_result = $this->delete($id);
                     if(empty($delete_address_book_result['status']) || $delete_address_book_result['status'] == 'fail')throw new Exception("Error To Delete Category");
-                    $result = $this->getListing($result);
                     $result = $this->response($result,"Success To Delete Address Book","listing");
+                    $result['customer_addresses'] = $this->getListing($result);
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                     return view("admin.addressbook.listingAddress",$title)->with('result', $result);

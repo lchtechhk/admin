@@ -33,8 +33,8 @@
                         </tr>
                       </thead>
                       <tbody class="contentAttribute">
-                        @if (count($result['customer_address']) > 0)
-                        @foreach($result['customer_address'] as $customer_address)
+                        @if (!empty($result['customer_addresses']) && count($result['customer_addresses']) > 0)
+                        @foreach($result['customer_addresses'] as $customer_address)
                         <tr>
                           <td>{{ $customer_address->id }}</td>
                           <td>
@@ -71,7 +71,6 @@
           </div>
           <!-- addressDialog -->
           <div class="modal fade" id="addressDialog" tabindex="-1" role="dialog" aria-labelledby="addressLabel">
-            @include('admin/addressbook/addressDialog')
           </div>
           <!-- deleteAddressModal -->
           @include('admin/addressbook/deleteAddressDialog')
