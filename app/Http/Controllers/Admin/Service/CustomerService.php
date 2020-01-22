@@ -51,7 +51,7 @@ class CustomerService extends BaseApiService{
                     $result['message'] =  'Update Error, The Email Is Duplicate In DB';
                     return view("admin.customer.viewCustomer", $title)->with('result', $result);
                 }        
-                $result['customers_picture'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                $result['picture'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
                 $add_customer_result = $this->add($result);
                 $customers = $this->findById($add_customer_result['response_id']);
                 $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
@@ -72,7 +72,7 @@ class CustomerService extends BaseApiService{
                     $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
                     return view("admin.customer.viewCustomer", $title)->with('result', $result);
                 }
-                $result['customers_picture'] = $this->UploadService->upload_image($result['request'],'newImage','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                $result['picture'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
                 if(empty($result['password'])){
                     unset($result['password']);
                 }
