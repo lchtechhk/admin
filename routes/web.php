@@ -115,6 +115,15 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/addCustomer', 'Controller\AdminCustomerController@addCustomer');
 		Route::post('/updateCustomer', 'Controller\AdminCustomerController@updateCustomer');
 		Route::post('/deleteCustomer', 'Controller\AdminCustomerController@deleteCustomer');
+
+		//Address Book 
+		Route::get('/listingAddressBook/{customer_id}/', 'Controller\AdminAddressBookController@listingAddressBook');
+		Route::post('/view_addAddressBook', 'Controller\AdminAddressBookController@view_addAddressBook');
+		Route::post('/view_editAddressBook', 'Controller\AdminAddressBookController@view_editAddressBook');
+
+		Route::post('/addAddressBook/{customer_id}', 'Controller\AdminAddressBookController@addAddressBook');
+		Route::post('/updateAddressBook/{address_book_id}/', 'Controller\AdminAddressBookController@updateAddressBook');
+		Route::post('/deleteAddressBook', 'Controller\AdminAddressBookController@deleteAddressBook');
     });
 
     Route::get('/test', 'Controller\TestController@pdf');
