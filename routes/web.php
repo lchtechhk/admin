@@ -120,10 +120,42 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::get('/listingAddressBook/{customer_id}/', 'Controller\AdminAddressBookController@listingAddressBook');
 		Route::post('/view_addAddressBook', 'Controller\AdminAddressBookController@view_addAddressBook');
 		Route::post('/view_editAddressBook', 'Controller\AdminAddressBookController@view_editAddressBook');
-
 		Route::post('/addAddressBook/{customer_id}', 'Controller\AdminAddressBookController@addAddressBook');
 		Route::post('/updateAddressBook/{address_book_id}/', 'Controller\AdminAddressBookController@updateAddressBook');
 		Route::post('/deleteAddressBook', 'Controller\AdminAddressBookController@deleteAddressBook');
+
+		//Country
+		Route::get('/listingCountry', 'Controller\AdminCountryController@listingCountry');
+		Route::get('/view_addCountry', 'Controller\AdminCountryController@view_addCountry');
+		Route::get('/view_editCountry/{id}', 'Controller\AdminCountryController@view_editCountry');
+		Route::post('/addCountry', 'Controller\AdminCountryController@addCountry');
+		Route::post('/updateCountry/{id}', 'Controller\AdminCountryController@updateCountry');
+		Route::post('/deleteCountry','Controller\AdminCountryController@deleteCountry');
+
+		//City
+		Route::get('/listingCity', 'Controller\AdminCityController@listingCity');
+		Route::get('/view_addCity', 'Controller\AdminCityController@view_addCity');
+		Route::get('/view_editCity/{id}', 'Controller\AdminCityController@view_editCity');
+		Route::post('/addCity', 'Controller\AdminCityController@addCity');
+		Route::post('/updateCity/{id}', 'Controller\AdminCityController@updateCity');
+		Route::post('/deleteCity','Controller\AdminCityController@deleteCity');
+
+		//Area
+		Route::get('/listingArea', 'Controller\AdminAreaController@listingArea');
+		Route::get('/view_addArea', 'Controller\AdminAreaController@view_addArea');
+		Route::get('/view_editArea/{id}', 'Controller\AdminAreaController@view_editArea');
+		Route::post('/addArea', 'Controller\AdminAreaController@addArea');
+		Route::post('/updateArea/{id}', 'Controller\AdminAreaController@updateArea');
+		Route::post('/deleteArea','Controller\AdminAreaController@deleteArea');
+
+		//District
+		Route::get('/listingDistrict', 'Controller\AdminDistrictController@listingDistrict');
+		Route::get('/view_addDistrict', 'Controller\AdminDistrictController@view_addDistrict');
+		Route::get('/view_editDistrict/{id}', 'Controller\AdminDistrictController@view_editDistrict');
+		Route::post('/addDistrict', 'Controller\AdminDistrictController@addDistrict');
+		Route::post('/updateDistrict/{id}', 'Controller\AdminDistrictController@updateDistrict');
+		Route::post('/deleteDistrict','Controller\AdminDistrictController@deleteDistrict');
+
     });
 
     Route::get('/test', 'Controller\TestController@pdf');

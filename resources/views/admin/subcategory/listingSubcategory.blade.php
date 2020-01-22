@@ -67,10 +67,6 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-                                                @else
-                                                <tr>
-                                                    <td colspan="7">{{ trans('labels.NoRecordFound') }}</td>
-                                                </tr>
                                                 @endif
                                             </tbody>
                                         </table>

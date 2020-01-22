@@ -1,4 +1,5 @@
-@extends('admin.common.layout') @section('content')
+@extends('admin.common.layout') 
+@section('content')
 <div class="content-wrapper">
     @include('layouts/add_header')
     <section class="content">
