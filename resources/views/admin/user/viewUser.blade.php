@@ -4,6 +4,13 @@
     @include('layouts/add_header')
     <section class="content">
         <div class="row">
+            <?php 
+            foreach ($_POST as $key => $value){
+        echo $key.'='.$value.'<br />';
+            }
+        
+            ?>
+            AD :{{ $_POST['first_name']}}
             <div class="col-md-12">
                 <div class="box-body">
                     <div class="row">
@@ -60,7 +67,7 @@
                                     </label>
                                     <div class="col-sm-10 col-md-4">
                                         {!! Form::text('first_name', 
-                                        print_value( isset($_POST['first_name']) ? $_POST['first_name'] : !empty($result['user']->first_name) ? $result['user']->first_name : '' ),
+                                        print_value((isset($_POST['first_name']) ? $_POST['first_name'] : (!empty($result['user']->first_name) ? $result['user']->first_name : '' ))),
                                         array('class'=>'form-control field-validate', 'id'=>'first_name')) !!}
                                         <span class="help-block"
                                             style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.FirstNameText') }}</span>
@@ -75,7 +82,7 @@
                                     </label>
                                     <div class="col-sm-10 col-md-4">
                                         {!! Form::text('last_name', 
-                                        print_value( isset($_POST['last_name']) ? $_POST['last_name'] : !empty($result['user']->last_name) ? $result['user']->last_name : '' ),
+                                        print_value((isset($_POST['last_name']) ? $_POST['last_name'] : (!empty($result['user']->last_name) ? $result['user']->last_name : '' ))),
                                         array('class'=>'form-control field-validate', 'id'=>'last_name')) !!}
                                         <span class="help-block"
                                             style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.lastNameText') }}</span>
@@ -118,7 +125,7 @@
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.DOB') }}</label>
                                     <div class="col-sm-10 col-md-4">
                                         {!! Form::text('dob', 
-                                        print_value(isset($_POST['dob']) ? $_POST['dob'] : !empty($result['user']->dob) ? $result['user']->dob : '' ),
+                                        print_value((isset($_POST['dob']) ? $_POST['dob'] : (!empty($result['user']->dob) ? $result['user']->dob : '' ))),
                                         array('class'=>'form-control datepicker' , 'id'=>'dob')) !!}
                                         <span class="help-block"
                                             style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.DOBText') }}</span>
@@ -128,7 +135,7 @@
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Telephone') }}</label>
                                     <div class="col-sm-10 col-md-4">
                                         {!! Form::text('phone', 
-                                        print_value(isset($_POST['phone']) ? $_POST['phone'] : !empty($result['user']->phone) ? $result['user']->phone : '' ),
+                                        print_value((isset($_POST['phone']) ? $_POST['phone'] : (!empty($result['user']->phone) ? $result['user']->phone : '' ))),
                                         array('class'=>'form-control', 'id'=>'phone')) !!}
                                         <span class="help-block"
                                             style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.TelephoneText') }}</span>
@@ -141,7 +148,7 @@
                                     </label>
                                     <div class="col-sm-10 col-md-4">
                                         {!! Form::email('email', 
-                                        print_value(isset($_POST['email']) ? $_POST['email'] : !empty($result['user']->email) ? $result['user']->email : '' ),
+                                        print_value((isset($_POST['email']) ? $_POST['email'] : (!empty($result['user']->email) ? $result['user']->email : '' ))),
                                         array('class'=>'form-control
                                         email-validate', 'id'=>'email')) !!}
                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">

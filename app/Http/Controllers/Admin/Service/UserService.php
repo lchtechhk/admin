@@ -119,9 +119,9 @@ class UserService extends BaseApiService{
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
-                // $user = $this->findByColumn_Value("user_id",$user_id);
-                // $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
-                // Log::info('result : ' . json_encode($result));
+                $user = $this->findByColumn_Value("user_id",$user_id);
+                $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
+                Log::info('result : ' . json_encode($result));
                 return view("admin.user.viewUser", $title)->with('result', $result);        
             break;
             case 'delete': 
