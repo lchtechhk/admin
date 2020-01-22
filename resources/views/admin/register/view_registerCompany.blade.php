@@ -1,5 +1,6 @@
 @extends('admin.login.layout_login')
 @section('content')
+@include('generic/view_function')
 <style>
     .wrapper {
         display: none !important;
