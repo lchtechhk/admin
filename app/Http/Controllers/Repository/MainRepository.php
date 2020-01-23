@@ -17,13 +17,17 @@
             return null;
         }
         protected function db_prepareDeleteKey_Value($key,$id){
+            DB::enableQueryLog();
             try{
                 $result = DB::table($this->getTable())->where($key, $id)->delete();
                 Log::info('[MainRepository] -- ' .'['.$this->getTable().'] -- DeleteKey_Value : ' . json_encode($result));
+                $query = DB::getQueryLog();
+                Log::notice('[MainRepository] -- ' .'[db_prepareDeleteKey_Value SQL] --'. \json_encode(end($query)));
                 return $result;
             }catch(Exception $e){
                 Log::info('[MainRepository] -- ' .'['.$this->getTable().'] -- DeleteKey_Value -- [Error] : ' .$e->getMessage());
             }
+
             return null;
         }
         protected function customMultipleDelete($table,$id_array){

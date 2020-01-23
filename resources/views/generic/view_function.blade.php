@@ -21,13 +21,9 @@
         return $value;
     }
 
-    function print_checkbox($display_choice,$edit_value,$post_value){
+    function print_checkbox($display_choice,$post_value){
         $value = '';
-        if(!empty($post_value)){
-            if($post_value == 'reject')$value .= "checked";
-        }else {
-            if($edit_value == 'reject')$value .= "checked";
-        }
+        if($display_choice == $post_value)$value .= "checked";
         return $value;
     }
 

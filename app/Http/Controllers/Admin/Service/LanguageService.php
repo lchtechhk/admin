@@ -20,8 +20,8 @@ use App\Http\Controllers\Admin\Service\UploadService;
             try{
                 $user_auth = auth()->guard('admin')->user();
                 $user_id = $user_auth->user_id;
-                $result = array("user_id"=>$user_id,"default_language"=>$language_id);
-                Log::info("update_default_language : " . \json_encode($result));
+                $result = array("user_id"=>$user_id,"default_language_id"=>$language_id);
+                Log::info("update_default_language_id : " . \json_encode($result));
                 $this->setTable('user');
                 $update_user_result = $this->update("user_id",$result);
                 $this->setTable('language');

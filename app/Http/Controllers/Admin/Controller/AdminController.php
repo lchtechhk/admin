@@ -140,7 +140,7 @@ class AdminController extends Controller{
 			if(auth()->guard('admin')->attempt($adminInfo)) {
 				$user_auth = auth()->guard('admin')->user();
 				Log::info('user_auth : ' . json_encode($user_auth));
-				$language_id = $user_auth->default_language;
+				$language_id = $user_auth->default_language_id;
 				$user = $this->UserService->findByColumn_Value("user_id",$user_auth->user_id);
 				session(['language_id' => $language_id]);
 				Log::info('user : ' . json_encode($user));
@@ -175,7 +175,7 @@ class AdminController extends Controller{
 			if(auth()->guard('admin')->attempt($adminInfo)) {
 				$user_auth = auth()->guard('admin')->user();
 				Log::info('user_auth : ' . json_encode($user_auth));
-				// $language_id = $user_auth->default_language;
+				// $language_id = $user_auth->default_language_id;
 				$user = $this->UserService->findByColumn_Value("user_id",$user_auth->user_id);
 				// session(['language_id' => $language_id]);
 				Log::info('user : ' . json_encode($user));

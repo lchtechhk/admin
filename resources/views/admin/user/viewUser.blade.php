@@ -4,13 +4,7 @@
     @include('layouts/add_header')
     <section class="content">
         <div class="row">
-            <?php 
-            foreach ($_POST as $key => $value){
-        echo $key.'='.$value.'<br />';
-            }
-        
-            ?>
-            AD :{{ $_POST['first_name']}}
+            AD :{{ isset($_POST['first_name']) ? $_POST['first_name'] : ""}}
             <div class="col-md-12">
                 <div class="box-body">
                     <div class="row">
@@ -29,7 +23,7 @@
                                     {{-- Only Edit --}}
                                     @if ($result['operation'] == 'edit' || $result['operation'] == 'view_edit')
                                         <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Product_id') }}
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.UserId') }}
                                                 <span style="color:red">★</span>
                                             </label>
                                             <div class="col-sm-10 col-md-4">
@@ -40,6 +34,45 @@
                                     @endif
                                 {{-- Content --}}
                                 <div class="form-group">
+                                    <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.BelongCompany') }}
+                                        <span style="color:red">★</span>
+                                    </label>
+                                    <div class="col-sm-10 col-md-4">
+                                        <div class="table-wrap" style="fro">
+                                            <div class="table">
+                                                <table id="area" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+															<th style="width:50px;">
+																<input style="transform: scale(1.5);" type="checkbox" onchange="checkAllDoctor(this)">
+															</th>
+															<th>
+																{{ trans('labels.CompanyName') }}
+															</th>
+                                                        </tr>
+                                                        @if (!empty($result['companies']) && count($result['companies']) > 0)
+                                                            @foreach ($result['companies'] as $index=>$company)
+                                                                <tr>
+                                                                    <td>
+                                                                        <input style="transform: scale(1.5);" type="checkbox" 
+                                                                        name="check_box_company[]" value="{{$company->company_id}}"
+                                                                        {{-- {{print_checkbox($company->company_id, (isset($_POST['companies'][$index]['company_id']) ? $_POST['companies'][$index]['company_id'] : 1 ))}}> --}}
+                                                                        {{print_checkbox($company->company_id, (isset($_POST['companies'][$index]['company_id']) ? $_POST['companies'][$index]['company_id'] : (!empty($result['companies'][$index]->company_id) ? $result['companies'][$index]->company_id : '')))}}>
+                                                                    </td>
+                                                                    <td>{{$company->name}}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                
+                                <div class="form-group">
                                     <label for="name"
                                         class="col-sm-2 col-md-3 control-label">{{ trans('labels.Permission') }}<span
                                             style="color:red">★</span></label>
@@ -48,7 +81,7 @@
                                             <option value="">-</option>
                                             @foreach ($result['permissions'] as $permission)
                                             <option value="{{ $permission->name }}" 
-                                                {{print_selected_value($permission->name, isset($_POST['permission']) ? $_POST['permission'] : !empty($result['user']->permission) ? $result['user']->permission : '')}}>
+                                                {{print_selected_value($permission->name, (isset($_POST['permission']) ? $_POST['permission'] : (!empty($result['user']->permission) ? $result['user']->permission : '')))}}>
                                                 {{ $permission->name }}
                                             </option>
                                             @endforeach
@@ -95,13 +128,13 @@
                                     <div class="col-sm-10 col-md-4">
                                         <label>
                                             <input type="radio" name="gender" value="M" class="minimal"
-                                            {{print_radio_value("M", isset($_POST['gender']) ? $_POST['gender'] : !empty($result['user']->gender) ? $result['user']->gender : '')}}>
+                                            {{print_radio_value("M", (isset($_POST['gender']) ? $_POST['gender'] : (!empty($result['user']->gender) ? $result['user']->gender : '')))}}>
                                             {{ trans('labels.Male') }}
                                         </label>
                                         <br>
                                         <label>
                                             <input  type="radio" name="gender" value="F" class="minimal"
-                                            {{print_radio_value("F", isset($_POST['gender']) ? $_POST['gender'] : !empty($result['user']->gender) ? $result['user']->gender : '')}}>
+                                            {{print_radio_value("F", (isset($_POST['gender']) ? $_POST['gender'] : (!empty($result['user']->gender) ? $result['user']->gender : '')))}}>
                                             {{ trans('labels.Female') }}
                                         </label>
                                     </div>
@@ -162,7 +195,7 @@
                                         <span style="color:red">★</span>
                                     </label>
                                     <div class="col-sm-10 col-md-4">
-                                        {!! Form::password('password',  array('class'=>'form-control ', 'id'=>'password')) !!}
+                                        {!! Form::password('password_str',  array('class'=>'form-control ', 'id'=>'password_str')) !!}
                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                             {{ trans('labels.PasswordText') }}
                                         </span>
@@ -176,11 +209,11 @@
                                     <div class="col-sm-10 col-md-4">
                                         <select class="form-control" name="status">
                                             <option value="active" 
-                                            {{print_selected_value("active", isset($_POST['status']) ? $_POST['status'] : !empty($result['user']->status) ? $result['user']->status : '')}}>
+                                            {{print_selected_value("active", (isset($_POST['status']) ? $_POST['status'] : (!empty($result['user']->status) ? $result['user']->status : '')))}}>
                                             {{ trans('labels.Active') }}
                                             </option>
                                             <option value="inactive"
-                                            {{print_selected_value("inactive", isset($_POST['status']) ? $_POST['status'] : !empty($result['user']->status) ? $result['user']->status : '')}}>
+                                            {{print_selected_value("inactive", (isset($_POST['status']) ? $_POST['status'] : (!empty($result['user']->status) ? $result['user']->status : '')))}}>
                                             {{ trans('labels.Inactive') }}
                                             </option>
                                         </select>

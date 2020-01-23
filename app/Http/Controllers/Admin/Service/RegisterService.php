@@ -118,7 +118,7 @@ class RegisterService extends BaseApiService{
                     // Handle User
                     $user_param['permission'] = 'boss';
                     $user_param['default_company_id'] = $result['company_id'];
-                    $user_param['default_language'] = $language_id;
+                    $user_param['default_language_id'] = $language_id;
                     $user_param['password'] = Hash::make($user_param['password_str']);
                     $email = $user_param['email'];
                     $own_email_count = $this->UserService->getCountForEmailExisting($email);
