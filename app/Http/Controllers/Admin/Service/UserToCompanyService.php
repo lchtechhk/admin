@@ -9,6 +9,22 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
             $this->setTable('user_to_company');
         }
 
+        function cleanByUserId($user_id){
+            DB::enableQueryLog();
+            $delete_id = DB::table($this->table)->where('user_id', $user_id)->where(function ($query) {
+                $query->where('is_main_company','no')->orWhereNull("is_main_company");
+            })->delete();
+            $result = array();
+            if($delete_id === null){
+                $result['status'] = 'fail';
+            }else {
+                $result['status'] = 'success';
+            }
+            $result['operation'] = 'delete';
+            $query = DB::getQueryLog();
+            Log::notice('[MainRepository] -- ' .'[cleanByUserId SQL] --'. \json_encode(end($query)));
+            return $result;
+        }
         function getUserIdsByCompany(){
             $user_to_company = $this->findByColumn_Value("company_id",Session::get('default_company_id'));
             $id_list = array();

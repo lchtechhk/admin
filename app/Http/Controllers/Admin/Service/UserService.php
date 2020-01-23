@@ -39,6 +39,12 @@ class UserService extends BaseApiService{
         return $result;
     }
 
+    function getUserById($result,$user_id){
+        $user = $this->findByColumn_Value("user_id",$user_id);
+        $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
+        $result['user']->companies = $this->View_CompanyService->getCompanyBelongOwn();
+        return $result;
+    }
     function getUserBelongOwn(){
         $user_ids = $this->UserToCompanyService->getUserIdsByCompany();
         Log::info('user_ids : ' . json_encode($user_ids));
@@ -52,7 +58,7 @@ class UserService extends BaseApiService{
     function redirect_view($result,$title){
         $result['label'] = "User";
         $result['permissions'] = $this->PermissionService->findByColumn_Value("is_public",1);
-        $result['companies'] = $this->View_CompanyService->getCompanyBelongOwn();
+        $result['companies'] = $this->View_CompanyService->findByColumn_Value("party_id",Session::get('party_id'));
         switch($result['operation']){
             case 'listing':
                 Log::info('[listing] --  : ' . \json_encode($result));
@@ -61,12 +67,10 @@ class UserService extends BaseApiService{
             break;
             case 'view_add':
                 Log::info('[view_add] --  : ' . \json_encode($result));
-
                 return view("admin.user.viewUser", $title)->with('result', $result);
             break;
             case 'view_edit':
-                $user = $this->findByColumn_Value("user_id",$result['user_id']);
-                $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
+                $result = $this->getUserById($result,$result['user_id']);
                 Log::info('[view_edit] --  : ' . \json_encode($result));
                 return view("admin.user.viewUser", $title)->with('result', $result);
             break;
@@ -86,8 +90,7 @@ class UserService extends BaseApiService{
                     $add_user_result = $this->add($result);
                     if(empty($add_user_result['status']) || $add_user_result['status'] == 'fail')throw new Exception("Error To Add User");
                     $result = $this->response($result,"Success To Add User","view_edit");
-                    $user = $this->findByColumn_Value("user_id",$add_user_result['response_id']);
-                    $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
+                    $result = $this->getUserById($result,$result['user_id']);
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
@@ -116,14 +119,14 @@ class UserService extends BaseApiService{
                     // handle update User To Company
                     // Log::info('edit resultresult : ' . json_encode($result));
 
+                    $delete_vtc_result = $this->UserToCompanyService->cleanByUserId($result['user_id']);
                     if(!empty($result['check_box_company']) && sizeof($result['check_box_company']) > 0){
-                        $delete_vtc_result = $this->UserToCompanyService->deleteByKey_Value("user_id",$result['user_id']);
                         if(empty($delete_vtc_result['status']) || $delete_vtc_result['status'] == 'fail')throw new Exception("Error To Delete VTC");
                         foreach ($result['check_box_company'] as $index => $company_id) {
                             $vtc_param = array();
                             $vtc_param['user_id'] = $result['user_id'];
                             $vtc_param['company_id'] = $company_id;
-                            $vtc_param['admin_type'] = $result['permission'];
+                            $vtc_param['is_main_company'] = 'no';
                             $add_vtc_result = $this->UserToCompanyService->add($vtc_param);
                             if(empty($add_vtc_result['status']) || $add_vtc_result['status'] == 'fail')throw new Exception("Error To Add VTC");
                         }
@@ -138,8 +141,7 @@ class UserService extends BaseApiService{
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
-                $user = $this->findByColumn_Value("user_id",$user_id);
-                $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
+                $result = $this->getUserById($result,$result['user_id']);
                 Log::info('result : ' . json_encode($result));
                 return view("admin.user.viewUser", $title)->with('result', $result);        
             break;

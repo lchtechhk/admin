@@ -44,8 +44,8 @@ class AppServiceProvider extends ServiceProvider
 			//->get();
 			->paginate(10);
 		
-		$languages = DB::table('languages')->get();
-		view()->share('languages', $languages);
+		// $languages = DB::table('languages')->get();
+		// view()->share('languages', $languages);
 		
 		$web_setting = DB::table('settings')->get();
 		view()->share('web_setting', $web_setting);

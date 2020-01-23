@@ -77,13 +77,13 @@ class AdminSiteSettingController extends Controller
 	
 	//addorderstatus
 	public function addorderstatus(Request $request){
-		$title = array('pageTitle' => Lang::get("labels.AddOrderStatus"));
-		$result = array();
+		// $title = array('pageTitle' => Lang::get("labels.AddOrderStatus"));
+		// $result = array();
 		
-		$languages = DB::table('languages')->get();		
-		$result['languages'] = $languages;
+		// $languages = DB::table('languages')->get();		
+		// $result['languages'] = $languages;
 		
-		return view("admin.addorderstatus",$title)->with('result', $result);
+		// return view("admin.addorderstatus",$title)->with('result', $result);
 	}
 		
 	//addNewOrderStatus	
@@ -112,20 +112,20 @@ class AdminSiteSettingController extends Controller
 	
 	//editorderstatus
 	public function editorderstatus(Request $request){		
-		$title = array('pageTitle' => Lang::get("labels.EditOrderStatus"));
-		$result = array();		
+		// $title = array('pageTitle' => Lang::get("labels.EditOrderStatus"));
+		// $result = array();		
 		
-		$orders_status = DB::table('orders_status')
-			->LeftJoin('languages', 'languages.languages_id','=', 'orders_status.language_id')
-			->where('orders_status_id','=', $request->id)
-			->paginate(60);
+		// $orders_status = DB::table('orders_status')
+		// 	->LeftJoin('languages', 'languages.languages_id','=', 'orders_status.language_id')
+		// 	->where('orders_status_id','=', $request->id)
+		// 	->paginate(60);
 			
-		$result['orders_status'] = $orders_status;	
+		// $result['orders_status'] = $orders_status;	
 			
-		$languages = DB::table('languages')->get();		
-		$result['languages'] = $languages;
+		// $languages = DB::table('languages')->get();		
+		// $result['languages'] = $languages;
 		
-		return view("admin.editorderstatus",$title)->with('result', $result);
+		// return view("admin.editorderstatus",$title)->with('result', $result);
 	}
 	
 	//updateOrderStatus	
@@ -155,28 +155,28 @@ class AdminSiteSettingController extends Controller
 		
 	//getlanguages
 	public function getlanguages(){
-		$languages = DB::table('languages')->get();
-		return $languages;
+		// $languages = DB::table('languages')->get();
+		// return $languages;
 	}
 	
 	//getsinglelanguages
 	public function getSingleLanguages($language_id){
-		$languages = DB::table('languages')->get();
-		return $languages;
+		// $languages = DB::table('languages')->get();
+		// return $languages;
 	}
 	
 	//languages
 	public function languages(Request $request){
-		$title = array('pageTitle' => Lang::get("labels.ListingLanguages"));		
+		// $title = array('pageTitle' => Lang::get("labels.ListingLanguages"));		
 		
-		$result = array();
+		// $result = array();
 		
-		$languages = DB::table('languages')
-			->paginate(60);
+		// $languages = DB::table('languages')
+		// 	->paginate(60);
 		
-		$result['languages'] = $languages;
+		// $result['languages'] = $languages;
 		
-		return view("admin.languages",$title)->with('result', $result);
+		// return view("admin.languages",$title)->with('result', $result);
 	}
 	
 	//addLanguages
@@ -188,46 +188,46 @@ class AdminSiteSettingController extends Controller
 	//addNewLanguages	
 	public function addnewlanguages(Request $request){
 		
-		$myVar = new AdminSiteSettingController();
-		$languages = $myVar->getLanguages();		
-		$extensions = $myVar->imageType();
+		// $myVar = new AdminSiteSettingController();
+		// $languages = $myVar->getLanguages();		
+		// $extensions = $myVar->imageType();
 		
-		if($request->hasFile('newImage') and in_array($request->newImage->extension(), $extensions)){
-			$image = $request->newImage;
-			$fileName = time().'.'.$image->getClientOriginalName();
-			$image->move('resources/assets/images/language_flags/', $fileName);
-			$uploadImage = 'resources/assets/images/language_flags/'.$fileName; 
-		}	else{
-			$uploadImage = '';
-		}	
+		// if($request->hasFile('newImage') and in_array($request->newImage->extension(), $extensions)){
+		// 	$image = $request->newImage;
+		// 	$fileName = time().'.'.$image->getClientOriginalName();
+		// 	$image->move('resources/assets/images/language_flags/', $fileName);
+		// 	$uploadImage = 'resources/assets/images/language_flags/'.$fileName; 
+		// }	else{
+		// 	$uploadImage = '';
+		// }	
 		
-		if($request->is_default=='1'){
-			$orders_status = DB::table('languages')->where('is_default','=', 1)->update([				
-				'is_default'	=>	0
-				]);	
-		}
+		// if($request->is_default=='1'){
+		// 	$orders_status = DB::table('languages')->where('is_default','=', 1)->update([				
+		// 		'is_default'	=>	0
+		// 		]);	
+		// }
 		
-		DB::table('languages')->insertGetId([
-				'name'			=>	$request->name,
-				'code'			=>	$request->code,
-				'image'			=>	$uploadImage,
-				'directory'		=>	$request->directory,
-				'direction'		=>	$request->direction,
-				'is_default'	=>	$request->is_default
-				]);
+		// DB::table('languages')->insertGetId([
+		// 		'name'			=>	$request->name,
+		// 		'code'			=>	$request->code,
+		// 		'image'			=>	$uploadImage,
+		// 		'directory'		=>	$request->directory,
+		// 		'direction'		=>	$request->direction,
+		// 		'is_default'	=>	$request->is_default
+		// 		]);
 								
-		$message = Lang::get("labels.languageAddedMessage");
-		return redirect()->back()->withErrors([$message]);
+		// $message = Lang::get("labels.languageAddedMessage");
+		// return redirect()->back()->withErrors([$message]);
 	}
 	
 	//editOrderStatus
 	public function editlanguages(Request $request){		
-		$title = array('pageTitle' => Lang::get("labels.EditLanguage"));
+		// $title = array('pageTitle' => Lang::get("labels.EditLanguage"));
 		
-		$languages = DB::table('languages')->where('languages_id','=', $request->id)->get();		
-		$result['languages'] = $languages;
+		// $languages = DB::table('languages')->where('languages_id','=', $request->id)->get();		
+		// $result['languages'] = $languages;
 		
-		return view("admin.editlanguages",$title)->with('result', $result);
+		// return view("admin.editlanguages",$title)->with('result', $result);
 	}
 	
 	//updateOrderStatus	
@@ -247,22 +247,22 @@ class AdminSiteSettingController extends Controller
 		}	
 		
 		if($request->is_default=='1'){
-			$orders_status = DB::table('languages')->where('is_default','=', 1)->update([				
-				'is_default'	=>	0
-				]);	
+			// $orders_status = DB::table('languages')->where('is_default','=', 1)->update([				
+			// 	'is_default'	=>	0
+			// 	]);	
 		}
 		
-		$orders_status = DB::table('languages')->where('languages_id','=', $request->id)->update([
-				'name'			=>	$request->name,
-				'code'			=>	$request->code,
-				'image'			=>	$uploadImage,
-				'directory'		=>	$request->directory,
-				'direction'		=>	$request->direction,
-				'is_default'	=>	$request->is_default
-				]);
+		// $orders_status = DB::table('languages')->where('languages_id','=', $request->id)->update([
+		// 		'name'			=>	$request->name,
+		// 		'code'			=>	$request->code,
+		// 		'image'			=>	$uploadImage,
+		// 		'directory'		=>	$request->directory,
+		// 		'direction'		=>	$request->direction,
+		// 		'is_default'	=>	$request->is_default
+		// 		]);
 		
-		$message = Lang::get("labels.languageEditMessage");
-		return redirect()->back()->withErrors([$message]);
+		// $message = Lang::get("labels.languageEditMessage");
+		// return redirect()->back()->withErrors([$message]);
 	}
 	
 	
@@ -280,7 +280,7 @@ class AdminSiteSettingController extends Controller
 	
 	//deletelanguage
 	public function deletelanguage(Request $request){
-		DB::table('languages')->where('languages_id', $request->id)->delete();
+		// DB::table('languages')->where('languages_id', $request->id)->delete();
 		
 		DB::table('categories_description')->where('language_id', $request->id)->delete();
 		DB::table('label_value')->where('language_id', $request->id)->delete();

@@ -4,7 +4,28 @@
     @include('layouts/add_header')
     <section class="content">
         <div class="row">
-            AD :{{ isset($_POST['first_name']) ? $_POST['first_name'] : ""}}
+            {{-- AD :{{ isset($_POST['first_name']) ? $_POST['first_name'] : ""}} --}}
+            {{-- {{isset($result['user']) ? json_encode($result['user']->companies) : ""}} <br/> --}}
+            {{-- $_POST['check_box_company'] : {{ isset($_POST['check_box_company']) ?  json_encode($_POST['check_box_company']) : "6666"}}  <br/> 
+            check_box_company : {{isset($_POST['check_box_company'][2]) ? $_POST['check_box_company'][2] : "33333"}} --}}
+            <table>
+                <?php 
+                
+                
+                    foreach ($_POST as $key => $value) {
+                        echo "<tr>";
+                        echo "<td>";
+                        echo $key;
+                        echo "</td>";
+                        echo "<td>";
+                        echo json_encode($value);
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                
+                
+                ?>
+                </table>
             <div class="col-md-12">
                 <div class="box-body">
                     <div class="row">
@@ -45,6 +66,9 @@
                                                         <tr>
 															<th style="width:50px;">
 																<input style="transform: scale(1.5);" type="checkbox" onchange="checkAllDoctor(this)">
+                                                            </th>
+                                                            <th>
+																{{ trans('labels.Id') }}
 															</th>
 															<th>
 																{{ trans('labels.CompanyName') }}
@@ -55,10 +79,13 @@
                                                                 <tr>
                                                                     <td>
                                                                         <input style="transform: scale(1.5);" type="checkbox" 
-                                                                        name="check_box_company[]" value="{{$company->company_id}}"
+                                                                        name="check_box_company[{{$company->company_id}}]" value="{{$company->company_id}}"
                                                                         {{-- {{print_checkbox($company->company_id, (isset($_POST['companies'][$index]['company_id']) ? $_POST['companies'][$index]['company_id'] : 1 ))}}> --}}
-                                                                        {{print_checkbox($company->company_id, (isset($_POST['companies'][$index]['company_id']) ? $_POST['companies'][$index]['company_id'] : (!empty($result['companies'][$index]->company_id) ? $result['companies'][$index]->company_id : '')))}}>
+                                                                        {{!empty($company->is_main_company) && $company->is_main_company == 'yes'? 'disabled checked' : ''}}
+                                                                        {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$index]->company_id) ? $result['user']->companies[$index]->company_id : '')))}}
+                                                                        >
                                                                     </td>
+                                                                    <td>{{$company->company_id}}</td>
                                                                     <td>{{$company->name}}</td>
                                                                 </tr>
                                                             @endforeach
@@ -72,7 +99,7 @@
 
                                 </div>
                                 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="name"
                                         class="col-sm-2 col-md-3 control-label">{{ trans('labels.Permission') }}<span
                                             style="color:red">★</span></label>
@@ -92,7 +119,7 @@
                                         <span
                                             class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label for="name"
                                         class="col-sm-2 col-md-3 control-label">{{ trans('labels.FirstName') }}

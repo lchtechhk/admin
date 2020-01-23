@@ -77,7 +77,7 @@
                                 'class'=>' ')) !!}
                                 <img src="{{asset('').$result['user_image']}}" alt="" width=" 100px">
                             @else
-                                <img src="storage/default_images/product.png"
+                                <img src="{{asset('')."storage/default_images/user.png"}}"
                                 style="width: 50px; float: left; margin-right: 10px">
                             @endif
                         </div>

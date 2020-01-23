@@ -26,14 +26,16 @@ class CompanyMiddleware
     {
         $user_auth = auth()->guard('admin')->user();
         if(empty($user_auth)) return redirect('/admin/login');
-        Log::info("user_auth : " . json_encode($user_auth));
+        // Log::info("user_auth : " . json_encode($user_auth));
 
         $default_company_id = $user_auth->default_company_id;
         $user_id = $user_auth->user_id;
+        $party_id = $user_auth->party_id;
 
         $request->session()->put('user_id', $user_id);
+        $request->session()->put('party_id', $party_id);
         $request->session()->put('default_company_id', $default_company_id);
-
+        
         $languages = $this->LanguageService->findByColumn_Value("is_default",'yes');
         if(!empty($languages) && \sizeof($languages) > 0){
             $language = $languages[0];

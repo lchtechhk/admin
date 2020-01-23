@@ -61,6 +61,7 @@ class RegisterService extends BaseApiService{
                     if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/company/images/'))$result['image'] = $image;
                     if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/company/icons/'))$result['icon'] = $icon;
                     Log::info('[add_registerCompany] --  : ' . json_encode($result));
+                    $result['is_main_company'] = 'yes';
                     $add_company_result = $this->CompanyService->register_add($result);
                     if(empty($add_company_result['status']) || $add_company_result['status'] == 'fail')throw new Exception("Error To Add Company");
                     $result['company_id'] = $add_company_result['response_id'];
@@ -75,7 +76,7 @@ class RegisterService extends BaseApiService{
                     $user_to_company_param = array();
                     $user_to_company_param['user_id'] = auth()->guard('admin')->user()->user_id;
                     $user_to_company_param['company_id'] = $add_company_result['response_id'];
-                    $user_to_company_param['admin_type'] = 'boss';
+                    $user_to_company_param['is_main_company'] = "yes";
                     $add_user_to_company = $this->UserToCompanyService->register_add($user_to_company_param);
                     if(empty($add_user_to_company['status']) || $add_user_to_company['status'] == 'fail')throw new Exception("Error To Add User To Company");
                     $result = $this->response($result,"Successful","view_edit");
@@ -95,10 +96,16 @@ class RegisterService extends BaseApiService{
 
                     // Handle Company
                     if($image = $this->UploadService->upload_image($result['request'],'company_image','storage/company/'.Session::get('default_company_id').'/company/images/'))$company_param['image'] = $image;
+                    $company_param['is_main_company'] = 'yes';
                     $add_company_result = $this->CompanyService->register_add($company_param);
                     if(empty($add_company_result['status']) || $add_company_result['status'] == 'fail')throw new Exception("Error To Add Company");
                     $result['company_id'] = $add_company_result['response_id'];
-                    
+                    // Handle Compant Party Id
+                    $party_param = array();
+                    $party_param['company_id'] = $result['company_id'];
+                    $party_param['party_id'] = $result['company_id'].".TL";
+                    $update_partyId_result = $this->CompanyService->update("company_id",$party_param);
+                    if(empty($update_partyId_result['status']) || $update_partyId_result['status'] == 'fail')throw new Exception("Error To Update PartyId");
 
                     // Handle Language
                     $lan_param = array();
@@ -115,10 +122,11 @@ class RegisterService extends BaseApiService{
                     Log::info('[language_id] --  : ' . $language_id);
 
 
-                    // Handle User
+                // Handle User
                     $user_param['permission'] = 'boss';
                     $user_param['default_company_id'] = $result['company_id'];
                     $user_param['default_language_id'] = $language_id;
+                    $user_param['party_id'] = $party_param['party_id'];
                     $user_param['password'] = Hash::make($user_param['password_str']);
                     $email = $user_param['email'];
                     $own_email_count = $this->UserService->getCountForEmailExisting($email);
@@ -145,7 +153,7 @@ class RegisterService extends BaseApiService{
                     $user_to_company_param = array();
                     $user_to_company_param['user_id'] = $result['user_id'];
                     $user_to_company_param['company_id'] = $result['company_id'];
-                    $user_to_company_param['admin_type'] = 'boss';
+                    $user_to_company_param['is_main_company'] = "yes";
                     $add_user_to_company = $this->UserToCompanyService->register_add($user_to_company_param);
                     if(empty($add_user_to_company['status']) || $add_user_to_company['status'] == 'fail')throw new Exception("Error To Add User To Company");
 
