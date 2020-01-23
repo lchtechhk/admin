@@ -6,12 +6,12 @@
         <div class="row">
             {{-- AD :{{ isset($_POST['first_name']) ? $_POST['first_name'] : ""}} --}}
             {{-- {{isset($result['user']) ? json_encode($result['user']->companies) : ""}} <br/> --}}
-            {{-- $_POST['check_box_company'] : {{ isset($_POST['check_box_company']) ?  json_encode($_POST['check_box_company']) : "6666"}}  <br/> 
+            {{-- $_POST['check_box_company'] : {{ isset($_POST['check_box_company']) ?  json_encode($_POST['check_box_company']) : "6666"}}  <br/>
             check_box_company : {{isset($_POST['check_box_company'][2]) ? $_POST['check_box_company'][2] : "33333"}} --}}
             <table>
-                <?php 
-                
-                
+                <?php
+
+
                     foreach ($_POST as $key => $value) {
                         echo "<tr>";
                         echo "<td>";
@@ -22,8 +22,8 @@
                         echo "</td>";
                         echo "</tr>";
                     }
-                
-                
+
+
                 ?>
                 </table>
             <div class="col-md-12">
@@ -78,10 +78,10 @@
                                                             @foreach ($result['companies'] as $index=>$company)
                                                                 <tr>
                                                                     <td>
-                                                                        <input style="transform: scale(1.5);" type="checkbox" 
+                                                                        <input style="transform: scale(1.5);" type="checkbox"
                                                                         name="check_box_company[{{$company->company_id}}]" value="{{$company->company_id}}"
                                                                         {{-- {{print_checkbox($company->company_id, (isset($_POST['companies'][$index]['company_id']) ? $_POST['companies'][$index]['company_id'] : 1 ))}}> --}}
-                                                                        {{!empty($company->is_main_company) && $company->is_main_company == 'yes'? 'disabled checked' : ''}}
+                                                                        {{!empty($result['main_company_id']) && $result['main_company_id'] == $company->company_id ? 'disabled checked' : ''}}
                                                                         {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$index]->company_id) ? $result['user']->companies[$index]->company_id : '')))}}
                                                                         >
                                                                     </td>
@@ -98,7 +98,7 @@
 
 
                                 </div>
-                                
+
                                 {{-- <div class="form-group">
                                     <label for="name"
                                         class="col-sm-2 col-md-3 control-label">{{ trans('labels.Permission') }}<span
@@ -107,7 +107,7 @@
                                         <select class="form-control field-validate" id="permission" name="permission">
                                             <option value="">-</option>
                                             @foreach ($result['permissions'] as $permission)
-                                            <option value="{{ $permission->name }}" 
+                                            <option value="{{ $permission->name }}"
                                                 {{print_selected_value($permission->name, (isset($_POST['permission']) ? $_POST['permission'] : (!empty($result['user']->permission) ? $result['user']->permission : '')))}}>
                                                 {{ $permission->name }}
                                             </option>
@@ -126,7 +126,7 @@
                                         <span style="color:red">★</span>
                                     </label>
                                     <div class="col-sm-10 col-md-4">
-                                        {!! Form::text('first_name', 
+                                        {!! Form::text('first_name',
                                         print_value((isset($_POST['first_name']) ? $_POST['first_name'] : (!empty($result['user']->first_name) ? $result['user']->first_name : '' ))),
                                         array('class'=>'form-control field-validate', 'id'=>'first_name')) !!}
                                         <span class="help-block"
@@ -141,7 +141,7 @@
                                         <span style="color:red">★</span>
                                     </label>
                                     <div class="col-sm-10 col-md-4">
-                                        {!! Form::text('last_name', 
+                                        {!! Form::text('last_name',
                                         print_value((isset($_POST['last_name']) ? $_POST['last_name'] : (!empty($result['user']->last_name) ? $result['user']->last_name : '' ))),
                                         array('class'=>'form-control field-validate', 'id'=>'last_name')) !!}
                                         <span class="help-block"
@@ -184,7 +184,7 @@
                                 <div class="form-group">
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.DOB') }}</label>
                                     <div class="col-sm-10 col-md-4">
-                                        {!! Form::text('dob', 
+                                        {!! Form::text('dob',
                                         print_value((isset($_POST['dob']) ? $_POST['dob'] : (!empty($result['user']->dob) ? $result['user']->dob : '' ))),
                                         array('class'=>'form-control datepicker' , 'id'=>'dob')) !!}
                                         <span class="help-block"
@@ -194,7 +194,7 @@
                                 <div class="form-group">
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Telephone') }}</label>
                                     <div class="col-sm-10 col-md-4">
-                                        {!! Form::text('phone', 
+                                        {!! Form::text('phone',
                                         print_value((isset($_POST['phone']) ? $_POST['phone'] : (!empty($result['user']->phone) ? $result['user']->phone : '' ))),
                                         array('class'=>'form-control', 'id'=>'phone')) !!}
                                         <span class="help-block"
@@ -207,7 +207,7 @@
                                         <span style="color:red">★</span>
                                     </label>
                                     <div class="col-sm-10 col-md-4">
-                                        {!! Form::email('email', 
+                                        {!! Form::email('email',
                                         print_value((isset($_POST['email']) ? $_POST['email'] : (!empty($result['user']->email) ? $result['user']->email : '' ))),
                                         array('class'=>'form-control
                                         email-validate', 'id'=>'email')) !!}
@@ -235,7 +235,7 @@
                                     </label>
                                     <div class="col-sm-10 col-md-4">
                                         <select class="form-control" name="status">
-                                            <option value="active" 
+                                            <option value="active"
                                             {{print_selected_value("active", (isset($_POST['status']) ? $_POST['status'] : (!empty($result['user']->status) ? $result['user']->status : '')))}}>
                                             {{ trans('labels.Active') }}
                                             </option>
@@ -249,8 +249,8 @@
                                     </div>
                                 </div>
 
-          
-                                
+
+
                             {{-- Language Content --}}
                             @include('layouts/submit_back_button')
                             {!! Form::close() !!}
@@ -266,9 +266,9 @@
 
 <script type="text/javascript">
     $(function () {
-        
 
-        
+
+
     });
 </script>
 

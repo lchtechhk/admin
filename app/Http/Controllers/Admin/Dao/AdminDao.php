@@ -17,7 +17,7 @@
             $query = DB::getQueryLog();
             Log::notice('[AdminDao] -- ' .'[SQL] - [findAll] -- '. \json_encode(end($query)));
             // Log::info('[AdminDao] -- ' .'['.$this->getTable().'] -- findAll : ' . json_encode($result));
-            
+
             return $result;
         }
         public function findByArray($columns_values){
@@ -63,6 +63,7 @@
             // Log::info('[AdminDao] -- ' .'['.$this->getTable().'] -- findByColumn_Values : ' . json_encode($result));
             return $result;
         }
+
         // With Language
         public function findAllWithLanguage(){
             DB::enableQueryLog();

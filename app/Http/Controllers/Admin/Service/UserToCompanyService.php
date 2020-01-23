@@ -9,6 +9,16 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
             $this->setTable('user_to_company');
         }
 
+        function getMainCompanyIdByUser($user_id){
+            $param = array();
+            $param['user_id'] = $user_id;
+            $param['is_main_company'] = 'yes';
+            $result = $this->findByArray($param);
+            if(sizeof($result) > 0){
+                return $result[0]->company_id;
+            }
+            return null;
+        }
         function cleanByUserId($user_id){
             DB::enableQueryLog();
             $delete_id = DB::table($this->table)->where('user_id', $user_id)->where(function ($query) {
@@ -45,7 +55,7 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
             }
             return $id_list;
         }
-        
+
         function redirect_view($result,$title){
         }
     }

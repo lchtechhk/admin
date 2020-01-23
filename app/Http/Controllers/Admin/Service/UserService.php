@@ -71,6 +71,7 @@ class UserService extends BaseApiService{
             break;
             case 'view_edit':
                 $result = $this->getUserById($result,$result['user_id']);
+                $result['main_company_id'] = $this->UserToCompanyService->getMainCompanyIdByUser($result['user_id']);
                 Log::info('[view_edit] --  : ' . \json_encode($result));
                 return view("admin.user.viewUser", $title)->with('result', $result);
             break;
@@ -82,7 +83,7 @@ class UserService extends BaseApiService{
                     // Log::info('own_email_count : ' . $own_email_count);
                     if($own_email_count > 0 ){
                         throw new Exception("Update Error, The Email Is Duplicate In DB");
-                    }        
+                    }
                     $result['image'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
                     $result['default_language_id'] = Session::get('language_id');
                     $result['default_company_id'] = Session::get('default_company_id');
@@ -96,7 +97,7 @@ class UserService extends BaseApiService{
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
                 Log::info('result : ' . json_encode($result));
-                return view("admin.user.viewUser", $title)->with('result', $result);               
+                return view("admin.user.viewUser", $title)->with('result', $result);
             break;
             case 'edit':
                 try{
@@ -110,7 +111,7 @@ class UserService extends BaseApiService{
                     }else if($own_email_count == 0 && $duplicate_email_count > 0){
                         throw new Exception("Update Error, The Email Is Duplicate In DB");
                     }
-    
+
                     $result['image'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
                     if(empty($result['password_str'])){
                         unset($result['password']);
@@ -143,9 +144,9 @@ class UserService extends BaseApiService{
                 }
                 $result = $this->getUserById($result,$result['user_id']);
                 Log::info('result : ' . json_encode($result));
-                return view("admin.user.viewUser", $title)->with('result', $result);        
+                return view("admin.user.viewUser", $title)->with('result', $result);
             break;
-            case 'delete': 
+            case 'delete':
                 try{
                     $delete_user_result = $this->deleteByKey_Value("user_id",$result['user_id']);
                     if(empty($delete_user_result['status']) || $delete_user_result['status'] == 'fail')throw new Exception("Error To Delete User");
