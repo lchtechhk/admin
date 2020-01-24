@@ -50,6 +50,7 @@ class CompanyMiddleware
                 return redirect('/admin/view_registerCompany');
             }
         }else {
+            Log::info("[Error] - CompanyMiddleware : Language");
             return redirect('/admin/login');
         }
         

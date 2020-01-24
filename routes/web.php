@@ -10,7 +10,7 @@ Route::get('/', function() { return Redirect::to("admin/login"); });
 
 
 Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
-    //log in
+	//log in
 	Route::get('/login', 'Controller\AdminController@login');
 	Route::post('/checkLogin', 'Controller\AdminController@checkLogin');
 	Route::get('/forward_login', 'Controller\AdminController@forward_login');

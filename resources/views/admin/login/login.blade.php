@@ -10,7 +10,8 @@
         <img style="width:300px; height:200px;" src="{{asset('/storage/company/logo/logo.png')}}" class="android-hide">
         <div style="font-size: 25px;">
             {{-- <b> {{ trans('labels.welcome_message') }}</b> --}}
-            {{-- {{ trans('labels.welcome_message_to') }} --}}
+            {{ trans('labels.welcome_message_to') }}
+            @include('layouts/responseMessage')
         </div>
     </div>
     <div class="login-box-body">
