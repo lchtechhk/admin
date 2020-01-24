@@ -1,3 +1,8 @@
+function clean_cache(){
+    var d = new Date();
+    var today = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+    localStorage.setItem('pre_order_form',JSON.stringify({"order_status" : "pending","date_purchased" : today}));
+}
 function purchase_date_change(date_purchased){
     $('#date_purchased').val(date_purchased);
 }
@@ -208,10 +213,11 @@ $(function() {
         var customer_id = this.value;
         var phone = $('option:selected', this).attr('phone');
         var email = $('option:selected', this).attr('email');
+        console.log("customer_id : " + customer_id);
         customer_change(phone,email);
         $.ajax({
             type: "POST",
-            url: "/cms/admin/findAddressByCustomerId",
+            url: "/admin/admin/findAddressByCustomerId",
             data: {customer_id:customer_id},
             success: function(msg) { 
                 console.log("msg : " + JSON.stringify(msg));
@@ -233,6 +239,8 @@ $(function() {
                     .remove()
                     .end()
                     msg.forEach(element => {
+                        console.log("element : " + JSON.stringify(element));
+
                         var address_id = element.id
                         var company = element.company
                         var country_name = element.country_name
@@ -245,8 +253,8 @@ $(function() {
                         var address_ch = element.address_ch
                         var address_en = element.address_en
                         var is_default = element.is_default
-         
-                        if(is_default == 'active'){
+
+                        if(is_default == 'yes'){
                             $('#customer_address_id')
                             .append($('<option>')
                             .val(address_id)
@@ -261,7 +269,6 @@ $(function() {
                             .attr("customer_building", building)
                             .attr("customer_room", room)
                             .attr("selected", "selected"));
-                            
                             $('#customer_street_address').val(address_ch);
                             $("#customer_company").attr('disabled', false);
                             $('#customer_company').val(company);
@@ -393,7 +400,7 @@ $(function() {
         if(is_pass){
             $.ajax({
                 type: "POST",
-                url: "/cms/admin/createOrder",
+                url: "/admin/admin/createOrder",
                 data: json,
                 success: function(msg) { 
                     console.log("msg : " + JSON.stringify(msg));

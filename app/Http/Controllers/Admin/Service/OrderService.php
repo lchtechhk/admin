@@ -71,11 +71,12 @@ class OrderService extends BaseApiService{
     function getOrder($order_id){
         $order_array = $this->findByColumn_Value("order_id",$order_id);
         $order = !empty($order_array) && sizeof($order_array) > 0 ? $order_array[0] : array();
+        Log::info('[order] -- getListing : ' .json_encode($order));
+
         $order_product_array = $this->View_OrderProductService->findByColumn_ValueWithLanguage("order_id",$order_id);
         $order_comment_array = $this->OrderCommentService->findByColumn_Value("order_id",$order_id);
         $order->order_products = $order_product_array;
         $order->order_comments = $order_comment_array;
-        Log::info('[order] -- getListing : ' .json_encode($order));
         return $order;
     }
 

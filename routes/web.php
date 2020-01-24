@@ -173,6 +173,29 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/updateCompany', 'Controller\AdminCompanyController@updateCompany');
 		Route::post('/deleteCompany', 'Controller\AdminCompanyController@deleteCompany');
 
+		//Order
+		Route::get('/listingOrder', 'Controller\AdminOrderController@listingOrder');
+		Route::get('/view_addOrder', 'Controller\AdminOrderController@view_addOrder');
+		Route::get('/view_editOrder/{order_id}', 'Controller\AdminOrderController@view_editOrder');
+		Route::get('/view_editOrder/{order_id}/{order_status}', 'Controller\AdminOrderController@view_editOrder');
+		Route::post('/addOrder', 'Controller\AdminOrderController@addOrder');
+		Route::post('/updateOrder', 'Controller\AdminOrderController@updateOrder');
+		Route::post('/updateOrderProduct', 'Controller\AdminOrderController@updateOrderProduct');
+		Route::post('/addOrderProduct', 'Controller\AdminOrderController@addOrderProduct');
+		Route::post('/deleteOrder', 'Controller\AdminOrderController@deleteOrder');
+		Route::post('/deleteOrderProduct', 'Controller\AdminOrderController@deleteOrderProduct');
+
+		Route::post('/part_customer_address', 'Controller\AdminOrderController@part_customer_address');
+		Route::post('/part_edit_product', 'Controller\AdminOrderController@part_edit_product');
+
+		//Order API
+		Route::get('/getAPI/{customer_id}', 'Controller\AdminOrderController@findAddressByCustomerId');
+		Route::post('/findAddressByCustomerId', 'Controller\AdminOrderController@findAddressByCustomerId');
+		Route::post('/findAddressByAddressId', 'Controller\AdminOrderController@findAddressByAddressId');
+		Route::post('/createOrder', 'Controller\AdminOrderController@createOrder');
+		Route::get('/dashboard/{reportBase}', 'Controller\AdminController@dashboard');
+		Route::get('/post', 'Controller\AdminController@myPost');
+
     });
 
     Route::get('/test', 'Controller\TestController@pdf');
