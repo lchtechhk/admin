@@ -45,7 +45,7 @@
                                                                 style="width: 50px; float: left; margin-right: 10px">
                                                             @endif
                                                         </td>
-                                                        <td>{{ $user->permission }}</td>
+                                                        <td>{{ $user->identity }}</td>
                                                         <td>{{ $user->last_name }} {{ $user->first_name }}</td>
                                                         <td>{{ $user->email }}</td>
                                                         <td>{{ $user->phone }}</td>

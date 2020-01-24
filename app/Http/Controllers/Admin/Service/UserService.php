@@ -57,8 +57,9 @@ class UserService extends BaseApiService{
 
     function redirect_view($result,$title){
         $result['label'] = "User";
-        $result['permissions'] = $this->PermissionService->findByColumn_Value("is_public",1);
+        $result['identities'] = $this->PermissionService->findByColumn_Value("is_public",1);
         $result['companies'] = $this->View_CompanyService->findByColumn_Value("party_id",Session::get('party_id'));
+        $result['default_company_id'] = Session::get('default_company_id');
         switch($result['operation']){
             case 'listing':
                 Log::info('[listing] --  : ' . \json_encode($result));
@@ -80,18 +81,40 @@ class UserService extends BaseApiService{
                     DB::beginTransaction();
                     $email = $result['email'];
                     $own_email_count = $this->getCountForEmailExisting($email);
-                    // Log::info('own_email_count : ' . $own_email_count);
                     if($own_email_count > 0 ){
                         throw new Exception("Update Error, The Email Is Duplicate In DB");
                     }
                     $result['image'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                    // handle User
                     $result['default_language_id'] = Session::get('language_id');
                     $result['default_company_id'] = Session::get('default_company_id');
                     $result['password'] = Hash::make($result['password_str']);
+                    $result['party_id'] = Session::get('party_id');
                     $add_user_result = $this->add($result);
                     if(empty($add_user_result['status']) || $add_user_result['status'] == 'fail')throw new Exception("Error To Add User");
+
+                    // handle update User To Company
+                    // Log::info('edit resultresult : ' . json_encode($result));
+                    // handle default_vtc
+                    $default_vtc_param = array();
+                    $default_vtc_param['user_id'] = $add_user_result['response_id'];
+                    $default_vtc_param['company_id'] = Session::get('default_company_id');
+                    $default_vtc_param['is_main_company'] = 'yes';
+                    $add_default_vtc_result = $this->UserToCompanyService->add($default_vtc_param);
+                    if(empty($add_default_vtc_result['status']) || $add_default_vtc_result['status'] == 'fail')throw new Exception("Error To Add Default VTC");
+
+                    if(!empty($result['check_box_company']) && sizeof($result['check_box_company']) > 0){
+                        foreach ($result['check_box_company'] as $index => $company_id) {
+                            $vtc_param = array();
+                            $vtc_param['user_id'] = $add_user_result['response_id'];
+                            $vtc_param['company_id'] = $company_id;
+                            $vtc_param['is_main_company'] = 'no';
+                            $add_vtc_result = $this->UserToCompanyService->add($vtc_param);
+                            if(empty($add_vtc_result['status']) || $add_vtc_result['status'] == 'fail')throw new Exception("Error To Add VTC");
+                        }
+                    }
+                    $result = $this->getUserById($result,$add_user_result['response_id']);
                     $result = $this->response($result,"Success To Add User","view_edit");
-                    $result = $this->getUserById($result,$result['user_id']);
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);

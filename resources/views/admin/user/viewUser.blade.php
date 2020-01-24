@@ -55,6 +55,22 @@
                                     @endif
                                 {{-- Content --}}
                                 <div class="form-group">
+                                    <label for="name"
+                                        class="col-sm-2 col-md-3 control-label">{{ trans('labels.DefaultCompany') }}
+                                        <span style="color:red">★</span>
+                                    </label>
+                                    <div class="col-sm-10 col-md-4">
+                                        {!! Form::text('default_company_id',
+                                        print_value($result['default_company_id']),
+                                        array('class'=>'form-control field-validate', 'id'=>'default_company_id','readonly')) !!}
+                                        <span class="help-block"
+                                            style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.FirstNameText') }}</span>
+                                        <span
+                                            class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.BelongCompany') }}
                                         <span style="color:red">★</span>
                                     </label>
@@ -77,14 +93,25 @@
                                                         @if (!empty($result['companies']) && count($result['companies']) > 0)
                                                             @foreach ($result['companies'] as $index=>$company)
                                                                 <tr>
-                                                                    <td>
-                                                                        <input style="transform: scale(1.5);" type="checkbox"
-                                                                        name="check_box_company[{{$company->company_id}}]" value="{{$company->company_id}}"
-                                                                        {{-- {{print_checkbox($company->company_id, (isset($_POST['companies'][$index]['company_id']) ? $_POST['companies'][$index]['company_id'] : 1 ))}}> --}}
-                                                                        {{!empty($result['main_company_id']) && $result['main_company_id'] == $company->company_id ? 'disabled checked' : ''}}
-                                                                        {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$index]->company_id) ? $result['user']->companies[$index]->company_id : '')))}}
-                                                                        >
-                                                                    </td>
+                                                                    @if ($result['operation'] == 'add' || $result['operation'] == 'view_add')
+                                                                        <td>
+                                                                            <input style="transform: scale(1.5);" type="checkbox"
+                                                                            name="check_box_company[{{$company->company_id}}]" value="{{$company->company_id}}"
+                                                                            {{-- {{print_checkbox($company->company_id, (isset($_POST['companies'][$index]['company_id']) ? $_POST['companies'][$index]['company_id'] : 1 ))}}> --}}
+                                                                            {{!empty($result['default_company_id']) && $result['default_company_id'] == $company->company_id ? 'disabled checked' : ''}}
+                                                                            {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$index]->company_id) ? $result['user']->companies[$index]->company_id : '')))}}
+                                                                            >
+                                                                        </td>
+                                                                    @elseif ($result['operation'] == 'edit' || $result['operation'] == 'view_edit')
+                                                                        <td>
+                                                                            <input style="transform: scale(1.5);" type="checkbox"
+                                                                            name="check_box_company[{{$company->company_id}}]" value="{{$company->company_id}}"
+                                                                            {{!empty($result['main_company_id']) && $result['main_company_id'] == $company->company_id ? 'disabled checked' : ''}}
+                                                                            {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$index]->company_id) ? $result['user']->companies[$index]->company_id : '')))}}
+                                                                            >
+                                                                        </td>
+                                                                    @endif
+                                                                    
                                                                     <td>{{$company->company_id}}</td>
                                                                     <td>{{$company->name}}</td>
                                                                 </tr>
@@ -99,27 +126,27 @@
 
                                 </div>
 
-                                {{-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="name"
-                                        class="col-sm-2 col-md-3 control-label">{{ trans('labels.Permission') }}<span
+                                        class="col-sm-2 col-md-3 control-label">{{ trans('labels.Identity') }}<span
                                             style="color:red">★</span></label>
                                     <div class="col-sm-10 col-md-4">
-                                        <select class="form-control field-validate" id="permission" name="permission">
+                                        <select class="form-control field-validate" id="identity" name="identity">
                                             <option value="">-</option>
-                                            @foreach ($result['permissions'] as $permission)
-                                            <option value="{{ $permission->name }}"
-                                                {{print_selected_value($permission->name, (isset($_POST['permission']) ? $_POST['permission'] : (!empty($result['user']->permission) ? $result['user']->permission : '')))}}>
-                                                {{ $permission->name }}
+                                            @foreach ($result['identities'] as $identity)
+                                            <option value="{{ $identity->name }}"
+                                                {{print_selected_value($identity->name, (isset($_POST['identity']) ? $_POST['identity'] : (!empty($result['user']->identity) ? $result['user']->identity : '')))}}>
+                                                {{ $identity->name }}
                                             </option>
                                             @endforeach
                                         </select>
                                         <span class="help-block"
                                             style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                                            {{ trans('labels.ChoosePermissionText') }}.</span>
+                                            {{ trans('labels.ChooseIdentityText') }}.</span>
                                         <span
                                             class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="form-group">
                                     <label for="name"
                                         class="col-sm-2 col-md-3 control-label">{{ trans('labels.FirstName') }}
