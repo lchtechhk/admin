@@ -41,7 +41,7 @@ class CompanyService extends BaseApiService{
     }
 
     function getCompany($company_id){
-        $companies = $this->View_CompanyService->findAll("company_id",$company_id);
+        $companies = $this->View_CompanyService->findByColumn_Value("party_id",Session::get('party_id'));
         $company = !empty($companies) && sizeof($companies) > 0 ? $companies[0] : array();
         $company->language_array = array();
         foreach ($companies as $obj) {

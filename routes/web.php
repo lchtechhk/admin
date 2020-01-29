@@ -172,7 +172,7 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/addCompany', 'Controller\AdminCompanyController@addCompany');
 		Route::post('/updateCompany', 'Controller\AdminCompanyController@updateCompany');
 		Route::post('/deleteCompany', 'Controller\AdminCompanyController@deleteCompany');
-
+		Route::get('/listingStaff/{company_id}', 'Controller\AdminCompanyController@listingStaff');
 		//Order
 		Route::get('/listingOrder', 'Controller\AdminOrderController@listingOrder');
 		Route::get('/view_addOrder', 'Controller\AdminOrderController@view_addOrder');
