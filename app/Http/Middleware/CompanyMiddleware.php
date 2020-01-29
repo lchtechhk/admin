@@ -43,7 +43,7 @@ class CompanyMiddleware
             $request->session()->put('language_id', $language->language_id);
             App::setLocale($language->code);
 
-            $own_companies = $this->View_CompanyService->getCompanyBelongOwn();
+            $own_companies = $this->View_CompanyService->getCompanyBelongOwn(Session::get('user_id'));
             if(\sizeof($own_companies) > 0){
                 $request->session()->put('owner_companies', $own_companies);
             }else {

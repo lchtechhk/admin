@@ -9,6 +9,16 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
             $this->setTable('user_to_company');
         }
 
+        function getMainUserIdByCompany($company_id){
+            $param = array();
+            $param['company_id'] = $company_id;
+            $param['is_main_company'] = 'yes';
+            $result = $this->findByArray($param);
+            if(sizeof($result) > 0){
+                return $result;
+            }
+            return null;
+        }
         function getMainCompanyIdByUser($user_id){
             $param = array();
             $param['user_id'] = $user_id;
@@ -35,6 +45,24 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
             Log::notice('[MainRepository] -- ' .'[cleanByUserId SQL] --'. \json_encode(end($query)));
             return $result;
         }
+
+        function cleanByCompanyId($company_id){
+            DB::enableQueryLog();
+            $delete_id = DB::table($this->table)->where('company_id', $company_id)->where(function ($query) {
+                $query->where('is_main_company','no')->orWhereNull("is_main_company");
+            })->delete();
+            $result = array();
+            if($delete_id === null){
+                $result['status'] = 'fail';
+            }else {
+                $result['status'] = 'success';
+            }
+            $result['operation'] = 'delete';
+            $query = DB::getQueryLog();
+            Log::notice('[MainRepository] -- ' .'[cleanByCompanyId SQL] --'. \json_encode(end($query)));
+            return $result;
+        }
+
         function getUserIdsByCompany(){
             $user_to_company = $this->findByColumn_Value("company_id",Session::get('default_company_id'));
             $id_list = array();
@@ -43,17 +71,17 @@ use App\Http\Controllers\Admin\Service\BaseApiService;
                     $id_list[] = $utc->user_id;
                 }
             }
-            return $id_list;
+            return array_unique($id_list);
         }
-        function getCompanyIdsByUser(){
-            $user_to_company = $this->findByColumn_Value("user_id",Session::get('user_id'));
+        function getCompanyIdsByUser($user_id){
+            $user_to_company = $this->findByColumn_Value("user_id",$user_id);
             $id_list = array();
             if(sizeof($user_to_company) > 0){
                 foreach ($user_to_company AS $utc) {
                     $id_list[] = $utc->company_id;
                 }
             }
-            return $id_list;
+            return array_unique($id_list);
         }
 
         function redirect_view($result,$title){

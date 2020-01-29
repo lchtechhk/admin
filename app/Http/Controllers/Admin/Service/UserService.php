@@ -42,7 +42,8 @@ class UserService extends BaseApiService{
     function getUserById($result,$user_id){
         $user = $this->findByColumn_Value("user_id",$user_id);
         $result['user'] = !empty($user) && \sizeof($user)>0? $user[0] : array();
-        $result['user']->companies = $this->View_CompanyService->getCompanyBelongOwn();
+        $companies = $this->View_CompanyService->getCompanyBelongOwn($user_id);
+        $result['user']->companies = $this->array_to_json($companies,"company_id");
         return $result;
     }
     function getUserBelongOwn(){
@@ -60,6 +61,9 @@ class UserService extends BaseApiService{
         $result['identities'] = $this->PermissionService->findByColumn_Value("is_public",1);
         $result['companies'] = $this->View_CompanyService->findByColumn_Value("party_id",Session::get('party_id'));
         $result['default_company_id'] = Session::get('default_company_id');
+        if(!empty($result['user_id'])){
+            $result['main_company_id'] = $this->UserToCompanyService->getMainCompanyIdByUser($result['user_id']);
+        }
         switch($result['operation']){
             case 'listing':
                 Log::info('[listing] --  : ' . \json_encode($result));
@@ -72,7 +76,6 @@ class UserService extends BaseApiService{
             break;
             case 'view_edit':
                 $result = $this->getUserById($result,$result['user_id']);
-                $result['main_company_id'] = $this->UserToCompanyService->getMainCompanyIdByUser($result['user_id']);
                 Log::info('[view_edit] --  : ' . \json_encode($result));
                 return view("admin.user.viewUser", $title)->with('result', $result);
             break;

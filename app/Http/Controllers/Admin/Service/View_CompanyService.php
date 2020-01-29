@@ -22,8 +22,7 @@ class View_CompanyService extends BaseApiService{
         return $this->findByColumn_Values("company_id",$company_ids);
     }
 
-    function getCompanyBelongOwn(){
-        $user_id = auth()->guard('admin')->user()->user_id;
+    function getCompanyBelongOwn($user_id){
         $company_ids = $this->UserToCompanyService->getCompanyIdsByUser($user_id);
         return $this->findByColumn_Values("company_id",$company_ids);
     }

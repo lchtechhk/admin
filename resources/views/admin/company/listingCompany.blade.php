@@ -50,8 +50,6 @@
                                                         <td>{{ $company->create_date }}</td>
                                                         <td>
                                                             <a data-toggle="tooltip" data-placement="bottom" title="View Company" href="view_editCompany/{{ $company->company_id }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                            <a data-toggle="tooltip" data-placement="bottom" title="View Staff" href="listingStaff/{{ $company->company_id }}"  id="listingStaff" company_id ="{{ $company->company_id }}" class="badge bg-green"><i class="fa fa-user" aria-hidden="true"></i></a>                             
-                                                            <a data-toggle="tooltip" data-placement="bottom" title="Delete Company" id="deleteCompanyFrom" company_id ="{{ $company->company_id }}" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

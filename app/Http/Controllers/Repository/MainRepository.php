@@ -188,5 +188,13 @@
             }
         }
 
+        protected function array_to_json($array,$key){
+            $a = array();
+            foreach ($array as $index => $obj) {
+                $id = $obj->$key;
+                $a[$id] = $obj;
+            }
+            return $a;
+        }
     }
 ?>

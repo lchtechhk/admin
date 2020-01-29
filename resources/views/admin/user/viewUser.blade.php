@@ -54,6 +54,7 @@
                                         </div>
                                     @endif
                                 {{-- Content --}}
+                                company : {{empty($result['user']) ? '' : json_encode($result['user'])}}
                                 <div class="form-group">
                                     <label for="name"
                                         class="col-sm-2 col-md-3 control-label">{{ trans('labels.DefaultCompany') }}
@@ -99,7 +100,7 @@
                                                                             name="check_box_company[{{$company->company_id}}]" value="{{$company->company_id}}"
                                                                             {{-- {{print_checkbox($company->company_id, (isset($_POST['companies'][$index]['company_id']) ? $_POST['companies'][$index]['company_id'] : 1 ))}}> --}}
                                                                             {{!empty($result['default_company_id']) && $result['default_company_id'] == $company->company_id ? 'disabled checked' : ''}}
-                                                                            {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$index]->company_id) ? $result['user']->companies[$index]->company_id : '')))}}
+                                                                            {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$company->company_id]->company_id) ? $result['user']->companies[$company->company_id]->company_id : '')))}}
                                                                             >
                                                                         </td>
                                                                     @elseif ($result['operation'] == 'edit' || $result['operation'] == 'view_edit')
@@ -107,7 +108,7 @@
                                                                             <input style="transform: scale(1.5);" type="checkbox"
                                                                             name="check_box_company[{{$company->company_id}}]" value="{{$company->company_id}}"
                                                                             {{!empty($result['main_company_id']) && $result['main_company_id'] == $company->company_id ? 'disabled checked' : ''}}
-                                                                            {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$index]->company_id) ? $result['user']->companies[$index]->company_id : '')))}}
+                                                                            {{print_checkbox($company->company_id, (!empty($_POST['check_box_company'][$company->company_id]) ? $_POST['check_box_company'][$company->company_id] : (!empty($result['user']->companies[$company->company_id]->company_id) ? $result['user']->companies[$company->company_id]->company_id : '')))}}
                                                                             >
                                                                         </td>
                                                                     @endif
@@ -122,8 +123,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
 
                                 <div class="form-group">

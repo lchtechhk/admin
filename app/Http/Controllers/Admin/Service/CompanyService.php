@@ -40,26 +40,38 @@ class CompanyService extends BaseApiService{
         return $result;
     }
 
-    function getCompany($company_id){
-        $companies = $this->View_CompanyService->findByColumn_Value("party_id",Session::get('party_id'));
-        $company = !empty($companies) && sizeof($companies) > 0 ? $companies[0] : array();
-        $company->language_array = array();
+    function getCompanyById($result,$company_id){
+        $companies = $this->View_CompanyService->findByColumn_Value("company_id",$company_id);
+        $result['company'] = !empty($companies) && sizeof($companies) > 0 ? $companies[0] : array();
+        $result['company']->language_array = array();
         foreach ($companies as $obj) {
             $language_id = $obj->language_id;
             $name = $obj->name;
             
-            $company->language_array[$language_id] = array();
-            $company->language_array[$language_id]['name'] = $name;
+            $result['company']->language_array[$language_id] = array();
+            $result['company']->language_array[$language_id]['name'] = $name;
         }
-        Log::info('[company] -- getListing : ' .json_encode($company));
-        return $company;
+        $users = $this->UserService->getUserBelongOwn();
+        $result['company']->users = $this->array_to_json($users,"user_id");
+        // Log::info('[company] : ' .json_encode($result));
+        return $result;
     }
 
 
     function redirect_view($result,$title){
         $result['label'] = "Company";
         $result['languages'] = $this->LanguageService->findAll();
-
+        $result['users'] = $this->UserService->findByColumn_Value("party_id",Session::get('party_id'));
+        $result['user_id'] = Session::get('user_id');
+        if(!empty($result['company_id'])){
+            $a = $this->UserToCompanyService->getMainUserIdByCompany($result['company_id']);
+            $a_array = array();
+            foreach ($a as $index => $user) {
+                $user_id = $user->user_id;
+                $a_array[$user_id] = $a;
+            }
+            $result['disable_user_ids'] = $a_array;
+        }
         switch($result['operation']){
             case 'listingStaff':
                 $result['label'] = "Staff";
@@ -70,14 +82,16 @@ class CompanyService extends BaseApiService{
             break;
             case 'listing':
                 Log::info('[listing] --  : ' . \json_encode($result));
-                $result['companies'] = $this->View_CompanyService->getListing();
+                $result['companies'] = $this->View_CompanyService->findByColumn_Value('company_id',Session::get('default_company_id'));
                 return view("admin.company.listingCompany", $title)->with('result', $result);
             break;
             case 'view_add':
                 return view("admin.company.viewCompany", $title)->with('result', $result);
             break;
             case 'view_edit':
-                $result['company'] = $this->getCompany($result['company_id']);
+                $result = $this->getCompanyById($result,$result['company_id']);
+                Log::info('[view_edit] : ' .json_encode($result));
+
                 return view("admin.company.viewCompany", $title)->with('result', $result);
             break;
             break;
@@ -111,7 +125,7 @@ class CompanyService extends BaseApiService{
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
-                $result['company'] = $this->getCompany($result['company_id']);
+                $result = $this->getCompanyById($result,$result['company_id']);
                 return view("admin.company.viewCompany", $title)->with('result', $result);       
             break;
             case 'edit':
@@ -120,6 +134,7 @@ class CompanyService extends BaseApiService{
                     if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/company/images/'))$result['image'] = $image;
                     if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/company/icons/'))$result['icon'] = $icon;
                     Log::info('[edit result] --  : ' . json_encode($result));
+                    // handle Company
                     $update_company_result = $this->update("company_id",$result);
                     if(empty($update_company_result['status']) || $update_company_result['status'] == 'fail')throw new Exception("Error To update Company");
                     foreach ($result['language_array'] as $language_id => $name) {
@@ -136,8 +151,21 @@ class CompanyService extends BaseApiService{
                             if(empty($add_company_description_result['status']) || $add_company_description_result['status'] == 'fail')throw new Exception("Error To Add Company Description");
                         }
                     }
+                    // handle vtc
+                    $delete_vtc_result = $this->UserToCompanyService->cleanByCompanyId($result['company_id']);
+                    if(!empty($result['check_box_user']) && sizeof($result['check_box_user']) > 0){
+                        foreach ($result['check_box_user'] as $index => $user_id) {
+                            $vtc_param = array();
+                            $vtc_param['user_id'] = $user_id;
+                            $vtc_param['company_id'] = $result['company_id'];
+                            $vtc_param['is_main_company'] = 'no';
+                            $add_vtc_result = $this->UserToCompanyService->add($vtc_param);
+                            if(empty($add_vtc_result['status']) || $add_vtc_result['status'] == 'fail')throw new Exception("Error To Add VTC");
+                        }
+                    }
+
                     $result = $this->response($result,"Successful","view_edit");
-                    $result['company'] = $this->getcompany($result['company_id']);
+                    $result = $this->getCompanyById($result,$result['company_id']);
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
