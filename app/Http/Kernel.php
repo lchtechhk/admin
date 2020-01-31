@@ -63,7 +63,6 @@ class Kernel extends HttpKernel
         'app_api'   => \App\Http\Middleware\ApiMiddleware::class,
 
         'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
-        'user' => \App\Http\Middleware\RedirectIfNotUser::class,
         'customer' => \App\Http\Middleware\RedirectIfNotCustomer::class,
         'company' => \App\Http\Middleware\CompanyMiddleware::class,
 
