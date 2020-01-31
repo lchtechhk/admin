@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\Customer as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Customer extends Authenticatable implements JWTSubject
@@ -19,11 +19,6 @@ class Customer extends Authenticatable implements JWTSubject
     protected $fillable = ['email', 'password'];
 
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
