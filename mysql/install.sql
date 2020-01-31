@@ -392,7 +392,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'1.TL','yes','c','storage/company/1/company/images/1579771057.scope_1.jpeg',22222222,NULL,NULL,NULL,NULL,NULL,NULL,'2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL,'active'),(2,'1.TL','no','c','storage/company/1/company/images/1579771057.scope_1.jpeg',22222222,NULL,NULL,NULL,NULL,NULL,NULL,'2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL,'active');
+INSERT INTO `company` VALUES (1,'1.TL','yes','email1@gmail.com','storage/company/1/company/images/1579771057.scope_1.jpeg',22222222,NULL,NULL,NULL,NULL,NULL,NULL,'2020-01-23 09:17:37',NULL,'2020-01-29 09:59:38',NULL,'active'),(2,'1.TL','no','email2@gmail.com','storage/company/1/company/images/1579771057.scope_1.jpeg',22222222,NULL,NULL,NULL,NULL,NULL,NULL,'2020-01-23 09:17:37',NULL,'2020-01-29 10:00:38',NULL,'active');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,7 +423,7 @@ CREATE TABLE `company_description` (
 
 LOCK TABLES `company_description` WRITE;
 /*!40000 ALTER TABLE `company_description` DISABLE KEYS */;
-INSERT INTO `company_description` VALUES (1,1,'Company A',2,'2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL,'active'),(2,2,'Company B',3,'2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL,'active');
+INSERT INTO `company_description` VALUES (1,1,'Company A',2,'2020-01-23 09:17:37',NULL,'2020-01-29 09:59:38',NULL,'active'),(2,2,'Company B',3,'2020-01-23 09:17:37',NULL,'2020-01-29 10:00:38',NULL,'active');
 /*!40000 ALTER TABLE `company_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -579,6 +579,7 @@ DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
+  `default_language_id` int(11) NOT NULL,
   `picture` text COLLATE utf8_general_mysql500_ci,
   `gender` char(1) COLLATE utf8_general_mysql500_ci DEFAULT '0',
   `firstname` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
@@ -590,6 +591,7 @@ CREATE TABLE `customer` (
   `telephone` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
   `fax` varchar(255) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `password` varchar(60) COLLATE utf8_general_mysql500_ci NOT NULL,
+  `password_str` varchar(60) COLLATE utf8_general_mysql500_ci NOT NULL,
   `fb_id` varchar(255) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `google_id` varchar(255) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `create_date` datetime NOT NULL,
@@ -607,7 +609,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,1,'storage/company/1/customer/images/1579669257.14.png','F','FirstName','LastName','2020-01-01','customer@gmail.com',NULL,NULL,'321','22222','123123',NULL,NULL,'2020-01-22 04:13:14',NULL,'2020-01-22 05:00:57',NULL,'active');
+INSERT INTO `customer` VALUES (1,1,2,'storage/company/1/customer/images/1579669257.14.png','F','FirstName','LastName','2020-01-01','customer@gmail.com',NULL,NULL,'321','22222','$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123',NULL,NULL,'2020-01-22 04:13:14',NULL,'2020-01-22 05:00:57',NULL,'active');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1134,7 +1136,7 @@ CREATE TABLE `order` (
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   `order_status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2052,7 +2054,7 @@ CREATE TABLE `user` (
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2061,7 +2063,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin.TL',1,1,'boss','resources/views/admin/images/admin_profile/1505132393.1486628854.fast.jpg','FRwwIOU5JxHpYfk4emlW6FEN37nUbwUE7t9pKTbrHGgei7TlCgmOVgbYfhO1','a','lam','F','2019-11-20','534038482',NULL,'acornjamie123@gmail.com','','$2y$10$oG7Hz/ikZqsvAjQM06hA9uci8IUPFr77Jo/g/.uWwT8yDEeCmDdLi','admin','2019-11-13 00:58:30',NULL,'2020-01-17 10:22:31',NULL,'active'),(2,'1.TL',2,1,'user',NULL,NULL,'Boss','A','F','2020-01-01','11111111',NULL,'boss@gmail.com',NULL,'$2y$10$iHpaYjx.tZ8aFJf/.wDK..rrULHu76IkygKXfAvSgVQ6MjpSZGaqq','123123','2020-01-23 09:17:37',NULL,'2020-01-24 05:03:47',NULL,'active'),(8,'1.TL',2,1,'user',NULL,NULL,'staff','B','M','2020-01-01','11111111',NULL,'staff@gmail.com',NULL,'$2y$10$z.3Ohfcc1RTRZhWHKZNKQen53mrt6yOI.dJDEwZoQ7i3OjwC.50pe','123123','2020-01-24 04:22:28',NULL,'2020-01-24 04:22:28',NULL,'active'),(9,'1.TL',3,2,'user',NULL,NULL,'staff','b','F','2020-01-01','22222222',NULL,'staffb@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 05:03:16',NULL,'2020-01-24 05:03:16',NULL,'active');
+INSERT INTO `user` VALUES (1,'admin.TL',1,1,'boss','resources/views/admin/images/admin_profile/1505132393.1486628854.fast.jpg','FRwwIOU5JxHpYfk4emlW6FEN37nUbwUE7t9pKTbrHGgei7TlCgmOVgbYfhO1','a','lam','F','2019-11-20','534038482',NULL,'acornjamie123@gmail.com','','$2y$10$oG7Hz/ikZqsvAjQM06hA9uci8IUPFr77Jo/g/.uWwT8yDEeCmDdLi','admin','2019-11-13 00:58:30',NULL,'2020-01-17 10:22:31',NULL,'active'),(2,'1.TL',2,2,'user',NULL,NULL,'Boss','A','F','2020-01-01','11111111',NULL,'boss@gmail.com',NULL,'$2y$10$iHpaYjx.tZ8aFJf/.wDK..rrULHu76IkygKXfAvSgVQ6MjpSZGaqq','123123','2020-01-23 09:17:37',NULL,'2020-01-29 10:00:28',NULL,'active'),(8,'1.TL',2,1,'user',NULL,NULL,'staff','B','M','2020-01-01','11111111',NULL,'staff@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 04:22:28',NULL,'2020-01-29 09:58:57',NULL,'active'),(9,'1.TL',3,1,'user',NULL,NULL,'staff','C','F','2020-01-01','22222222',NULL,'staffb@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 05:03:16',NULL,'2020-01-29 09:05:02',NULL,'active'),(10,'1.TL',3,2,'user',NULL,NULL,'staff','C','F','2020-01-15','22222222',NULL,'staffc@gmail.com',NULL,'$2y$10$SeZWccMc2qX7n7os4BUdmeUT4mPRLvVm2oTFzS8QC83.jFBEeYrw.','123123','2020-01-29 10:02:24',NULL,'2020-01-29 10:02:24',NULL,'active');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2082,7 +2084,7 @@ CREATE TABLE `user_to_company` (
   `edit_date` datetime NOT NULL,
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2091,7 +2093,7 @@ CREATE TABLE `user_to_company` (
 
 LOCK TABLES `user_to_company` WRITE;
 /*!40000 ALTER TABLE `user_to_company` DISABLE KEYS */;
-INSERT INTO `user_to_company` VALUES (1,2,1,'yes','2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL),(6,8,1,'yes','2020-01-24 04:22:28',NULL,'2020-01-24 04:22:28',NULL),(7,8,2,'no','2020-01-24 04:22:28',NULL,'2020-01-24 04:22:28',NULL),(9,2,2,'no','2020-01-24 05:01:26',NULL,'2020-01-24 05:01:26',NULL),(10,9,2,'yes','2020-01-24 05:03:16',NULL,'2020-01-24 05:03:16',NULL);
+INSERT INTO `user_to_company` VALUES (1,2,1,'yes','2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL),(6,8,1,'yes','2020-01-24 04:22:28',NULL,'2020-01-24 04:22:28',NULL),(10,9,2,'yes','2020-01-24 05:03:16',NULL,'2020-01-24 05:03:16',NULL),(25,9,1,'no','2020-01-29 09:59:38',NULL,'2020-01-29 09:59:38',NULL),(27,2,2,'no','2020-01-29 10:00:38',NULL,'2020-01-29 10:00:38',NULL),(28,8,2,'no','2020-01-29 10:00:38',NULL,'2020-01-29 10:00:38',NULL),(29,10,2,'yes','2020-01-29 10:02:24',NULL,'2020-01-29 10:02:24',NULL),(30,10,1,'no','2020-01-29 10:02:24',NULL,'2020-01-29 10:02:24',NULL);
 /*!40000 ALTER TABLE `user_to_company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2283,6 +2285,7 @@ SET character_set_client = utf8mb4;
 /*!50001 CREATE VIEW `view_customer` AS SELECT 
  1 AS `id`,
  1 AS `company_id`,
+ 1 AS `default_language_id`,
  1 AS `picture`,
  1 AS `gender`,
  1 AS `firstname`,
@@ -2774,7 +2777,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_customer` AS select `customer`.`id` AS `id`,`customer`.`company_id` AS `company_id`,`customer`.`picture` AS `picture`,`customer`.`gender` AS `gender`,`customer`.`firstname` AS `firstname`,`customer`.`lastname` AS `lastname`,`customer`.`dob` AS `dob`,`customer`.`email` AS `email`,`customer`.`user_name` AS `user_name`,`customer`.`default_address_id` AS `default_address_id`,`customer`.`telephone` AS `telephone`,`customer`.`fax` AS `fax`,`customer`.`password` AS `password`,`customer`.`fb_id` AS `fb_id`,`customer`.`google_id` AS `google_id`,`customer`.`create_date` AS `create_date`,`customer`.`create_by_id` AS `create_by_id`,`customer`.`edit_date` AS `edit_date`,`customer`.`edit_by_id` AS `edit_by_id`,`customer`.`status` AS `status`,`address_book`.`company` AS `entry_company`,`address_book`.`firstname` AS `entry_firstname`,`address_book`.`lastname` AS `entry_lastname`,`address_book`.`district_id` AS `district_id`,`address_book`.`address_ch` AS `address_ch`,`address_book`.`address_en` AS `address_en`,`address_book`.`create_date` AS `entry_create_date`,`address_book`.`create_by_id` AS `entry_create_by_id`,`address_book`.`edit_date` AS `entry_edit_date`,`address_book`.`edit_by_id` AS `entry_edit_by_id`,`address_book`.`status` AS `entry_status` from (`customer` left join `address_book` on((`address_book`.`id` = `customer`.`default_address_id`))) */;
+/*!50001 VIEW `view_customer` AS select `customer`.`id` AS `id`,`customer`.`company_id` AS `company_id`,`customer`.`default_language_id` AS `default_language_id`,`customer`.`picture` AS `picture`,`customer`.`gender` AS `gender`,`customer`.`firstname` AS `firstname`,`customer`.`lastname` AS `lastname`,`customer`.`dob` AS `dob`,`customer`.`email` AS `email`,`customer`.`user_name` AS `user_name`,`customer`.`default_address_id` AS `default_address_id`,`customer`.`telephone` AS `telephone`,`customer`.`fax` AS `fax`,`customer`.`password` AS `password`,`customer`.`fb_id` AS `fb_id`,`customer`.`google_id` AS `google_id`,`customer`.`create_date` AS `create_date`,`customer`.`create_by_id` AS `create_by_id`,`customer`.`edit_date` AS `edit_date`,`customer`.`edit_by_id` AS `edit_by_id`,`customer`.`status` AS `status`,`address_book`.`company` AS `entry_company`,`address_book`.`firstname` AS `entry_firstname`,`address_book`.`lastname` AS `entry_lastname`,`address_book`.`district_id` AS `district_id`,`address_book`.`address_ch` AS `address_ch`,`address_book`.`address_en` AS `address_en`,`address_book`.`create_date` AS `entry_create_date`,`address_book`.`create_by_id` AS `entry_create_by_id`,`address_book`.`edit_date` AS `entry_edit_date`,`address_book`.`edit_by_id` AS `entry_edit_by_id`,`address_book`.`status` AS `entry_status` from (`customer` left join `address_book` on((`address_book`.`id` = `customer`.`default_address_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2932,4 +2935,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-24 14:39:30
+-- Dump completed on 2020-01-31 18:09:35
