@@ -96,7 +96,7 @@
                       <div class="col-sm-10 col-md-4">
                         {!! Form::text('telephone', 
                         print_value(isset($_POST['telephone']) ? $_POST['telephone'] : !empty($result['customer']->telephone) ? $result['customer']->telephone : '' ),
-                        array('class'=>'form-control', 'id'=>'telephone')) !!}
+                        array('class'=>'form-control field-validate', 'id'=>'telephone')) !!}
                         <span class="help-block"
                           style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.TelephoneText') }}</span>
                       </div>
@@ -131,7 +131,7 @@
                         <span style="color:red">★</span>
                       </label>
                       <div class="col-sm-10 col-md-4">
-                        {!! Form::password('password', array('class'=>'form-control ', 'id'=>'password')) !!}
+                        {!! Form::password('password_str', array('class'=>'form-control ', 'id'=>'password_str')) !!}
                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                           {{ trans('labels.PasswordText') }}
                         </span>

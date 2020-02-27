@@ -5,6 +5,7 @@ use DB;
 use Lang;
 use Exception;
 use Session;
+use Hash;
 
 use App\Http\Controllers\Admin\Service\View_CustomerService;
 use App\Http\Controllers\Admin\Service\AddressBookService;
@@ -53,6 +54,7 @@ class CustomerService extends BaseApiService{
                 }        
                 $result['picture'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
                 $result['default_language_id'] = Session::get('default_company_id');
+                $result['password'] = Hash::make($result['password_str']);
                 $add_customer_result = $this->add($result);
                 $customers = $this->findById($add_customer_result['response_id']);
                 $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
@@ -74,8 +76,10 @@ class CustomerService extends BaseApiService{
                     return view("admin.customer.viewCustomer", $title)->with('result', $result);
                 }
                 $result['picture'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
-                if(empty($result['password'])){
-                    unset($result['password']);
+                if(empty($result['password_str'])){
+                    unset($result['password_str']);
+                }else {
+                    $result['password'] = Hash::make($result['password_str']);
                 }
                 $update_customer_result = $this->update('id',$result);
                 if(empty($update_customer_result['status']) || $update_customer_result['status'] == 'fail')throw new Exception("Error To Update Customer");
