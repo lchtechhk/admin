@@ -614,6 +614,34 @@ INSERT INTO `customer` VALUES (1,1,2,'storage/company/1/customer/images/15796692
 UNLOCK TABLES;
 
 --
+-- Table structure for table `customer_token`
+--
+
+DROP TABLE IF EXISTS `customer_token`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `customer_token` (
+  `id` int(11) NOT NULL,
+  `customer_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `parent_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `token` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `create_date` datetime NOT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_token`
+--
+
+LOCK TABLES `customer_token` WRITE;
+/*!40000 ALTER TABLE `customer_token` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customer_token` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `customers`
 --
 
@@ -2063,7 +2091,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin.TL',1,1,'boss','resources/views/admin/images/admin_profile/1505132393.1486628854.fast.jpg','FRwwIOU5JxHpYfk4emlW6FEN37nUbwUE7t9pKTbrHGgei7TlCgmOVgbYfhO1','a','lam','F','2019-11-20','534038482',NULL,'acornjamie123@gmail.com','','$2y$10$oG7Hz/ikZqsvAjQM06hA9uci8IUPFr77Jo/g/.uWwT8yDEeCmDdLi','admin','2019-11-13 00:58:30',NULL,'2020-01-17 10:22:31',NULL,'active'),(2,'1.TL',2,2,'user',NULL,NULL,'Boss','A','F','2020-01-01','11111111',NULL,'boss@gmail.com',NULL,'$2y$10$iHpaYjx.tZ8aFJf/.wDK..rrULHu76IkygKXfAvSgVQ6MjpSZGaqq','123123','2020-01-23 09:17:37',NULL,'2020-01-29 10:00:28',NULL,'active'),(8,'1.TL',2,1,'user',NULL,NULL,'staff','B','M','2020-01-01','11111111',NULL,'staff@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 04:22:28',NULL,'2020-01-29 09:58:57',NULL,'active'),(9,'1.TL',3,1,'user',NULL,NULL,'staff','C','F','2020-01-01','22222222',NULL,'staffb@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 05:03:16',NULL,'2020-01-29 09:05:02',NULL,'active'),(10,'1.TL',3,2,'user',NULL,NULL,'staff','C','F','2020-01-15','22222222',NULL,'staffc@gmail.com',NULL,'$2y$10$SeZWccMc2qX7n7os4BUdmeUT4mPRLvVm2oTFzS8QC83.jFBEeYrw.','123123','2020-01-29 10:02:24',NULL,'2020-01-29 10:02:24',NULL,'active');
+INSERT INTO `user` VALUES (1,'admin.TL',1,1,'boss','resources/views/admin/images/admin_profile/1505132393.1486628854.fast.jpg','FRwwIOU5JxHpYfk4emlW6FEN37nUbwUE7t9pKTbrHGgei7TlCgmOVgbYfhO1','a','lam','F','2019-11-20','534038482',NULL,'acornjamie123@gmail.com','','$2y$10$oG7Hz/ikZqsvAjQM06hA9uci8IUPFr77Jo/g/.uWwT8yDEeCmDdLi','admin','2019-11-13 00:58:30',NULL,'2020-01-17 10:22:31',NULL,'active'),(2,'1.TL',2,1,'user',NULL,NULL,'Boss','A','F','2020-01-01','11111111',NULL,'boss@gmail.com',NULL,'$2y$10$iHpaYjx.tZ8aFJf/.wDK..rrULHu76IkygKXfAvSgVQ6MjpSZGaqq','123123','2020-01-23 09:17:37',NULL,'2020-02-27 10:29:03',NULL,'active'),(8,'1.TL',2,1,'user',NULL,NULL,'staff','B','M','2020-01-01','11111111',NULL,'staff@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 04:22:28',NULL,'2020-01-29 09:58:57',NULL,'active'),(9,'1.TL',3,1,'user',NULL,NULL,'staff','C','F','2020-01-01','22222222',NULL,'staffb@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 05:03:16',NULL,'2020-01-29 09:05:02',NULL,'active'),(10,'1.TL',3,2,'user',NULL,NULL,'staff','C','F','2020-01-15','22222222',NULL,'staffc@gmail.com',NULL,'$2y$10$SeZWccMc2qX7n7os4BUdmeUT4mPRLvVm2oTFzS8QC83.jFBEeYrw.','123123','2020-01-29 10:02:24',NULL,'2020-01-29 10:02:24',NULL,'active');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2935,4 +2963,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-31 18:09:35
+-- Dump completed on 2020-02-27 18:30:50
