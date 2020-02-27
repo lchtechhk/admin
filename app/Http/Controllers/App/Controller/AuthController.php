@@ -102,9 +102,8 @@ class AuthController extends Controller{
             $token = $request->input('token');
             $owner = JWTAuth::parseToken()->authenticate();
             if($owner['status'] != true) throw new Exception($owner['message']);
-            // Log::info("refresh_token : " . json_encode($owner));
+            $this->AppCustomerTokenService->save_token($token);
             return response()->json(['status' => true, 'data'=> [ 'owner' => $owner,'token' => $this->AuthService->refresh_token($token)]]);
-            // return response()->json(['status' => true, 'data'=> [ 'owner' => $owner,'token' => $token]]);
         }catch(Exception $e){
             Log::info("e : " . json_encode($e));
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e]);
