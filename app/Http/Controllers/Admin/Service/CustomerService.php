@@ -52,6 +52,7 @@ class CustomerService extends BaseApiService{
                     return view("admin.customer.viewCustomer", $title)->with('result', $result);
                 }        
                 $result['picture'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
+                $result['default_language_id'] = Session::get('default_company_id');
                 $add_customer_result = $this->add($result);
                 $customers = $this->findById($add_customer_result['response_id']);
                 $result['customer'] = !empty($customers) && \sizeof($customers)>0? $customers[0] : array();
