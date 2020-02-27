@@ -6,7 +6,9 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		Route::get('/respondWithToken', 'Controller\AuthController@respondWithToken');
 		Route::get('/logout', 'Controller\AuthController@logout');
 		Route::get('/me', 'Controller\AuthController@me');
-		Route::post('/authenticate', 'Controller\AuthController@authenticate');
+		Route::get('/authenticate', 'Controller\AuthController@authenticate');
+		Route::get('/refresh_token', 'Controller\AuthController@refresh_token');
+
 
 		// Product
 		Route::post('/listingProduct', 'Controller\AppProductController@listingProduct');

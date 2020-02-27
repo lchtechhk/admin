@@ -11,12 +11,15 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Validator, DB, Hash, Mail, Illuminate\Support\Facades\Password;
 
 use App\Http\Controllers\App\Service\AuthService;
+use App\Http\Controllers\App\Service\AppCustomerTokenService;
 
 class AuthController extends Controller{
     private $AuthService;
+    private $AppCustomerTokenService;
 
     function __construct(){
         $this->AuthService = new AuthService();    
+        $this->AppCustomerTokenService = new AppCustomerTokenService();    
     }
     
     public function test(){
@@ -32,7 +35,7 @@ class AuthController extends Controller{
         ];
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
-            return response()->json(['success'=> false, 'error'=> $validator->messages()]);
+            return response()->json(['status'=> false, 'message'=> $validator->messages()]);
         }
         $username = $request->username;
         $email = $request->email;
@@ -49,16 +52,17 @@ class AuthController extends Controller{
         ];
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
-            return response()->json(['success'=> false, 'error'=> $validator->messages()]);
+            return response()->json(['status'=> false, 'message'=> $validator->messages()]);
         }
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['success' => false, 'error' => 'We cant find an account with this credentials.'], 401);
+                return response()->json(['status' => false, 'message' => 'We cant find an account with this credentials.'], 401);
             }
         } catch (JWTException $e) {
-            return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
+            return response()->json(['status' => false, 'message' => 'Failed to login, please try again.'], 500);
         }
-        return response()->json(['success' => true, 'data'=> [ 'token' => $token ]]);
+        $this->AppCustomerTokenService->save_token($token);
+        return response()->json(['status' => true, 'data'=> [ 'token' => $token ],'message' => 'Login Successful']);
     }
 
     public function logout(Request $request) {
@@ -66,10 +70,10 @@ class AuthController extends Controller{
         $validator = Validator::make($credentials, ['token' => 'required']);
         try {
             JWTAuth::parseToken()->invalidate();
-            return response()->json(['success' => true, 'message'=> "You have successfully logged out."]);
+            return response()->json(['status' => true, 'message'=> "You have successfully logged out."]);
         } catch (JWTException $e) {
             Log::error('error : ' . $e->getMessage());
-            return response()->json(['success' => false, 'error' => 'Failed to logout, please try again.'], 500);
+            return response()->json(['status' => false, 'message' => 'Failed to logout, please try again.'], 500);
         }
     }
 
@@ -88,7 +92,23 @@ class AuthController extends Controller{
         return $this->AuthService->getOwner()['msg'];
     }
 
-    public function authenticate(){
-        return $owner = JWTAuth::parseToken()->authenticate()->default_company_id;
+    public function authenticate(Request $request){
+        $token = $request->input('token');
+        $owner = JWTAuth::parseToken()->authenticate();
+        return response()->json(['status' => true, 'data'=> [ 'owner' => $owner]]);
+    }
+    public function refresh_token(Request $request){
+        try{
+            $token = $request->input('token');
+            $owner = JWTAuth::parseToken()->authenticate();
+            if($owner['status'] != true) throw new Exception($owner['message']);
+            // Log::info("refresh_token : " . json_encode($owner));
+            return response()->json(['status' => true, 'data'=> [ 'owner' => $owner,'token' => $this->AuthService->refresh_token($token)]]);
+            // return response()->json(['status' => true, 'data'=> [ 'owner' => $owner,'token' => $token]]);
+        }catch(Exception $e){
+            Log::info("e : " . json_encode($e));
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e]);
+        }
+
     }
 }

@@ -15,10 +15,10 @@ class ApiMiddleware{
     public function handle($request, Closure $next){
         try{
             $own = $this->AuthService->getOwner();
-            if(!$own['success'])throw new Exception($own['msg']);
+            if(!$own['status'])throw new Exception($own['message']);
         }catch (Exception $e) {
             Log::error('[Error - ApiMiddleware] : ' . $e->getMessage());
-            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+            return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
         }
              
         return $next($request);
