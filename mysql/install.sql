@@ -44,7 +44,7 @@ CREATE TABLE `address_book` (
   `is_default` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_address_book_customers_id` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,7 +53,6 @@ CREATE TABLE `address_book` (
 
 LOCK TABLES `address_book` WRITE;
 /*!40000 ALTER TABLE `address_book` DISABLE KEYS */;
-INSERT INTO `address_book` VALUES (1,1,'Company address A','FirstName','LastName','1','Estate','Building','802',NULL,NULL,'2020-01-24 05:51:34',NULL,'2020-01-24 05:52:19',NULL,'active','yes');
 /*!40000 ALTER TABLE `address_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +209,7 @@ CREATE TABLE `area` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +218,6 @@ CREATE TABLE `area` (
 
 LOCK TABLES `area` WRITE;
 /*!40000 ALTER TABLE `area` DISABLE KEYS */;
-INSERT INTO `area` VALUES (1,1,'AreaName','AreaCode',1,'2020-01-24 05:52:04',NULL,'2020-01-24 05:52:04',NULL,'active');
 /*!40000 ALTER TABLE `area` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,7 +287,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,1,'storage/company/1/category/images/1579846899.14.png','storage/company/1/category/icons/1579846899.13.png',NULL,NULL,'2020-01-24 06:21:39',NULL,'2020-01-24 06:21:39',NULL,'active');
+INSERT INTO `category` VALUES (1,10,NULL,NULL,NULL,NULL,'2020-02-28 06:08:26',NULL,'2020-02-28 06:08:26',NULL,'active');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,7 +319,7 @@ CREATE TABLE `category_description` (
 
 LOCK TABLES `category_description` WRITE;
 /*!40000 ALTER TABLE `category_description` DISABLE KEYS */;
-INSERT INTO `category_description` VALUES (1,'Category',2,1,'2020-01-24 06:21:39',NULL,'2020-01-24 06:21:39',NULL,'active');
+INSERT INTO `category_description` VALUES (1,'Category',11,1,'2020-02-28 06:08:26',NULL,'2020-02-28 06:08:26',NULL,'active');
 /*!40000 ALTER TABLE `category_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -344,7 +342,7 @@ CREATE TABLE `cities` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,7 +351,6 @@ CREATE TABLE `cities` (
 
 LOCK TABLES `cities` WRITE;
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
-INSERT INTO `cities` VALUES (1,1,'CityName','CityName',1,'2020-01-24 05:51:56',NULL,'2020-01-24 05:51:56',NULL,'active');
 /*!40000 ALTER TABLE `cities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,7 +380,7 @@ CREATE TABLE `company` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -392,7 +389,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'1.TL','yes','email1@gmail.com','storage/company/1/company/images/1579771057.scope_1.jpeg',22222222,NULL,NULL,NULL,NULL,NULL,NULL,'2020-01-23 09:17:37',NULL,'2020-01-29 09:59:38',NULL,'active'),(2,'1.TL','no','email2@gmail.com','storage/company/1/company/images/1579771057.scope_1.jpeg',22222222,NULL,NULL,NULL,NULL,NULL,NULL,'2020-01-23 09:17:37',NULL,'2020-01-29 10:00:38',NULL,'active');
+INSERT INTO `company` VALUES (10,'10.TL','yes','companyA@gmail.com',NULL,22222222,NULL,NULL,NULL,NULL,NULL,NULL,'2020-02-28 06:03:16',NULL,'2020-02-28 06:03:16',NULL,'active');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +411,7 @@ CREATE TABLE `company_description` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`company_description_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,7 +420,7 @@ CREATE TABLE `company_description` (
 
 LOCK TABLES `company_description` WRITE;
 /*!40000 ALTER TABLE `company_description` DISABLE KEYS */;
-INSERT INTO `company_description` VALUES (1,1,'Company A',2,'2020-01-23 09:17:37',NULL,'2020-01-29 09:59:38',NULL,'active'),(2,2,'Company B',3,'2020-01-23 09:17:37',NULL,'2020-01-29 10:00:38',NULL,'active');
+INSERT INTO `company_description` VALUES (1,10,'companyA',1,'2020-02-28 06:03:16',NULL,'2020-02-28 06:03:16',NULL,'active');
 /*!40000 ALTER TABLE `company_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -479,7 +476,7 @@ CREATE TABLE `countries` (
   `status` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_COUNTRIES_NAME` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -488,7 +485,6 @@ CREATE TABLE `countries` (
 
 LOCK TABLES `countries` WRITE;
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
-INSERT INTO `countries` VALUES (1,1,'CountryName','code',NULL,NULL,'2020-01-24 05:51:46',NULL,'2020-01-24 05:51:46',NULL,'active');
 /*!40000 ALTER TABLE `countries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,7 +596,7 @@ CREATE TABLE `customer` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -609,7 +605,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,1,2,'storage/company/1/customer/images/1579669257.14.png','F','FirstName','LastName','2020-01-01','customer@gmail.com',NULL,NULL,'321','22222','$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123',NULL,NULL,'2020-01-22 04:13:14',NULL,'2020-01-22 05:00:57',NULL,'active');
+INSERT INTO `customer` VALUES (1,10,11,'storage/company/10/customer/images/1582870442.14.png','M','customer','A','2020-02-01','customerA@gmail.com',NULL,NULL,'2222222',NULL,'$2y$10$K.5RHH4z9.oDc.8bWu8AhOrsq2NLWwuQeCszXa9ErFMKyn8Xw9mFK','123123',NULL,NULL,'2020-02-28 06:14:02',NULL,'2020-02-28 06:14:02',NULL,'active'),(2,10,11,'storage/company/10/customer/images/1582870475.1024_icon.png','F','Customer','B','2020-02-01','customerb@gmail.com',NULL,NULL,'33333333',NULL,'$2y$10$CftVsPkzmh0/CdoQygVbR.bODE8Dy/QXdzn2L150zXs091QsPN7u6','123123',NULL,NULL,'2020-02-28 06:14:35',NULL,'2020-02-28 06:14:35',NULL,'active');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -621,15 +617,16 @@ DROP TABLE IF EXISTS `customer_token`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `customer_token` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `parent_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
-  `token` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `token` longtext COLLATE utf8_general_mysql500_ci NOT NULL,
   `create_date` datetime NOT NULL,
+  `edit_date` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   `end_date` datetime DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -638,6 +635,7 @@ CREATE TABLE `customer_token` (
 
 LOCK TABLES `customer_token` WRITE;
 /*!40000 ALTER TABLE `customer_token` DISABLE KEYS */;
+INSERT INTO `customer_token` VALUES (1,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4NzkzNTUsImV4cCI6MTU4Mjg4Mjk1NSwibmJmIjoxNTgyODc5MzU1LCJqdGkiOiJMTWxUb2o2WjV6a3VtMVdXIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.YopyTnUSeLXniK8_VMZc5nFEYhe41obsIVlwFm71cEA','2020-02-28 08:42:35','2020-02-28 08:42:35','2020-02-28 08:42:51','cancel'),(2,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4NzkzNzEsImV4cCI6MTU4Mjg4Mjk3MSwibmJmIjoxNTgyODc5MzcxLCJqdGkiOiJWMnlnSk5Ta1JOZWZJTlViIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.RCUsMruwOhFRay2Dz4beRwcq0S_ePIkWr90GdA7hMYM','2020-02-28 08:42:51','2020-02-28 08:42:51','2020-02-28 08:43:23','cancel'),(3,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk0MDMsImV4cCI6MTU4Mjg4MzAwMywibmJmIjoxNTgyODc5NDAzLCJqdGkiOiJTM1JzVDgwUTJZSUVCbkNEIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.UQuGUrJ9V7KsL218r7EX8O7kJ8FQaqfcgMiSZxtBKN4','2020-02-28 08:43:23','2020-02-28 08:43:23','2020-02-28 08:44:07','cancel'),(4,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk0NDcsImV4cCI6MTU4Mjg4MzA0NywibmJmIjoxNTgyODc5NDQ3LCJqdGkiOiJ1UmdMaUFVbXZBaUdkUHIxIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.Vf-yAD1aAjS6ZDKFLV9u1mTkYqJKiuqZzj0lviRXcjc','2020-02-28 08:44:07','2020-02-28 08:44:07','2020-02-28 08:44:42','cancel'),(5,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk0ODIsImV4cCI6MTU4Mjg4MzA4MiwibmJmIjoxNTgyODc5NDgyLCJqdGkiOiJudXhpNTg3dWRxUnJUT0tDIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.hzPOYhPNT9wZvJFmM2UTa9AkR3fgVqg1JOwnb-dr8Qw','2020-02-28 08:44:42','2020-02-28 08:44:42','2020-02-28 08:45:47','cancel'),(6,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk1NDcsImV4cCI6MTU4Mjg4MzE0NywibmJmIjoxNTgyODc5NTQ3LCJqdGkiOiJUc2Q4ZlhqbXdWVHQ1ZlgzIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0._IJoTsR2xsvRP0V89e9fNTXQ834ReAgSvWcDHRuXAYU','2020-02-28 08:45:47','2020-02-28 08:45:47','2020-02-28 08:47:58','cancel'),(7,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk2NzgsImV4cCI6MTU4Mjg4MzI3OCwibmJmIjoxNTgyODc5Njc4LCJqdGkiOiI4MEhNNEFxQTlXdW03ZTlrIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.y0JzEVupZogNGX4Qe1fdQ6CfzfrknBxQ5sMUHnZXXAQ','2020-02-28 08:47:58','2020-02-28 08:47:58','2020-02-28 08:48:09','cancel'),(8,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk2ODksImV4cCI6MTU4Mjg4MzI4OSwibmJmIjoxNTgyODc5Njg5LCJqdGkiOiIzb09ZSldhcm1DNUxqRnR6Iiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.nfKlIMCQXV35Z12ZMh7BdQb9KPU30yLX21elWK-zre0','2020-02-28 08:48:09','2020-02-28 08:48:09','2020-02-28 08:49:59','cancel'),(9,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk3OTksImV4cCI6MTU4Mjg4MzM5OSwibmJmIjoxNTgyODc5Nzk5LCJqdGkiOiJIeVh2UzBrVllabVVZM0JnIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.JloTtNj28FxjXx4SxceyZOPFtuf1yttDi4kLTVeTqx4','2020-02-28 08:49:59','2020-02-28 08:49:59','2020-02-28 08:50:12','cancel'),(10,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk4MTIsImV4cCI6MTU4Mjg4MzQxMiwibmJmIjoxNTgyODc5ODEyLCJqdGkiOiJRRGx3d2RlczhtSzlsSkNXIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.7fRkJmxKn1aQnhwuGNwGb-qmWJ2QSJUake9uDwkubLc','2020-02-28 08:50:12','2020-02-28 08:50:12','2020-02-28 08:53:11','cancel'),(11,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4Nzk5OTEsImV4cCI6MTU4Mjg4MzU5MSwibmJmIjoxNTgyODc5OTkxLCJqdGkiOiJJRzNRVG5ubVVjYm5sQm9MIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.YvQsEoOhXYvwqVbMO7orThbn9E8U6YYL_M-66fWKkz0','2020-02-28 08:53:11','2020-02-28 08:53:11','2020-02-28 08:53:26','cancel'),(12,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODAwMDYsImV4cCI6MTU4Mjg4MzYwNiwibmJmIjoxNTgyODgwMDA2LCJqdGkiOiJLc0xGR1Z2QVpRdm10RmI1Iiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.Ns5mESjxgCCEP5JqjNL5UipndyGg1zJYtWhWmQMPjZg','2020-02-28 08:53:26','2020-02-28 08:53:26','2020-02-28 08:54:50','cancel'),(13,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODAwMDYsImV4cCI6MTU4Mjg4MzYwNiwibmJmIjoxNTgyODgwMDA2LCJqdGkiOiJLc0xGR1Z2QVpRdm10RmI1Iiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.Ns5mESjxgCCEP5JqjNL5UipndyGg1zJYtWhWmQMPjZg','2020-02-28 08:54:50','2020-02-28 08:54:50','2020-02-28 09:15:42','cancel'),(14,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODEzNDIsImV4cCI6MTU4Mjg4NDk0MiwibmJmIjoxNTgyODgxMzQyLCJqdGkiOiJ3MW9TbEprbkh6c1JXMVgxIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.dA4lWlg_4I0Sk7gG9qOeKr6sLbB4kW8TJnDMimDS_QU','2020-02-28 09:15:42','2020-02-28 09:15:42','2020-02-28 09:20:57','cancel'),(15,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODE2NTcsImV4cCI6MTU4Mjg4NTI1NywibmJmIjoxNTgyODgxNjU3LCJqdGkiOiJTVDZRMG00ZWxqMVhnS2JiIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.29E4kjCEfiabcEjG3Rcrq4WadQa7smK1e6lYhscUVD8','2020-02-28 09:20:57','2020-02-28 09:20:57','2020-02-28 09:22:37','cancel'),(16,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODE3NTcsImV4cCI6MTU4Mjg4NTM1NywibmJmIjoxNTgyODgxNzU3LCJqdGkiOiJFbDF2OEV3SVFiWm1RdVdxIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.9rJrmpvl1YQK6cxLpGB8Pb6mSduJxLtdMTTqrGBRdAA','2020-02-28 09:22:37','2020-02-28 09:22:37','2020-02-28 09:28:52','cancel'),(17,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODIxMzIsImV4cCI6MTU4Mjg4NTczMiwibmJmIjoxNTgyODgyMTMyLCJqdGkiOiJteGtWeVFCM3lBQUJ6ZjBWIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.L5RUFjymofcUPGd0JmPKc8K26lU5eqt6KDt6x4OWep8','2020-02-28 09:28:52','2020-02-28 09:28:52','2020-02-28 09:29:01','cancel'),(18,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODIxNDEsImV4cCI6MTU4Mjg4NTc0MSwibmJmIjoxNTgyODgyMTQxLCJqdGkiOiJ1N1dsZjh2NEpwaVJQWE80Iiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.JuR17hl26-jbTRjA73QzjMEsu9tQTFu2O9BLKPf2lV8','2020-02-28 09:29:01','2020-02-28 09:29:01','2020-02-28 09:29:09','cancel'),(19,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODIxNDksImV4cCI6MTU4Mjg4NTc0OSwibmJmIjoxNTgyODgyMTQ5LCJqdGkiOiJQMWp1Y0dFQTZ1d3ZyeE9HIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.c_Vq0UOXHMqEe2-ZLHvwYDadeMCuqRg29edFRNt7S5Q','2020-02-28 09:29:09','2020-02-28 09:29:09','2020-02-28 09:31:56','cancel'),(21,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODIzMTYsImV4cCI6MTU4Mjg4NTkxNiwibmJmIjoxNTgyODgyMzE2LCJqdGkiOiIwU0J3VzExWDRvTFdBTHo4Iiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.OKJWCenzFLb1QpsJp_JVaZRyYkIH7wdON1W-I85WNLs','2020-02-28 09:31:56','2020-02-28 09:37:14','2020-02-28 00:00:00','cancel'),(22,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODI3ODQsImV4cCI6MTU4Mjg4NjM4NCwibmJmIjoxNTgyODgyNzg0LCJqdGkiOiJydHdMQ3JZc1hHQkxZTFZsIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.fr7Vi7UqjAhY4Q8sh1dGycYOIBsvONQKkktXiLsinow','2020-02-28 09:39:44','2020-02-28 09:39:58','2020-02-28 09:39:58','cancel'),(23,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODI4NDcsImV4cCI6MTU4Mjg4NjQ0NywibmJmIjoxNTgyODgyODQ3LCJqdGkiOiJVa3hXc05CdXZRYUpQQ3B3Iiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.83KJ3djOK8JQ9D5oXCLFxOkYMiaox7sGM1y3g97yAB8','2020-02-28 09:40:47','2020-02-28 09:40:47','2020-02-28 09:40:56','cancel'),(24,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FkbWluXC9hcGlcL2FwcFwvbG9naW4iLCJpYXQiOjE1ODI4ODI4NDcsImV4cCI6MTU4Mjg4NjQ0NywibmJmIjoxNTgyODgyODQ3LCJqdGkiOiJVa3hXc05CdXZRYUpQQ3B3Iiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.83KJ3djOK8JQ9D5oXCLFxOkYMiaox7sGM1y3g97yAB8','2020-02-28 09:40:56','2020-02-28 09:40:56','2020-02-28 10:00:14','cancel'),(25,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTE2XC9hZG1pblwvYXBpXC9hcHBcL2xvZ2luIiwiaWF0IjoxNTgyODg0MDE0LCJleHAiOjE1ODI4ODc2MTQsIm5iZiI6MTU4Mjg4NDAxNCwianRpIjoiVGhUNFlOTFNabFJKajloUCIsInN1YiI6MSwicHJ2IjoiOGI0MjJlNmY2NTc5MzJiOGFlYmNiMWJmMWUzNTZkZDc2YTM2NWJmMiJ9.7BxOfDH1vduGwBxuBgQnSKpnWPNTHjp3KliNsT3F3hM','2020-02-28 10:00:14','2020-02-28 10:00:14','2020-02-28 10:00:14','cancel'),(26,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTE2XC9hZG1pblwvYXBpXC9hcHBcL2xvZ2luIiwiaWF0IjoxNTgyODg0MDE0LCJleHAiOjE1ODI4ODc2MTQsIm5iZiI6MTU4Mjg4NDAxNCwianRpIjoiVGhUNFlOTFNabFJKajloUCIsInN1YiI6MSwicHJ2IjoiOGI0MjJlNmY2NTc5MzJiOGFlYmNiMWJmMWUzNTZkZDc2YTM2NWJmMiJ9.7BxOfDH1vduGwBxuBgQnSKpnWPNTHjp3KliNsT3F3hM','2020-02-28 10:00:14','2020-02-28 10:00:14','2020-02-28 10:00:38','cancel'),(27,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTE2XC9hZG1pblwvYXBpXC9hcHBcL3JlZnJlc2hfdG9rZW4iLCJpYXQiOjE1ODI4ODQwMTQsImV4cCI6MTU4Mjg4NzYxNCwibmJmIjoxNTgyODg0MDE0LCJqdGkiOiJyNWhDZG5Wd3RCUXc4b3RHIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.d-jlFo_NUm-t9WUT3HeR03HpjKzVUhHgPqDmPsoOquA','2020-02-28 10:00:38','2020-02-28 10:00:38','2020-02-28 10:00:42','cancel'),(28,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTE2XC9hZG1pblwvYXBpXC9hcHBcL3JlZnJlc2hfdG9rZW4iLCJpYXQiOjE1ODI4ODQwMTQsImV4cCI6MTU4Mjg4NzYzOCwibmJmIjoxNTgyODg0MDM4LCJqdGkiOiJlbG5XNU1mVUVRaFVES0dSIiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.26Nl20LecvQ_b_t0HcH4AiAAF5U4_n8Z0wm_yD91Dr8','2020-02-28 10:00:42','2020-02-28 10:00:42','2020-02-28 10:00:51','cancel'),(29,'1',NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTE2XC9hZG1pblwvYXBpXC9hcHBcL3JlZnJlc2hfdG9rZW4iLCJpYXQiOjE1ODI4ODQwMTQsImV4cCI6MTU4Mjg4NzY0MiwibmJmIjoxNTgyODg0MDQyLCJqdGkiOiIwZ0doSExua0NNT1hWbGx6Iiwic3ViIjoxLCJwcnYiOiI4YjQyMmU2ZjY1NzkzMmI4YWViY2IxYmYxZTM1NmRkNzZhMzY1YmYyIn0.6TbPpn5o-Ujp1O0DgekcDSzNUMZVLLupRiUlQoSYGMw','2020-02-28 10:00:51','2020-02-28 10:00:51',NULL,'active');
 /*!40000 ALTER TABLE `customer_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -747,7 +745,7 @@ CREATE TABLE `district` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -756,7 +754,6 @@ CREATE TABLE `district` (
 
 LOCK TABLES `district` WRITE;
 /*!40000 ALTER TABLE `district` DISABLE KEYS */;
-INSERT INTO `district` VALUES (1,1,'DistrictName','DistrictCode',1,'2020-01-24 05:52:11',NULL,'2020-01-24 05:52:11',NULL,'active');
 /*!40000 ALTER TABLE `district` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -833,7 +830,7 @@ CREATE TABLE `language` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`language_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -842,7 +839,7 @@ CREATE TABLE `language` (
 
 LOCK TABLES `language` WRITE;
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
-INSERT INTO `language` VALUES (1,0,'HongKong','hk','storage\\image\\hk.png',NULL,NULL,NULL,'yes','2020-01-20 15:00:00',NULL,'2020-01-20 15:00:00',NULL,'active'),(2,1,'HongKong','hk','storage\\image\\hk.png',NULL,NULL,NULL,'yes','2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL,'active'),(3,2,'HongKong','hk','storage\\image\\hk.png',NULL,NULL,NULL,'yes','2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL,'active');
+INSERT INTO `language` VALUES (1,0,'HongKong','hk','storage\\image\\hk.png',NULL,NULL,NULL,'yes','2020-01-20 15:00:00',NULL,'2020-01-20 15:00:00',NULL,'active'),(11,10,'HongKong','hk','storage\\image\\hk.png',NULL,NULL,NULL,'yes','2020-02-28 06:03:16',NULL,'2020-02-28 06:03:16',NULL,'active');
 /*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -865,7 +862,7 @@ CREATE TABLE `manufacturer` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`manufacturer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -874,7 +871,7 @@ CREATE TABLE `manufacturer` (
 
 LOCK TABLES `manufacturer` WRITE;
 /*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
-INSERT INTO `manufacturer` VALUES (1,1,NULL,NULL,NULL,'2020-01-24 06:21:59',NULL,'2020-01-24 06:21:59',NULL,'active');
+INSERT INTO `manufacturer` VALUES (2,10,'url',NULL,NULL,'2020-02-28 06:06:16',NULL,'2020-02-28 06:08:14',NULL,'active');
 /*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -905,7 +902,7 @@ CREATE TABLE `manufacturer_description` (
 
 LOCK TABLES `manufacturer_description` WRITE;
 /*!40000 ALTER TABLE `manufacturer_description` DISABLE KEYS */;
-INSERT INTO `manufacturer_description` VALUES (1,'AddManufacturer',2,1,'2020-01-24 06:21:59',NULL,'2020-01-24 06:21:59',NULL,'active');
+INSERT INTO `manufacturer_description` VALUES (1,'AddManufacturer s',11,2,'2020-02-28 06:06:16',NULL,'2020-02-28 06:08:14',NULL,'active');
 /*!40000 ALTER TABLE `manufacturer_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1229,7 +1226,7 @@ CREATE TABLE `order_product` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`order_product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1238,7 +1235,6 @@ CREATE TABLE `order_product` (
 
 LOCK TABLES `order_product` WRITE;
 /*!40000 ALTER TABLE `order_product` DISABLE KEYS */;
-INSERT INTO `order_product` VALUES (1,2,1,NULL,1.00,1,1.00,'2020-01-24 06:32:15',NULL,'2020-01-24 06:32:15',NULL,'active');
 /*!40000 ALTER TABLE `order_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1265,7 +1261,7 @@ CREATE TABLE `order_product_description` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`order_product_description_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1274,7 +1270,6 @@ CREATE TABLE `order_product_description` (
 
 LOCK TABLES `order_product_description` WRITE;
 /*!40000 ALTER TABLE `order_product_description` DISABLE KEYS */;
-INSERT INTO `order_product_description` VALUES (1,2,1,2,1,1,'1','ProductAttributeName','<p>1</p>','2020-01-24 06:32:15',NULL,'2020-01-24 06:32:15',NULL,'active');
 /*!40000 ALTER TABLE `order_product_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1498,7 +1493,7 @@ CREATE TABLE `product` (
   `model` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   KEY `idx_products_model` (`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1507,7 +1502,6 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,1,1,1,NULL,NULL,11.00,'cancel',0.00,NULL,'1',NULL,NULL,NULL,1,1,'2020-01-24 06:26:19',NULL,'2020-01-24 06:26:19',NULL,'active',NULL,NULL,0,0,NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1533,7 +1527,7 @@ CREATE TABLE `product_attribute` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`product_attribute_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1542,7 +1536,6 @@ CREATE TABLE `product_attribute` (
 
 LOCK TABLES `product_attribute` WRITE;
 /*!40000 ALTER TABLE `product_attribute` DISABLE KEYS */;
-INSERT INTO `product_attribute` VALUES (1,1,NULL,'2','1',1.00,'add',0,'2020-01-24 06:28:32',NULL,'2020-01-24 06:28:32',NULL,'active');
 /*!40000 ALTER TABLE `product_attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1564,7 +1557,7 @@ CREATE TABLE `product_attribute_description` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`product_attribute_description_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1573,7 +1566,6 @@ CREATE TABLE `product_attribute_description` (
 
 LOCK TABLES `product_attribute_description` WRITE;
 /*!40000 ALTER TABLE `product_attribute_description` DISABLE KEYS */;
-INSERT INTO `product_attribute_description` VALUES (1,2,1,'ProductAttributeName','2020-01-24 06:28:32',NULL,'2020-01-24 06:28:32',NULL,'active');
 /*!40000 ALTER TABLE `product_attribute_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1599,7 +1591,7 @@ CREATE TABLE `product_description` (
   `status` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`product_description_id`,`language_id`),
   KEY `products_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1608,7 +1600,6 @@ CREATE TABLE `product_description` (
 
 LOCK TABLES `product_description` WRITE;
 /*!40000 ALTER TABLE `product_description` DISABLE KEYS */;
-INSERT INTO `product_description` VALUES (1,2,1,'1','<p>1</p>',NULL,0,'2020-01-24 06:26:19',NULL,'2020-01-24 06:26:19',NULL,'active');
 /*!40000 ALTER TABLE `product_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1985,7 +1976,7 @@ CREATE TABLE `sub_category` (
 
 LOCK TABLES `sub_category` WRITE;
 /*!40000 ALTER TABLE `sub_category` DISABLE KEYS */;
-INSERT INTO `sub_category` VALUES (1,1,NULL,NULL,NULL,NULL,'2020-01-24 06:21:48',NULL,'2020-01-24 06:21:48',NULL,'active','1');
+INSERT INTO `sub_category` VALUES (1,10,NULL,NULL,NULL,NULL,'2020-02-28 06:08:36',NULL,'2020-02-28 06:08:36',NULL,'active','1');
 /*!40000 ALTER TABLE `sub_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2016,7 +2007,7 @@ CREATE TABLE `sub_category_description` (
 
 LOCK TABLES `sub_category_description` WRITE;
 /*!40000 ALTER TABLE `sub_category_description` DISABLE KEYS */;
-INSERT INTO `sub_category_description` VALUES (1,'AddSubCategory',2,1,'2020-01-24 06:21:48',NULL,'2020-01-24 06:21:48',NULL,'active');
+INSERT INTO `sub_category_description` VALUES (1,'SubCategory',11,1,'2020-02-28 06:08:36',NULL,'2020-02-28 06:08:36',NULL,'active');
 /*!40000 ALTER TABLE `sub_category_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2082,7 +2073,7 @@ CREATE TABLE `user` (
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2091,7 +2082,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin.TL',1,1,'boss','resources/views/admin/images/admin_profile/1505132393.1486628854.fast.jpg','FRwwIOU5JxHpYfk4emlW6FEN37nUbwUE7t9pKTbrHGgei7TlCgmOVgbYfhO1','a','lam','F','2019-11-20','534038482',NULL,'acornjamie123@gmail.com','','$2y$10$oG7Hz/ikZqsvAjQM06hA9uci8IUPFr77Jo/g/.uWwT8yDEeCmDdLi','admin','2019-11-13 00:58:30',NULL,'2020-01-17 10:22:31',NULL,'active'),(2,'1.TL',2,1,'user',NULL,NULL,'Boss','A','F','2020-01-01','11111111',NULL,'boss@gmail.com',NULL,'$2y$10$iHpaYjx.tZ8aFJf/.wDK..rrULHu76IkygKXfAvSgVQ6MjpSZGaqq','123123','2020-01-23 09:17:37',NULL,'2020-02-27 10:29:03',NULL,'active'),(8,'1.TL',2,1,'user',NULL,NULL,'staff','B','M','2020-01-01','11111111',NULL,'staff@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 04:22:28',NULL,'2020-01-29 09:58:57',NULL,'active'),(9,'1.TL',3,1,'user',NULL,NULL,'staff','C','F','2020-01-01','22222222',NULL,'staffb@gmail.com',NULL,'$2y$10$3S201nBQn.Wiaw54CqpRuOhA1s.g5EF3zkjSSEDDwxbLss3Q.Li2G','123123','2020-01-24 05:03:16',NULL,'2020-01-29 09:05:02',NULL,'active'),(10,'1.TL',3,2,'user',NULL,NULL,'staff','C','F','2020-01-15','22222222',NULL,'staffc@gmail.com',NULL,'$2y$10$SeZWccMc2qX7n7os4BUdmeUT4mPRLvVm2oTFzS8QC83.jFBEeYrw.','123123','2020-01-29 10:02:24',NULL,'2020-01-29 10:02:24',NULL,'active');
+INSERT INTO `user` VALUES (1,'admin.TL',1,1,'boss','resources/views/admin/images/admin_profile/1505132393.1486628854.fast.jpg','FRwwIOU5JxHpYfk4emlW6FEN37nUbwUE7t9pKTbrHGgei7TlCgmOVgbYfhO1','a','lam','F','2019-11-20','534038482',NULL,'acornjamie123@gmail.com','','$2y$10$oG7Hz/ikZqsvAjQM06hA9uci8IUPFr77Jo/g/.uWwT8yDEeCmDdLi','admin','2019-11-13 00:58:30',NULL,'2020-01-17 10:22:31',NULL,'active'),(8,'10.TL',11,10,'boss',NULL,NULL,'boss@gmail.com','a','M','2020-02-01','1111111',NULL,'boss@gmail.com',NULL,'$2y$10$H7eVnKQ/tJ8r09Toxqmon.M98HYxFFjhd5LiKYBHeuiQ9Kn.zdA9C','123123','2020-02-28 06:03:16',NULL,'2020-02-28 06:03:16',NULL,'active');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2112,7 +2103,7 @@ CREATE TABLE `user_to_company` (
   `edit_date` datetime NOT NULL,
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2121,7 +2112,7 @@ CREATE TABLE `user_to_company` (
 
 LOCK TABLES `user_to_company` WRITE;
 /*!40000 ALTER TABLE `user_to_company` DISABLE KEYS */;
-INSERT INTO `user_to_company` VALUES (1,2,1,'yes','2020-01-23 09:17:37',NULL,'2020-01-23 09:17:37',NULL),(6,8,1,'yes','2020-01-24 04:22:28',NULL,'2020-01-24 04:22:28',NULL),(10,9,2,'yes','2020-01-24 05:03:16',NULL,'2020-01-24 05:03:16',NULL),(25,9,1,'no','2020-01-29 09:59:38',NULL,'2020-01-29 09:59:38',NULL),(27,2,2,'no','2020-01-29 10:00:38',NULL,'2020-01-29 10:00:38',NULL),(28,8,2,'no','2020-01-29 10:00:38',NULL,'2020-01-29 10:00:38',NULL),(29,10,2,'yes','2020-01-29 10:02:24',NULL,'2020-01-29 10:02:24',NULL),(30,10,1,'no','2020-01-29 10:02:24',NULL,'2020-01-29 10:02:24',NULL);
+INSERT INTO `user_to_company` VALUES (1,8,10,'yes','2020-02-28 06:03:16',NULL,'2020-02-28 06:03:16',NULL);
 /*!40000 ALTER TABLE `user_to_company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2332,6 +2323,10 @@ SET character_set_client = utf8mb4;
  1 AS `edit_date`,
  1 AS `edit_by_id`,
  1 AS `status`,
+ 1 AS `company_name`,
+ 1 AS `company_email`,
+ 1 AS `company_phone`,
+ 1 AS `company_image`,
  1 AS `entry_company`,
  1 AS `entry_firstname`,
  1 AS `entry_lastname`,
@@ -2805,7 +2800,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_customer` AS select `customer`.`id` AS `id`,`customer`.`company_id` AS `company_id`,`customer`.`default_language_id` AS `default_language_id`,`customer`.`picture` AS `picture`,`customer`.`gender` AS `gender`,`customer`.`firstname` AS `firstname`,`customer`.`lastname` AS `lastname`,`customer`.`dob` AS `dob`,`customer`.`email` AS `email`,`customer`.`user_name` AS `user_name`,`customer`.`default_address_id` AS `default_address_id`,`customer`.`telephone` AS `telephone`,`customer`.`fax` AS `fax`,`customer`.`password` AS `password`,`customer`.`fb_id` AS `fb_id`,`customer`.`google_id` AS `google_id`,`customer`.`create_date` AS `create_date`,`customer`.`create_by_id` AS `create_by_id`,`customer`.`edit_date` AS `edit_date`,`customer`.`edit_by_id` AS `edit_by_id`,`customer`.`status` AS `status`,`address_book`.`company` AS `entry_company`,`address_book`.`firstname` AS `entry_firstname`,`address_book`.`lastname` AS `entry_lastname`,`address_book`.`district_id` AS `district_id`,`address_book`.`address_ch` AS `address_ch`,`address_book`.`address_en` AS `address_en`,`address_book`.`create_date` AS `entry_create_date`,`address_book`.`create_by_id` AS `entry_create_by_id`,`address_book`.`edit_date` AS `entry_edit_date`,`address_book`.`edit_by_id` AS `entry_edit_by_id`,`address_book`.`status` AS `entry_status` from (`customer` left join `address_book` on((`address_book`.`id` = `customer`.`default_address_id`))) */;
+/*!50001 VIEW `view_customer` AS select `customer`.`id` AS `id`,`customer`.`company_id` AS `company_id`,`customer`.`default_language_id` AS `default_language_id`,`customer`.`picture` AS `picture`,`customer`.`gender` AS `gender`,`customer`.`firstname` AS `firstname`,`customer`.`lastname` AS `lastname`,`customer`.`dob` AS `dob`,`customer`.`email` AS `email`,`customer`.`user_name` AS `user_name`,`customer`.`default_address_id` AS `default_address_id`,`customer`.`telephone` AS `telephone`,`customer`.`fax` AS `fax`,`customer`.`password` AS `password`,`customer`.`fb_id` AS `fb_id`,`customer`.`google_id` AS `google_id`,`customer`.`create_date` AS `create_date`,`customer`.`create_by_id` AS `create_by_id`,`customer`.`edit_date` AS `edit_date`,`customer`.`edit_by_id` AS `edit_by_id`,`customer`.`status` AS `status`,`view_company`.`name` AS `company_name`,`view_company`.`email` AS `company_email`,`view_company`.`phone` AS `company_phone`,`view_company`.`image` AS `company_image`,`address_book`.`company` AS `entry_company`,`address_book`.`firstname` AS `entry_firstname`,`address_book`.`lastname` AS `entry_lastname`,`address_book`.`district_id` AS `district_id`,`address_book`.`address_ch` AS `address_ch`,`address_book`.`address_en` AS `address_en`,`address_book`.`create_date` AS `entry_create_date`,`address_book`.`create_by_id` AS `entry_create_by_id`,`address_book`.`edit_date` AS `entry_edit_date`,`address_book`.`edit_by_id` AS `entry_edit_by_id`,`address_book`.`status` AS `entry_status` from ((`customer` left join `address_book` on((`address_book`.`id` = `customer`.`default_address_id`))) left join `view_company` on((`view_company`.`company_id` = `customer`.`company_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2963,4 +2958,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-27 18:30:50
+-- Dump completed on 2020-02-28 18:02:23
