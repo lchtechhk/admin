@@ -24,6 +24,17 @@ class AppViewCompanyService extends AppBaseApiService{
     function test(){
         return $this->findAll();
     }
+
+    function getProfile($customer_id){
+        $this->companyAuth = false;
+        $result = DB::table($this->getTable())->where('id', $customer_id)
+        ->pluck('title','picture','gender',
+        'firstname','lastname','email',
+        'create_date','company_name','company_phone','company_image');
+        $result = $result->get();
+        Log::info('[AppViewCompanyService] -- ' .'['.$this->getTable().'] -- getProfile : ' . json_encode($result));
+        return $result;
+    }
 }
 
 ?>

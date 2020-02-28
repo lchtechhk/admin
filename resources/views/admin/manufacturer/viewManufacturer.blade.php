@@ -28,7 +28,7 @@
                                         </label>
                                         <div class="col-sm-10 col-md-4">
                                             {!! Form::text('manufacturer_id',
-                                            empty($result['manufacturer']->manufacturer_id) ? '' : $result['manufacturer']->manufacturer_id,
+                                            print_value( (isset($_POST['manufacturer']) ? $_POST['manufacturer'] : (!empty($result['manufacturer']->manufacturer_id) ? $result['manufacturer']->manufacturer_id : '' ))),
                                             array('class'=>'form-control', 'id'=>'manufacturer_id','readonly')) !!}
                                         </div>
                                     </div>
@@ -42,8 +42,8 @@
                                             <span style="color:red">★</span>
                                         </label>
                                         <div class="col-sm-10 col-md-4">
-                                            {!! Form::text("language_array[".$language->language_id."]",
-                                            print_value(isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : !empty($result['manufacturer']->language_array[$language->language_id]['name']) ? $result['manufacturer']->language_array[$language->language_id]['name'] : '' ),
+                                            {!! Form::text("language_array[".$language->language_id."][name]",
+                                            print_value( (isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : (!empty($result['manufacturer']->language_array[$language->language_id]['name']) ? $result['manufacturer']->language_array[$language->language_id]['name'] : '' ))),
                                             array('class'=>'form-control
                                             field-validate', 'id'=>'name')) !!}
                                             <span class="help-block"
@@ -59,7 +59,7 @@
                                             class="col-sm-2 col-md-3 control-label">{{ trans('labels.Url') }}</label>
                                         <div class="col-sm-10 col-md-4">
                                             {!! Form::text("url", 
-                                            print_value( isset($_POST['url']) ? $_POST['url'] : !empty($result['manufacturer']->url) ? $result['manufacturer']->url : '' ),
+                                            print_value( (isset($_POST['url']) ? $_POST['url'] : (!empty($result['manufacturer']->url) ? $result['manufacturer']->url : '' ))),
                                             array('class'=>'form-control', 'id'=>'name')) !!}
                                             <span class="help-block"
                                                 style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.Url') }}</span>

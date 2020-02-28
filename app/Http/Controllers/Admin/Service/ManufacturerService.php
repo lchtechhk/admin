@@ -76,11 +76,11 @@ class ManufacturerService extends BaseApiService{
                         if(empty($add_manufacturer_description_result['status']) || $add_manufacturer_description_result['status'] == 'fail')throw new Exception("Error To Add Manufacturer Description");
                     }
                     $result = $this->response($result,"Successful","view_edit");
+                    $result['manufacturer'] = $this->getManufacturer($result['manufacturer_id']);
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
-                $result['manufacturer'] = $this->getManufacturer($result['manufacturer_id']);
                 return view("admin.manufacturer.viewManufacturer", $title)->with('result', $result);
 
             break;

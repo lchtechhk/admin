@@ -21,9 +21,6 @@ class AppCustomerService extends AppBaseApiService{
         $this->AppLanguageService = new AppLanguageService();
     }
 
-    function test(){
-        return $this->findAll();
-    }
 }
 
 ?>

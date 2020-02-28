@@ -7,13 +7,16 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 use App\Http\Controllers\App\Service\AuthService;
+use App\Http\Controllers\App\Service\AppViewCompanyService;
 
 class AppCustomerTokenService extends AppBaseApiService{
     private $AuthService;
+    private $AppViewCompanyService;
     function __construct(){
         $this->setTable('customer_token');
         $this->companyAuth = false;
         $this->AuthService = new AuthService();   
+        $this->AppViewCompanyService = new AppViewCompanyService(); 
     }
 
     function save_token($token){
@@ -23,6 +26,11 @@ class AppCustomerTokenService extends AppBaseApiService{
         $customer_id = $payload['sub'];
         try{
             DB::beginTransaction();
+
+            // getProfile
+            $profile = $this->AppViewCompanyService->getProfile($customer_id);
+            Log::info("profile : " . json_encode($profile));
+
             // Search
             $token_histories = $this->findByColumn_Value("customer_id",$customer_id);
             Log::info("token_histories : " . json_encode($token_histories));
@@ -45,7 +53,7 @@ class AppCustomerTokenService extends AppBaseApiService{
         }catch(Exception $e){
             $result = $this->throwException($result,$e->getMessage(),true);
         }
-        Log::info("result : " . json_encode($result));
+        return $result;
     }
     function redirect_view($result,$title){
     }

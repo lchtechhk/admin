@@ -46,7 +46,7 @@
                                             </label>
                                             <div class="col-sm-10 col-md-8">
                                                 {!! Form::text("language_array[".$language->language_id."][name]",
-                                                    print_value(isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : !empty($result['product_option']->language_array[$language->language_id]['name']) ? $result['product_option']->language_array[$language->language_id]['name'] : '' ),
+                                                    print_value( (isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : (!empty($result['product_option']->language_array[$language->language_id]['name']) ? $result['product_option']->language_array[$language->language_id]['name'] : '' ))),
                                                     array('class'=>'form-control field-validate
                                                     ', 'id'=>'name'))
                                                 !!}

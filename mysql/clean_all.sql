@@ -26,6 +26,11 @@ DELETE FROM `cms`.`user` WHERE (`user_id` >= '2');
 DELETE FROM `cms`.`language` WHERE (`language_id` > '1');
 DELETE FROM `cms`.`customer` WHERE (`id` >= '1');
 
+DELETE FROM `cms`.`countries` WHERE (`id` >= '1');
+DELETE FROM `cms`.`district` WHERE (`id` >= '1');
+DELETE FROM `cms`.`area` WHERE (`id` >= '1');
+DELETE FROM `cms`.`cities` WHERE (`id` >= '1');
+DELETE FROM `cms`.`zones` WHERE (`id` >= '1');
 
 ALTER TABLE `cms`.`customer` AUTO_INCREMENT = 1;
 ALTER TABLE `cms`.`user` AUTO_INCREMENT = 1;

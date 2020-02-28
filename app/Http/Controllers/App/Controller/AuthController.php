@@ -61,8 +61,15 @@ class AuthController extends Controller{
         } catch (JWTException $e) {
             return response()->json(['status' => false, 'message' => 'Failed to login, please try again.'], 500);
         }
-        $this->AppCustomerTokenService->save_token($token);
-        return response()->json(['status' => true, 'data'=> [ 'token' => $token ],'message' => 'Login Successful']);
+
+        try {
+            $save_token_result = $this->AppCustomerTokenService->save_token($token);
+            if(empty($save_token_result['status']) || $save_token_result['status'] == 'fail')throw new Exception($save_token_result['message']);
+            Log::info("owner : " . json_encode($owner));
+            return response()->json(['status' => true, 'data'=> [ 'token' => $token ],'message' => 'Login Successful']);
+        } catch (Exception $e) {
+            return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 
     public function logout(Request $request) {
@@ -105,8 +112,8 @@ class AuthController extends Controller{
             $this->AppCustomerTokenService->save_token($token);
             return response()->json(['status' => true, 'data'=> [ 'owner' => $owner,'token' => $this->AuthService->refresh_token($token)]]);
         }catch(Exception $e){
-            Log::info("e : " . json_encode($e));
-            return response()->json(['status' => false, 'data'=> '', 'message'=>$e]);
+            Log::info("[refresh_token] -- Error : " . $e->getMessage());
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
         }
 
     }

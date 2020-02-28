@@ -10,6 +10,9 @@
     }
 
     function print_radio_value($display_choice,$post_value){
+        Log::info("display_choice : " .$display_choice);
+        Log::info("post_value : " .$post_value);
+
         $value = '';
         if($display_choice == $post_value)$value .= "checked";
         return $value;

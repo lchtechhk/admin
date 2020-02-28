@@ -49,8 +49,8 @@
                         <span style="color:red">★</span>
                       </label>
                       <div class="col-sm-10 col-md-4">
-                        {!! Form::text("language_array[".$language->language_id."]",
-                        print_value(isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : !empty($result['category']->language_array[$language->language_id]['name']) ? $result['category']->language_array[$language->language_id]['name'] : '' ),
+                        {!! Form::text("language_array[".$language->language_id."][name]",
+                        print_value( (isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : (!empty($result['category']->language_array[$language->language_id]['name']) ? $result['category']->language_array[$language->language_id]['name'] : '' ))),
                         array('class'=>'form-control
                         field-validate', 'id'=>'name')) !!}
                         <span class="help-block"

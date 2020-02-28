@@ -17,8 +17,8 @@
 
 <body class=" hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-        @include('admin.common.header')
-        @include('admin.common.sidebar')
+        {{-- @include('admin.common.header')
+        @include('admin.common.sidebar') --}}
         @yield('content')
         @include('admin.common.controlsidebar')
         @include('admin.common.footer')
