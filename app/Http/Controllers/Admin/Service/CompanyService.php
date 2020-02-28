@@ -104,7 +104,9 @@ class CompanyService extends BaseApiService{
                     $add_company_result = $this->add($result);
                     if(empty($add_company_result['status']) || $add_company_result['status'] == 'fail')throw new Exception("Error To Add Company");
                     $result['company_id'] = $add_company_result['response_id'];
-                    foreach ($result['language_array'] as $language_id => $name) {
+                    foreach ($result['language_array'] as $language_id => $obj) {
+                        $name = !empty($obj['name']) ? $obj['name'] : '';
+                        $description = !empty($obj['description']) ? $obj['description'] : '';
                         $param = array();
                         $param['language_id'] = $language_id;
                         $param['name'] = $name;
@@ -137,7 +139,9 @@ class CompanyService extends BaseApiService{
                     // handle Company
                     $update_company_result = $this->update("company_id",$result);
                     if(empty($update_company_result['status']) || $update_company_result['status'] == 'fail')throw new Exception("Error To update Company");
-                    foreach ($result['language_array'] as $language_id => $name) {
+                    foreach ($result['language_array'] as $language_id => $obj) {
+                        $name = !empty($obj['name']) ? $obj['name'] : '';
+                        $description = !empty($obj['description']) ? $obj['description'] : '';
                         $param = array();
                         $param['name'] = $name;
                         $param['company_id'] = $result['company_id'];

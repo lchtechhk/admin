@@ -149,8 +149,6 @@
                                 <span style="color:red">★</span>
                             </label>
                             <div class="col-sm-10 col-md-4">
-                                {{json_encode($_POST['language_array'])}}<br/>
-
                                 {!! Form::text("language_array[".$language->language_id."][name]",
                                 print_value( (isset($_POST['language_array'][$language->language_id]['name']) ? $_POST['language_array'][$language->language_id]['name'] : (!empty($result['language_array'][$language->language_id]['name']) ? $result['language_array'][$language->language_id]['name'] : '' ))),
                                  array('class'=>'form-control

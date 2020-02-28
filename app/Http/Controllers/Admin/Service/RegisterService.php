@@ -65,7 +65,9 @@ class RegisterService extends BaseApiService{
                     $add_company_result = $this->CompanyService->register_add($result);
                     if(empty($add_company_result['status']) || $add_company_result['status'] == 'fail')throw new Exception("Error To Add Company");
                     $result['company_id'] = $add_company_result['response_id'];
-                    foreach ($result['language_array'] as $language_id => $name) {
+                    foreach ($result['language_array'] as $language_id => $obj) {
+                        $name = !empty($obj['name']) ? $obj['name'] : '';
+                        $description = !empty($obj['description']) ? $obj['description'] : '';
                         $param = array();
                         $param['language_id'] = $language_id;
                         $param['name'] = $name;
@@ -118,12 +120,9 @@ class RegisterService extends BaseApiService{
                     $add_language_result = $this->LanguageService->register_add($lan_param);
                     if(empty($add_language_result['status']) || $add_language_result['status'] == 'fail')throw new Exception("Error To Add Language");
                     $language_id = $add_language_result['response_id'];
-
-                    Log::info('[language_id] --  : ' . $language_id);
-
-
+                    
                 // Handle User
-                    $user_param['permission'] = 'boss';
+                    $user_param['identity'] = 'boss';
                     $user_param['default_company_id'] = $result['company_id'];
                     $user_param['default_language_id'] = $language_id;
                     $user_param['party_id'] = $party_param['party_id'];
@@ -140,12 +139,16 @@ class RegisterService extends BaseApiService{
 
             
                     // Handle Company Description
-                    foreach ($company_param['language_array'] as $name) {
+                    foreach ($company_param['language_array'] as $language_id => $obj) {
+                        $name = !empty($obj['name']) ? $obj['name'] : '';
+                        $description = !empty($obj['description']) ? $obj['description'] : '';
                         $param = array();
                         $param['language_id'] = $language_id;
                         $param['name'] = $name;
                         $param['company_id'] = $result['company_id'];
-                        $add_company_description_result = $this->CompanyDescriptionService->add($param);
+                        Log::info('[param] --  : ' . json_encode($param));
+
+                        $add_company_description_result = $this->CompanyDescriptionService->register_add($param);
                         if(empty($add_company_description_result['status']) || $add_company_description_result['status'] == 'fail')throw new Exception("Error To Add Company Description");
                     }
 

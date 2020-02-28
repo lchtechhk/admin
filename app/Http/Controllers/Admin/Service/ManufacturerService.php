@@ -67,7 +67,9 @@ class ManufacturerService extends BaseApiService{
                     $add_manufacturer_result = $this->add($result);
                     if(empty($add_manufacturer_result['status']) || $add_manufacturer_result['status'] == 'fail')throw new Exception("Error To Add Manufacturer");
                     $result['manufacturer_id'] = $add_manufacturer_result['response_id'];
-                    foreach ($result['language_array'] as $language_id => $name) {
+                    foreach ($result['language_array'] as $language_id => $obj) {
+                        $name = !empty($obj['name']) ? $obj['name'] : '';
+                        $description = !empty($obj['description']) ? $obj['description'] : '';
                         $param = array();
                         $param['language_id'] = $language_id;
                         $param['name'] = $name;
@@ -92,7 +94,9 @@ class ManufacturerService extends BaseApiService{
                     Log::info('[edit result] --  : ' . json_encode($result));
                     $update_manufacturer_result = $this->update("manufacturer_id",$result);
                     if(empty($update_manufacturer_result['status']) || $update_manufacturer_result['status'] == 'fail')throw new Exception("Error To update Manufacturer");
-                    foreach ($result['language_array'] as $language_id => $name) {
+                    foreach ($result['language_array'] as $language_id => $obj) {
+                        $name = !empty($obj['name']) ? $obj['name'] : '';
+                        $description = !empty($obj['description']) ? $obj['description'] : '';
                         $param = array();
                         $param['name'] = $name;
                         $param['manufacturer_id'] = $result['manufacturer_id'];

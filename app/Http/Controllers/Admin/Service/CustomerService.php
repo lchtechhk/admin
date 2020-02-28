@@ -53,7 +53,7 @@ class CustomerService extends BaseApiService{
                     return view("admin.customer.viewCustomer", $title)->with('result', $result);
                 }        
                 $result['picture'] = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/customer/images/');
-                $result['default_language_id'] = Session::get('default_company_id');
+                $result['default_language_id'] = Session::get('language_id');
                 $result['password'] = Hash::make($result['password_str']);
                 $add_customer_result = $this->add($result);
                 $customers = $this->findById($add_customer_result['response_id']);

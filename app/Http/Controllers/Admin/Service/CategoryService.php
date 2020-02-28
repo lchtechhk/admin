@@ -66,7 +66,9 @@ class CategoryService extends BaseApiService{
                     $add_category_result = $this->add($result);
                     if(empty($add_category_result['status']) || $add_category_result['status'] == 'fail')throw new Exception("Error To Add Category");
                     $result['category_id'] = $add_category_result['response_id'];
-                    foreach ($result['language_array'] as $language_id => $name) {
+                    foreach ($result['language_array'] as $language_id => $obj) {
+                        $name = !empty($obj['name']) ? $obj['name'] : '';
+                        $description = !empty($obj['description']) ? $obj['description'] : '';
                         $param = array();
                         $param['language_id'] = $language_id;
                         $param['category_id'] = $result['category_id'];
@@ -92,7 +94,9 @@ class CategoryService extends BaseApiService{
                     Log::info('[result] --  : ' . json_encode($result));
                     $update_category_result = $this->update("category_id",$result);
                     if(empty($update_category_result['status']) || $update_category_result['status'] == 'fail')throw new Exception("Error To update Category");
-                    foreach ($result['language_array'] as $language_id => $name) {
+                    foreach ($result['language_array'] as $language_id => $obj) {
+                        $name = !empty($obj['name']) ? $obj['name'] : '';
+                        $description = !empty($obj['description']) ? $obj['description'] : '';
                         $param = array();
                         $param['name'] = $name;
                         $param['category_id'] = $result['category_id'];
