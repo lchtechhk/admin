@@ -11,15 +11,12 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Validator, DB, Hash, Mail, Illuminate\Support\Facades\Password;
 
 use App\Http\Controllers\App\Service\AuthService;
-use App\Http\Controllers\App\Service\AppCustomerTokenService;
 
 class AuthController extends Controller{
     private $AuthService;
-    private $AppCustomerTokenService;
 
     function __construct(){
         $this->AuthService = new AuthService();    
-        $this->AppCustomerTokenService = new AppCustomerTokenService();    
     }
     
     public function test(){
@@ -63,7 +60,7 @@ class AuthController extends Controller{
         }
 
         try {
-            $save_token_result = $this->AppCustomerTokenService->save_token($token);
+            $save_token_result = $this->AuthService->login($token);
             if(empty($save_token_result['status']) || $save_token_result['status'] == 'fail')throw new Exception($save_token_result['message']);
             Log::info("save_token_result : " . json_encode($save_token_result));
             return response()->json(['status' => true, 'data'=> [ 'token' => $token , 'owner' => $save_token_result['owner']],'message' => 'Login Successful']);
@@ -74,19 +71,23 @@ class AuthController extends Controller{
 
     public function logout(Request $request) {
         $credentials = $request->only('token');
+        $token = $credentials['token'];
         $validator = Validator::make($credentials, ['token' => 'required']);
         try {
+            $cancel_token_result = $this->AuthService->logout($token);
+            if(empty($cancel_token_result['status']) || $cancel_token_result['status'] == 'fail')throw new Exception($cancel_token_result['message']);
             JWTAuth::parseToken()->invalidate();
             return response()->json(['status' => true, 'message'=> "You have successfully logged out."]);
         } catch (JWTException $e) {
-            Log::error('error : ' . $e->getMessage());
             return response()->json(['status' => false, 'message' => 'Failed to logout, please try again.'], 500);
+        } catch (JWTException $e) {
+            Log::error('error : ' . $e->getMessage());
+            return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
         }
     }
 
     protected function respondWithToken(Request $request){
         $token = $request->input('token');
-        Log::error('token : ' . $token);
 
         return response()->json([
             'access_token' => $token,
@@ -109,7 +110,7 @@ class AuthController extends Controller{
             $token = $request->input('token');
             $owner = JWTAuth::parseToken()->authenticate();
             if($owner['status'] != true) throw new Exception($owner['message']);
-            $refresh_token_result = $this->AppCustomerTokenService->save_token($token);
+            $refresh_token_result = $this->AuthService->login($token);
             if(empty($refresh_token_result['status']) || $refresh_token_result['status'] == 'fail')throw new Exception($save_token_result['message']);
             return response()->json(['status' => true, 'data'=> [ 'owner' => $refresh_token_result['owner'],'token' => $this->AuthService->refresh_token($token)]]);
         }catch(Exception $e){
