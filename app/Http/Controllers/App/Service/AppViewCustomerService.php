@@ -21,6 +21,18 @@ class AppViewCustomerService extends AppBaseApiService{
         $this->AppLanguageService = new AppLanguageService();
     }
 
+    function getProfile($customer_id){
+        try{
+            $this->companyAuth = false;
+            $result = DB::table($this->getTable())->where('id', $customer_id)
+            ->get(['picture','gender','firstname','lastname','email','create_date','company_name','company_phone','company_image']);
+            Log::info('[AppViewCustomerService] -- ' .'['.$this->getTable().'] -- getProfile : ' . json_encode($result[0]));
+            return $result[0];
+        }catch(Excepton $e){
+            throw new Exception ($e->getMessage());
+        }
+    }
+
     function test(){
         return $this->findAll();
     }
