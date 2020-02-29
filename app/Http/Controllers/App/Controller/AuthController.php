@@ -18,10 +18,6 @@ class AuthController extends Controller{
     function __construct(){
         $this->AuthService = new AuthService();    
     }
-    
-    public function test(){
-        return "1233";
-    }
 
     public function register(Request $request){
         $credentials = $request->only('username', 'email', 'password');
@@ -62,7 +58,6 @@ class AuthController extends Controller{
         try {
             $save_token_result = $this->AuthService->login($token);
             if(empty($save_token_result['status']) || $save_token_result['status'] == 'fail')throw new Exception($save_token_result['message']);
-            Log::info("save_token_result : " . json_encode($save_token_result));
             return response()->json(['status' => true, 'data'=> [ 'token' => $token , 'owner' => $save_token_result['owner']],'message' => 'Login Successful']);
         } catch (Exception $e) {
             return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
@@ -76,7 +71,7 @@ class AuthController extends Controller{
         try {
             $cancel_token_result = $this->AuthService->logout($token);
             if(empty($cancel_token_result['status']) || $cancel_token_result['status'] == 'fail')throw new Exception($cancel_token_result['message']);
-            JWTAuth::parseToken()->invalidate();
+            // JWTAuth::parseToken()->invalidate();
             return response()->json(['status' => true, 'message'=> "You have successfully logged out."]);
         } catch (JWTException $e) {
             return response()->json(['status' => false, 'message' => 'Failed to logout, please try again.'], 500);
@@ -110,9 +105,9 @@ class AuthController extends Controller{
             $token = $request->input('token');
             $owner = JWTAuth::parseToken()->authenticate();
             if($owner['status'] != true) throw new Exception($owner['message']);
-            $refresh_token_result = $this->AuthService->login($token);
+            $refresh_token_result = $this->AuthService->refresh_token($token);
             if(empty($refresh_token_result['status']) || $refresh_token_result['status'] == 'fail')throw new Exception($save_token_result['message']);
-            return response()->json(['status' => true, 'data'=> [ 'owner' => $refresh_token_result['owner'],'token' => $this->AuthService->refresh_token($token)]]);
+            return response()->json(['status' => true, 'data'=> [ 'owner' => $refresh_token_result['owner'],'token' => JWTAuth::refresh($token)]]);
         }catch(Exception $e){
             Log::info("[refresh_token] -- Error : " . $e->getMessage());
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);

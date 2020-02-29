@@ -16,7 +16,7 @@ class AppCustomerTokenService extends AppBaseApiService{
         $this->AppViewCustomerService = new AppViewCustomerService(); 
     }
 
-    function save_token($token){
+    function save_token($operation_type,$token){
         $result = array();
         JWTAuth::setToken($token);
         $payload = JWTAuth::getPayload($token);
@@ -27,7 +27,7 @@ class AppCustomerTokenService extends AppBaseApiService{
             // getProfile
             $profile = $this->AppViewCustomerService->getProfile($customer_id);
             $result['owner'] = $profile;
-            // Search
+            // Search Token History
             $token_histories = $this->findByColumn_Value("customer_id",$customer_id);
             // Log::info("token_histories : " . json_encode($token_histories));
             if(!empty($token_histories) && sizeof($token_histories) > 0){
@@ -37,10 +37,15 @@ class AppCustomerTokenService extends AppBaseApiService{
                 $update_param['status'] = 'cancel';
                 $update_token_result = DB::table($this->table)->where(array('customer_id'=>$customer_id,'status'=>'active'))->update($update_param);
             }
-            // Add
+            // Add Token History
             $param = array();
             $param['customer_id'] = $customer_id;
-            $param['token'] = $token;
+            if($operation_type == 'login'){
+                $param['token'] = $token;
+            }else if($operation_type == 'refresh'){
+                $param['token'] = JWTAuth::refresh($token);
+
+            }
             $add_token_result = $this->add($param);
             if(empty($add_token_result['status']) || $add_token_result['status'] == 'fail')throw new Exception("Error To Add Token");
             $result = $this->response($result,"Successful","view_edit");
@@ -50,6 +55,15 @@ class AppCustomerTokenService extends AppBaseApiService{
         }
 
         return $result;
+    }
+
+    function get_lasttime_login($customer_id){
+        Log::info('[customer_id] -- ' );
+
+        $result = DB::table($this->getTable())->where("customer_id", $customer_id)->orderBy("create_date", 'desc')->first(['create_date','status']);
+        Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- get_lasttime_login : ' . json_encode($result));
+        return $result;
+        // return "123";
     }
     function redirect_view($result,$title){
     }

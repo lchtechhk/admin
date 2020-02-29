@@ -27,14 +27,20 @@ class AuthService {
         }
     }
 
-    public function refresh_token($token){
-        return $new_token = JWTAuth::refresh($token);
+    public function refresh_token($old_token){
+        $result = array();
+        try {
+            $result = $this->AppCustomerTokenService->save_token("refresh",$old_token);
+        } catch (Exception $e) {
+            $result = $this->throwException($result,$e->getMessage(),true);
+        } 
+        return $result;
     }
 
     public function login($token){
         $result = array();
         try {
-            $result = $this->AppCustomerTokenService->save_token($token);
+            $result = $this->AppCustomerTokenService->save_token("login",$token);
         } catch (Exception $e) {
             $result = $this->throwException($result,$e->getMessage(),true);
         } 
@@ -42,10 +48,13 @@ class AuthService {
     }
 
     public function logout($token){
+        Log::info("logout : " . $token);
         $result = array();
         try {   
             DB::beginTransaction();
             $param = array('token'=>$token,'end_date'=>date('Y-m-d H:i:s'),'status'=>'cancel');
+            $a = $this->AppCustomerTokenService->findByColumn_Value("token",$token);
+            if(empty($a))throw new Exception("Token is not existing");
             $cancel_token_result = $this->AppCustomerTokenService->update("token",$param);
             if(empty($cancel_token_result['status']) || $cancel_token_result['status'] == 'fail')throw new Exception($cancel_token_result['message']);
             $result = $this->response($result,"Successful","view_edit");

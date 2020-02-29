@@ -1,6 +1,6 @@
 <?php
 Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
-	Route::post('/', 'Controller\AuthController@test');
+	Route::post('/', 'Controller\AppTestController@test');
     Route::post('/login', 'Controller\AuthController@login');
 	Route::group(['middleware' => 'app_api'], function() {
 		Route::get('/respondWithToken', 'Controller\AuthController@respondWithToken');
