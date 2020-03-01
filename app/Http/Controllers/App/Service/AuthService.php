@@ -48,7 +48,7 @@ class AuthService {
     }
 
     public function logout($token){
-        Log::info("logout : " . $token);
+        // Log::info("logout : " . $token);
         $result = array();
         try {   
             DB::beginTransaction();

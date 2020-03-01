@@ -44,7 +44,7 @@ class AppCustomerTokenService extends AppBaseApiService{
                 $param['token'] = $token;
             }else if($operation_type == 'refresh'){
                 $param['token'] = JWTAuth::refresh($token);
-
+                $result['token'] = $param['token'];
             }
             $add_token_result = $this->add($param);
             if(empty($add_token_result['status']) || $add_token_result['status'] == 'fail')throw new Exception("Error To Add Token");
