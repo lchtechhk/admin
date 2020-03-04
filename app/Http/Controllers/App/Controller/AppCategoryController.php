@@ -25,6 +25,7 @@ class AppCategoryController extends Controller{
 	}
     
     function listingCategory(Request $request){
+        Log::info("listingCategory");
         try{
             $result = array();
             $result['success'] = true;
