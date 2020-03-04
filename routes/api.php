@@ -13,7 +13,7 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		// Product
 		Route::post('/listingProduct', 'Controller\AppProductController@listingProduct');
 		// Category
-		Route::post('/listingCategory', 'Controller\AppCategoryController@listingCategory');
+		Route::get('/listingCategory', 'Controller\AppCategoryController@listingCategory');
 		// Order
 		Route::post('/listingOrder', 'Controller\AppOrderController@listingOrder');
 		// Order

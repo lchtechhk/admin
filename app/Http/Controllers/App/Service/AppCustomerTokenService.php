@@ -58,8 +58,6 @@ class AppCustomerTokenService extends AppBaseApiService{
     }
 
     function get_lasttime_login($customer_id){
-        Log::info('[customer_id] -- ' );
-
         $result = DB::table($this->getTable())->where("customer_id", $customer_id)->orderBy("create_date", 'desc')->first(['create_date','status']);
         Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- get_lasttime_login : ' . json_encode($result));
         return $result;
