@@ -53,21 +53,21 @@
         }
         // With Language
         public function findAllWithLanguage(){
-            $result = DB::table($this->getTable())->where('language_id',Session::get('language_id'));
+            $result = DB::table($this->getTable())->where('language_id',JWTAuth::parseToken()->authenticate()->default_language_id);
             if($this->companyAuth)$result = $result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
             $result = $result->get();
             Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findAllWithLanguage : ' . json_encode($result));
             return $result;
         }
         public function findByColumn_ValueWithLanguage($field,$id){
-            $result = DB::table($this->getTable())->where('language_id',Session::get('language_id'))->where($field, $id);
+            $result = DB::table($this->getTable())->where('language_id',JWTAuth::parseToken()->authenticate()->default_language_id)->where($field, $id);
             if($this->companyAuth)$result = $result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
             $result = $result->get();
             Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findByColumn_ValueWithLanguage : ' . json_encode($result));
             return $result;
         }
         public function findByColumn_ValuesWithLanguage($column,$values){
-            $result = DB::table($this->getTable())->where('language_id',Session::get('language_id'))->whereIn($column, $values);
+            $result = DB::table($this->getTable())->where('language_id',JWTAuth::parseToken()->authenticate()->default_language_id)->whereIn($column, $values);
             if($this->companyAuth)$result = $result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
             $result = $result->get();
             Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findByColumn_ValuesWithLanguage : ' . json_encode($result));
