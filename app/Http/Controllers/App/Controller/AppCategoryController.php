@@ -25,16 +25,11 @@ class AppCategoryController extends Controller{
 	}
     
     function listingCategory(Request $request){
-        Log::info("listingCategory");
         try{
-            $result = array();
-            $result['success'] = true;
-            $result['categories'] = $this->AppViewSubCategoryService->listingCategory();
-            return response()->json($result, 200);
+            $categories = $this->AppViewSubCategoryService->listingCategory();
+            return response()->json(['status' => true, 'data'=> [ 'categories' => $categories, 'max-item' =>4]],200);
         }catch(Exception $e){
-            $result['success'] = false;
-            $result['msg'] = $e->getMessage();
-            return response()->json($result, 500);
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
         }
     }
 }
