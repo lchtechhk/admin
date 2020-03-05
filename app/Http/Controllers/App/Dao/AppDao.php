@@ -34,7 +34,7 @@
             $result = DB::table($this->getTable())->where($field, $id);
             if($this->companyAuth)$result = $result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
             $result = $result->get();
-            Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findByColumn_Value : ' . json_encode($result));
+            // Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findByColumn_Value : ' . json_encode($result));
             return $result;
         }
         public function findById($id){

@@ -37,6 +37,7 @@ class AppProductController extends Controller{
             $search['status'] = 'active';
 
             $products = $this->AppViewProductService->search($search);
+            Log::info("products : " . json_encode($products));
             return response()->json(['status' => true, 'data'=> [ 'products' => $products]],200);
         }catch(Exception $e){
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
