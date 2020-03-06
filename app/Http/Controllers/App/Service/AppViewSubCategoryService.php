@@ -22,7 +22,7 @@ class AppViewSubCategoryService extends AppBaseApiService{
     }
 
     function listingCategory(){
-        return $this->findAll();
+        return $this->findAllWithLanguage();
     }
 }
 

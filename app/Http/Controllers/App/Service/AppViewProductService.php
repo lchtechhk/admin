@@ -16,7 +16,7 @@ class AppViewProductService extends AppBaseApiService{
     }
 
     function search($search){
-        return $result = $this->findAllWithLanguage();
+        return $result = $this->findByArrayWithLanguage($search);
 
     }
     function test(){

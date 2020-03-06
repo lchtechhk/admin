@@ -25,6 +25,7 @@ class AppCategoryController extends Controller{
 	}
     
     function listingCategory(Request $request){
+        if(!empty($sub_category_id))$search_param['sub_category_id'] = $sub_category_id;
         try{
             $categories = $this->AppViewSubCategoryService->listingCategory();
             return response()->json(['status' => true, 'data'=> [ 'categories' => $categories, 'max-item' =>4]],200);

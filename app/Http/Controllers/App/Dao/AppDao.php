@@ -74,6 +74,18 @@
             return $result;
         }
 
+        public function findByArrayWithLanguage($array){
+            $result = DB::table($this->getTable())->where('language_id',JWTAuth::parseToken()->authenticate()->default_language_id);
+            if($this->companyAuth)$result = $result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
+
+            foreach ($array as $column => $value) {
+                $result = $result->where($column, $value);
+            }
+            $result = $result->get();
+            Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findByColumn_ValuesWithLanguage : ' . json_encode($array));
+            return $result;
+        }
+
         public function findByColumn_Values_Return_Array($column,$target_column,$id){
             $result = DB::table($this->getTable())->where($column, $id);
             if($this->companyAuth)$result = $result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
