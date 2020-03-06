@@ -23,7 +23,7 @@ class AppViewCustomerService extends AppBaseApiService{
             $this->companyAuth = false;
             // User Information
             $result = DB::table($this->getTable())->where('id', $customer_id)
-            ->get(['company_id','picture','gender','firstname','lastname','email','create_date','company_name','company_phone','company_image']);
+            ->get(['company_id','language_id','language_name','language_image','picture','gender','firstname','lastname','email','create_date','company_name','company_phone','company_image']);
             if(!empty($result) && sizeof($result) > 0){
                 if(empty($result[0]->picture)) $result[0]->picture = './assets/images/user.png';
             }
