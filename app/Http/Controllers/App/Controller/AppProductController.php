@@ -31,9 +31,8 @@ class AppProductController extends Controller{
     function listingProduct(Request $request){
         try{
             $sub_category_id = $request->input('sub_category_id');
-            
             $search = array();
-            if(empty($sub_category_id) && $sub_category_id > 0)$search['sub_category_id'] = $sub_category_id;
+            if(!empty($sub_category_id) && $sub_category_id > 0)$search['sub_category_id'] = $sub_category_id;
             $search['status'] = 'active';
 
             $products = $this->AppViewProductService->search($search);

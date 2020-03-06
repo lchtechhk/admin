@@ -16,6 +16,8 @@ class AppViewProductService extends AppBaseApiService{
     }
 
     function search($search){
+        Log::info("search : " . json_encode($search));
+
         return $result = $this->findByArrayWithLanguage($search);
 
     }
