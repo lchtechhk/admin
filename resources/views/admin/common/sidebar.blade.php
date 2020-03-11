@@ -123,7 +123,7 @@
               {{ trans('labels.link_all_products') }}
             </a>
           </li>
-          <li
+          <!-- <li
             class="
             {{ Request::is('admin/listingProductOption') ? 'active' : '' }} 
             {{ Request::is('admin/view_addProductOption') ? 'active' : '' }} 
@@ -149,7 +149,7 @@
               <i class="fa fa-circle-o"></i>
               Option Value
             </a>
-          </li>
+          </li> -->
         </ul>
       </li>
       <li class="treeview 
