@@ -44,7 +44,7 @@ CREATE TABLE `address_book` (
   `is_default` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_address_book_customers_id` (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,6 +53,7 @@ CREATE TABLE `address_book` (
 
 LOCK TABLES `address_book` WRITE;
 /*!40000 ALTER TABLE `address_book` DISABLE KEYS */;
+INSERT INTO `address_book` VALUES (1,1,'Company','FirstName','LastName','1','Estate','Building','888',NULL,NULL,'2020-03-12 04:16:49',NULL,'2020-03-12 04:16:49',NULL,'active','yes');
 /*!40000 ALTER TABLE `address_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1165,7 +1166,7 @@ CREATE TABLE `order` (
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   `order_status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1174,6 +1175,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (1,10,1,'A customer','Company','1','香港 港島  中西區 堅尼地城  EstateBuilding888室','香港','港島','中西區','堅尼地城','Estate','Building','888','2222222','customerA@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,20.00,'123',NULL,NULL,100.00,'2020-03-12 00:00:00',NULL,NULL,0,NULL,NULL,0,NULL,NULL,'2020-03-12 04:19:05',NULL,'2020-03-12 04:19:05',NULL,'active','pending');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1230,7 +1232,7 @@ CREATE TABLE `order_product` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`order_product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1239,6 +1241,7 @@ CREATE TABLE `order_product` (
 
 LOCK TABLES `order_product` WRITE;
 /*!40000 ALTER TABLE `order_product` DISABLE KEYS */;
+INSERT INTO `order_product` VALUES (1,1,1,NULL,10.00,10,100.00,'2020-03-12 04:19:05',NULL,'2020-03-12 04:19:05',NULL,'active');
 /*!40000 ALTER TABLE `order_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1265,7 +1268,7 @@ CREATE TABLE `order_product_description` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`order_product_description_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1274,6 +1277,7 @@ CREATE TABLE `order_product_description` (
 
 LOCK TABLES `order_product_description` WRITE;
 /*!40000 ALTER TABLE `order_product_description` DISABLE KEYS */;
+INSERT INTO `order_product_description` VALUES (1,1,1,11,1,1,'ProductA','ProductAttributeName','<p>labels.Description (HongKong)</p>','2020-03-12 04:19:05',NULL,'2020-03-12 04:19:05',NULL,'active');
 /*!40000 ALTER TABLE `order_product_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1532,7 +1536,7 @@ CREATE TABLE `product_attribute` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`product_attribute_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1541,6 +1545,7 @@ CREATE TABLE `product_attribute` (
 
 LOCK TABLES `product_attribute` WRITE;
 /*!40000 ALTER TABLE `product_attribute` DISABLE KEYS */;
+INSERT INTO `product_attribute` VALUES (1,1,NULL,'10','20',10.00,'add',0,'2020-03-12 04:18:52',NULL,'2020-03-12 04:18:52',NULL,'active');
 /*!40000 ALTER TABLE `product_attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1562,7 +1567,7 @@ CREATE TABLE `product_attribute_description` (
   `edit_by_id` varchar(45) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_general_mysql500_ci NOT NULL,
   PRIMARY KEY (`product_attribute_description_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1571,6 +1576,7 @@ CREATE TABLE `product_attribute_description` (
 
 LOCK TABLES `product_attribute_description` WRITE;
 /*!40000 ALTER TABLE `product_attribute_description` DISABLE KEYS */;
+INSERT INTO `product_attribute_description` VALUES (1,11,1,'ProductAttributeName','2020-03-12 04:18:52',NULL,'2020-03-12 04:18:52',NULL,'active');
 /*!40000 ALTER TABLE `product_attribute_description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2967,4 +2973,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-12 12:10:29
+-- Dump completed on 2020-03-12 13:45:29
