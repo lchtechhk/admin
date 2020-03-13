@@ -14,6 +14,11 @@
             @include('layouts/responseMessage')
         </div>
     </div>
+    <div class="login-logo">
+        <div style="font-size: 25px;">
+            最後更新日期：2020年3月13日
+        </div>
+    </div>
     <div class="login-box-body">
         <p class="login-box-msg">{{ trans('labels.login_text') }}</p>
         @if( count($errors) > 0)
