@@ -282,7 +282,7 @@
         </a>
       </li>
 
-      <li
+      {{-- <li
         class="treeview 
           {{ Request::is('admin/listingUser') ? 'active' : '' }} 
           {{ Request::is('admin/viewUser') ? 'active' : '' }} 
@@ -302,7 +302,7 @@
           <i class="fa fa-list-ul" aria-hidden="true"></i> <span>
             {{ trans('labels.link_company') }}</span>
         </a>
-      </li>
+      </li> --}}
 
       {{-- <li class="treeview {{ Request::is('admin/shippingmethods') ? 'active' : '' }}
       {{ Request::is('admin/upsShipping') ? 'active' : '' }} {{ Request::is('admin/flateRate') ? 'active' : '' }}">
