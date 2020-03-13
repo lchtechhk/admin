@@ -27,8 +27,10 @@
                                                     <th>{{ trans('labels.Name') }}</th>
                                                     <th>{{ trans('labels.Image') }}</th>
                                                     <th>{{ trans('labels.Qty') }}</th>
+                                                    <th>{{ trans('labels.OriginalPrice') }}</th>
                                                     <th>{{ trans('labels.price_prefix') }}</th>
                                                     <th>{{ trans('labels.price') }}</th>
+                                                    <th>{{ trans('labels.FinalPrice') }}</th>
                                                     <th>{{ trans('labels.Action') }}</th>
                                                 </tr>
                                             </thead>
@@ -48,8 +50,10 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $product_attribute->qty }}</td>
+                                                    <td>{{ $product_attribute->original_product }}</td>
                                                     <td>{{ $product_attribute->price_prefix }}</td>
                                                     <td>{{ $product_attribute->price }}</td>
+                                                    <td>{{ $product_attribute->final_price }}</td>
                                                     <td>
                                                         <a product_id='{{ $product_attribute->product_id }}'
                                                             product_attribute_id="{{ $product_attribute->product_attribute_id }}"

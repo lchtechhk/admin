@@ -1,4 +1,6 @@
 @include('generic/view_function')
+<script src={{App::make('url')->to('/')."/resources/assets/js/product_attribute.js"}}></script>
+
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -99,6 +101,19 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="name"
+                    class="col-sm-2 col-md-3 control-label">{{ trans('labels.OriginalPrice') }}</label>
+                <div class="col-sm-10 col-md-4">
+                    {!! Form::text('original_product', 
+                    print_value( $result['product']->price ),
+                    array('class'=>'form-control field-validate', 'id'=>'original_product','readonly')) !!}
+                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                    {{ trans('labels.ProductOriginalPriceText') }}
+                    </span>
+                    <span class="help-block hidden">{{ trans('labels.ProductOriginalPriceText') }}</span>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Price') }}</label>
                 <div class="col-sm-2 col-md-2">
                     <select class="form-control" name="price_prefix" id="price_prefix">
@@ -120,6 +135,19 @@
                     {{ trans('labels.ProductAttributePriceText') }}
                     </span>
                     <span class="help-block hidden">{{ trans('labels.ProductAttributePriceText') }}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name"
+                    class="col-sm-2 col-md-3 control-label">{{ trans('labels.FinalPrice') }}</label>
+                <div class="col-sm-10 col-md-4">
+                    {!! Form::text('final_price', 
+                    print_value( !empty($result['product_attribute']->final_price) ? $result['product_attribute']->final_price : "" ),
+                    array('class'=>'form-control field-validate', 'id'=>'final_price','readonly')) !!}
+                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                    {{ trans('labels.ProductFinalPriceText') }}
+                    </span>
+                    <span class="help-block hidden">{{ trans('labels.ProductFinalPriceText') }}</span>
                 </div>
             </div>
             <div class="form-group">

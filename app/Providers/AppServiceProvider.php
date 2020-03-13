@@ -36,13 +36,13 @@ class AppServiceProvider extends ServiceProvider
 				->get();
 				
 		//products low in quantity
-		$lowInQunatity = DB::table('product')
-			->LeftJoin('product_description', 'product_description.product_id', '=', 'product.product_id')
-			->whereColumn('product.quantity', '<=', 'product.low_limit')
-			->where('product_description.language_id', '=', '1')
-			->where('product.low_limit', '>', 0)
-			//->get();
-			->paginate(10);
+		// $lowInQunatity = DB::table('product')
+		// 	->LeftJoin('product_description', 'product_description.product_id', '=', 'product.product_id')
+		// 	->whereColumn('product.quantity', '<=', 'product.low_limit')
+		// 	->where('product_description.language_id', '=', '1')
+		// 	->where('product.low_limit', '>', 0)
+		// 	//->get();
+		// 	->paginate(10);
 		
 		// $languages = DB::table('languages')->get();
 		// view()->share('languages', $languages);
@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
 
 		view()->share('unseenOrders', $result);
 		view()->share('newCustomers', $newCustomers);
-		view()->share('lowInQunatity', $lowInQunatity);    		
+		// view()->share('lowInQunatity', $lowInQunatity);    		
 	}
 
     /**

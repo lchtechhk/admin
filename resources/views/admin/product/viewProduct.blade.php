@@ -144,7 +144,7 @@
                                         </div>
                                     </div> -->
 
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="name" class="col-sm-2 col-md-3 control-label">
                                             {{ trans('labels.ProductsQuantity') }}
                                             <span style="color:red">★</span>
@@ -158,9 +158,9 @@
                                             </span>
                                             <span class="help-block hidden">{{ trans('labels.ProductsQuantityText') }}</span>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.QuantityLowLimit') }}</label>
                                         <div class="col-sm-10 col-md-4">
                                             {!! Form::text('low_limit', 
@@ -169,7 +169,7 @@
                                             <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                             {{ trans('labels.QuantityLowLimitText') }}</span>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <hr>  
 

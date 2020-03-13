@@ -119,9 +119,9 @@
         <li class="dropdown messages-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-th"></i>
-            <span class="label label-warning">{{ count($lowInQunatity) }}</span>
+            {{-- <span class="label label-warning">{{ count($lowInQunatity) }}</span> --}}
           </a>
-          <ul class="dropdown-menu">
+          {{-- <ul class="dropdown-menu">
             <li class="header">{{ count($lowInQunatity) }} {{ trans('labels.products_are_in_low_quantity') }}</li>
             <li>
               <ul class="menu">
@@ -138,11 +138,9 @@
                   </a>
                 </li>
                 @endforeach
-                <!-- end message -->
               </ul>
             </li>
-            <!--<li class="footer"><a href="#">See All Messages</a></li>-->
-          </ul>
+          </ul> --}}
         </li>
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
