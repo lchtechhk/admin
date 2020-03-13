@@ -50,7 +50,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $product_attribute->qty }}</td>
-                                                    <td>{{ $product_attribute->original_product }}</td>
+                                                    <td>{{ $product_attribute->original_price }}</td>
                                                     <td>{{ $product_attribute->price_prefix }}</td>
                                                     <td>{{ $product_attribute->price }}</td>
                                                     <td>{{ $product_attribute->final_price }}</td>

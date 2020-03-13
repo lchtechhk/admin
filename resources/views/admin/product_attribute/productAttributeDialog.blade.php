@@ -105,7 +105,7 @@
                     class="col-sm-2 col-md-3 control-label">{{ trans('labels.OriginalPrice') }}</label>
                 <div class="col-sm-10 col-md-4">
                     {!! Form::text('original_product', 
-                    print_value( $result['product']->price ),
+                    print_value( $result['product']->original_price ),
                     array('class'=>'form-control field-validate', 'id'=>'original_product','readonly')) !!}
                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                     {{ trans('labels.ProductOriginalPriceText') }}

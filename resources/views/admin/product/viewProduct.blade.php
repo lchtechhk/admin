@@ -110,7 +110,7 @@
                                         </label>
                                         <div class="col-sm-10 col-md-4">
                                             {!! Form::text('price', 
-                                            print_value( (isset($_POST['price']) ? $_POST['price'] : (!empty($result['product']->price) ? $result['product']->price : '' ))),
+                                            print_value( (isset($_POST['price']) ? $_POST['price'] : (!empty($result['product']->original_price) ? $result['product']->original_price : '' ))),
                                             array('class'=>'form-control field-validate', 'id'=>'price')) !!}
                                             <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                             {{ trans('labels.ProductPriceText') }}

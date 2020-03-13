@@ -20,4 +20,8 @@
         }
         return $value;
     }
+    function check_operation($operation){
+        return $operation == 'part_customer_address' || $operation == 'part_edit_product'|| $operation == 'edit' || 
+        $operation == 'view_edit' || $operation == 'listing' || $operation == 'changeable';
+    }
 ?>

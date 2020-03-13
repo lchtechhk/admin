@@ -99,6 +99,7 @@ class OrderService extends BaseApiService{
             foreach ($ps->language_array as $language_id => $p) {
                 $product_description = array();
                 $product_description['order_product_id'] = $inset_order_product_result['response_id'];
+                $product_description['order_id'] = $result['order_id'];
                 $product_description['product_id'] = $ps->product_id;
                 $product_description['product_attribute_id'] = $ps->product_attribute_id;
                 $product_description['language_id'] = $language_id; 
@@ -167,12 +168,11 @@ class OrderService extends BaseApiService{
                     $this->addOrderProduct($result);
                     $this->update_order_total_price($result['order_id']);
                     $result = $this->response($result,"Successful","view_edit");
-                    $result['order'] = $this->getOrder($result['order_id']);
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }		
-                // Log::info('[add_product] --  : ' . \json_encode($result));
+                $result['order'] = $this->getOrder($result['order_id']);
                 return view("admin.order.viewOrder", $title)->with('result', $result);
             break;
             case 'edit_product':

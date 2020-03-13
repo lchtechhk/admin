@@ -21,17 +21,18 @@
     function order_change_product(asset,a){
         if(a != undefined){
             initial();
+            console.log(json)
+
             $("#add_product_quantity").attr("readonly", false); 
             var json = JSON.parse(a)
             var product_attribute_name = json["product_attribute_name"];
             var image = json["image"];
-            var price = json["price"];
+            var final_price = json["final_price"];
             // console.log(asset)
             // console.log(image)
-            // console.log(price)
             $('#add_product_name').val(product_attribute_name);
             $('#add_order_product_image').attr('src', asset+image)
-            $('#add_product_price').val(price);
+            $('#add_product_price').val(final_price);
         }
     }
 </script>
@@ -50,7 +51,7 @@
                         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.OrderId') }}<span style="color:red">★</span></label> 
                         <div class="col-sm-10 col-md-4">
                             {!! Form::text('order_id', 
-                            empty($result['order']->order_id) ? '' : print_value($result['operation'],$result['order']->order_id),
+                            empty($result['order']->order_id) ? '' : print_value($result['order']->order_id),
                             array('class'=>'form-control','readonly','required')) !!}
                         </div>
                     </div>
@@ -70,8 +71,10 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Image') }}<span style="color:red"></span></label> 
                         <div class="col-sm-10 col-md-4">
-                            @if(!empty($result['order_product']->image))
-                                <img id="add_order_product_image" src="" width="60px">
+                            @if(!empty($result['product_attributes']->image))
+                        <img id="add_order_product_image" 
+                            src={{asset('').$result['product_attributes']->image}}
+                            width="60px">
                             @else
                             <img id="add_order_product_image" src={{asset('')."resources/assets/images/default_images/product.png"}}
                                 style="width: 50px; float: left; margin-right: 10px">
