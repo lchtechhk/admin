@@ -22,16 +22,17 @@
         if(a != undefined){
             initial();
             $("#add_product_quantity").attr("readonly", false); 
+            console.log("a : " + a);
             var json = JSON.parse(a)
             var product_attribute_name = json["product_attribute_name"];
             var image = json["image"];
-            var price = json["price"];
+            var final_price = json["final_price"];
             // console.log(asset)
             // console.log(image)
             // console.log(price)
             $('#add_product_name').val(product_attribute_name);
             $('#add_order_product_image').attr('src', asset+image)
-            $('#add_product_price').val(price);
+            $('#add_product_price').val(final_price);
         }
     }
 </script>
