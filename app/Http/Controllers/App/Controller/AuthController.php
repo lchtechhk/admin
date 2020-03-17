@@ -45,7 +45,7 @@ class AuthController extends Controller{
         ];
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
-            return response()->json(['status'=> false, 'message'=> $validator->messages()]);
+            return response()->json(['status'=> false, 'message'=> "The email must be a valid email address."]);
         }
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
