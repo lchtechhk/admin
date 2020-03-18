@@ -46,6 +46,7 @@ class AppViewProductService extends AppBaseApiService{
 
 
     }
+    
     function test(){
         return $this->findAll();
     }

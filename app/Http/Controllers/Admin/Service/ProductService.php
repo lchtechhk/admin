@@ -11,10 +11,12 @@ use App\Http\Controllers\Admin\Service\View_CategoryService;
 use App\Http\Controllers\Admin\Service\View_SubCategoryService;
 use App\Http\Controllers\Admin\Service\View_ManufacturerService;
 use App\Http\Controllers\Admin\Service\UnitService;
+use App\Http\Controllers\Admin\Service\ProductAttributeService;
 
 use App\Http\Controllers\Admin\Service\LanguageService;
 use App\Http\Controllers\Admin\Service\UploadService;
 use App\Http\Controllers\Admin\Service\ProductDescriptionService;
+use App\Http\Controllers\Admin\Service\ProductAttributeDescriptionService;
 
 
 
@@ -23,6 +25,7 @@ class ProductService extends BaseApiService{
     private $LanguageService;
     private $UploadService;
     private $ProductService;
+    private $ProductAttributeService;
 
 
     function __construct(){
@@ -36,6 +39,8 @@ class ProductService extends BaseApiService{
         $this->View_ManufacturerService = new View_ManufacturerService();
         $this->View_ProductService = new View_ProductService();
         $this->UnitService = new UnitService();
+        $this->ProductAttributeService = new ProductAttributeService();
+        $this->ProductAttributeDescriptionService = new ProductAttributeDescriptionService();
 
 
     }
@@ -89,6 +94,18 @@ class ProductService extends BaseApiService{
                     }
                     $add_product_result = $this->add($result);
                     if(empty($add_product_result['status']) || $add_product_result['status'] == 'fail')throw new Exception("Error To Add Product");
+                    // Add ProductAttribute
+                    $attribute_param = array();
+                    $attribute_param['product_id'] = $add_product_result ['response_id'];
+                    $attribute_param['image'] = !empty($result['image']) ? $result['image'] : "";
+                    $attribute_param['qty'] = 100;
+                    $attribute_param['low_limit'] = 1;
+                    $attribute_param['price'] = 0;
+                    $attribute_param['price_prefix'] = 'add';
+                    $attribute_param['sorting'] = 0;
+                    $add_attribute_result = $this->ProductAttributeService->add($attribute_param);
+                    if(empty($add_attribute_result['status']) || $add_attribute_result['status'] == 'fail')throw new Exception("Error To Add Product Attribute");                    
+                    // Language
                     $result['product_id'] = $add_product_result['response_id'];
                     foreach ($result['language_array'] as $language_id => $obj) {
                         $name = $obj['name'];
@@ -100,6 +117,9 @@ class ProductService extends BaseApiService{
                         $param['description'] = $description;
                         $add_product_description_result = $this->ProductDescriptionService->add($param);
                         if(empty($add_product_description_result['status']) || $add_product_description_result['status'] == 'fail')throw new Exception("Error To Add Product Description");
+                        $param['product_attribute_id'] = $add_attribute_result['response_id'];
+                        $add_product_attribute_description_result = $this->ProductAttributeDescriptionService->add($param);
+                        if(empty($add_product_attribute_description_result['status']) || $add_product_attribute_description_result['status'] == 'fail')throw new Exception("Error To Add Product Attribute Description");
                     }
                     $result = $this->response($result,"Successful","view_edit");
                     $result['product'] = $this->getProduct($result['product_id']);
