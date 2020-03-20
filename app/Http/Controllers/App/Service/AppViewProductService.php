@@ -41,6 +41,8 @@ class AppViewProductService extends AppBaseApiService{
         foreach ($result_attribute as $attribute_index => $attribute_obj) {
             $a_product_id = $attribute_obj->product_id;
             if(isset($key_product[$a_product_id])){
+                $original_image = $key_product[$a_product_id]->image;
+                $attribute_obj->original_image = $original_image;
                 array_push($key_product[$a_product_id]->attribute,$attribute_obj);
             }
         }
@@ -54,7 +56,7 @@ class AppViewProductService extends AppBaseApiService{
         foreach ($key_product as $key_id => $value) {
             $result[] = $value;
         }
-        Log::info("result : " . json_encode($result));
+        Log::info("search : " . json_encode($result));
 
         return $result;
 
