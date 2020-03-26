@@ -41,6 +41,20 @@ class AppProductController extends Controller{
         }catch(Exception $e){
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
         }
+    }
 
+    function getProductDetails(Request $request){
+        try{
+            $product_id = $request->input('product_id');
+            $search = array();
+            if(!empty($product_id) && $product_id > 0)$search['product_id'] = $product_id;
+            $search['status'] = 'active';
+
+            $product = $this->AppViewProductService->findByProductId($search);
+            Log::info("product : " . json_encode($product));
+            return response()->json(['status' => true, 'data'=> [ 'product' => $product]],200);
+        }catch(Exception $e){
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
+        }
     }
 }

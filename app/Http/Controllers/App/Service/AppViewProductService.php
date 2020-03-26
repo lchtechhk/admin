@@ -56,13 +56,27 @@ class AppViewProductService extends AppBaseApiService{
         foreach ($key_product as $key_id => $value) {
             $result[] = $value;
         }
-        Log::info("search : " . json_encode($result));
+        // Log::info("search : " . json_encode($result));
 
         return $result;
 
 
     }
     
+    function findByProductId($search){
+        $result_product = $this->findByArrayWithLanguage($search);
+        if(!empty($result_product) && \sizeof($result_product) > 0){
+            $result_product = $result_product[0];
+            $result_attribute = $this->AppViewProductAttributeService->findByColumn_ValueWithLanguage('product_id',$search['product_id']);
+            $result_image = $this->AppProductImageService->findByColumn_Value('product_id',$search['product_id']);
+    
+            $result_product->attribute = $result_attribute;
+            $result_product->images = $result_image;
+            // Log::info("result_product : " . json_encode($result_product));
+            return $result_product;
+        }
+        return null;
+    }
     function test(){
         return $this->findAll();
     }
