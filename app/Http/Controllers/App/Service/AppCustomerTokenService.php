@@ -7,13 +7,18 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 use App\Http\Controllers\App\Service\AppViewCustomerService;
+use App\Http\Controllers\App\Service\AppViewAddressBookService;
 
 class AppCustomerTokenService extends AppBaseApiService{
     private $AppViewCustomerService;
+    private $AppViewAddressBookService;
+
     function __construct(){
         $this->setTable('customer_token');
         $this->companyAuth = false;
         $this->AppViewCustomerService = new AppViewCustomerService(); 
+        $this->AppViewAddressBookService = new AppViewAddressBookService(); 
+
     }
 
     function save_token($operation_type,$token){
@@ -27,6 +32,10 @@ class AppCustomerTokenService extends AppBaseApiService{
             // getProfile
             $profile = $this->AppViewCustomerService->getProfile($customer_id);
             $result['owner'] = $profile;
+
+            // getCustomerAddress
+            $address = $this->AppViewAddressBookService->findByCustomerId($customer_id);
+            $result['address'] = $address;
             // Search Token History
             $token_histories = $this->findByColumn_Value("customer_id",$customer_id);
             // Log::info("token_histories : " . json_encode($token_histories));
@@ -50,6 +59,7 @@ class AppCustomerTokenService extends AppBaseApiService{
             if(empty($add_token_result['status']) || $add_token_result['status'] == 'fail')throw new Exception("Error To Add Token");
             $result = $this->response($result,"Successful","view_edit");
             DB::commit();
+            Log::info("address : " . json_encode($result));
         }catch(Exception $e){
             $result = $this->throwException($result,$e->getMessage(),true);
         }
