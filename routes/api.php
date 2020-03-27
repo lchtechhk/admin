@@ -16,9 +16,11 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 
 		// Category
 		Route::get('/listingCategory', 'Controller\AppCategoryController@listingCategory');
+		// District
+		Route::get('/listingDistrict', 'Controller\AppDistrictController@listingDistrict');
 		// Order
 		Route::post('/listingOrder', 'Controller\AppOrderController@listingOrder');
-		// Order
+		// Compnay
 		Route::post('/getCompanyInfo', 'Controller\AppCustomerController@getCompanyInfo');
 
 	});
