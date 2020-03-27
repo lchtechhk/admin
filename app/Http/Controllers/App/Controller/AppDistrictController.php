@@ -15,11 +15,14 @@ use Illuminate\Http\Request;
 
 
 use App\Http\Controllers\App\Service\AppViewDistrictService;
+use App\Http\Controllers\App\Service\AppAddressBookService;
 
 class AppDistrictController extends Controller{
-    private $AppViewOAppViewDistrictServicerderService;
-    
+    private $AppAddressBookService;
+    private $AppViewDistrictService;
+
 	public function __construct(){
+		$this->AppAddressBookService = new AppAddressBookService();
 		$this->AppViewDistrictService = new AppViewDistrictService();
 
 	}
@@ -34,7 +37,11 @@ class AppDistrictController extends Controller{
         }
     }
 
-    function updateCustomerAddress(){
-        
+    function updateCustomerAddress(Request $request){
+        $param = array();
+        $param = $request->input();
+        $update_address_result = $this->AppAddressBookService->updateCustomerAddress($param);
+        Log::info("result : " . json_encode($update_address_result));
+
     }
 }

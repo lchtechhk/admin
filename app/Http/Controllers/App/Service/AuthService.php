@@ -27,6 +27,11 @@ class AuthService {
         }
     }
 
+    public function getCustomerIdByToken($token){
+        JWTAuth::setToken($token);
+        $payload = JWTAuth::getPayload($token);
+        return $customer_id = $payload['sub'];
+    }
     public function refresh_token($old_token){
         $result = array();
         try {
