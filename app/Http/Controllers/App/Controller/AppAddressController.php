@@ -24,6 +24,17 @@ class AppAddressController extends Controller{
 
     }
     
+    function getAddressByCustomerId(){
+        try{
+            DB::beginTransaction();
+            $customer_address = $this->AppAddressBookService->findAddressByCustomerId();
+            return response()->json(['status' => true, 'data'=> [ 'customer_address' => $customer_address],'message' => 'Successful' ],200);
+            DB::commit();
+        }catch(Exception $e){
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
+        }
+    }
+
     function addCustomerAddress(Request $request){
         try{
             DB::beginTransaction();
