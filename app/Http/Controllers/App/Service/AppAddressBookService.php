@@ -32,6 +32,18 @@ class AppAddressBookService extends AppBaseApiService{
         return $result;   
     }
 
+    function deleteCustomerAddress($address_id){
+        $result = array();
+        try{
+            $delete_address_result = $this->deleteByKey_Value("id",$address_id);
+            if(empty($delete_address_result['status']) || $delete_address_result['status'] == 'fail')throw new Exception("Error To Delete Address");
+            $result = $this->response($result,"Successful","view_edit");
+        }catch(Exception $e){
+            $result = $this->throwException($result,$e->getMessage(),false);
+        }
+        return $result;   
+    }
+
     function updateAddressDefault($token,$address_book_id){
         // Log::info("token : " . $token);
         // Log::info("address_book_id : " . $address_book_id);

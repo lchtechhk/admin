@@ -44,4 +44,20 @@ class AppAddressController extends Controller{
         // Log::info("result : " . json_encode($update_address_result));
 
     }
+
+    function deleteCustomerAddress(Request $request){
+        try{
+            DB::beginTransaction();
+            $param = array();
+            $address_id = $request->input("address_id");
+            $delete_address_result = $this->AppAddressBookService->deleteCustomerAddress($address_id);
+            if(empty($delete_address_result['status']) || $delete_address_result['status'] == 'fail')throw new Exception($delete_address_result['message']);
+            DB::commit();
+            return response()->json(['status' => true, 'data'=> '','message' => 'Successful' ]);
+        }catch(Exception $e){
+            $this->AppAddressBookService->throwException(array(),$e->getMessage(),true);
+            Log::info("[deleteCustomerAddress] -- Error : " . $e->getMessage());
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
+        }
+    }
 }
