@@ -18,6 +18,7 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		Route::get('/listingCategory', 'Controller\AppCategoryController@listingCategory');
 		// District
 		Route::get('/listingDistrict', 'Controller\AppDistrictController@listingDistrict');
+		Route::post('/addCustomerAddress', 'Controller\AppAddressController@addCustomerAddress');
 		Route::post('/updateCustomerAddress', 'Controller\AppAddressController@updateCustomerAddress');
 		Route::post('/deleteCustomerAddress', 'Controller\AppAddressController@deleteCustomerAddress');
 		// Order

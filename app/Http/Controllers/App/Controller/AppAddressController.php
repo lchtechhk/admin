@@ -24,6 +24,25 @@ class AppAddressController extends Controller{
 
     }
     
+    function addCustomerAddress(Request $request){
+        try{
+            DB::beginTransaction();
+            $param = array();
+            $param = $request->input();
+            $add_address_result = $this->AppAddressBookService->addCustomerAddress($param);
+            if(empty($add_address_result['status']) || $add_address_result['status'] == 'fail')throw new Exception($add_address_result['message']);
+            DB::commit();
+            return response()->json(['status' => true, 'data'=> '','message' => 'Successful' ]);
+        }catch(Exception $e){
+            $this->AppAddressBookService->throwException(array(),$e->getMessage(),true);
+            Log::info("[updateCustomerAddress] -- Error : " . $e->getMessage());
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
+        }
+        
+        // Log::info("result : " . json_encode($update_address_result));
+
+    }
+
     function updateCustomerAddress(Request $request){
         try{
             DB::beginTransaction();

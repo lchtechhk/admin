@@ -9,6 +9,9 @@ use League\Flysystem\Exception;
 
 abstract class AppBaseApiService extends AppDao{ 
  
+        function __construct(){
+            parent::__construct();
+        }
         public function add($array){
             try{
                 $array['status'] = 'active';
