@@ -13,19 +13,6 @@ class AppAddressBookService extends AppBaseApiService{
         $this->companyAuth = false;
     }
 
-    function findAddressByCustomerId(){
-        $result = array();
-        try{
-            $customer_id = JWTAuth::parseToken()->authenticate()->id;
-            $customer_address = $this->findByColumn_Value("customer_id",$customer_id);
-            Log::info("[findAddressByCustomerId] : " . json_encode($customer_address));
-            $result = $customer_address;
-        }catch(Exception $e){
-            $result = $this->throwException($result,$e->getMessage(),false);
-        }
-        return $result;   
-    }
-
     function addCustomerAddress($param){
         $result = array();
         try{

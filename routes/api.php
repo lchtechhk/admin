@@ -23,7 +23,7 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		Route::post('/addCustomerAddress', 'Controller\AppAddressController@addCustomerAddress');
 		Route::post('/updateCustomerAddress', 'Controller\AppAddressController@updateCustomerAddress');
 		Route::post('/deleteCustomerAddress', 'Controller\AppAddressController@deleteCustomerAddress');
-		Route::get('/getAddressByCustomerId', 'Controller\AppAddressController@getAddressByCustomerId');
+		Route::get('/getAddressByToken', 'Controller\AppAddressController@getAddressByToken');
 
 		// Order
 		Route::post('/listingOrder', 'Controller\AppOrderController@listingOrder');

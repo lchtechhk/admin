@@ -14,20 +14,23 @@ use Exception;
 use Illuminate\Http\Request;
 
 
+use App\Http\Controllers\App\Service\AppViewAddressBookService;
 use App\Http\Controllers\App\Service\AppAddressBookService;
 
 class AppAddressController extends Controller{
+    private $AppViewAddressBookService;
     private $AppAddressBookService;
 
 	public function __construct(){
+		$this->AppViewAddressBookService = new AppViewAddressBookService();
 		$this->AppAddressBookService = new AppAddressBookService();
 
     }
     
-    function getAddressByCustomerId(){
+    function getAddressByToken(){
         try{
             DB::beginTransaction();
-            $customer_address = $this->AppAddressBookService->findAddressByCustomerId();
+            $customer_address = $this->AppViewAddressBookService->findAddressByToken();
             return response()->json(['status' => true, 'data'=> [ 'customer_address' => $customer_address],'message' => 'Successful' ],200);
             DB::commit();
         }catch(Exception $e){
