@@ -20,12 +20,6 @@ class AppViewDistrictService extends AppBaseApiService{
     }
 
     function getAllDistrict(){
-        $customer_id = JWTAuth::parseToken()->authenticate()->id;
-        $company_id = JWTAuth::parseToken()->authenticate()->company_id;
-        $language_id = JWTAuth::parseToken()->authenticate()->default_language_id;
-        Log::info("customer_id : " . $this->customer_id);
-        Log::info("company_id : " . $this->company_id);
-        Log::info("language_id : " . $this->language_id);
         return $this->findByColumn_Value("district_status","active");
     }
 }

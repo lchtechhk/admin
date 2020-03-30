@@ -4,27 +4,33 @@ use Log;
 use DB;
 use Lang;
 use Exception;
-
-
-use App\Http\Controllers\App\Service\AuthService;
-
+use JWTAuth;
 
 class AppAddressBookService extends AppBaseApiService{
-    private $AuthService;
-
 
     function __construct(){
         $this->setTable('address_book');
         $this->companyAuth = false;
-        $this->AuthService = new AuthService();   
+    }
 
+    function addCustomerAddress($param){
+        $result = array();
+        try{
+            $param['customer_id'] = JWTAuth::parseToken()->authenticate()->id;
+            $add_address_result = $this->add($param);
+            if(empty($add_address_result['status']) || $add_address_result['status'] == 'fail')throw new Exception("Error To Add Address");
+            $result = $this->response($result,"Successful","view_edit");
+        }catch(Exception $e){
+            $result = $this->throwException($result,$e->getMessage(),false);
+        }
+        return $result;   
     }
 
     function updateCustomerAddress($param){
         $result = array();
         try{
             $update_address_result = $this->update("id",$param);
-            if(empty($update_address_result['status']) || $update_address_result['status'] == 'fail')throw new Exception("Error To update Address");
+            if(empty($update_address_result['status']) || $update_address_result['status'] == 'fail')throw new Exception("Error To Update Address");
             $result = $this->response($result,"Successful","view_edit");
         }catch(Exception $e){
             $result = $this->throwException($result,$e->getMessage(),false);
@@ -50,7 +56,7 @@ class AppAddressBookService extends AppBaseApiService{
 
         $result = array();
         try{
-            $customer_id = $this->AuthService->getCustomerIdByToken($token);
+            $customer_id = JWTAuth::parseToken()->authenticate()->id;
             $clear_param = array("customer_id"=>$customer_id,'is_default'=>'no');
             // Log::info("clear_param : " . json_encode($clear_param));
 
