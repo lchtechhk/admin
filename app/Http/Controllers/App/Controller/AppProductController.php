@@ -63,9 +63,9 @@ class AppProductController extends Controller{
 
     function getProductByAttIds(Request $request){
         try{
-            $attu_ids = $request->input('attu_ids');
+            $att_ids = $request->input('att_ids');
             $search = array();
-            if(!empty($attu_ids) && $attu_ids > 0)$search['product_attribute_id'] = $attu_ids;
+            if(!empty($att_ids) && $att_ids > 0)$search['product_attribute_id'] = $att_ids;
             $search['status'] = 'active';
             $products = $this->AppViewProductAttributeService->findByAttIds($search);
             Log::info("products : " . json_encode($products));
