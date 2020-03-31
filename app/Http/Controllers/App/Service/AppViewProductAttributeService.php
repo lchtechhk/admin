@@ -18,7 +18,7 @@ class AppViewProductAttributeService extends AppBaseApiService{
         if(!empty($result_product) && \sizeof($result_product) > 0){
             return $result_product;
         }
-        return null;
+        return array();
     }
     function test(){
         return $this->findAll();
