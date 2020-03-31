@@ -79,7 +79,11 @@
             if($this->companyAuth)$result = $result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
 
             foreach ($array as $column => $value) {
-                $result = $result->where($column, $value);
+                if(\is_array($value)){
+                    $result = $result->whereIN($column, $value);
+                }else {
+                    $result = $result->where($column, $value);
+                }
             }
             $result = $result->get();
             Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findByColumn_ValuesWithLanguage : ' . json_encode($array));

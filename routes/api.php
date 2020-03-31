@@ -10,9 +10,10 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		Route::get('/refresh_token', 'Controller\AuthController@refresh_token');
 
 
-		// Product
+		// Product / Att
 		Route::post('/listingProduct', 'Controller\AppProductController@listingProduct');
 		Route::post('/getProductDetails', 'Controller\AppProductController@getProductDetails');
+		Route::post('/getProductByAttIds', 'Controller\AppProductController@getProductByAttIds');
 
 		// Category
 		Route::get('/listingCategory', 'Controller\AppCategoryController@listingCategory');

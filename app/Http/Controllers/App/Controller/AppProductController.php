@@ -16,14 +16,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\App\Service\AppProductService;
 use App\Http\Controllers\App\Service\AppViewProductService;
+use App\Http\Controllers\App\Service\AppViewProductAttributeService;
 
 class AppProductController extends Controller{
     private $AppProductService;
     private $AppViewProductService;
+    private $AppViewProductAttributeService;
 
 	public function __construct(){
 		$this->AppProductService = new AppProductService();
 		$this->AppViewProductService = new AppViewProductService();
+		$this->AppViewProductAttributeService = new AppViewProductAttributeService();
 
 	}
     
@@ -53,6 +56,20 @@ class AppProductController extends Controller{
             $product = $this->AppViewProductService->findByProductId($search);
             Log::info("product : " . json_encode($product));
             return response()->json(['status' => true, 'data'=> [ 'product' => $product]],200);
+        }catch(Exception $e){
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
+        }
+    }
+
+    function getProductByAttIds(Request $request){
+        try{
+            $attu_ids = $request->input('attu_ids');
+            $search = array();
+            if(!empty($attu_ids) && $attu_ids > 0)$search['product_attribute_id'] = $attu_ids;
+            $search['status'] = 'active';
+            $products = $this->AppViewProductAttributeService->findByAttIds($search);
+            Log::info("products : " . json_encode($products));
+            return response()->json(['status' => true, 'data'=> [ 'products' => $products]],200);
         }catch(Exception $e){
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
         }

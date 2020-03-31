@@ -77,6 +77,7 @@ class AppViewProductService extends AppBaseApiService{
         }
         return null;
     }
+
     function test(){
         return $this->findAll();
     }

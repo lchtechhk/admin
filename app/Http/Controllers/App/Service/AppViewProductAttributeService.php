@@ -13,6 +13,13 @@ class AppViewProductAttributeService extends AppBaseApiService{
         $this->companyAuth = true;
     }
 
+    function findByAttIds($param){
+        $result_product = $this->findByArrayWithLanguage($param);
+        if(!empty($result_product) && \sizeof($result_product) > 0){
+            return $result_product;
+        }
+        return null;
+    }
     function test(){
         return $this->findAll();
     }
