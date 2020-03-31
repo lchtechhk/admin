@@ -64,8 +64,6 @@ class AppAddressController extends Controller{
             $param = $request->input();
             $update_address_result = $this->AppAddressBookService->updateCustomerAddress($param);
             if(empty($update_address_result['status']) || $update_address_result['status'] == 'fail')throw new Exception($update_address_result['message']);
-            $update_default_result = $this->AppAddressBookService->updateAddressDefault($param['token'],$param['id']);
-            if(empty($update_default_result['status']) || $update_default_result['status'] == 'fail')throw new Exception($update_default_result['message']);
             DB::commit();
             return response()->json(['status' => true, 'data'=> '','message' => 'Successful' ]);
         }catch(Exception $e){

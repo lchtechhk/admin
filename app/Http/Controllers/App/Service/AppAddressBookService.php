@@ -19,6 +19,10 @@ class AppAddressBookService extends AppBaseApiService{
             $param['customer_id'] = JWTAuth::parseToken()->authenticate()->id;
             $add_address_result = $this->add($param);
             if(empty($add_address_result['status']) || $add_address_result['status'] == 'fail')throw new Exception("Error To Add Address");
+            if($param['is_default']){
+                $update_default_result = $this->updateAddressDefault($add_address_result['response_id']);
+                if(empty($update_default_result['status']) || $update_default_result['status'] == 'fail')throw new Exception($update_default_result['message']);
+            }
             $result = $this->response($result,"Successful","view_edit");
         }catch(Exception $e){
             $result = $this->throwException($result,$e->getMessage(),false);
@@ -31,6 +35,10 @@ class AppAddressBookService extends AppBaseApiService{
         try{
             $update_address_result = $this->update("id",$param);
             if(empty($update_address_result['status']) || $update_address_result['status'] == 'fail')throw new Exception("Error To Update Address");
+            if($param['is_default']){
+                $update_default_result = $this->updateAddressDefault($param['id']);
+                if(empty($update_default_result['status']) || $update_default_result['status'] == 'fail')throw new Exception($update_default_result['message']);
+            }
             $result = $this->response($result,"Successful","view_edit");
         }catch(Exception $e){
             $result = $this->throwException($result,$e->getMessage(),false);
@@ -50,15 +58,11 @@ class AppAddressBookService extends AppBaseApiService{
         return $result;   
     }
 
-    function updateAddressDefault($token,$address_book_id){
-        // Log::info("token : " . $token);
-        // Log::info("address_book_id : " . $address_book_id);
-
+    function updateAddressDefault($address_book_id){
         $result = array();
         try{
             $customer_id = JWTAuth::parseToken()->authenticate()->id;
             $clear_param = array("customer_id"=>$customer_id,'is_default'=>'no');
-            // Log::info("clear_param : " . json_encode($clear_param));
 
             $clear_default_result = $this->update("customer_id",$clear_param);
             if(empty($clear_default_result['status']) || $clear_default_result['status'] == 'fail')throw new Exception("Error To Clear Default");

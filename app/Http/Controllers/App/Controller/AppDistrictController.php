@@ -30,7 +30,7 @@ class AppDistrictController extends Controller{
     function listingDistrict(){
         try{
             $districts = $this->AppViewDistrictService->getAllDistrict();
-            Log::info("districts : " . json_encode($districts));
+            // Log::info("districts : " . json_encode($districts));
             return response()->json(['status' => true, 'data'=> [ 'districts' => $districts]],200);
         }catch(Exception $e){
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
@@ -41,7 +41,6 @@ class AppDistrictController extends Controller{
         $param = array();
         $param = $request->input();
         $update_address_result = $this->AppAddressBookService->updateCustomerAddress($param);
-        Log::info("result : " . json_encode($update_address_result));
-
+        // Log::info("result : " . json_encode($update_address_result));
     }
 }
