@@ -20,6 +20,18 @@ class AppViewProductAttributeService extends AppBaseApiService{
         }
         return array();
     }
+
+    function getProductByAttIds_key($param){
+        $result = array();
+        $result_product = $this->findByArrayWithLanguage($param);
+        if(!empty($result_product) && \sizeof($result_product) > 0){
+            foreach ($result_product as $index => $obj) {
+               $product_attribute_id = $obj->product_attribute_id;
+               $result[$product_attribute_id] = $obj;
+            }
+        }
+        return $result;
+    }
     function test(){
         return $this->findAll();
     }

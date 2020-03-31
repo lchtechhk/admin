@@ -74,4 +74,18 @@ class AppProductController extends Controller{
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
         }
     }
+
+    function getProductByAttIds_key(Request $request){
+        try{
+            $att_ids = $request->input('att_ids');
+            $search = array();
+            if(!empty($att_ids) && $att_ids > 0)$search['product_attribute_id'] = $att_ids;
+            $search['status'] = 'active';
+            $products = $this->AppViewProductAttributeService->getProductByAttIds_key($search);
+            Log::info("products : " . json_encode($products));
+            return response()->json(['status' => true, 'data'=> [ 'products' => $products]],200);
+        }catch(Exception $e){
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
+        }
+    }
 }
