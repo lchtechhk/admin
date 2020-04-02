@@ -27,10 +27,15 @@ class AppAddressController extends Controller{
 
     }
 
-    function findFirstCustomerAddress(){
-        $result = $this->AppAddressBookService->findFirstCustomerAddress();
-        return response()->json(['status' => true, 'data'=> [ 'customer_address' => $result],'message' => 'Successful' ],200);
-
+    function getFirstCustomerAddress(){
+        try{
+            DB::beginTransaction();
+            $result = $this->AppAddressBookService->findFirstCustomerAddress();
+            return response()->json(['status' => true, 'data'=> [ 'customer_address' => $result],'message' => 'Successful' ],200);
+            DB::commit();
+        }catch(Exception $e){
+            return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
+        }
     }
     
     function getAddressByToken(){
