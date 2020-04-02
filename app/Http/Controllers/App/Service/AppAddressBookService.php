@@ -46,11 +46,17 @@ class AppAddressBookService extends AppBaseApiService{
         return $result;   
     }
 
-    function deleteCustomerAddress($address_id){
+    function deleteCustomerAddress($address_book_id){
         $result = array();
         try{
-            $delete_address_result = $this->deleteByKey_Value("id",$address_id);
+            $delete_address_result = $this->deleteByKey_Value("id",$address_book_id);
             if(empty($delete_address_result['status']) || $delete_address_result['status'] == 'fail')throw new Exception("Error To Delete Address");
+            if(!empty($find_result = $this->findFirstCustomerAddress())){
+                $first_address_id = $find_result->id;
+                $update_default_result = $this->updateAddressDefault($first_address_id);
+                if(empty($update_default_result['status']) || $update_default_result['status'] == 'fail')throw new Exception("Error To Update Default");
+
+            }
             $result = $this->response($result,"Successful","view_edit");
         }catch(Exception $e){
             $result = $this->throwException($result,$e->getMessage(),false);
@@ -58,6 +64,21 @@ class AppAddressBookService extends AppBaseApiService{
         return $result;   
     }
 
+    function findFirstCustomerAddress(){
+        $result = array();
+        try{
+            $customer_id = JWTAuth::parseToken()->authenticate()->id;
+            $result = DB::table($this->getTable());
+            $result->where("customer_id",$customer_id);
+            $result->first();
+            $result = $result->get();
+            Log::info('[AppAddressBookService] -- ' .'['.$this->getTable().'] -- findFirstCustomerAddress : ' . json_encode($result[0]));
+            return $result[0];
+
+        }catch(Exception $e){
+            $result = $this->throwException($result,$e->getMessage(),false);
+        }
+    }
     function updateAddressDefault($address_book_id){
         $result = array();
         try{

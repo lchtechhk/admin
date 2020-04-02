@@ -26,6 +26,12 @@ class AppAddressController extends Controller{
 		$this->AppAddressBookService = new AppAddressBookService();
 
     }
+
+    function findFirstCustomerAddress(){
+        $result = $this->AppAddressBookService->findFirstCustomerAddress();
+        return response()->json(['status' => true, 'data'=> [ 'customer_address' => $result],'message' => 'Successful' ],200);
+
+    }
     
     function getAddressByToken(){
         try{
