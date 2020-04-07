@@ -41,6 +41,7 @@ class AuthService {
         $result = array();
         try {
             $result = $this->AppCustomerTokenService->save_token("login",$token);
+            Log::info("login : " . json_encode($result));
         } catch (Exception $e) {
             $result = $this->throwException($result,$e->getMessage(),true);
         } 

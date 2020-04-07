@@ -59,7 +59,7 @@ class AppCustomerTokenService extends AppBaseApiService{
             if(empty($add_token_result['status']) || $add_token_result['status'] == 'fail')throw new Exception("Error To Add Token");
             $result = $this->response($result,"Successful","view_edit");
             DB::commit();
-            Log::info("address : " . json_encode($result));
+            // Log::info("address : " . json_encode($result));
         }catch(Exception $e){
             $result = $this->throwException($result,$e->getMessage(),true);
         }
