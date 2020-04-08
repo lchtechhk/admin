@@ -282,6 +282,17 @@
         </a>
       </li>
 
+      <li
+        class="treeview 
+          {{ Request::is('admin/listingPaymentMethod') ? 'active' : '' }} 
+          {{ Request::is('admin/view_paymentMethod') ? 'active' : '' }} 
+          {{ Request::is('admin/view_paymentMethod/*') ? 'active' : '' }}">
+        <a href="{{ URL::to('admin/listingPaymentMethod')}}">
+          <i class="fa fa-list-ul" aria-hidden="true"></i> <span>
+            {{ trans('labels.link_payment_method') }}</span>
+        </a>
+      </li>
+
       {{-- <li
         class="treeview 
           {{ Request::is('admin/listingUser') ? 'active' : '' }} 
