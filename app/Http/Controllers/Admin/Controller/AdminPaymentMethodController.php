@@ -48,7 +48,7 @@ class AdminPaymentMethodController extends Controller{
         $result = array();
         $result['request'] = $request;
         $result['operation'] = 'view_edit';
-        $result['PaymentMethod_id'] = $request->PaymentMethod_id;
+        $result['payment_method_id'] = $request->payment_method_id;
 		return $this->PaymentMethodService->redirect_view($result,$title);
     }
 

@@ -42,7 +42,7 @@ class PaymentMethodService extends BaseApiService{
                 return view("admin.payment_method.viewPaymentMethod", $title)->with('result', $result);
             break;
             case 'view_edit':
-                $result = $this->getPaymentMethodById($result,$result['company_id']);
+                $result = $this->getPaymentMethodById($result,$result['payment_method_id']);
                 Log::info('[view_edit] : ' .json_encode($result));
 
                 return view("admin.payment_method.viewPaymentMethod", $title)->with('result', $result);

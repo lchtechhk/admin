@@ -191,7 +191,7 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		//Payment Method
 		Route::get('/listingPaymentMethod', 'Controller\AdminPaymentMethodController@listingPaymentMethod');
 		Route::get('/view_addPaymentMethod', 'Controller\AdminPaymentMethodController@view_addPaymentMethod');
-		Route::get('/view_editPaymentMethod/{company_id}', 'Controller\AdminPaymentMethodController@view_editPaymentMethod');
+		Route::get('/view_editPaymentMethod/{payment_method_id}', 'Controller\AdminPaymentMethodController@view_editPaymentMethod');
 		Route::post('/addPaymentMethod', 'Controller\AdminPaymentMethodController@addPaymentMethod');
 		Route::post('/updatePaymentMethod', 'Controller\AdminPaymentMethodController@updatePaymentMethod');
 		Route::post('/deletePaymentMethod', 'Controller\AdminPaymentMethodController@deletePaymentMethod');

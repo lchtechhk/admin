@@ -41,7 +41,7 @@
                                             <span style="color:red">★</span>
                                         <div class="col-sm-10 col-md-4">
                                             {!! Form::text('name', 
-                                            print_value(isset($_POST['name']) ? $_POST['name'] : !empty($result['payment_method']->name) ? $result['payment_method']->name : '' ),
+                                            print_value( (isset($_POST['name']) ? $_POST['name'] : (!empty($result['payment_method']->name) ? $result['payment_method']->name : '' ))),
                                             array('class'=>'form-control field-validate',
                                             'id'=>'name'))!!}
                                             <span class="help-block"
@@ -56,7 +56,7 @@
                                             class="col-sm-2 col-md-3 control-label">{{ trans('labels.Description') }}</label>
                                         <div class="col-sm-10 col-md-4">
                                             {!! Form::text('description', 
-                                            print_value(isset($_POST['description']) ? $_POST['description'] : !empty($result['payment_method']->description) ? $result['payment_method']->description : '' ),
+                                                print_value( (isset($_POST['description']) ? $_POST['description'] : (!empty($result['payment_method']->description) ? $result['payment_method']->description : '' ))),
                                             array('class'=>'form-control ',
                                             'id'=>'description'))!!}
                                             <span class="help-block"
