@@ -24,10 +24,10 @@ class AppPaymentMethodController extends Controller{
 
     }
 
-    function listingAllPaymentMethod(){
+    function getAllPaymentMethod(){
         try{
             DB::beginTransaction();
-            $result = $this->AppPaymentMethodService->listingAllPaymentMethod();
+            $result = $this->AppPaymentMethodService->getAllPaymentMethod();
             return response()->json(['status' => true, 'data'=> [ 'payment_methods' => $result],'message' => 'Successful' ],200);
             DB::commit();
         }catch(Exception $e){

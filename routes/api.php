@@ -29,7 +29,7 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		Route::get('/getFirstCustomerAddress', 'Controller\AppAddressController@getFirstCustomerAddress');
 
 		// Payment Method
-		Route::get('/listingAllPaymentMethod', 'Controller\AppPaymentMethodController@listingAllPaymentMethod');
+		Route::get('/getAllPaymentMethod', 'Controller\AppPaymentMethodController@getAllPaymentMethod');
 
 		// Order
 		Route::post('/listingOrder', 'Controller\AppOrderController@listingOrder');

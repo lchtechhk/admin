@@ -14,7 +14,7 @@ class AppPaymentMethodService extends AppBaseApiService{
         $this->companyAuth = true;
     }
 
-    function listingAllPaymentMethod(){
+    function getAllPaymentMethod(){
         return $this->findAll();
     }
     function test(){
