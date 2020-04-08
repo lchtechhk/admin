@@ -28,6 +28,9 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		Route::get('/getAddressByToken', 'Controller\AppAddressController@getAddressByToken');
 		Route::get('/getFirstCustomerAddress', 'Controller\AppAddressController@getFirstCustomerAddress');
 
+		// Payment Method
+		Route::get('/listingAllPaymentMethod', 'Controller\AppPaymentMethodController@listingAllPaymentMethod');
+
 		// Order
 		Route::post('/listingOrder', 'Controller\AppOrderController@listingOrder');
 		// Compnay
