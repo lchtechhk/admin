@@ -43,8 +43,6 @@ class PaymentMethodService extends BaseApiService{
             break;
             case 'view_edit':
                 $result = $this->getPaymentMethodById($result,$result['payment_method_id']);
-                Log::info('[view_edit] : ' .json_encode($result));
-
                 return view("admin.payment_method.viewPaymentMethod", $title)->with('result', $result);
             break;
             break;
@@ -69,48 +67,18 @@ class PaymentMethodService extends BaseApiService{
             case 'edit':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/company/images/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/company/'.Session::get('default_company_id').'/company/icons/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/payment_method/images/'))$result['image'] = $image;
                     Log::info('[edit result] --  : ' . json_encode($result));
                     // handle Company
-                    $update_company_result = $this->update("company_id",$result);
-                    if(empty($update_company_result['status']) || $update_company_result['status'] == 'fail')throw new Exception("Error To update Company");
-                    foreach ($result['language_array'] as $language_id => $obj) {
-                        $name = !empty($obj['name']) ? $obj['name'] : '';
-                        $description = !empty($obj['description']) ? $obj['description'] : '';
-                        $param = array();
-                        $param['name'] = $name;
-                        $param['company_id'] = $result['company_id'];
-                        $param['language_id'] = $language_id;
-                        $isExisting = $this->CompanyDescriptionService->isExistingByMultipleKey_Value($param,array("company_id","language_id"),array($result['company_id'],$language_id));
-                        if($isExisting){
-                            $update_company_description_result = $this->CompanyDescriptionService->updateByMultipleKey_Value($param,array("company_id","language_id"),array($result['company_id'],$language_id));
-                            if(empty($update_company_description_result['status']) || $update_company_description_result['status'] == 'fail')throw new Exception("Error To Update Company");
-                        }else {
-                            $add_company_description_result = $this->CompanyDescriptionService->add($param);
-                            if(empty($add_company_description_result['status']) || $add_company_description_result['status'] == 'fail')throw new Exception("Error To Add Company Description");
-                        }
-                    }
-                    // handle vtc
-                    $delete_vtc_result = $this->UserToCompanyService->cleanByCompanyId($result['company_id']);
-                    if(!empty($result['check_box_user']) && sizeof($result['check_box_user']) > 0){
-                        foreach ($result['check_box_user'] as $index => $user_id) {
-                            $vtc_param = array();
-                            $vtc_param['user_id'] = $user_id;
-                            $vtc_param['company_id'] = $result['company_id'];
-                            $vtc_param['is_main_company'] = 'no';
-                            $add_vtc_result = $this->UserToCompanyService->add($vtc_param);
-                            if(empty($add_vtc_result['status']) || $add_vtc_result['status'] == 'fail')throw new Exception("Error To Add VTC");
-                        }
-                    }
-
+                    $update_method_result = $this->update("payment_method_id",$result);
+                    if(empty($update_method_result['status']) || $update_method_result['status'] == 'fail')throw new Exception("Error To Update Payment Method");
                     $result = $this->response($result,"Successful","view_edit");
-                    $result = $this->getPaymentMethodById($result,$result['company_id']);
+                    $result = $this->getPaymentMethodById($result,$result['payment_method_id']);
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
-                return view("admin.payment_method.viewCompany", $title)->with('result', $result);        
+                return view("admin.payment_method.viewPaymentMethod", $title)->with('result', $result);        
             break;
             case 'delete': 
                 try{

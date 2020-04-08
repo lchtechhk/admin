@@ -27,6 +27,7 @@
                                                     <th>{{ trans('labels.Name') }}</th>
                                                     <th>{{ trans('labels.Description') }}</th>
                                                     <th>{{ trans('labels.CreateDate') }}</th>
+                                                    <th>{{ trans('labels.Status') }}</th>
                                                     <th>{{ trans('labels.Action') }}</th>
                                                 </tr>
                                             </thead>
@@ -39,13 +40,14 @@
                                                             @if(!empty($method->image))
                                                                 <img src="{{asset('').'/'.$method->image}}" alt="" width=" 100px">
                                                             @else
-                                                                <img src={{asset('')."resources/assets/images/default_images/company.png"}}
+                                                                <img src={{asset('')."storage/default_images/payment_method.png"}}
                                                                 style="width: 50px; float: left; margin-right: 10px">
                                                             @endif
                                                         </td>
                                                         <td>{{ $method->name }}</td>
                                                         <td>{{ $method->description }}</td>
                                                         <td>{{ $method->create_date }}</td>
+                                                        <td>{{ $method->status }}</td>
                                                         <td>
                                                             <a data-toggle="tooltip" data-placement="bottom" title="View Payment Method" href="view_editPaymentMethod/{{ $method->payment_method_id }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                         </td>
