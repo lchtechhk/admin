@@ -80,7 +80,7 @@
                                                 'class'=>' ')) !!}
                                                 <img src="{{asset('').$result['payment_method']->image}}" alt="" width=" 100px">
                                             @else
-                                                <img src="{{asset('').'storage/default_images/product.png' }}"
+                                                <img src="{{asset('').'storage/default_images/payment_method.png' }}"
                                                 style="width: 50px; float: left; margin-right: 10px">
                                             @endif
                                         </div>

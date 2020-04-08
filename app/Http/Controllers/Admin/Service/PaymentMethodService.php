@@ -51,8 +51,9 @@ class PaymentMethodService extends BaseApiService{
             case 'add':
                 try{
                     DB::beginTransaction();
-                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/default_images/'))$result['image'] = $image;
-                    if($icon = $this->UploadService->upload_image($result['request'],'icon','storage/default_images/'))$result['icon'] = $icon;
+                    if($image = $this->UploadService->upload_image($result['request'],'image','storage/company/'.Session::get('default_company_id').'/payment_method/images/'))$result['image'] = $image;
+                    Log::info('[add result] --  : ' . json_encode($result));
+
                     $add_method_result = $this->add($result);
                     if(empty($add_method_result['status']) || $add_method_result['status'] == 'fail')throw new Exception("Error To Add Payment Method");
                     $result['payment_method_id'] = $add_method_result['response_id'];
@@ -62,7 +63,6 @@ class PaymentMethodService extends BaseApiService{
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
-                Log::info('[add result] --  : ' . json_encode($result));
 
                 return view("admin.payment_method.viewPaymentMethod", $title)->with('result', $result);       
             break;
