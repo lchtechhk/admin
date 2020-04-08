@@ -11,6 +11,9 @@ abstract class AppBaseApiService extends AppDao{
  
         function __construct(){
             parent::__construct();
+            // $customer_id = JWTAuth::parseToken()->authenticate()->id;
+            // $company_id = JWTAuth::parseToken()->authenticate()->company_id;
+
         }
         public function add($array){
             try{

@@ -17,6 +17,11 @@ class AppPaymentMethodService extends AppBaseApiService{
     function getAllPaymentMethod(){
         return $this->findAll();
     }
+
+    function getAllPaymentMethodForLogin($company_id){
+        $this->companyAuth = false;
+        return $this->findByColumn_Value("company_id",$company_id);
+    }
     function test(){
         return $this->findAll();
     }

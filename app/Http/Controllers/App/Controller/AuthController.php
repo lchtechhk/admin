@@ -58,7 +58,9 @@ class AuthController extends Controller{
         try {
             $save_token_result = $this->AuthService->login($token);
             if(empty($save_token_result['status']) || $save_token_result['status'] == 'fail')throw new Exception($save_token_result['message']);
-            return response()->json(['status' => true, 'data'=> [ 'token' => $token , 'owner' => $save_token_result['owner'], 'address' => $save_token_result['address'] ],'message' => 'Login Successful']);
+            return response()->json(['status' => true, 'data'=> [ 'token' => $token , 'owner' => $save_token_result['owner'],
+             'address' => $save_token_result['address'],
+             'payment_methods' => $save_token_result['payment_methods'] ],'message' => 'Login Successful']);
         } catch (Exception $e) {
             return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
         }
@@ -107,7 +109,10 @@ class AuthController extends Controller{
             if($owner['status'] != true) throw new Exception($owner['message']);
             $refresh_token_result = $this->AuthService->refresh_token($token);
             if(empty($refresh_token_result['status']) || $refresh_token_result['status'] == 'fail')throw new Exception($save_token_result['message']);
-            return response()->json(['status' => true, 'data'=> [ 'owner' => $refresh_token_result['owner'],'token' => $refresh_token_result['token'], 'address' => $refresh_token_result['address'] ]]);
+            return response()->json(['status' => true, 'data'=> [ 'owner' => $refresh_token_result['owner'],
+            'token' => $refresh_token_result['token'],
+            'address' => $refresh_token_result['address'],
+            'payment_methods' => $save_token_result['payment_methods'] ]]);
         }catch(Exception $e){
             Log::info("[refresh_token] -- Error : " . $e->getMessage());
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
