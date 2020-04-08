@@ -108,11 +108,11 @@ class AuthController extends Controller{
             $owner = JWTAuth::parseToken()->authenticate();
             if($owner['status'] != true) throw new Exception($owner['message']);
             $refresh_token_result = $this->AuthService->refresh_token($token);
-            if(empty($refresh_token_result['status']) || $refresh_token_result['status'] == 'fail')throw new Exception($save_token_result['message']);
+            if(empty($refresh_token_result['status']) || $refresh_token_result['status'] == 'fail')throw new Exception($refresh_token_result['message']);
             return response()->json(['status' => true, 'data'=> [ 'owner' => $refresh_token_result['owner'],
             'token' => $refresh_token_result['token'],
             'address' => $refresh_token_result['address'],
-            'payment_methods' => $save_token_result['payment_methods'] ]]);
+            'payment_methods' => $refresh_token_result['payment_methods'] ]]);
         }catch(Exception $e){
             Log::info("[refresh_token] -- Error : " . $e->getMessage());
             return response()->json(['status' => false, 'data'=> '', 'message'=>$e->getMessage()]);
