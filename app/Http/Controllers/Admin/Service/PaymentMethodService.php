@@ -82,14 +82,14 @@ class PaymentMethodService extends BaseApiService{
             break;
             case 'delete': 
                 try{
-                    $delete_company_result = $this->deleteByKey_Value("company_id",$result['company_id']);
-                    if(empty($delete_company_result['status']) || $delete_company_result['status'] == 'fail')throw new Exception("Error To Delete Company");
-                    $result['companies'] = $this->View_CompanyService->getListing();
-                    $result = $this->response($result,"Success To Delete Company","view_edit");
+                    $delete_method_result = $this->deleteByKey_Value("payment_method_id",$result['payment_method_id']);
+                    if(empty($delete_method_result['status']) || $delete_method_result['status'] == 'fail')throw new Exception("Error To Delete Company");
+                    $result['payment_methods'] = $this->findAll();
+                    $result = $this->response($result,"Success To Delete Payment Method","view_edit");
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }
-                return view("admin.payment_method.listingCompany", $title)->with('result', $result);
+                return view("admin.payment_method.listingPaymentMethod", $title)->with('result', $result);
             break;
         }
     }

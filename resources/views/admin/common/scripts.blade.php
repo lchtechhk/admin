@@ -995,6 +995,14 @@ $(document).on('click', '#updateAddress', function(e){
 		$("#deleteManufacturerModal").modal('show');
 	});
 
+	//deletePaymentMethod
+	$(document).on('click', '#deletePaymentMethodId', function(){
+		var payment_method_id = $(this).attr('payment_method_id');
+		console.log('deletePaymentMethodModal : ' + payment_method_id);
+		$('#payment_method_id').val(payment_method_id);
+		$("#deletePaymentMethodModal").modal('show');
+	});
+
 	//deleteOrderProduct
 	$(document).on('click', '#deleteOrderProductbtn', function(){
 		var order_product_id = $(this).attr('order_product_id');

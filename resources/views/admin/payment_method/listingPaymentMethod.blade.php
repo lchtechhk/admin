@@ -50,6 +50,13 @@
                                                         <td>{{ $method->status }}</td>
                                                         <td>
                                                             <a data-toggle="tooltip" data-placement="bottom" title="View Payment Method" href="view_editPaymentMethod/{{ $method->payment_method_id }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                            <a data-toggle="tooltip" data-placement="bottom"
+                                                            title="{{ trans('labels.Delete') }}"
+                                                            id="deletePaymentMethodId"
+                                                            payment_method_id="{{$method->payment_method_id}}"
+                                                            class="badge bg-red">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
