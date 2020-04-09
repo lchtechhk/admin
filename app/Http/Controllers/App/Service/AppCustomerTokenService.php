@@ -60,8 +60,10 @@ class AppCustomerTokenService extends AppBaseApiService{
             $param['customer_id'] = $customer_id;
             if($operation_type == 'login'){
                 $param['token'] = $token;
+                $param['type'] = "login";
             }else if($operation_type == 'refresh'){
                 $param['token'] = JWTAuth::refresh($token);
+                $param['type'] = "refresh";
                 $result['token'] = $param['token'];
             }
             $add_token_result = $this->add($param);
@@ -74,13 +76,6 @@ class AppCustomerTokenService extends AppBaseApiService{
         }
 
         return $result;
-    }
-
-    function get_lasttime_login($customer_id){
-        $result = DB::table($this->getTable())->where("customer_id", $customer_id)->orderBy("create_date", 'desc')->first(['create_date','status']);
-        Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- get_lasttime_login : ' . json_encode($result));
-        return $result;
-        // return "123";
     }
     function redirect_view($result,$title){
     }

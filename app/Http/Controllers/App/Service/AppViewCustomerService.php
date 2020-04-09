@@ -40,7 +40,7 @@ class AppViewCustomerService extends AppBaseApiService{
 
     function get_lasttime_login($customer_id){
         Log::info('[get_lasttime_login] -- ' );
-        $result = DB::table("customer_token")->where("customer_id", $customer_id)->where("status", "cancel")->orderBy("create_date", 'desc')->first(['create_date','end_date','status']);
+        $result = DB::table("customer_token")->where("customer_id", $customer_id)->where("type", "login")->orderBy("create_date", 'desc')->skip(1)->take(1)->first(['create_date','end_date','status']);
         Log::info('[AppDao] -- ' .'[customer_token] -- get_lasttime_login : ' . json_encode($result));
         return $result;
         // return "123";
