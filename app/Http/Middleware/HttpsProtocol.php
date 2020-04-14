@@ -10,6 +10,7 @@ class HttpsProtocol {
 
     public function handle($request, Closure $next)
     {
+        // Log::info("Appenvironment : " . App::environment());
         Log::info("HttpsProtocol : " . $request->getRequestUri());
         if (!$request->secure()) {
             // if (!$request->secure() && App::environment() === 'production') {
