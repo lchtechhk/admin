@@ -61,11 +61,11 @@ class AddressBookService extends BaseApiService{
                     $add_addressbook_result = $this->add($result);
                     if(empty($add_addressbook_result['status']) || $add_addressbook_result['status'] == 'fail')throw new Exception("Error To Delete Category");
                     $result = $this->response($result,"Success To Add Address Book","listing");
-                    $result['customer_addresses'] = $this->getListing($result);
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }	
-                Log::info('result : '. json_encode($result));
+                // Log::info('result : '. json_encode($result));
+                $result['customer_addresses'] = $this->getListing($result);
                 return view("admin.addressbook.listingAddress",$title)->with('result', $result);
             break;
             case 'edit':
@@ -77,11 +77,11 @@ class AddressBookService extends BaseApiService{
                     $update_addressbook_result = $this->update("id",$result);
                     if(empty($update_addressbook_result['status']) || $update_addressbook_result['status'] == 'fail')throw new Exception("Error To Delete Category");
                     $result = $this->response($result,"Success To Update Address Book","listing");
-                    $result['customer_addresses'] = $this->getListing($result);
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }	
+                $result['customer_addresses'] = $this->getListing($result);
                 return view("admin.addressbook.listingAddress",$title)->with('result', $result);
             break;
             case 'delete':
@@ -91,11 +91,10 @@ class AddressBookService extends BaseApiService{
                     $delete_address_book_result = $this->delete($id);
                     if(empty($delete_address_book_result['status']) || $delete_address_book_result['status'] == 'fail')throw new Exception("Error To Delete Category");
                     $result = $this->response($result,"Success To Delete Address Book","listing");
-                    $result['customer_addresses'] = $this->getListing($result);
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
-                    return view("admin.addressbook.listingAddress",$title)->with('result', $result);
                 }	      
+                $result['customer_addresses'] = $this->getListing($result);
                 return view("admin.addressbook.listingAddress",$title)->with('result', $result);
             break;
         }

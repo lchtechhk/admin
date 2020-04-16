@@ -62,7 +62,8 @@
               </div>
             </div>
             <div class="box-footer text-center">
-              <a href="{{ URL::to('admin/customers')}}" class="btn btn-primary">{{ trans('labels.SaveComplete') }}</a>
+              <a href="{{ URL::to('admin/listingCustomer')}}" type="button"
+                class="btn btn-default">{{ trans('labels.back') }}</a>
             </div>
           </div>
           <!-- addressDialog -->
