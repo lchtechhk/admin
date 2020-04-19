@@ -25,6 +25,7 @@ class AppOrderService extends AppBaseApiService{
     function addOrder($param){
         $result = array();
         try{
+            // To Do Order
             $param['customer_id'] = JWTAuth::parseToken()->authenticate()->id;
             $param['company_id'] = JWTAuth::parseToken()->authenticate()->company_id;
             $param['status'] = "active";
@@ -32,6 +33,10 @@ class AppOrderService extends AppBaseApiService{
             $param['date_purchased'] = date("Y-m-d H:s:i");
             $add_order_result = $this->add($param);
             if(empty($add_order_result['status']) || $add_order_result['status'] == 'fail')throw new Exception("Error To Add Order");
+            // To Do Order Product
+            
+            // To Do Order Product Desc
+            
             // throw new Exception("Error To Add Order");
             $result = $this->response($result,"Successful","view_edit");
         }catch(Exception $e){
