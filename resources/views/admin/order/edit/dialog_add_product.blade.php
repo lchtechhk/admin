@@ -51,7 +51,7 @@
                         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.OrderId') }}<span style="color:red">★</span></label> 
                         <div class="col-sm-10 col-md-4">
                             {!! Form::text('order_id', 
-                            empty($result['order']->order_id) ? '' : print_value($result['order']->order_id),
+                            print_value( (isset($_POST['order_id']) ? $_POST['order_id'] : (!empty($result['order']->order_id) ? $result['order']->order_id : '' ))),
                             array('class'=>'form-control','readonly','required')) !!}
                         </div>
                     </div>

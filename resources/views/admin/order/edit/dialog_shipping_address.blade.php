@@ -14,7 +14,7 @@
                         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.OrderId') }}<span style="color:red">★</span></label> 
                         <div class="col-sm-10 col-md-4">
                             {!! Form::text('order_id', 
-                            empty($result['order']->order_id) ? '' : print_value($result['operation'],$result['order']->order_id),
+                            print_value( (isset($_POST['order_id']) ? $_POST['order_id'] : (!empty($result['order']->order_id) ? $result['order']->order_id : '' ))),
                             array('class'=>'form-control','readonly','required')) !!}
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                                 @foreach ($result['customers'] as $customer)
                                     <option value="{{ $customer->id }}"
                                         @if(!empty($result['order']->customer_id))
-                                            {{print_selected_value($result['operation'],$customer->id,$result['order']->customer_id)}}
+                                            {{print_selected_value($customer->id,$result['order']->customer_id)}}
                                         @endif >
                                         {{ $customer->lastname }} {{$customer->firstname}}
                                     </option>
@@ -39,7 +39,7 @@
                         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.ShippingMethod') }}<span style="color:red">★</span></label> 
                         <div class="col-sm-10 col-md-4">
                             {!! Form::text('shipping_method', 
-                            empty($result['order']->shipping_method) ? '' : print_value($result['operation'],$result['order']->shipping_method),
+                            print_value( (isset($_POST['shipping_method']) ? $_POST['shipping_method'] : (!empty($result['order']->shipping_method) ? $result['order']->shipping_method : '' ))),
                             array('class'=>'form-control','id'=>'shipping_method','required')) !!}
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.ShippingCost') }}<span style="color:red">★</span></label> 
                         <div class="col-sm-10 col-md-4">
                             {!! Form::text('shipping_cost', 
-                            empty($result['order']->shipping_cost) ? '' : print_value($result['operation'],$result['order']->shipping_cost),
+                            print_value( (isset($_POST['shipping_cost']) ? $_POST['shipping_cost'] : (!empty($result['order']->shipping_cost) ? $result['order']->shipping_cost : '' ))),
                             array('class'=>'form-control','id'=>'shipping_cost','required')) !!}
                         </div>
                     </div>
