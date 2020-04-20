@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
 	function __construct(){
 	}
     public function boot(){
+		Log::info("AppServiceProvider");
 		DB::listen(function ($query) {
 			// Log::notice($query->bindings);
             // $query->sql
@@ -30,10 +31,7 @@ class AppServiceProvider extends ServiceProvider
 		$index = 0;	
 		
 		//new customers
-		$newCustomers = DB::table('customers')
-				->where('is_seen','=', 0)
-				->orderBy('id','desc')
-				->get();
+		$newCustomers = [];
 				
 		//products low in quantity
 		// $lowInQunatity = DB::table('product')
@@ -47,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
 		// $languages = DB::table('languages')->get();
 		// view()->share('languages', $languages);
 		
-		$web_setting = DB::table('settings')->get();
+		$web_setting = [];
 		view()->share('web_setting', $web_setting);
 
 		view()->share('unseenOrders', $result);

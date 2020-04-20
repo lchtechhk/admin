@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
+use Log;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Log::info("AuthServiceProvider");
         $this->registerPolicies();
 
         //

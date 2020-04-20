@@ -32,6 +32,17 @@ class AppViewProductAttributeService extends AppBaseApiService{
         }
         return $result;
     }
+    function getProductByAttId($att_id){
+        $result = array();
+        $result_product = $this->findByColumn_Value('product_attribute_id',$att_id);
+        if(!empty($result_product) && \sizeof($result_product) > 0){
+            foreach ($result_product as $index => $obj) {
+               $product_attribute_id = $obj->product_attribute_id;
+               $result[$product_attribute_id] = $obj;
+            }
+        }
+        return $result;
+    }
     // function getProductByAttributeId($product_attribute_id){
     //     $product_attribute_array = $this->findByColumn_Value("product_attribute_id",$product_attribute_id);
     //     $product_attribute = !empty($product_attribute_array) && sizeof($product_attribute_array) > 0 ? $product_attribute_array[0] : array();

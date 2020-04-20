@@ -23,7 +23,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{ trans('labels.ID') }}</th>
-                                                    <th>{{ trans('labels.CustomerName') }}</th>
+                                                    <th>{{ trans('labels.CompanyName') }}</th>
                                                     <th>{{ trans('labels.Email') }}</th>
                                                     <th>{{ trans('labels.Phone') }}</th>
                                                     <th>{{ trans('labels.OrderTotal') }}</th>
@@ -37,7 +37,7 @@
                                                 @foreach ($result['orders'] as $order)
                                                     <tr>
                                                         <td>{{ $order->order_id }}</td>
-                                                        <td>{{ $order->customer_name }}</td>
+                                                        <td>{{ $order->customer_company }}</td>
                                                         <td>{{ $order->email }}</td>
                                                         <td>{{ $order->customer_telephone }}</td>
                                                         <td>{{ $order->order_price }}</td>

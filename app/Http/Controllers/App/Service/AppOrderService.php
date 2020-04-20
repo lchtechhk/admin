@@ -43,11 +43,9 @@ class AppOrderService extends AppBaseApiService{
             $add_order_result = $this->add($param);
             if(empty($add_order_result['status']) || $add_order_result['status'] == 'fail')throw new Exception("Error To Add Order");
             $order_id = $add_order_result['response_id'];
-            // To Do Order Product
+            // To Add Order Product
             $product_parm = array();
             $product_parm = $param['order_products'];
-
-            $att_ids = array();
             foreach ($product_parm as $index => $p) {
                 //Add Order Id
                 $p['order_id'] = $order_id;
@@ -56,25 +54,26 @@ class AppOrderService extends AppBaseApiService{
                 $add_order_product_result = $this->AppOrderProductService->add($p);
                 if(empty($add_order_product_result['status']) || $add_order_product_result['status'] == 'fail')throw new Exception("Error To Add Order Product");
                 $order_product_id = $add_order_product_result['response_id'];
-                // To Add Order Product Description
-                Log::info("order_product_id : " . $order_product_id);
-                $att_ids[] = $att_id;
                 // Find Product Att Description
-                $att_ps = $this->AppViewProductAttributeService->findByColumn_Values("product_attribute_id",$att_ids);
-                foreach ($att_ps as $key_id => $att_desc) {
+                $att_ps = $this->AppViewProductAttributeService->findByColumn_Value("product_attribute_id",$att_id);
+                Log::info("att_ps : " . \json_encode($att_ps));
+                // To Add Order Product Description
+                foreach ($att_ps as $att_index => $att_desc) {
                     $desc_param = array();
                     $desc_param['order_id'] = $order_id;
                     $desc_param['order_product_id'] = $order_product_id;
                     $desc_param['language_id'] = $att_desc->language_id;
+                    $desc_param['product_id'] = $att_desc->product_id;
+                    $desc_param['product_attribute_id'] = $att_desc->product_attribute_id;
+                    $desc_param['image'] = $att_desc->image;
+                    $desc_param['product_name'] = $att_desc->product_name;
+                    $desc_param['product_attribute_name'] = $att_desc->product_attribute_name;
+                    $desc_param['product_description'] = $att_desc->product_description;
+                    $add_order_product_desc_result = $this->AppOrderProductDescService->add($desc_param);
+                    if(empty($add_order_product_desc_result['status']) || $add_order_product_desc_result['status'] == 'fail')throw new Exception("Error To Add Order Product Description");
                     Log::info("desc_param : " . \json_encode($desc_param));
                 }
             }
-            Log::info("product_parm : " . \json_encode($product_parm));
-            Log::info("att_ids : " . \json_encode($att_ids));
-
-            // To Do Order Product Desc
-
-            // throw new Exception("Error To Add Order");
             $result = $this->response($result,"Successful","view_edit");
         }catch(Exception $e){
             $result = $this->throwException($result,$e->getMessage(),false);
