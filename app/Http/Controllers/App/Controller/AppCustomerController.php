@@ -9,7 +9,7 @@ use DB;
 use Hash;
 use Log;
 use Auth;
-
+use Exception;
 //for requesting a value 
 use Illuminate\Http\Request;
 

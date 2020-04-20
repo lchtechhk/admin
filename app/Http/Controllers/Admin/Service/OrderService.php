@@ -28,7 +28,7 @@ class OrderService extends BaseApiService{
     private $CustomerService;
 
     function __construct(){
-        $this->setTable('cms.order');
+        $this->setTable('cms.orders');
         $this->companyAuth = true;
         $this->LanguageService = new LanguageService();
         $this->UploadService = new UploadService();
