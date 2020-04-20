@@ -11,6 +11,7 @@ use App\Http\Controllers\App\Service\AppLanguageService;
 use App\Http\Controllers\App\Service\AppViewProductAttributeService;
 use App\Http\Controllers\App\Service\AppOrderProductService;
 use App\Http\Controllers\App\Service\AppOrderProductDescService;
+use App\Http\Controllers\App\Service\AppOrderProductCommentService;
 
 
 
@@ -20,6 +21,7 @@ class AppOrderService extends AppBaseApiService{
     private $AppViewProductAttributeService;
     private $AppOrderProductService;
     private $AppOrderProductDescService;
+    private $AppOrderProductCommentService;
 
     function __construct(){
         $this->setTable('orders');
@@ -28,6 +30,7 @@ class AppOrderService extends AppBaseApiService{
         $this->AppViewProductAttributeService = new AppViewProductAttributeService();
         $this->AppOrderProductService = new AppOrderProductService();
         $this->AppOrderProductDescService = new AppOrderProductDescService();
+        $this->AppOrderProductCommentService = new AppOrderProductCommentService();
 
     }
 
@@ -43,6 +46,17 @@ class AppOrderService extends AppBaseApiService{
             $add_order_result = $this->add($param);
             if(empty($add_order_result['status']) || $add_order_result['status'] == 'fail')throw new Exception("Error To Add Order");
             $order_id = $add_order_result['response_id'];
+            // To Add Order Comment
+            if(!empty($param['customer_remark'])){
+                $comment_param = array();
+                $comment_param['order_id'] = $order_id;
+                $comment_param['comment'] = $param['customer_remark'];
+                $comment_param['customer_notified'] = "yes";
+                $comment_param['permission'] = "customer";
+                $comment_param['comment_date'] = date("Y-m-d H:s:i");
+                $add_comment_result = $this->AppOrderProductCommentService->add($comment_param);
+                if(empty($add_comment_result['status']) || $add_comment_result['status'] == 'fail')throw new Exception("Error To Add Order Comment");
+            }
             // To Add Order Product
             $product_parm = array();
             $product_parm = $param['order_products'];
