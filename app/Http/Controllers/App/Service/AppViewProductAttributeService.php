@@ -32,6 +32,24 @@ class AppViewProductAttributeService extends AppBaseApiService{
         }
         return $result;
     }
+    // function getProductByAttributeId($product_attribute_id){
+    //     $product_attribute_array = $this->findByColumn_Value("product_attribute_id",$product_attribute_id);
+    //     $product_attribute = !empty($product_attribute_array) && sizeof($product_attribute_array) > 0 ? $product_attribute_array[0] : array();
+    //     $product_attribute->language_array = array();
+    //     foreach ($product_attribute_array as $obj) {
+    //         $language_id = $obj->language_id;
+    //         $product_name = $obj->product_name;
+    //         $product_attribute_name = $obj->product_attribute_name;
+    //         $product_description = $obj->product_description;
+    //         $product_attribute->language_array[$language_id] = array();
+    //         $product_attribute->language_array[$language_id]['product_name'] = $product_name;
+    //         $product_attribute->language_array[$language_id]['product_attribute_name'] = $product_attribute_name;
+    //         $product_attribute->language_array[$language_id]['product_description'] = $product_description;
+
+    //     }
+    //     return $product_attribute;
+    // }
+    
     function test(){
         return $this->findAll();
     }

@@ -74,11 +74,11 @@
             return $result;
         }
 
-        public function findByArrayWithLanguage($array){
+        public function findByArrayWithLanguage($key_value_obj){
             $result = DB::table($this->getTable())->where('language_id',JWTAuth::parseToken()->authenticate()->default_language_id);
             if($this->companyAuth)$result = $result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
 
-            foreach ($array as $column => $value) {
+            foreach ($key_value_obj as $column => $value) {
                 if(\is_array($value)){
                     $result = $result->whereIN($column, $value);
                 }else {
@@ -86,7 +86,7 @@
                 }
             }
             $result = $result->get();
-            Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findByColumn_ValuesWithLanguage : ' . json_encode($array));
+            Log::info('[AppDao] -- ' .'['.$this->getTable().'] -- findByColumn_ValuesWithLanguage : ' . json_encode($key_value_obj));
             return $result;
         }
 

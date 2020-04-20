@@ -53,6 +53,7 @@
                     }
                 }
                 DB::enableQueryLog();
+                Log::info("target_array : " . json_encode($target_array));
                 $insert_id = DB::table($table)->insertGetId($target_array);
                 $query = DB::getQueryLog();
                 Log::notice('[MainRepository] -- ' .'[Insert SQL] --'. \json_encode(end($query)));
@@ -65,6 +66,7 @@
                     return false;
                 }
         }
+        
         protected function db_prepareUpdate($table, $data,$key,$id){
             $list_cols =  DB::select('DESCRIBE '."$table");
             $nb_cols = count($list_cols);
