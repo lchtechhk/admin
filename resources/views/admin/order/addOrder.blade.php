@@ -31,7 +31,7 @@
                                         </div>
                                     </div>
                                     <div class="row invoice-info">
-                                        <div class="col-sm-6 invoice-col">
+                                        <div class="col-sm-4 invoice-col">
                                             <div style="border:1px black solid;background:#3c8dbc;color:#FFF;text-align:center;">{{ trans('labels.CustomerInfo') }}</div><br>
                                                 <table>
                                                     <tr>
@@ -68,7 +68,24 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 invoice-col">
+                                        <div class="col-sm-4 invoice-col">
+                                            <div style="border:1px black solid;background:#3c8dbc;color:#FFF;text-align:center;">{{ trans('labels.PaymentInfo') }}</div><br>
+                                            <table>
+                                                <tr>
+                                                    <td style="padding:10px;"><div style="font-weight:bold;">{{ trans('labels.PaymentMethod') }} : </div></td>
+                                                    <td style="padding:10px;"><div id="display_payment_method_name" ></div></td>
+                                                    <td style="padding:10px;"><span id="error_display_payment_method_name" class="help-block alert alert-danger hidden">{{ trans('labels.textRequiredFieldMessage') }}</span></td>
+                                                </tr>
+                                            </table>
+                                            <div class="row text-center" >
+                                                <div class="col-xs-12">
+                                                    <a class="btn btn-primary part_payment_method">
+                                                        {{ trans('labels.Edit') }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 invoice-col">
                                             <div style="border:1px black solid;background:#3c8dbc;color:#FFF;text-align:center;">{{ trans('labels.ShippingInfo') }}</div><br>
                                             <table>
                                                 <tr>
@@ -221,6 +238,7 @@
         @include('admin/order/add/dialog_customer_address')
         @include('admin/order/add/dialog_shipping_address')
         @include('admin/order/add/dialog_add_product')
+        @include('admin/order/add/dialog_payment_method')
         @include('admin/order/deleteOrderProduct')
     </section>
 </div>
@@ -228,6 +246,11 @@
 <script type="text/javascript">
     window.onload = function()
     {
+        //
+        $("#payment_method_id").change(function() {
+            var text = $(this).find("option:selected").text();
+            $("#payment_method_name").val(text);
+        });
         CKEDITOR.replace( 'order_remark', {
             filebrowserBrowseUrl: '{{url('uploads/images/')}}',
             filebrowserUploadUrl: '{{url('admin/article/image')}}?_token={{csrf_token()}}'

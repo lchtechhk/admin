@@ -171,6 +171,7 @@ class AdminOrderController extends Controller{
 
     function createOrder(Request $request){
         $customer_address_obj = $request->input("customer_address_obj");
+        $payment_method_obj = $request->input("payment_method_obj");
         $shipping_address_obj = $request->input("shipping_address_obj");
         $order_obj = $request->input("order_obj");
 
@@ -178,12 +179,13 @@ class AdminOrderController extends Controller{
         $product_item_size = sizeof($order_product_array);
 
         // Log::info('[customer_address_obj] --  : ' . json_encode($customer_address_obj));
+        // Log::info('[payment_method_obj] --  : ' . json_encode($payment_method_obj));
         // Log::info('[shipping_address_obj] --  : ' . json_encode($shipping_address_obj));
         // Log::info('[order_product_array] --  : ' . json_encode($order_product_array));
         // Log::info('[order_obj] --  : ' . json_encode($order_obj));
         $result = array();
-        if(!empty($customer_address_obj) && !empty($shipping_address_obj) && !empty($order_obj) && \sizeof($order_product_array) > 0){
-            $order_obj = array_merge($customer_address_obj,$shipping_address_obj,$order_obj);
+        if(!empty($customer_address_obj) && !empty($payment_method_obj) && !empty($shipping_address_obj) && !empty($order_obj) && \sizeof($order_product_array) > 0){
+            $order_obj = array_merge($customer_address_obj,$payment_method_obj,$shipping_address_obj,$order_obj);
 
             try{ 
                 DB::beginTransaction();

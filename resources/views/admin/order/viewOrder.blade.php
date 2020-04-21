@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="row invoice-info">
                                         <div class="col-sm-4 invoice-col">
-                                            {{ trans('labels.CustomerInfo') }}:
+                                            <div style="border:1px black solid;background:#3c8dbc;color:#FFF;text-align:center;">{{ trans('labels.CustomerInfo') }}</div><br>
                                             <address>
                                                 <strong>{{ trans('labels.CustomerName') }}:</strong>{{ $result['order']->customer_name }}<br>
                                                 <strong>{{ trans('labels.Address') }}:</strong> {{ $result['order']->customer_street_address }} <br>
@@ -63,7 +63,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 invoice-col">
-                                            {{ trans('labels.PaymentInfo') }}
+                                            <div style="border:1px black solid;background:#3c8dbc;color:#FFF;text-align:center;">{{ trans('labels.PaymentInfo') }}</div><br>
                                             <address>
                                                 <strong> {{ trans('labels.PaymentMethodId') }}:</strong> {{ $result['order']->payment_method_id }} <br>
                                                 <strong> {{ trans('labels.PaymentMethod') }}:</strong> {{ $result['order']->payment_method_name }} <br>
@@ -78,7 +78,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 invoice-col">
-                                            {{ trans('labels.ShippingInfo') }}
+                                            <div style="border:1px black solid;background:#3c8dbc;color:#FFF;text-align:center;">{{ trans('labels.ShippingInfo') }}</div><br>
                                             <address>
                                                 <strong> {{ trans('labels.ShippingMethod') }}:</strong> {{ $result['order']->shipping_method }} <br>
                                                 <strong> {{ trans('labels.ShippingCost') }}:</strong> {{$result['order']->shipping_cost}}<br>

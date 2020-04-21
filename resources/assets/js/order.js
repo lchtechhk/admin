@@ -99,7 +99,7 @@ function check_vaildate(a){
         // console.log("value : " + $(a).val());
         $( "#group_"+id ).removeClass( "has-error" );
         $( "#error_display_"+id ).addClass( "hidden" );
-        console.log("error_display_"+id);
+        // console.log("error_display_"+id);
         if($(a).hasClass('field-validate')){
             if(!$(a).val()){
                 $( "#group_"+id ).addClass( "has-error" );
@@ -132,6 +132,7 @@ function fill_pre_order_form(){
         var pre_customer_address_array = pre_order_form['pre_customer_address_array'];
         var item_html = pre_order_form['item_html'];
         var customer_address = pre_order_form['customer_address'];
+        var payment_method = pre_order_form['payment_method'];
         var shipping_address = pre_order_form['shipping_address'];
         var date_purchased = pre_order_form['date_purchased'];
         var order_status = pre_order_form['order_status'];
@@ -148,6 +149,12 @@ function fill_pre_order_form(){
                 if(key != "customer_company" && key !="customer_street_address"){
                     $("#"+key).attr('disabled', false);
                 }
+            }) 
+
+            // payment_method
+            $.each(payment_method,(key,val)=>{
+                $( "#display_"+key ).html(val);
+                $( "#"+key ).val(val);
             }) 
 
             // shipping_address
@@ -339,6 +346,19 @@ $(function() {
         
     });
 
+    // Dialog Payment Method
+    $("#addPaymentMethod").click(function(){
+        var is_pass = true;
+        $('#form_payment_method *').filter(':input').each(function(){
+            if(check_vaildate(this) === false)is_pass = false;
+        });
+        if(is_pass){
+            fill_payment_method();
+            $( ".close" ).click();
+        }
+        
+    });
+
     // Dialog Shipping
     $("#addShipping").click(function(){
         var is_pass = true;
@@ -385,11 +405,13 @@ $(function() {
 
     $("#add_Order").click(function(){
         var customer_address_obj = json_customer_address();
+        var payment_method_obj = json_payment_method();
         var shipping_address_obj = json_shipping_address();
         var order_product_array = json_order_product();
         var order_obj = json_order_form();
         var json = {
             customer_address_obj : customer_address_obj,
+            payment_method_obj : payment_method_obj,
             shipping_address_obj : shipping_address_obj,
             order_product_array :order_product_array ,
             order_obj : order_obj,
@@ -549,6 +571,16 @@ $(function() {
         localStorage.setItem("pre_order_form",JSON.stringify(pre_order_form));
         return JSON.parse(localStorage.getItem("pre_order_form"));
     }
+    function fill_payment_method(){
+        var payment_method_id = $("#payment_method_id").val();
+        var payment_method_name = $("#payment_method_name").val();
+        var payment_method = {
+            payment_method_id : payment_method_id,
+            payment_method_name : payment_method_name,
+        }
+        var pre_payment_method_form = set_pre_order_form("payment_method",payment_method);
+        $("#display_payment_method_name").html(pre_payment_method_form['payment_method']['payment_method_name']);
+    }
     function fill_shipping_address(){
         var shipping_method = $("#shipping_method").val();
         var shipping_cost = $("#shipping_cost").val();
@@ -656,6 +688,17 @@ $(function() {
         
     }
 
+    function json_payment_method(){
+        var pre_order_form = JSON.parse(localStorage.getItem("pre_order_form"));
+        var payment_method = pre_order_form['payment_method'];
+        if(!payment_method)return null;
+        var payment_method_obj = {
+            payment_method_id : payment_method['payment_method_id'],
+            payment_method_name : payment_method['payment_method_name'],
+        }
+        return payment_method_obj;
+    }
+    
     function json_shipping_address(){
         var pre_order_form = JSON.parse(localStorage.getItem("pre_order_form"));
         var shipping_address = pre_order_form['shipping_address'];
