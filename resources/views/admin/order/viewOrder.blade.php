@@ -48,15 +48,30 @@
                                         <div class="col-sm-4 invoice-col">
                                             {{ trans('labels.CustomerInfo') }}:
                                             <address>
-                                                {{ trans('labels.CustomerName') }}:<strong>{{ $result['order']->customer_name }}</strong><br>
-                                                {{ trans('labels.Address') }}: {{ $result['order']->customer_street_address }} <br>
-                                                {{ trans('labels.Phone') }}: {{ $result['order']->customer_telephone }}<br>
-                                                {{ trans('labels.Email') }}: {{ $result['order']->email }}
+                                                <strong>{{ trans('labels.CustomerName') }}:</strong>{{ $result['order']->customer_name }}<br>
+                                                <strong>{{ trans('labels.Address') }}:</strong> {{ $result['order']->customer_street_address }} <br>
+                                                    <strong>{{ trans('labels.Phone') }}:</strong> {{ $result['order']->customer_telephone }}<br>
+                                                        <strong>{{ trans('labels.Email') }}:</strong> {{ $result['order']->email }}
                                             </address>
                                             <div class="row text-center" >
                                                 <div class="col-xs-12">
                                                     <a  order_id='{{ $result['order']->order_id }}'
                                                         class="btn btn-primary part_customer_address">
+                                                        {{ trans('labels.Edit') }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 invoice-col">
+                                            {{ trans('labels.PaymentInfo') }}
+                                            <address>
+                                                <strong> {{ trans('labels.PaymentMethodId') }}:</strong> {{ $result['order']->payment_method_id }} <br>
+                                                <strong> {{ trans('labels.PaymentMethod') }}:</strong> {{ $result['order']->payment_method_name }} <br>
+                                            </address>
+                                            <div class="row text-center" >
+                                                <div class="col-xs-12">
+                                                    <a  order_id='{{ $result['order']->order_id }}'
+                                                        class="btn btn-primary part_payment_method">
                                                         {{ trans('labels.Edit') }}
                                                     </a>
                                                 </div>
@@ -228,6 +243,7 @@
          <!-- View Address Part Dialog -->
          @include('admin/order/edit/dialog_date_purchased')
          @include('admin/order/edit/dialog_customer_address')
+         @include('admin/order/edit/dialog_payment_method')
          @include('admin/order/edit/dialog_shipping_address')
          @include('admin/order/edit/dialog_add_product')
          @include('admin/order/deleteOrderProduct')
@@ -239,6 +255,12 @@
 <script type="text/javascript">
     window.onload = function()
     {
+        //
+        $("#payment_method_id").change(function() {
+            var text = $(this).find("option:selected").text();
+            $("#payment_method_name").val(text);
+        });
+
         CKEDITOR.replace( 'order_remark', {
             filebrowserBrowseUrl: '{{url('uploads/images/')}}',
             filebrowserUploadUrl: '{{url('admin/article/image')}}?_token={{csrf_token()}}'

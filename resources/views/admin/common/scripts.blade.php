@@ -413,6 +413,10 @@ $(document).on('click', '.editProductImageModal', function(){
 	});
 });
 
+// Order part_payment_method
+$(document).on('click', '.part_payment_method', function(){
+	$('#dialog_payment_method').modal('show');
+});
 
 // Order part_customer_address
 $(document).on('click', '.part_customer_address', function(){

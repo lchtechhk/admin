@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Service\OrderProductDescriptionService;
 use App\Http\Controllers\Admin\Service\View_OrderProductService;
 use App\Http\Controllers\Admin\Service\OrderCommentService;
 use App\Http\Controllers\Admin\Service\CustomerService;
+use App\Http\Controllers\Admin\Service\PaymentMethodService;
 
 
 
@@ -25,7 +26,7 @@ class OrderService extends BaseApiService{
     private $View_OrderProductService;
     private $View_ProductAttributeService;
     private $OrderCommentService;
-    private $CustomerService;
+    private $PaymentMethodService;
 
     function __construct(){
         $this->setTable('cms.orders');
@@ -39,6 +40,7 @@ class OrderService extends BaseApiService{
         $this->OrderCommentService = new OrderCommentService();
         $this->View_ProductAttributeService = new View_ProductAttributeService();
         $this->CustomerService = new CustomerService();
+        $this->PaymentMethodService = new PaymentMethodService();
 
     }
 
@@ -120,7 +122,7 @@ class OrderService extends BaseApiService{
         $result['label'] = "Order";
         $result['product_attributes'] = $this->View_ProductAttributeService->getAllProduct();
         $result['customers'] = $this->CustomerService->findAll();
-
+        $result['payment_methods'] = $this->PaymentMethodService->findAll();
         switch($result['operation']){
             case 'listing':
                 $result['orders'] = $this->View_OrderService->getListing();
@@ -133,8 +135,8 @@ class OrderService extends BaseApiService{
                 return view("admin.order.addOrder", $title)->with('result', $result);
             break;
             case 'view_edit':
-                Log::info('[view_edit] --  : ' . \json_encode($result));
                 $result['order'] = $this->getOrder($result['order_id']);
+                Log::info('[view_edit] --  : ' . \json_encode($result['order']));
                 return view("admin.order.viewOrder", $title)->with('result', $result);
             break;
             case 'add':
