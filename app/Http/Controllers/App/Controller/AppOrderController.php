@@ -27,12 +27,10 @@ class AppOrderController extends Controller{
 
 	}
     
-    function listingOrder(Request $request){
+    function getAllOrderRecord(Request $request){
         try{
-            $result = array();
-            $result['success'] = true;
-            $result['orders'] = $this->AppViewOrderService->test();
-            return response()->json($result, 200);
+            $orders = $this->AppViewOrderService->getAllOrderRecord();
+            return response()->json(['status' => true, 'data'=> [ 'orders' => $orders]],200);
         }catch(Exception $e){
             $result['success'] = false;
             $result['msg'] = $e->getMessage();

@@ -32,7 +32,7 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		Route::get('/getAllPaymentMethod', 'Controller\AppPaymentMethodController@getAllPaymentMethod');
 
 		// Order
-		Route::post('/listingOrder', 'Controller\AppOrderController@listingOrder');
+		Route::post('/getAllOrderRecord', 'Controller\AppOrderController@getAllOrderRecord');
 		Route::post('/addOrder', 'Controller\AppOrderController@addOrder');
 		Route::post('/updateOrder', 'Controller\AppOrderController@updateOrder');
 		// Compnay

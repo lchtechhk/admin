@@ -172,19 +172,25 @@
                                                 <select class="form-control select2" name="order_status" style="width: 100%;">
                                                         <option value="pending" 
                                                             @if(!empty($result['order']->order_status))
-                                                                {{print_selected_value($result['operation'],'pending',$result['order']->order_status)}}
+                                                                {{print_selected_value("pending" ,$result['order']->order_status)}}
                                                             @endif>
                                                             Pending
                                                         </option>
-                                                        <option value="complete" 
+                                                        <option value="transport" 
                                                             @if(!empty($result['order']->order_status))
-                                                                {{print_selected_value($result['operation'],'complete',$result['order']->order_status)}}
+                                                                {{print_selected_value("transport" ,$result['order']->order_status)}}
                                                             @endif>
-                                                            Complete
+                                                            Transport
+                                                        </option>
+                                                        <option value="received" 
+                                                            @if(!empty($result['order']->order_status))
+                                                                {{print_selected_value("received" ,$result['order']->order_status)}}
+                                                            @endif>
+                                                            Received
                                                         </option>
                                                         <option value="cancel" 
                                                             @if(!empty($result['order']->order_status))
-                                                                {{print_selected_value($result['operation'],'cancels',$result['order']->order_status)}}
+                                                                {{print_selected_value("cancel" ,$result['order']->order_status)}}
                                                             @endif>
                                                             Cancel
                                                         </option>

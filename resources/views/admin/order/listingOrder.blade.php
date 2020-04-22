@@ -42,7 +42,7 @@
                                                         <td>{{ $order->customer_telephone }}</td>
                                                         <td>{{ $order->order_price }}</td>
                                                         <td>{{ $order->date_purchased }}</td>
-                                                        <td>{{ $order->status }}</td>
+                                                        <td>{{ $order->order_status }}</td>
                                                         <td>
                                                             <a data-toggle="tooltip" data-placement="bottom" title="View Order" href="view_editOrder/{{ $order->order_id }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                             <a data-toggle="tooltip" data-placement="bottom" title="Delete Order" id="deleteOrderId" order_id ="{{ $order->order_id }}" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
