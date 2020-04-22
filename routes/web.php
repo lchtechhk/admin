@@ -188,6 +188,9 @@ Route::group(['namespace' => 'Admin', 'prefix'=>'admin'], function () {
 		Route::post('/part_customer_address', 'Controller\AdminOrderController@part_customer_address');
 		Route::post('/part_edit_product', 'Controller\AdminOrderController@part_edit_product');
 
+		// Order Api
+		Route::post('/change_order_status', 'Controller\AdminOrderProductController@change_order_status');
+
 		//Payment Method
 		Route::get('/listingPaymentMethod', 'Controller\AdminPaymentMethodController@listingPaymentMethod');
 		Route::get('/view_addPaymentMethod', 'Controller\AdminPaymentMethodController@view_addPaymentMethod');

@@ -144,6 +144,14 @@ class AdminOrderController extends Controller{
         return $this->OrderService->redirect_view($result,"");
     }
 
+    function change_order_status(Request $request){
+        $result = array();
+        $result = $request->input();
+        $result['operation'] = 'change_order_status';
+        Log::info('[result] --  : ' . json_encode($result));
+        return $this->OrderService->api($result);
+    }
+
      // function getAPI($customer_id){
     //     $result = array();
     //     Log::info('[customer_id] --  : ' . $customer_id);

@@ -115,6 +115,8 @@
                                                                 <th>{{ trans('labels.UnitPrice') }}</th>
                                                                 <th>{{ trans('labels.Qty') }}</th>
                                                                 <th>{{ trans('labels.FinalPrice') }}</th>
+                                                                <th>{{ trans('labels.CustomerRemark') }}</th>
+                                                                <th>{{ trans('labels.OrderStatus') }}</th>
                                                                 <th>{{ trans('labels.Action') }}</th>
                                                             </tr>
                                                         </thead>
@@ -137,6 +139,12 @@
                                                                         <td>{{  $order_product->product_price }}</td>
                                                                         <td>{{  $order_product->product_quantity }}</td>
                                                                         <td>{{ $order_product->currency_id}} {{ $order_product->final_price }}</td>
+                                                                        <td>{{  $order_product->customer_remark }}</td>
+                                                                        <td>
+                                                                            <label>{{ Form::radio("order_status[$order_product->order_product_id]", 'pending' , print_radio_value('pending',$order_product->order_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_status($order_product->order_product_id,'pending')"]) }} <label>Pending</label> <br/>
+                                                                            {{ Form::radio("order_status[$order_product->order_product_id]", 'transport' , print_radio_value('transport',$order_product->order_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_status($order_product->order_product_id,'transport')"]) }} <label>Transport</label> <br/>
+                                                                            {{ Form::radio("order_status[$order_product->order_product_id]", 'received' , print_radio_value('received',$order_product->order_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_status($order_product->order_product_id,'received')"]) }} <label>Received</label>
+                                                                        </td>
                                                                         <td>
                                                                             <a data-toggle="tooltip" data-placement="bottom" title="View Order Product" order_product='{{json_encode($order_product)}}' order_product_id='{{ $order_product->order_product_id }}'
                                                                                 class="badge bg-light-blue part_edit_product"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
@@ -151,10 +159,13 @@
                                                                     <th></th>
                                                                     <th></th>
                                                                     <td style="background-color:gray;" width="30%">{{ $order_product->currency_id }} {{ $result['order']->order_price }}</td>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
                                                                 </tr>
                                                             @else
                                                                 <tr >
-                                                                    <td colspan="6" style="text-align:center;">No Any Product</td>
+                                                                    <td colspan="8" style="text-align:center;">No Any Product</td>
                                                                 </tr>
                                                             @endif
                                                         </tbody>
@@ -164,7 +175,7 @@
                                         </div>                                            
                                     </div>
 
-                                    <div class="col-xs-12">
+                                    {{-- <div class="col-xs-12">
                                         <hr>
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -197,7 +208,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -259,6 +270,29 @@
     </section>
 </div>
 <script type="text/javascript">
+    function change_order_status(order_product_id,order_status){
+        // console.log("order_product_id : " + order_product_id);
+        // console.log("order_status : " + order_status);
+        $.ajax({
+            url: "{{ URL::to('admin/change_order_status')}}",
+            type: "POST",
+            data: {"order_product_id":order_product_id,"order_status":order_status},
+            success: function (data) {
+                console.log("change_order_status : " +data);
+                data = JSON.parse(data)
+                if(data && data.status == 'success'){
+                    location.reload();
+                }else {
+                    alert(data.message);
+                }
+            },
+            error:function (error){
+                alert(JSON.stringify(error));
+                console.log("error : " + JSON.stringify(error));
+            },
+            dataType: 'html'
+        });
+    }
     window.onload = function()
     {
         //

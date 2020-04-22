@@ -233,8 +233,7 @@ class OrderService extends BaseApiService{
             // break;
             case 'part_edit_product':
                 return view("admin.order.edit.dialog_edit_product")->with('result', $result);
-            break;
-            
+            break;  
         }
     }
 }
