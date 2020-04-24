@@ -83,6 +83,14 @@
                             array('class'=>'form-control ','id'=>'edit_final_price',"onkeypress"=>'validate(event)','required')) !!}
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.CustomerRemark') }}<span style="color:red">★</span></label> 
+                        <div class="col-sm-10 col-md-4">
+                            {!! Form::text('customer_remark', 
+                            empty($result['order_product']->customer_remark) ? '' : order_print_value($result['operation'],$result['order_product']->customer_remark),
+                            array('class'=>'form-control ','id'=>'edit_customer_remark','required')) !!}
+                        </div>
+                    </div>
                 </div>
                 @include('layouts/dialog_submit_back_button')
             {!! Form::close() !!}

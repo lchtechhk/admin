@@ -179,11 +179,14 @@ class OrderService extends BaseApiService{
             break;
             case 'edit_product':
                 try{
+                    Log::info('[edit_product] --  : '. \json_encode($result));
+
                     DB::beginTransaction();
                     $item = array();
                     $item['order_product_id'] = $result['order_product_id'];
                     $item['final_price'] = $result['final_price'];
                     $item['product_quantity'] = $result['product_quantity'];
+                    $item['customer_remark'] = $result['customer_remark'];
                     $update_order_product_result = $this->OrderProductService->update("order_product_id",$item);
                     if(empty($update_order_product_result['status']) || $update_order_product_result['status'] == 'fail')throw new Exception("Error To Update Order Product");
                     $update_order_result = $this->update_order_total_price($result['order_id']);
