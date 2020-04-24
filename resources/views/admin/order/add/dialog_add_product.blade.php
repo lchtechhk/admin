@@ -99,6 +99,24 @@
                             array('class'=>'form-control ','id'=>'add_final_price','readonly',"onkeypress"=>'validate(event)')) !!}
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.CustomerRemark') }}<span style="color:red">★</span></label> 
+                        <div class="col-sm-10 col-md-4">
+                            {!! Form::text('customer_remark', '',
+                            array('class'=>'form-control ','id'=>'add_customer_remark','required')) !!}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Status') }}<span style="color:red">★</span></label> 
+                        <div class="col-sm-10 col-md-4">
+                            <select class="form-control select1 field-validate" required name="add_order_product_status" id="add_order_product_status" style="width: 100%;">
+                                <option value="pending" selected>Pending</option>
+                                <option value="transport">Transport</option>
+                                <option value="received" >Received</option>
+
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn btn-primary" id="addOrderProduct">{{ trans('labels.Add') }}</div>

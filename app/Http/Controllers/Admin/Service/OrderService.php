@@ -94,6 +94,8 @@ class OrderService extends BaseApiService{
             $product['product_quantity'] = $result['product_quantity'];
             $product['final_price'] = $result['final_price'];
             $product['product_attribute_id'] = $result['product_attribute_id'];
+            $product['customer_remark'] = $result['customer_remark'];
+            $product['order_product_status'] = $result['order_product_status'];
 
             $inset_order_product_result = $this->OrderProductService->add($product);
             if(empty($inset_order_product_result['status']) || $inset_order_product_result['status'] == 'fail')throw new Exception("Error To Inset Order Product");
@@ -235,6 +237,7 @@ class OrderService extends BaseApiService{
             //     return view("admin.order.dialog_customer_address")->with('result', $result);
             // break;
             case 'part_edit_product':
+                Log::info('[part_edit_product] --  : ' . json_encode($result));
                 return view("admin.order.edit.dialog_edit_product")->with('result', $result);
             break;  
         }

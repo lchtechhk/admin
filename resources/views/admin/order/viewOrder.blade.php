@@ -141,7 +141,7 @@
                                                                         <td>{{ $order_product->currency_id}} {{ $order_product->final_price }}</td>
                                                                         <td>{{  $order_product->customer_remark }}</td>
                                                                         <td>
-                                                                            <label>{{ Form::radio("order_product_status[$order_product->order_product_id]", 'pending' , print_radio_value('pending',$order_product->order_product_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_product_status($order_product->order_product_id,'pending')"]) }} <label>Pending</label> <br/>
+                                                                            {{ Form::radio("order_product_status[$order_product->order_product_id]", 'pending' , print_radio_value('pending',$order_product->order_product_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_product_status($order_product->order_product_id,'pending')"]) }} <label>Pending</label> <br/>
                                                                             {{ Form::radio("order_product_status[$order_product->order_product_id]", 'transport' , print_radio_value('transport',$order_product->order_product_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_product_status($order_product->order_product_id,'transport')"]) }} <label>Transport</label> <br/>
                                                                             {{ Form::radio("order_product_status[$order_product->order_product_id]", 'received' , print_radio_value('received',$order_product->order_product_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_product_status($order_product->order_product_id,'received')"]) }} <label>Received</label>
                                                                         </td>
@@ -279,7 +279,8 @@
                 console.log("change_order_product_status : " +data);
                 data = JSON.parse(data)
                 if(data && data.status == 'success'){
-                    location.reload();
+                    // console.log(window.location.origin+"/admin/admin/view_editOrder/21");
+                    // window.location.href = window.location.origin+"/admin/admin/view_editOrder/21";
                 }else {
                     alert(data.message);
                 }

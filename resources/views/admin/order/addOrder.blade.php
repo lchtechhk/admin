@@ -131,12 +131,14 @@
                                                                 <th>{{ trans('labels.UnitPrice') }}</th>
                                                                 <th>{{ trans('labels.Qty') }}</th>
                                                                 <th>{{ trans('labels.FinalPrice') }}</th>
+                                                                <th>{{ trans('labels.CustomerRemark') }}</th>
+                                                                <th>{{ trans('labels.OrderStatus') }}</th>
                                                                 <th>{{ trans('labels.Action') }}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="row_order_table">
                                                             <tr id="no_any_product">
-                                                                <td colspan="7" style="text-align:center;">No Any Product</td>
+                                                                <td colspan="9" style="text-align:center;">No Any Product</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
