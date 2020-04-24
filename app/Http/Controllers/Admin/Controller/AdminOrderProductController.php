@@ -29,10 +29,10 @@ class AdminOrderProductController extends Controller{
         $this->OrderProductService = new OrderProductService();
 	}
     
-    function change_order_status(Request $request){
+    function change_order_product_status(Request $request){
         $result = array();
         $result = $request->input();
-        $result['operation'] = 'change_order_status';
+        $result['operation'] = 'change_order_product_status';
         Log::info('[result] --  : ' . json_encode($result));
         return $this->OrderProductService->api($result);
     }

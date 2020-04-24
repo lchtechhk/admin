@@ -63,6 +63,7 @@ class AppOrderService extends AppBaseApiService{
             foreach ($product_parm as $index => $p) {
                 //Add Order Id
                 $p['order_id'] = $order_id;
+                $p['order_product_status'] = "pending";
                 $product_parm[$index]['order_id'] = $order_id;
                 $att_id = $p['product_attribute_id'];
                 $add_order_product_result = $this->AppOrderProductService->add($p);

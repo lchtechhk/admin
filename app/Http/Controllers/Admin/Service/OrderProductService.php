@@ -21,20 +21,20 @@ class OrderProductService extends BaseApiService{
 
     function api($result){
         switch($result['operation']){
-            case 'change_order_status':
+            case 'change_order_product_status':
                 try{
                     $param = array();
                     $param['order_product_id'] = $result['order_product_id'];
-                    $param['order_status'] = $result['order_status'];
+                    $param['order_product_status'] = $result['order_product_status'];
                     DB::beginTransaction();
-                    $update_order_status_result = $this->update("order_product_id",$param);
-                    if(empty($update_order_status_result['status']) || $update_order_status_result['status'] == 'fail')throw new Exception("Error To Update Order Status");
-                    $result = $this->response($result,"Successful","change_order_status");
+                    $update_order_product_status_result = $this->update("order_product_id",$param);
+                    if(empty($update_order_product_status_result['status']) || $update_order_product_status_result['status'] == 'fail')throw new Exception("Error To Update Order Product Status");
+                    $result = $this->response($result,"Successful","change_order_product_status");
                     DB::commit();
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }		
-                Log::info('[change_order_status service] --  : '. \json_encode($result));
+                Log::info('[change_order_product_status service] --  : '. \json_encode($result));
                 return $result;
             break;
         }

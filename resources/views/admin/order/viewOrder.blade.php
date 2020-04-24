@@ -141,9 +141,9 @@
                                                                         <td>{{ $order_product->currency_id}} {{ $order_product->final_price }}</td>
                                                                         <td>{{  $order_product->customer_remark }}</td>
                                                                         <td>
-                                                                            <label>{{ Form::radio("order_status[$order_product->order_product_id]", 'pending' , print_radio_value('pending',$order_product->order_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_status($order_product->order_product_id,'pending')"]) }} <label>Pending</label> <br/>
-                                                                            {{ Form::radio("order_status[$order_product->order_product_id]", 'transport' , print_radio_value('transport',$order_product->order_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_status($order_product->order_product_id,'transport')"]) }} <label>Transport</label> <br/>
-                                                                            {{ Form::radio("order_status[$order_product->order_product_id]", 'received' , print_radio_value('received',$order_product->order_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_status($order_product->order_product_id,'received')"]) }} <label>Received</label>
+                                                                            <label>{{ Form::radio("order_product_status[$order_product->order_product_id]", 'pending' , print_radio_value('pending',$order_product->order_product_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_product_status($order_product->order_product_id,'pending')"]) }} <label>Pending</label> <br/>
+                                                                            {{ Form::radio("order_product_status[$order_product->order_product_id]", 'transport' , print_radio_value('transport',$order_product->order_product_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_product_status($order_product->order_product_id,'transport')"]) }} <label>Transport</label> <br/>
+                                                                            {{ Form::radio("order_product_status[$order_product->order_product_id]", 'received' , print_radio_value('received',$order_product->order_product_status),['style'=> 'height:30px; width:30px;','onchange' => "change_order_product_status($order_product->order_product_id,'received')"]) }} <label>Received</label>
                                                                         </td>
                                                                         <td>
                                                                             <a data-toggle="tooltip" data-placement="bottom" title="View Order Product" order_product='{{json_encode($order_product)}}' order_product_id='{{ $order_product->order_product_id }}'
@@ -270,15 +270,13 @@
     </section>
 </div>
 <script type="text/javascript">
-    function change_order_status(order_product_id,order_status){
-        // console.log("order_product_id : " + order_product_id);
-        // console.log("order_status : " + order_status);
+    function change_order_product_status(order_product_id,order_product_status){
         $.ajax({
-            url: "{{ URL::to('admin/change_order_status')}}",
+            url: "{{ URL::to('admin/change_order_product_status')}}",
             type: "POST",
-            data: {"order_product_id":order_product_id,"order_status":order_status},
+            data: {"order_product_id":order_product_id,"order_product_status":order_product_status},
             success: function (data) {
-                console.log("change_order_status : " +data);
+                console.log("change_order_product_status : " +data);
                 data = JSON.parse(data)
                 if(data && data.status == 'success'){
                     location.reload();
