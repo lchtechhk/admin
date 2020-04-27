@@ -6,20 +6,14 @@ use Lang;
 use Exception;
 use JWTAuth;
 
-use App\Http\Controllers\App\Service\AppUploadService;
-use App\Http\Controllers\App\Service\AppLanguageService;
-
 
 
 class AppViewOrderService extends AppBaseApiService{
-    private $AppLanguageService;
-    private $AppUploadService;
 
 
     function __construct(){
         $this->setTable('view_order');
         $this->companyAuth = true;
-        $this->AppLanguageService = new AppLanguageService();
     }
 
     function getAllOrderRecord(){

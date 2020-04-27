@@ -16,20 +16,23 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\App\Service\AppOrderService;
 use App\Http\Controllers\App\Service\AppViewOrderService;
+use App\Http\Controllers\App\Service\AppViewOrderProductService;
 
 class AppOrderController extends Controller{
     private $AppOrderService;
     private $AppViewOrderService;
-    
+    private $AppViewOrderProductService;
+
 	public function __construct(){
         $this->AppOrderService = new AppOrderService();
 		$this->AppViewOrderService = new AppViewOrderService();
+		$this->AppViewOrderProductService = new AppViewOrderProductService();
 
 	}
     
     function getAllOrderRecord(Request $request){
         try{
-            $orders = $this->AppViewOrderService->getAllOrderRecord();
+            $orders = $this->AppViewOrderProductService->getAllOrderProductRecord();
             return response()->json(['status' => true, 'data'=> [ 'orders' => $orders]],200);
         }catch(Exception $e){
             $result['success'] = false;
