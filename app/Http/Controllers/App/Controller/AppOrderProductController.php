@@ -27,10 +27,10 @@ class AppOrderProductController extends Controller{
 
 	}
     
-    function getOrderDetail(Request $request){
+    function getOrderItem(Request $request){
         try{
             $order_id = $request->input('order_id');
-            $orders = $this->AppViewOrderProductService->getDetailByOrderId($order_id);
+            $orders = $this->AppViewOrderProductService->getOrderItemByOrderId($order_id);
             return response()->json(['status' => true, 'data'=> [ 'orders' => $orders]],200);
         }catch(Exception $e){
             $result['success'] = false;

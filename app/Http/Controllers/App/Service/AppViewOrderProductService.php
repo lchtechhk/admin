@@ -17,7 +17,7 @@ class AppViewOrderProductService extends AppBaseApiService{
         $this->companyAuth = true;
     }
 
-    function getDetailByOrderId($order_id){
+    function getOrderItemByOrderId($order_id){
         try{
             if(empty($order_id))throw new Exception ("Not Found The Order Id");
             $result = array('pending'=>[],'transport'=>[],'received'=>[]);
