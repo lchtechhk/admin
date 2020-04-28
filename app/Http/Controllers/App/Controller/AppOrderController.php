@@ -32,7 +32,7 @@ class AppOrderController extends Controller{
     
     function getAllOrderRecord(Request $request){
         try{
-            $orders = $this->AppViewOrderProductService->getAllOrderProductRecord();
+            $orders = $this->AppViewOrderService->getAllOrderRecord();
             return response()->json(['status' => true, 'data'=> [ 'orders' => $orders]],200);
         }catch(Exception $e){
             $result['success'] = false;

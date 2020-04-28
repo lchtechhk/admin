@@ -162,7 +162,7 @@ class OrderService extends BaseApiService{
                 }catch(Exception $e){
                     $result = $this->throwException($result,$e->getMessage(),true);
                 }		
-                // Log::info('[edit] --  : ' . \json_encode($result));
+                Log::info('[edit] --  : ' . \json_encode($result));
                 $result['order'] = $this->getOrder($result['order_id']);
                 return view("admin.order.viewOrder", $title)->with('result', $result);
             break;

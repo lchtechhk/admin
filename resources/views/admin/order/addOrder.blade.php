@@ -156,19 +156,19 @@
                                                 <select class="form-control select2" id="order_status" name="order_status" style="width: 100%;">
                                                         <option value="pending" 
                                                             @if(!empty($result['order']->order_status))
-                                                                {{print_selected_value($result['operation'],'pending',$result['order']->order_status)}}
+                                                                {{print_selected_value("pending", (isset($_POST['order']) ? $_POST['order'] : (!empty($result['order']->order_status) ? $result['order']->order_status : '')))}}
                                                             @endif>
                                                             Pending
                                                         </option>
                                                         <option value="complete" 
                                                             @if(!empty($result['order']->order_status))
-                                                                {{print_selected_value($result['operation'],'complete',$result['order']->order_status)}}
+                                                                {{print_selected_value("complete", (isset($_POST['order']) ? $_POST['order'] : (!empty($result['order']->order_status) ? $result['order']->order_status : '')))}}
                                                             @endif>
                                                             Complete
                                                         </option>
                                                         <option value="cancel" 
                                                             @if(!empty($result['order']->order_status))
-                                                                {{print_selected_value($result['operation'],'cancels',$result['order']->order_status)}}
+                                                                {{print_selected_value("cancel", (isset($_POST['order']) ? $_POST['order'] : (!empty($result['order']->order_status) ? $result['order']->order_status : '')))}}
                                                             @endif>
                                                             Cancel
                                                         </option>
