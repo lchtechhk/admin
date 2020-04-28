@@ -35,6 +35,8 @@ Route::group(['namespace' => 'App', 'prefix'=>'app'], function () {
 		Route::post('/getAllOrderRecord', 'Controller\AppOrderController@getAllOrderRecord');
 		Route::post('/addOrder', 'Controller\AppOrderController@addOrder');
 		Route::post('/updateOrder', 'Controller\AppOrderController@updateOrder');
+		Route::post('/getOrderDetail', 'Controller\AppOrderProductController@getOrderDetail');
+
 		// Compnay
 		Route::post('/getCompanyInfo', 'Controller\AppCustomerController@getCompanyInfo');
 
