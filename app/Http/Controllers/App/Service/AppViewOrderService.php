@@ -17,32 +17,32 @@ class AppViewOrderService extends AppBaseApiService{
     }
 
     function getAllOrderRecord(){
-        $result = array('pending'=>[],'transport'=>[],'received'=>[]);
+        $result = array('pending'=>[],'complete'=>[],'cancel'=>[]);
         $order_result = DB::table($this->getTable());
         $order_result = $order_result->where('company_id',JWTAuth::parseToken()->authenticate()->company_id);
         $order_result = $order_result->where('customer_id',JWTAuth::parseToken()->authenticate()->id);
-        $order_result = $order_result->whereIn('order_status',['pending','transport','received']);
+        $order_result = $order_result->whereIn('order_status',['pending','complete','cancel']);
         $order_result = $order_result->get();
         
         $pending_qty = 0;
-        $transport_qty = 0;
-        $received_qty = 0;
+        $complete_qty = 0;
+        $cancel_qty = 0;
         foreach ($order_result as $index => $order) {
             $order_status = $order->order_status;
             if($order_status == 'pending'){
                 $result['pending'][] = $order;
                 $pending_qty++;
-            }else if($order_status == 'transport'){
-                $result['transport'][] = $order;
-                $transport_qty++;
-            }else if($order_status == 'received'){
-                $result['received'][] = $order;
-                $received_qty++;
+            }else if($order_status == 'complete'){
+                $result['complete'][] = $order;
+                $complete_qty++;
+            }else if($order_status == 'cancel'){
+                $result['cancel'][] = $order;
+                $cancel_qty++;
             }
         }
         $result['pending_qty'] = $pending_qty;
-        $result['transport_qty'] = $transport_qty;
-        $result['received_qty'] = $received_qty;
+        $result['complete_qty'] = $complete_qty;
+        $result['cancel_qty'] = $cancel_qty;
         Log::info('[getAllOrderRecord] : ' . json_encode($result));
         return $result;
     }
