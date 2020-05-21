@@ -23,6 +23,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{ trans('labels.Default') }}</th>
+                                                    <th>{{ trans('labels.ID') }}</th>
                                                     <th>{{ trans('labels.Language') }}</th>
                                                     <th>{{ trans('labels.Icon') }}</th>
                                                     <th>{{ trans('labels.Code') }}</th>
@@ -41,6 +42,7 @@
                                                                     checked @endif >
                                                                 </label>
                                                             </td>
+                                                            <td>{{ $language->language_id }}</td>
                                                             <td>{{ $language->name }}</td>
                                                             <td><img src="{{asset('').$language->image}}" style="max-width:70px;"
                                                                     alt=""></td>
