@@ -13,6 +13,7 @@ return [
     |
 	*/
 	// Jamie
+	'header_dashboard'=>'DashBoard',
 	'Area'=>'Area',
 	'ListingAllArea'=>'Listing All Area',
 	'deleteAreaText'=>'Delete Area Text',

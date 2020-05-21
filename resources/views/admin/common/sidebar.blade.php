@@ -14,7 +14,9 @@
       <li class="header">{{ trans('labels.navigation') }}</li>
       <li class="treeview {{ Request::is('admin/dashboard/this_month') ? 'active' : '' }}">
         <a href="{{ URL::to('admin/dashboard/this_month')}}">
-          <i class="fa fa-dashboard"></i> <span>{{ trans('labels.header_dashboard') }}</span>
+          {{-- <i class="fa fa-dashboard"></i> <span>{{ trans('labels.header_dashboard') }}</span> --}}
+          <i class="fa fa-dashboard"></i> <span>{{ trans('Dashboard') }}</span>
+
         </a>
       </li>
 
@@ -23,7 +25,9 @@
         {{ Request::is('admin/view_addLanguage') ? 'active' : '' }} 
         {{ Request::is('admin/view_editLanguage/*') ? 'active' : '' }} ">
         <a href="{{ URL::to('admin/listingLanguage')}}">
-          <i class="fa fa-language" aria-hidden="true"></i> <span> {{ trans('labels.listingLanguage') }} </span>
+          {{-- <i class="fa fa-language" aria-hidden="true"></i> <span> {{ trans('labels.listingLanguage') }} </span> --}}
+          <i class="fa fa-language" aria-hidden="true"></i> <span> {{ trans('Language') }} </span>
+
         </a>
       </li>
 
@@ -44,7 +48,9 @@
         {{ Request::is('admin/updateManufacturer/*') ? 'active' : '' }}
         {{ Request::is('admin/deleteManufacturer/*') ? 'active' : '' }} ">
         <a href="{{ URL::to('admin/listingManufacturer')}}">
-          <i class="fa fa-industry" aria-hidden="true"></i> <span>{{ trans('labels.link_manufacturer') }}</span>
+          {{-- <i class="fa fa-industry" aria-hidden="true"></i> <span>{{ trans('labels.link_manufacturer') }}</span> --}}
+          <i class="fa fa-industry" aria-hidden="true"></i> <span>{{ trans('Manufacturer') }}</span>
+
         </a>
       </li>
 
@@ -58,7 +64,8 @@
           {{ Request::is('admin/view_editSubCategory/*') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-bars" aria-hidden="true"></i>
-          <span>{{ trans('labels.link_categories') }} </span>
+          {{-- <span>{{ trans('labels.link_categories') }} </span> --}}
+          <span>{{ trans('Categories') }} </span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
@@ -68,7 +75,8 @@
             {{ Request::is('admin/view_editCategory/*') ? 'active' : '' }}">
             <a href="{{ URL::to('admin/listingCategory')}}">
               <i class="fa fa-circle-o"></i>
-              {{ trans('labels.link_main_categories') }}
+              {{-- {{ trans('labels.link_main_categories') }} --}}
+              {{ trans('Main Categories') }}
             </a>
           </li>
           <li class="{{ Request::is('admin/listingSubCategory') ? 'active' : '' }}  
@@ -76,7 +84,8 @@
             {{ Request::is('admin/view_editSubCategory/*') ? 'active' : '' }}">
             <a href="{{ URL::to('admin/listingSubCategory')}}">
               <i class="fa fa-circle-o"></i>
-              {{ trans('labels.link_sub_categories') }}
+              {{-- {{ trans('labels.link_sub_categories') }} --}}
+              {{ trans('Sub Category') }}
             </a>
           </li>
         </ul>
@@ -109,8 +118,14 @@
         {{ Request::is('admin/addattributes') ? 'active' : '' }}  
         {{ Request::is('admin/editattributes/*') ? 'active' : '' }}">
         <a href="#">
-          <i class="fa fa-database"></i> <span>{{ trans('labels.link_products') }}</span> <i
-            class="fa fa-angle-left pull-right"></i>
+          <i class="fa fa-database"></i> 
+          <span>
+            {{-- {{ trans('labels.link_products') }} --}}
+            {{ trans('All Product') }}
+
+          </span> 
+          
+          <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
           <li
@@ -120,7 +135,9 @@
             {{ Request::is('admin/view_editProduct/*') ? 'active' : '' }}">
             <a href="{{ URL::to('admin/listingProduct')}}">
               <i class="fa fa-circle-o"></i>
-              {{ trans('labels.link_all_products') }}
+              {{-- {{ trans('labels.link_all_products') }} --}}
+              {{ trans('All Product') }}
+
             </a>
           </li>
           <!-- <li
@@ -158,7 +175,8 @@
           {{ Request::is('admin/editCustomers/*') ? 'active' : '' }}">
         <a href="{{ URL::to('admin/listingCustomer')}}">
           <i class="fa fa-users" aria-hidden="true"></i>
-          <span>{{ trans('labels.link_customers') }}</span>
+          {{-- <span>{{ trans('labels.link_customers') }}</span> --}}
+          <span>{{ trans('Customer') }}</span>
         </a>
       </li>
       <li class="treeview 
@@ -190,7 +208,9 @@
                       {{ Request::is('admin/deleteZone') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-money" aria-hidden="true"></i>
-          <span>{{ trans('labels.location') }}</span> <i class="fa fa-angle-left pull-right"></i>
+          {{-- <span>{{ trans('labels.location') }}</span>  --}}
+          <span>{{ trans('Location') }}</span> 
+          <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
           <li class="{{ Request::is('admin/listingCountry') ? 'active' : '' }} 
@@ -201,7 +221,9 @@
                         {{ Request::is('admin/deleteCountry') ? 'active' : '' }} ">
             <a href="{{ URL::to('admin/listingCountry')}}">
               <i class="fa fa-circle-o"></i>
-              {{ trans('labels.link_countries') }}
+              {{-- {{ trans('labels.link_countries') }} --}}
+              {{ trans('Countries') }}
+
             </a>
           </li>
           <li class="{{ Request::is('admin/listingCity') ? 'active' : '' }} 
@@ -210,7 +232,8 @@
                        {{ Request::is('admin/deleteCity') ? 'active' : '' }}">
             <a href="{{ URL::to('admin/listingCity')}}">
               <i class="fa fa-circle-o"></i>
-              {{ trans('labels.cities') }}
+              {{-- {{ trans('labels.cities') }} --}}
+              {{ trans('Cities') }}
             </a>
           </li>
           <li class="{{ Request::is('admin/listingArea') ? 'active' : '' }} 
@@ -220,7 +243,9 @@
                        {{ Request::is('admin/deleteArea') ? 'active' : '' }}">
             <a href="{{ URL::to('admin/listingArea')}}">
               <i class="fa fa-circle-o"></i>
-              {{ trans('labels.link_area') }}
+              {{-- {{ trans('labels.link_area') }} --}}
+              {{ trans('Area') }}
+
             </a>
           </li>
           <li class="{{ Request::is('admin/listingDistrict') ? 'active' : '' }} 
@@ -230,7 +255,9 @@
                        {{ Request::is('admin/deleteDistrict') ? 'active' : '' }} ">
             <a href="{{ URL::to('admin/listingDistrict')}}">
               <i class="fa fa-circle-o"></i>
-              {{ trans('labels.link_district') }}
+              {{-- {{ trans('labels.link_district') }} --}}
+              {{ trans('District') }}
+
             </a>
           </li>
           {{-- <li class="{{ Request::is('admin/listingZone') ? 'active' : '' }} 
@@ -278,7 +305,9 @@
           {{ Request::is('admin/view_editOrder/*') ? 'active' : '' }}">
         <a href="{{ URL::to('admin/listingOrder')}}">
           <i class="fa fa-list-ul" aria-hidden="true"></i> <span>
-            {{ trans('labels.link_orders') }}</span>
+            {{-- {{ trans('labels.link_orders') }}</span> --}}
+            {{ trans('Orders') }}</span>
+
         </a>
       </li>
 
@@ -289,7 +318,9 @@
           {{ Request::is('admin/view_paymentMethod/*') ? 'active' : '' }}">
         <a href="{{ URL::to('admin/listingPaymentMethod')}}">
           <i class="fa fa-list-ul" aria-hidden="true"></i> <span>
-            {{ trans('labels.link_payment_method') }}</span>
+            {{-- {{ trans('labels.link_payment_method') }}</span> --}}
+            {{ trans('Payment Method') }}</span>
+
         </a>
       </li>
 
